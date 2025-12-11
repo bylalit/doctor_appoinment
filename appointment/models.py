@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -9,7 +10,8 @@ class Category(models.Model):
     
 
 class Doctor(models.Model):
-    image = models.ImageField(upload_to='doctor_image')
+    # image = models.ImageField(upload_to='doctor_image')
+    image = CloudinaryField('image', folder='doctor_image')
     name = models.CharField(max_length=100)
     email = models.EmailField()
     username = models.CharField(max_length=255, unique=True)
