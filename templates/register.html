@@ -1,0 +1,47 @@
+
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+<section class="my-5">
+    <div class="my-5 py-5">
+
+        <!-- Form -->
+        <form class="w-100 bg-white rounded shadow p-4 py-5 mx-auto" method="POST" style="max-width: 400px;" aria-label="Create Account Form">
+            {% csrf_token %}
+
+            <h2 class="text-dark fw-semibold fs-4 mb-2">Create Account</h2>
+            <p class="text-muted small mb-4">Please sign up to book appointment</p>
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label text-muted small mb-1">UserName</label>
+                <input type="text" class="form-control form-control-sm py-2" id="username" name="username" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label text-muted small mb-1">Email</label>
+                <input type="email" class="form-control form-control-sm py-2" id="email" name="email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label for="password" class="form-label text-muted small mb-1">Password</label>
+                <input type="password" class="form-control form-control-sm py-2" id="password" name="password" required>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-sm text-white w-100 mb-3 py-2" style="background-color: rgb(95 111 255);">
+                Create account
+            </button>
+
+            <!-- Login Redirect -->
+            <p class="text-muted small mb-0">
+                Already have an account?
+                <a href="{% url 'login' %}" class="text-decoration-underline text-primary">Login here</a>
+            </p>
+        </form>
+    </div>
+</section>
+{% endblock %}

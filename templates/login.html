@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+    <section class="my-5">
+        <div class="my-5 py-5">
+            <form class="w-100 bg-white rounded shadow p-4 py-5 mx-auto" method='POST' style="max-width: 400px;" aria-label="Create Account Form">
+                {% csrf_token %}
+                <h2 class="text-dark fw-semibold fs-4 mb-2">Login</h2>
+                <p class="text-muted small mb-4">Please log in to book appointment</p>
+
+                <div class="mb-3">
+                    <label for="username" class="form-label text-muted small mb-1">UserName</label>
+                    <input type="text" class="form-control form-control-sm py-2" id="username" name="username">
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label text-muted small mb-1">Password</label>
+                    <input type="password" class="form-control form-control-sm py-2" id="password" name="password">
+                </div>
+
+                <button type="submit" class="btn btn-sm text-white w-100 mb-3 py-2" style="background-color: rgb(95 111 255);">
+                    Login
+                </button>
+
+                <p class="text-muted small mb-0">
+                    Create an new account?
+                    <a href="{% url "register" %}" class="text-decoration-underline text-primary">Click here</a>
+                </p>
+            </form>
+        </div>
+
+    </section>
+
+{% endblock %}

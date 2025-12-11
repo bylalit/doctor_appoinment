@@ -1,0 +1,118 @@
+{% extends "dashboard/layout.html" %}
+
+{% block contant %}
+
+    <section class="ps-5 bg-light pt-4 w-100 hv-100">
+        <h3 class="fs-4 mb-3">Add Doctor</h3>
+        <div class="py-5 px-4 bg-white" style="width: 800px;height: 550px; overflow-y: scroll;">
+            <form class="mx-auto" method='POST' style="max-width: 800px;" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="product-images" class="form-label fw-semibold text-dark opacity-75">Upload Doctor Image</label>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <!-- Repeat image input blocks -->
+                        <label for="image"
+                            class="border border-secondary border-dashed rounded d-flex flex-column align-items-center justify-content-center text-secondary text-center"
+                            style="width: 70px; height: 70px; cursor: pointer;">
+                            <img src="https://storage.googleapis.com/a1aa/image/23b54cba-4027-4999-5744-d29d18583cb7.jpg"
+                                width="20" height="20" class="mb-1" alt="Upload icon">
+                            <span class="small">Upload</span>
+                        </label>
+                        <input type="file" class="form-control w-50 h-50" id="image" name="image" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
+                        <div class="w-50">
+                            <label for="name" class="form-label fw-semibold text-dark">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-control"
+                            placeholder="Type here">
+                        </div>
+                        <div class="w-50">
+                            <label for="speciality" class="form-label fw-semibold text-dark">Speciality</label>
+                            <select name="category" class="form-select" id="speciality">
+                                {% for cat in category %}
+                                    <option value="{{ cat.id }}">{{ cat }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
+                        <div class="w-50">
+                            <label for="email" class="form-label fw-semibold text-dark">Doctor Email</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                            placeholder="Email">
+                        </div>
+                        <div class="w-50">
+                            <label for="degree" class="form-label fw-semibold text-dark">Degree</label>
+                            <input type="text" id="degree" name="degree" class="form-control"
+                            placeholder="Degree">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
+                        <div class="w-50">
+                            <label for="username" class="form-label fw-semibold text-dark">Set Username</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                            placeholder="Username">
+                        </div>
+                        <div class="w-50">
+                            <label for="password" class="form-label fw-semibold text-dark">Set Password</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                            placeholder="Password">
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
+                        <div class="w-50">
+                            <label for="address" class="form-label fw-semibold text-dark">Address</label>
+                            <input type='text' id="address" name="address" class="form-control"
+                            placeholder="Address">
+                        </div>
+                        <div class="w-50">
+                            <label for="fees" class="form-label fw-semibold text-dark">Fees</label>
+                            <input type='number' id="fees" name="fees" class="form-control"
+                            placeholder="Fees">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="w-100">
+                            <label for="experience" class="form-label fw-semibold text-dark">Experience</label>
+                                <select name="experience" class="form-select" id="experience">
+                                <option value="1">1 Year</option>
+                                <option value="2">2 Year</option>
+                                <option value="3">3 Year</option>
+                                <option value="4">4 Year</option>
+                                <option value="5">5 Year</option>
+                                <option value="6">6 Year</option>
+                                <option value="7">7 Year</option>
+                                <option value="8">8 Year</option>
+                                <option value="9">9 Year</option>
+                                <option value="10">10 Year</option>
+                            </select>
+                        </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="about" class="form-label fw-semibold text-dark">About Doctor</label>
+                    <textarea name="about" id="about" class="form-control" rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="btn fw-semibold text-light rounded-pill px-5 py-2 mt-2" style="background-color: rgb(95 111 255);">ADD</button>
+            </form>
+        </div>
+
+    </section>
+
+{% endblock %}

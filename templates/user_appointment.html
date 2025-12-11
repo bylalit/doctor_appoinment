@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+    <section class="mt-5 px-5">
+        <div class="container py-4 px-5">
+            <h2 class="text-muted fs-4 fw-semibold text-light mb-4 mt-3">My appointments</h2>
+            <div class="border-top pt-4 px-5">
+
+                <!-- Appointment Card 1 -->
+
+                {% if appointments %}
+                    {% for appointment in appointments %}
+                        {% if appointment.status == 'Pending' %}
+                            <div class="d-flex flex-column flex-sm-row align-items-sm-center border-bottom pb-4 mb-4">
+                                <div class="flex-shrink-0 bg-light rounded">
+                                    <img src="{{ appointment.doctor.image.url }}"
+                                        alt="Portrait of Dr. Emily Larson" class="rounded object-fit-cover" width="130" height="130">
+                                </div>
+                                <div class="flex-grow-1 mt-3 mt-sm-0 ms-sm-4 small text-dark">
+                                    <p class="fw-semibold text-dark mb-1">{{  appointment.doctor.name  }}</p>
+                                    <p class="text-muted mb-1">{{ appointment.doctor.category  }}</p>
+                                    <p class="text-muted mb-1">
+                                        <span class="fw-semibold">Address:</span><br>
+                                        {{ appointment.doctor.address }}
+                                    </p>
+                                    <p class="text-muted mt-1">
+                                        <span class="fw-semibold">Date &amp; Time:</span>
+                                        {{ appointment.appointment_date }} | {{  appointment.appointment_time  }}
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-column gap-3 mt-3 mt-sm-0 ms-sm-3 text-end w-sm-auto">
+                                    {% comment %} <button type="button" class="btn btn-outline-success btn-sm">Pay Online</button> {% endcomment %}
+                                    <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-outline-danger btn-sm">Cancel appointment</button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                        <h3 class='py-5 text-center fs-2'>Not Any Appointment Added!</h3>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+    <section class="mt-5 px-5">
+        <div class="container py-5 my-4 px-3 px-md-5">
+            <h2 class="text-center text-muted fs-5 fw-medium mb-2">
+                ABOUT <span class="fw-bold text-dark">US</span>
+            </h2>
+
+            <div class="row align-items-center mb-5">
+                <!-- Image -->
+                <div class="col-md-4 mb-4 mb-md-0">
+                <img src="{% static "assets/assets_frontend/about_image.png" %}"
+                    alt="Two doctors in clinic"
+                    class="img-fluid rounded" width="340" height="340" style="object-fit: cover;">
+                </div>
+
+                <!-- Text -->
+                <div class="col-md-8 small text-muted">
+                <p class="mb-4">
+                    Welcome to Prescripto, your trusted partner in managing your healthcare needs conveniently and efficiently.
+                    At Prescripto, we understand the challenges individuals face when it comes to scheduling doctor appointments
+                    and managing their health records.
+                </p>
+                <p class="mb-4">
+                    Prescripto is committed to excellence in healthcare technology. We continuously strive to enhance our platform,
+                    integrating the latest advancements to improve user experience and deliver superior service. Whether you're booking
+                    your first appointment or managing ongoing care, Prescripto is here to support you every step of the way.
+                </p>
+                <p class="fw-bold mb-2 text-dark">Our Vision</p>
+                <p>
+                    Our vision at Prescripto is to create a seamless healthcare experience for every user. We aim to bridge the gap
+                    between patients and healthcare providers, making it easier for you to access the care you need, when you need it.
+                </p>
+                </div>
+            </div>
+
+            <!-- Why Choose Us -->
+            <h3 class="text-dark small fw-semibold pt-5 fs-5 mb-4">WHY <span class="fw-bold">CHOOSE US</span></h3>
+            <div class="row text-muted small border rounded overflow-hidden">
+                <div class="col-md-4 border-end p-5">
+                    <p class="fw-bold text-dark mb-4 fs-5">EFFICIENCY:</p>
+                    <p>Streamlined appointment scheduling that fits into your busy lifestyle.</p>
+                </div>
+                <div class="col-md-4 border-end p-5">
+                    <p class="fw-bold text-dark mb-4 fs-5">CONVENIENCE:</p>
+                    <p>Access to a network of trusted healthcare professionals in your area.</p>
+                </div>
+                <div class="col-md-4 p-5">
+                    <p class="fw-bold text-dark mb-4 fs-5">PERSONALIZATION:</p>
+                    <p>Tailored recommendations and reminders to help you stay on top of your health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block contant %}
+
+<section class="flex-grow p-5 bg-light w-100">
+
+    {% if role == 'admin' %}
+        <!-- ================= ADMIN DASHBOARD ================= -->
+        <div class="d-flex flex-wrap gap-3 mb-4">
+            <div class="d-flex align-items-center bg-white rounded px-4 py-2 shadow-sm min-w-160">
+                <img src="{% static "assets/assets_admin/doctor_icon.svg" %}" width="35" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_doctors }}</p>
+                    <small class="text-muted">Doctors</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160">
+                <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="30" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ appointment_total }}</p>
+                    <small class="text-muted">Appointments</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160">
+                <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="40" height="40" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_patients }}</p>
+                    <small class="text-muted">Patients</small>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if role == 'doctor' %}
+        <!-- ================= DOCTOR DASHBOARD ================= -->
+        <div class="mb-4">
+            <h4 class="fw-bold">Welcome {{ doctor.name }}</h4>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3" style="margin-bottom: 80px">
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160">
+                <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="30" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_appointments }}</p>
+                    <small class="text-muted">Appointments</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160">
+                <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="40" height="40" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_patients }}</p>
+                    <small class="text-muted">Patients</small>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- ===== Common Appointments List for Both ===== -->
+    <div class="bg-white rounded shadow-sm" style="max-width: 768px;">
+        <div class="d-flex align-items-center border-bottom px-4 py-3">
+            <i class="fas fa-list-alt text-primary me-2"></i>
+            <h6 class="mb-0 fw-semibold text-dark">
+                {% if role == 'admin' %} Latest Bookings {% else %} Your Recent Appointments {% endif %}
+            </h6>
+        </div>
+
+        <ul class="list-unstyled mb-0">
+            {% for appointment in appointments %}
+                <li class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ appointment.doctor.image.url }}" class="rounded me-3" width="40" height="40" />
+                        <div class="small text-dark">
+                            <p class="mb-0 fw-semibold">{{ appointment.doctor.name }}</p>
+                            <small class="text-muted">Booking on {{ appointment.appointment_date }}</small>
+                        </div>
+                    </div>
+                    {% comment %} <button class="btn btn-sm btn-outline-danger border rounded-circle p-0"
+                    style="width: 30px; height: 30px;">
+                        ×
+                    </button> {% endcomment %}
+                    {% if appointment.status == 'Pending' %}
+                        <div class='d-flex justify-content-center'>
+                            <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-sm btn-light border text-danger rounded-circle p-0 me-2" style="width: 24px; height: 24px;">×</button>
+                            </form>
+                            <form method="post" action="{% url 'approved_appointment' appointment.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-sm btn-light border text-success rounded-circle p-0" style="width: 30px; height: 30px;">✓</button>
+                            </form>
+                        </div>
+                    {% elif appointment.status == 'Approved' %}
+                        <p class="text-success m-0 small">Complated</p>
+                    {% else %}
+                        <p class="text-danger m-0 small">Cancelled</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block contant %}
+<section class="flex-grow p-5 bg-light w-100">
+    <h3 class="mb-4">Update Profile</h3>
+
+    <form action="" method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm" style="max-width: 900px;">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Full Name</label>
+                <input type="text" name="name" class="form-control" value="{{ doctor.name }}" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" name="email" class="form-control" value="{{ doctor.email }}" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Degree</label>
+                <input type="text" name="degree" class="form-control" value="{{ doctor.degree }}">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Experience</label>
+                <input type="text" name="experience" class="form-control" value="{{ doctor.experience }}">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Fees</label>
+                <input type="number" name="fees" class="form-control" value="{{ doctor.fees }}">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Address</label>
+                <textarea name="address" class="form-control" rows="2">{{ doctor.address }}</textarea>
+            </div>
+
+            <div class="col-12 mb-3">
+                <label class="form-label fw-semibold">About</label>
+                <textarea name="about" class="form-control" rows="3">{{ doctor.about }}</textarea>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Current Image</label><br>
+                <img src="{{ doctor.image.url }}" width="130" class="rounded shadow-sm mb-2">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Change Image</label>
+                <input type="file" name="image" class="form-control">
+            </div>
+        </div>
+
+        <button class="btn btn-primary px-4">Update</button>
+    </form>
+</section>
+{% endblock %}

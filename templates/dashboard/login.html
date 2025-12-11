@@ -1,0 +1,171 @@
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>
+    Prescripto
+  </title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
+
+  <style>
+        .card-hover-up {
+        transition: transform 0.3s ease;
+        }
+        .card-hover-up:hover {
+        transform: translateY(-5px);
+        }
+
+        .alert-box {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px;
+        width: 320px;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        z-index: 9999;
+        margin-bottom: 10px;
+        }
+
+        .alert-box.success {
+        border-left: 5px solid #28a745;
+        }
+
+        .alert-box.error, .alert-box.danger {
+        border-left: 5px solid #dc3545;
+        }
+
+        .alert-box.warning {
+        border-left: 5px solid #ffc107;
+        }
+
+        .alert-box.info {
+        border-left: 5px solid #0dcaf0;
+        }
+
+        .alert-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        .icon {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: bold;
+        }
+
+        .close {
+        cursor: pointer;
+        font-size: 18px;
+        color: #aaa;
+        }
+
+        .progress-bar {
+        position: relative;
+        height: 4px;
+        background: #eee;
+        margin-top: 10px;
+        overflow: hidden;
+        border-radius: 3px;
+        }
+
+        .progress-bar span {
+        display: block;
+        height: 100%;
+        width: 100%;
+        animation: shrink 4s linear forwards;
+        }
+
+        /* Progress bar color matching type */
+        .alert-box.success .progress-bar span { background-color: #28a745; }
+        .alert-box.error .progress-bar span,
+        .alert-box.danger .progress-bar span { background-color: #dc3545; }
+        .alert-box.warning .progress-bar span { background-color: #ffc107; }
+        .alert-box.info .progress-bar span { background-color: #0dcaf0; }
+
+        @keyframes shrink {
+        from { width: 100%; }
+        to { width: 0%; }
+        }
+
+    </style>
+
+</head>
+
+<body class="bg-white text-gray-900">
+
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert-box {{ message.tags }}" id="alertBox">
+                <div class="alert-header">
+                    <div class="icon">
+                    {% if 'success' in message.tags %}
+                        <i style="color: #28a745;">✔</i>
+                    {% elif 'error' in message.tags or 'danger' in message.tags %}
+                        <i style="color: #dc3545;">❗</i>
+                    {% elif 'warning' in message.tags %}
+                        <i style="color: #ffc107;">⚠</i>
+                    {% else %}
+                        <i style="color: #0dcaf0;">ℹ</i>
+                    {% endif %}
+                    <span class="small">{{ message }}</span>
+                    </div>
+                    <div class="close" onclick="closeAlert()">✖</div>
+                </div>
+                <div class="progress-bar"><span></span></div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    <section class="d-flex align-items-center justify-content-around h-100 w-100">
+        <div>
+            <form class="bg-white rounded shadow" method='POST' style="padding:35px 70px; max-width:600px" aria-label="Create Account Form">
+                {% csrf_token %}
+                <h2 class="text-primary fw-semibold fs-3 mb-4 text-center">Admin <span class='text-dark'>Login</span></h2>
+
+                <div class="mb-3">
+                    <label for="username" class="form-label text-muted small mb-1">UserName</label>
+                    <input type="text" class="form-control form-control-sm py-2" id="username" name="username">
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label text-muted small mb-1">Password</label>
+                    <input type="password" class="form-control form-control-sm py-2" id="password" name="password">
+                </div>
+
+                <button type="submit" class="btn btn-sm text-white w-100 mb-3 py-2" style="background-color: rgb(95 111 255);">
+                    Login
+                </button>
+
+                <p class="text-muted small mb-0">
+                    Create an new account?
+                    <a href="" class="text-decoration-underline text-primary">Click here</a>
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+            }, 4000);
+        }
+
+        function closeAlert() {
+            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+        }
+    </script>
+
+</body>
+</html>
+

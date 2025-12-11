@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+      <main class="container py-5 px-5">
+    <!-- Hero 1 -->
+    <section
+      class="text-white rounded p-5 p-md-5 d-flex flex-column flex-sm-row justify-content-between align-items-center"
+      style="background-color: rgb(95 111 255);">
+      <div class="mb-4 mb-sm-0">
+        <h1 class="fw-bold fs-1 mb-3">
+          Book Appointment<br>With Trusted Doctors
+        </h1>
+
+
+        <div class="d-flex align-items-center justify-content-center mt-5">
+          <img src="{% static "assets/assets_frontend/group_profiles-BCL6AVF5.png" %}" class="me-3 mb-3" width="100" height="50"
+            alt="Doctor 1">
+          <p class="small" style="max-width: 420px;">
+            Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+          </p>
+        </div>
+        <a href="{% url "doctor" 'all doctor' %}"
+          class="btn btn-light rounded-pill ps-4 mt-3 py-3 text-primary fw-semibold btn-sm d-flex align-items-center gap-2 w-50">
+          Book appointment <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      <img src="{% static "assets/assets_frontend/header_img.png" %}" class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4" width="420"
+        height="700" alt="Doctors">
+    </section>
+
+    <!-- Speciality -->
+    <section class="text-center mt-5">
+      <h2 class="fw-semibold fs-3 py-2 mb-1">Find by Speciality</h2>
+      <p class="text-muted small mx-auto mb-5" style="max-width: 440px;">
+        Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-4">
+        <!-- Repeat for each speciality -->
+        <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
+          <a href="{% url "doctor" 'General physician' %}">
+            <img src="{% static "assets/assets_frontend/General_physician.svg" %}"
+              class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
+              height="90" alt="Specialist">
+          </a>
+          <span class="mt-2">General physician</span>
+        </div>
+        <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
+          <a href="{% url "doctor" 'Gynecologist' %}">
+            <img src="{% static "assets/assets_frontend/Gynecologist.svg" %}"
+              class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
+              height="90" alt="Specialist">
+          </a>
+          <span class="mt-2">Gynecologist</span>
+        </div>
+        <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
+          <a href="{% url "doctor" 'Dermatologist' %}">
+            <img src="{% static "assets/assets_frontend/Dermatologist.svg" %}"
+              class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
+              height="90" alt="Specialist">
+          </a>
+          <span class="mt-2">Dermatologist</span>
+        </div>
+        <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
+          <a href="{% url "doctor" 'Pediatricians' %}">
+            <img src="{% static "assets/assets_frontend/Pediatricians.svg" %}"
+              class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
+              height="90" alt="Specialist">
+          </a>
+          <span class="mt-2">Pediatricians</span>
+        </div>
+        <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
+          <a href="{% url "doctor" 'Neurologist' %}">
+            <img src="{% static "assets/assets_frontend/Neurologist.svg" %}"
+              class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
+              height="90" alt="Specialist">
+          </a>
+          <span class="mt-2">Neurologist</span>
+        </div>
+        <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
+          <a href="{% url "doctor" 'Gastroenterologist' %}">
+            <img src="{% static "assets/assets_frontend/Gastroenterologist.svg" %}"
+              class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
+              height="90" alt="Specialist">
+          </a>
+          <span class="mt-2">Gastroenterologist</span>
+        </div>
+        <!-- Add the other specialties the same way -->
+      </div>
+    </section>
+
+    <!-- Top Doctors -->
+    <section class="mt-5 px-5">
+      <h3 class="text-center fw-semibold fs-3 py-2 mb-1">Top Doctors to Book</h3>
+      <p class="text-center text-muted small mx-auto mb-5">
+        Simply browse through our extensive list of trusted doctors.
+      </p>
+      <div class="row row-cols-2 row-cols-sm-5 g-4">
+        
+          {% for doctor in doctors %}
+            <div class="col">
+                <div class="card border-0 rounded shadow-sm card-hover-up">
+                    <div class="bg-light d-flex justify-content-center">
+                        <a href="{% url "doctor_info" doctor.id %}">
+                            <img src="{{  doctor.image.url  }}" alt="Doctor" class="img-fluid" style="width: 180px; object-fit: contain;">
+                        </a>
+                    </div>
+                    <div class="card-body pb-3">
+                        <p class="text-success small fw-semibold mb-1">
+                            <span class="text-success me-1 fs-5">●</span>Available
+                        </p>
+                        <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
+                        <p class="text-muted small mb-0">{{ doctor.category }}</p>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+
+      </div>
+      <div class="text-center my-5">
+        <a href="{% url "doctor" 'all doctor' %}" class="btn btn-outline-primary fw-semibold rounded-pill btn-sm px-5 py-2 my-4">More</a>
+      </div>
+    </section>
+
+    <!-- Hero 2 -->
+    <section
+      class="text-white rounded d-flex px-5 py-3 flex-column flex-sm-row justify-content-between align-items-center mt-5"
+      style="background-color: rgb(95 111 255);">
+      <div>
+        <h2 class="fw-bold fs-1 mb-4">Book Appointment<br>With 100+ Trusted Doctors</h2>
+        <button class="btn btn-light rounded-pill px-5 py-2 text-primary fw-semibold btn-sm">Create account</button>
+      </div>
+      <img src="{% static "assets/assets_frontend/appointment_img.png" %}" class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4" width="320"
+        alt="Doctor">
+    </section>
+  </main>
+
+{% endblock contant %}
+
