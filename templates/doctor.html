@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+    <section class="mt-5 px-5">
+        <div class="container px-5 py-5">
+            <p class="mb-4 small">
+                Browse through the doctors <br> specialist.
+            </p>
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-2 mb-4">
+                    <div class="d-flex flex-column gap-3">
+                        <a href="{% url "doctor" 'General physician' %}" class="btn {% if category_name == 'General physician' %}btn-primary {% else %}btn-outline-primary{% endif %} btn-sm text-start">General physician</a>
+                        <a href="{% url "doctor" 'Gynecologist' %}" class="btn {% if category_name == 'Gynecologist' %}btn-primary {% else %} btn-outline-primary {% endif %} btn-sm text-start">Gynecologist</a>
+                        <a href="{% url "doctor" 'Dermatologist' %}" class="btn {% if category_name == 'Dermatologist' %}btn-primary {% else %} btn-outline-primary {% endif %} btn-sm text-start">Dermatologist</a>
+                        <a href="{% url "doctor" 'Pediatricians' %}" class="btn {% if category_name == 'Pediatricians' %}btn-primary {% else %} btn-outline-primary {% endif %} btn-sm text-start">Pediatricians</a>
+                        <a href="{% url "doctor" 'Neurologist' %}" class="btn {% if category_name == 'Neurologist' %}btn-primary {% else %} btn-outline-primary {% endif %} btn-sm text-start">Neurologist</a>
+                        <a href="{% url "doctor" 'Gastroenterologist' %}" class="btn {% if category_name == 'Gastroenterologist' %}btn-primary {% else %} btn-outline-primary {% endif %} btn-sm text-start">Gastroenterologist</a>
+                    </div>
+                </div>
+
+                <!-- Doctor Cards -->
+                <div class="col-md-10 px-5">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+
+                    {% for doctor in doctors %}
+                        <div class="col">
+                            <div class="card border-0 rounded shadow-sm card-hover-up">
+                                <div class="bg-light d-flex justify-content-center">
+                                    <a href="{% url "doctor_info" doctor.id %}">
+                                        <img src="{{  doctor.image.url  }}" alt="Doctor" class="img-fluid" style="width: 180px; object-fit: contain;">
+                                    </a>
+                                </div>
+                                <div class="card-body pb-3">
+                                    <p class="text-success small fw-semibold mb-1">
+                                        <span class="text-success me-1 fs-5">●</span>Available
+                                    </p>
+                                    <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
+                                    <p class="text-muted small mb-0">{{ doctor.category }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+ 
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+

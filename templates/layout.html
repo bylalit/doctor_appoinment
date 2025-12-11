@@ -1,0 +1,278 @@
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>
+    Prescripto
+  </title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+
+    .hover-effect:hover {
+      color: #212529 !important;
+      /* Bootstrap's text-dark */
+    }
+  </style>
+
+  <style>
+    .card-hover-up {
+      transition: transform 0.3s ease;
+    }
+    .card-hover-up:hover {
+      transform: translateY(-5px);
+    }
+
+    .alert-box {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px;
+      width: 320px;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      z-index: 9999;
+      margin-bottom: 10px;
+    }
+
+    .alert-box.success {
+      border-left: 5px solid #28a745;
+    }
+
+    .alert-box.error, .alert-box.danger {
+      border-left: 5px solid #dc3545;
+    }
+
+    .alert-box.warning {
+      border-left: 5px solid #ffc107;
+    }
+
+    .alert-box.info {
+      border-left: 5px solid #0dcaf0;
+    }
+
+    .alert-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+    }
+
+    .close {
+      cursor: pointer;
+      font-size: 18px;
+      color: #aaa;
+    }
+
+    .progress-bar {
+      position: relative;
+      height: 4px;
+      background: #eee;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      width: 100%;
+      animation: shrink 4s linear forwards;
+    }
+
+    /* Progress bar color matching type */
+    .alert-box.success .progress-bar span { background-color: #28a745; }
+    .alert-box.error .progress-bar span,
+    .alert-box.danger .progress-bar span { background-color: #dc3545; }
+    .alert-box.warning .progress-bar span { background-color: #ffc107; }
+    .alert-box.info .progress-bar span { background-color: #0dcaf0; }
+
+    @keyframes shrink {
+      from { width: 100%; }
+      to { width: 0%; }
+    }
+
+  </style>
+</head>
+
+<body class="bg-white text-gray-900">
+
+  <header class="container py-3 d-flex flex-wrap align-items-center border-bottom justify-content-between px-5">
+    <div class="d-flex align-items-center gap-2">
+      <a href="{% url "home" %}">
+        <img src="{% static "assets/assets_frontend/logo.svg" %}" alt="Prescripto logo icon of a house with a medical cross inside"
+          width="80%" height="80%">
+      </a>
+    </div>
+
+    <nav class="d-flex gap-3 fw-semibold text-secondary small">
+      <a class="text-decoration-none text-secondary hover-effect" href="{% url "home" %}">HOME</a>
+      <a class="text-decoration-none text-secondary hover-effect" href="{% url "doctor" 'all doctor' %}">ALL DOCTORS</a>
+      <a class="text-decoration-none text-secondary hover-effect" href="{% url "about" %}">ABOUT</a>
+      <a class="text-decoration-none text-secondary hover-effect" href="{% url "contact" %}">CONTACT</a>
+      <a target="_blank" href="{% url "dash_admin" %}" class="border px-2 py-1 rounded-pill text-decoration-none text-secondary hover-effect" style='font-size:10px;'>Admin Panel</a>
+    </nav>
+
+    {% comment %}  {% endcomment %}
+
+
+    {% if request.session.login %}
+      <div class="position-relative dropdown">
+        <a href="#" class="d-inline-block" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="{% static "assets/assets_frontend/upload_area.png" %}" alt="Profile" height="36">
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
+          {% comment %} <li><a class="dropdown-item" href="">My Profile</a></li> {% endcomment %}
+          <li><a class="dropdown-item" href="{% url "user_appointment" %}">My Appointments</a></li>
+          <li><a class="dropdown-item" href="{% url "logout_user" %}">Logout</a></li>
+        </ul>
+      </div>
+    {% else %}
+      <a href="{% url "register" %}" type="button" class="btn btn-sm text-sm rounded-pill px-4 py-2 text-white text-uppercase fw-semibold"
+        style="background-color: rgb(95 111 255);">
+        Create account
+      </a>
+    {% endif %}
+    
+  </header>
+
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert-box {{ message.tags }}" id="alertBox">
+      <div class="alert-header">
+        <div class="icon">
+          {% if 'success' in message.tags %}
+            <i style="color: #28a745;">✔</i>
+          {% elif 'error' in message.tags or 'danger' in message.tags %}
+            <i style="color: #dc3545;">❗</i>
+          {% elif 'warning' in message.tags %}
+            <i style="color: #ffc107;">⚠</i>
+          {% else %}
+            <i style="color: #0dcaf0;">ℹ</i>
+          {% endif %}
+          <span class="small">{{ message }}</span>
+        </div>
+        <div class="close" onclick="closeAlert()">✖</div>
+      </div>
+      <div class="progress-bar"><span></span></div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+
+  {% block contant %}
+  {% endblock %}
+
+
+  <footer class="container p-5 text-muted small">
+      <div class="row px-5">
+      <!-- Logo & Description -->
+      <div class="col-sm-4 mb-4 mb-sm-0">
+          <div class="d-flex align-items-center mb-4">
+            <a href="{% url "home" %}">
+              <img src="{% static "assets/assets_frontend/logo.svg" %}" alt="Prescripto logo icon of a house with a medical cross inside"
+                class="me-2" width="70%" />
+            </a>
+          </div>
+          <p class="text-muted" style="max-width: 300px; line-height: 1.5;">
+            Trusted by patients for quick appointments and quality medical care. 
+            We connect you with professional doctors who ensure safe and effective treatment. 
+            Your well-being is our top responsibility.
+          </p>
+      </div>
+
+      <!-- Company Links -->
+      <div class="col-sm-4 mb-4 mb-sm-0">
+          <h6 class="fw-semibold mt-3 mb-4">COMPANY</h6>
+          <ul class="list-unstyled ">
+          <li><a href="#" class="text-decoration-none text-muted">Home</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">About us</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Contact us</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Privacy policy</a></li>
+          </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-sm-4 mb-4">
+          <h6 class="fw-semibold mb-4 mt-3">GET IN TOUCH</h6>
+          <address class="text-muted mb-0">
+          <p class="mb-1">+1-212-456-7890</p>
+          <p class="mb-0">lalit0101kp@gmail.com</p>
+          </address>
+      </div>
+      </div>
+
+      <hr class="my-4" />
+      <p class="text-center text-muted mb-0">
+      &copy; 2025 Lalit Kumar Prajapati - All Right Reserved.
+      </p>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+   <script>
+      const timeButtons = document.querySelectorAll('#timeButtons button');
+      const selectedTimeInput = document.getElementById('selectedTime');
+
+      timeButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+              // Remove active classes from all buttons
+              timeButtons.forEach(b => {
+                  b.classList.remove('bg-primary', 'text-white');
+                  b.classList.add('text-secondary');
+              });
+
+              // Set selected time
+              selectedTimeInput.value = btn.getAttribute('data-time');
+
+              // Highlight selected button
+              btn.classList.remove('text-secondary');
+              btn.classList.add('bg-primary', 'text-white');
+          });
+      });
+
+
+      setTimeout(function () {
+          const container = document.getElementById('message-container');
+          if (container) {
+              container.style.display = 'none';
+          }
+      }, 2000);
+
+
+
+      window.onload = function() {
+        setTimeout(() => {
+          document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+        }, 4000);
+      }
+
+      function closeAlert() {
+        document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+      }
+
+    </script>
+
+  </body>
+</html>
+

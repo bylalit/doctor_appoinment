@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+    <section class="mt-4">
+        <div class="container p-5">
+            <div class="d-flex flex-column flex-md-row gap-4">
+                <div class="rounded d-flex align-items-center justify-content-center flex-shrink-0"
+                    style="width: 224px; height: 288px;background-color: rgb(95 111 255);" >
+                    <img src="{{  doctor.image.url  }}"
+                        alt="Doctor" class="rounded" width="280">
+                </div>
+
+                <div class="border rounded p-4 flex-fill">
+                    <h2 class="h4 fw-semibold text-dark d-flex align-items-center gap-2">
+                        {{ doctor.name }}
+                        <span  style="color: rgb(95 111 255);" class='small'>
+                            <i class="fas fa-check-circle small"></i>
+                        </span>
+                    </h2>
+                    <p class="text-muted small mt-1 mb-3">
+                        {{ doctor.degree }} - {{ doctor.category  }}
+                        <span class="border rounded-pill px-2 py-1 ms-2 text-secondary fw-bold d-inline-block">{{ doctor.experience }}
+                            Year</span>
+                    </p>
+                    <p class="fw-semibold text-dark d-flex align-items-center gap-1 mb-2">
+                        About
+                        <i class="fas fa-info-circle text-muted small"></i>
+                    </p>
+                    <p class="text-secondary small mb-4">
+                        {{ doctor.about }}
+                    </p>
+                    <p class="fw-semibold text-dark">
+                        Appointment fee: <span class="fw-bold">${{ doctor.fees }}</span>
+                    </p>
+                </div>
+            </div>
+
+            <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
+                {% csrf_token %}
+
+                <div class="mt-5">
+                    <p class="fw-semibold text-dark mb-3 fs-5">Booking Date</p>
+
+                    <input type="date" name="date" class="form-control mb-4" required style="max-width: 300px;" />
+                    <p class="fw-semibold text-dark mb-3 fs-5">Select Time</p>
+
+                    <!-- Hidden field to store selected time -->
+                    <input type="hidden" name="time" id="selectedTime">
+
+                    <div class="d-flex gap-3 mb-4 flex-wrap" id="timeButtons">
+                        <button type="button" data-time="08:00" class="btn border rounded-pill px-4 py-2 text-secondary small">08:00 AM</button>
+                        <button type="button" data-time="08:30" class="btn border rounded-pill px-4 py-2 text-secondary small">08:30 AM</button>
+                        <button type="button" data-time="09:00" class="btn border rounded-pill px-4 py-2 text-secondary small">09:00 AM</button>
+                        <button type="button" data-time="09:30" class="btn border rounded-pill px-4 py-2 text-secondary small">09:30 AM</button>
+                        <button type="button" data-time="10:00" class="btn border rounded-pill px-4 py-2 text-secondary small">10:00 AM</button>
+                    </div>
+
+                    <button type="submit" class="btn text-white w-100 rounded-pill mt-3 py-2 small"
+                        style="background-color: #5F73FF; max-width: 300px;">
+                        Confirm Appointment
+                    </button>
+                </div>
+            </form>
+
+
+            <div class='pt-5 mt-5 '>
+                <h3 class='fw-semibold text-dark mb-4 fs-4'>Releted Doctors</h3>
+                <div class="row row-cols-2 row-cols-sm-5 g-4">
+                    {% for doctor in releted_doctor %}
+                        <div class="col">
+                            <div class="card border-0 rounded shadow-sm card-hover-up">
+                                <div class="bg-light d-flex justify-content-center">
+                                    <a href="{% url "doctor_info" doctor.id %}">
+                                        <img src="{{  doctor.image.url  }}" alt="Doctor" class="img-fluid" style="width: 180px; object-fit: contain;">
+                                    </a>
+                                </div>
+                                <div class="card-body pb-3">
+                                    <p class="text-success small fw-semibold mb-1">
+                                        <span class="text-success me-1 fs-5">●</span>Available
+                                    </p>
+                                    <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
+                                    <p class="text-muted small mb-0">{{ doctor.category }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

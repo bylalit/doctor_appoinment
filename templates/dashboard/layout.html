@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prescripto</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .card-hover-up {
+        transition: transform 0.3s ease;
+        }
+        .card-hover-up:hover {
+        transform: translateY(-5px);
+        }
+
+        .alert-box {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px;
+        width: 320px;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        z-index: 9999;
+        margin-bottom: 10px;
+        }
+
+        .alert-box.success {
+        border-left: 5px solid #28a745;
+        }
+
+        .alert-box.error, .alert-box.danger {
+        border-left: 5px solid #dc3545;
+        }
+
+        .alert-box.warning {
+        border-left: 5px solid #ffc107;
+        }
+
+        .alert-box.info {
+        border-left: 5px solid #0dcaf0;
+        }
+
+        .alert-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        .icon {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: bold;
+        }
+
+        .close {
+        cursor: pointer;
+        font-size: 18px;
+        color: #aaa;
+        }
+
+        .progress-bar {
+        position: relative;
+        height: 4px;
+        background: #eee;
+        margin-top: 10px;
+        overflow: hidden;
+        border-radius: 3px;
+        }
+
+        .progress-bar span {
+        display: block;
+        height: 100%;
+        width: 100%;
+        animation: shrink 4s linear forwards;
+        }
+
+        /* Progress bar color matching type */
+        .alert-box.success .progress-bar span { background-color: #28a745; }
+        .alert-box.error .progress-bar span,
+        .alert-box.danger .progress-bar span { background-color: #dc3545; }
+        .alert-box.warning .progress-bar span { background-color: #ffc107; }
+        .alert-box.info .progress-bar span { background-color: #0dcaf0; }
+
+        @keyframes shrink {
+        from { width: 100%; }
+        to { width: 0%; }
+        }
+
+    </style>
+
+</head>
+{% load static %}
+
+<body>
+
+    <header class="d-flex justify-content-between align-items-center border-bottom border-secondary px-4"
+        style="height: 64px;">
+        <div class="d-flex align-items-center position-relative">
+            <a href="{% url "dash_admin" %}">
+                <img src="{% static "assets/assets_frontend/logo.svg" %}" alt="GreenCart logo icon with green color" width='70%'>
+            </a>
+        </div>
+        <div class="d-flex align-items-center gap-3 text-secondary small">
+            {% if role == 'admin' %}
+                <span>Hi! Admin</span>
+            {% else %}
+                <span>Hi! {{ doctor.name }}</span>
+            {% endif %}
+            <a href="{% url "dash_logout" %}" class="btn btn-outline-primary btn-sm rounded-pill px-3 py-1">Logout</a>
+        </div>
+    </header>
+
+    <main class="d-flex" style="min-height: calc(100vh - 64px);">
+
+        {% if role == 'admin' %}
+            <nav id="sidebar" class="border-end border-secondary p-3" style="width: 18rem;">
+                <a href="{% url "dash_admin" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'admin' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
+                    <i class="fa-solid fa-house"></i> <span class='small'>Dashboard</span>
+                </a>
+                <a href="{% url "appointments" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'appointments' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
+                    <i class="fa-regular fa-calendar-check"></i> <span class='small'>Appointments</span> 
+                </a>
+                <a href="{% url "add_doctor" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'add_doctor' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
+                    <i class="fas fa-plus-square"></i> <span class='small'>Add Doctor</span>
+                </a>
+                <a href="{% url "doctor_list" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'doctor_list' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="list">
+                    <i class="fas fa-list-ul"></i> <span class='small'>Doctors List</span>
+                </a>
+            </nav>
+        {% endif %}
+
+        {% if role == 'doctor' %}
+            <nav id="sidebar" class="border-end border-secondary p-3" style="width: 18rem;">
+                <a href="{% url "doctor_dashboard" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'doctor' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
+                    <i class="fa-solid fa-house"></i> <span class='small'>Dashboard</span>
+                </a>
+                <a href="{% url "doctor_appointments" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'doctor_appointments' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
+                   <i class="fa-regular fa-calendar-check"></i><span class='small'>My Appointments</span>
+                </a>
+                <a href="{% url "doctor_profile" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'profile' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
+                    <i class="fa-solid fa-user"></i> <span class='small'>My Profile</span>
+                </a>
+                <a href="{% url "edit_doctor" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'edit_doctor' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
+                    <i class="fa-solid fa-upload"></i> <span class='small'>Update Profile</span>
+                </a>
+            </nav>
+        {% endif %}
+
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert-box {{ message.tags }}" id="alertBox">
+                <div class="alert-header">
+                    <div class="icon">
+                    {% if 'success' in message.tags %}
+                        <i style="color: #28a745;">✔</i>
+                    {% elif 'error' in message.tags or 'danger' in message.tags %}
+                        <i style="color: #dc3545;">❗</i>
+                    {% elif 'warning' in message.tags %}
+                        <i style="color: #ffc107;">⚠</i>
+                    {% else %}
+                        <i style="color: #0dcaf0;">ℹ</i>
+                    {% endif %}
+                    <span class="small">{{ message }}</span>
+                    </div>
+                    <div class="close" onclick="closeAlert()">✖</div>
+                </div>
+                <div class="progress-bar"><span></span></div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        {% block contant %}
+        
+        {% endblock %}
+     
+    </main>
+
+
+    <!-- Bootstrap Bundle JS (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.querySelectorAll('#sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+    
+                document.querySelectorAll('#sidebar .nav-link').forEach(el => {
+                    el.classList.remove('bg-success', 'bg-opacity-25', 'border-start', 'border-success', 'fw-medium');
+                });
+    
+                this.classList.add('bg-success', 'bg-opacity-25', 'border-start', 'border-success', 'fw-medium');
+            });
+        });
+
+        window.onload = function() {
+            setTimeout(() => {
+            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+            }, 4000);
+        }
+
+        function closeAlert() {
+            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>

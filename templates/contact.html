@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+    
+    <section class="mt-4 mb-5 px-5">
+        <div class="container py-5 px-md-4">
+            <h2 class="text-center text-muted fw-normal mb-5 fs-5">
+                CONTACT <span class="fw-semibold text-dark">US</span>
+            </h2>
+
+            <div class="row justify-content-center align-items-start g-4 g-md-5">
+                <!-- Image Column -->
+                <div class="col-md-5 text-center">
+                <img src="{% static "assets/assets_frontend/contact_image.png" %}"
+                    alt="Doctor vaccinating young girl"
+                    class="img-fluid rounded"
+                    style="max-width: 400px; object-fit: cover;"
+                    width="400" height="400">
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-md-4 pt-4">
+                    <h3 class="text-dark fw-semibold fs-5 mb-3">OUR OFFICE</h3>
+                    <p class="text-muted mb-4" style="font-size: 0.85rem; line-height: 1.6;">
+                        00000 Willms Station<br>
+                        Suite 000, Washington, USA
+                    </p>
+
+                    <p class="text-muted mb-5" style="font-size: 0.85rem; line-height: 1.6;">
+                        Tel: (000) 000-0000<br>
+                        Email: greatstackdev@gmail.com
+                    </p>
+
+                    <h3 class="text-dark fw-semibold fs-5 mb-3">CAREERS AT PRESCRIPTO</h3>
+                    <p class="text-muted text-xs mb-4" style="font-size: 0.85rem; line-height: 1.6;">
+                        Learn more about our teams and job openings.
+                    </p>
+
+                    <button type="button" class="btn text-white btn-sm px-4 py-2" style="background-color: rgb(95 111 255);">
+                        Explore Jobs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+{% endblock %}

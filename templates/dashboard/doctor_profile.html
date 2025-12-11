@@ -1,0 +1,63 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+<section class="flex-grow p-4 bg-light w-100">
+    
+    <div class="container">
+        <h3 class="mb-4">Doctor Full Profile</h3>
+
+        <div class="card shadow-sm p-4">
+            <div class="row">
+                
+                <div class="col-md-4 text-center">
+                    <img src="{{ doctor.image.url }}" 
+                         alt="Doctor Image" 
+                         class="img-fluid rounded shadow-sm mb-3"
+                         style="max-height: 280px; object-fit: cover;">
+                </div>
+
+                <div class="col-md-8">
+                    <h3 class="fw-bold">{{ doctor.name }}</h3>
+                    <p class="text-secondary mb-1">👨‍⚕️ {{ doctor.degree }}</p>
+                    <p class="text-secondary mb-3">🩺 {{ doctor.category.name }}</p>
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="bg-light">Email</th>
+                            <td>{{ doctor.email }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Username</th>
+                            <td>{{ doctor.username }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Experience</th>
+                            <td>{{ doctor.experience }} Years</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Fees</th>
+                            <td>₹ {{ doctor.fees }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Address</th>
+                            <td>{{ doctor.address }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5 class="fw-bold">About Doctor</h5>
+            <p class="text-muted" style="white-space: pre-line;">
+                {{ doctor.about }}
+            </p>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

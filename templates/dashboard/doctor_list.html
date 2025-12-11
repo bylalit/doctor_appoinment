@@ -1,0 +1,32 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block contant %}
+
+    <section class='w-100 p-5 bg-light'>
+        <h3 class='mb-4 fs-4 ms-4'>All Doctors</h3>
+        <div class="row row-cols-2 row-cols-sm-5 g-4 px-4">
+            {% for doctor in doctors %}
+                <div class="col">
+                    <div class="card border-0 rounded shadow-sm">
+                        <div class="bg-light d-flex justify-content-center aaa" >
+                        <img src="{{  doctor.image.url  }}" alt="Doctor" class="img-fluid"
+                            style="width: 180px; object-fit: contain;">
+                        </div>
+                        <div class="card-body pb-3">
+                            <h6 class="card-title fw-bold mb-1">{{ doctor.name }}</h6>
+                            <p class="text-muted small mb-2">{{ doctor.category }}</p>
+                            <div class='d-flex align-items-center'>
+                                <input type="checkbox" name="available" class='active me-2' id="available">
+                                <p class="small fw-bold m-0">
+                                    Available
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
