@@ -331,6 +331,8 @@ def add_doctor(request):
         doctor.save()
         messages.success(request, "Doctor Added Succefully!")
         
+        print("Image URL:", doctor.image.url)
+        
         return redirect('add_doctor')
     
     return render(request, 'dashboard/add_doctor.html', {'category': category, "role" : "admin", 'action': 'add_doctor'})
