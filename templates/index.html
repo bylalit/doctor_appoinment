@@ -96,7 +96,7 @@
       <p class="text-center text-muted small mx-auto mb-5">
         Simply browse through our extensive list of trusted doctors.
       </p>
-      <div class="row row-cols-2 row-cols-sm-5 g-4">
+      {% comment %} <div class="row row-cols-2 row-cols-sm-5 g-4">
         
           {% for doctor in doctors %}
             <div class="col">
@@ -117,7 +117,37 @@
             </div>
           {% endfor %}
 
-      </div>
+      </div> {% endcomment %}
+
+      <div class="row row-cols-2 row-cols-sm-5 g-4">
+    
+        {% for doctor in doctors %}
+        <div class="col">
+            <div class="card border-0 rounded shadow-sm h-100"> <!-- h-100 important -->
+                
+                <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
+                    <a href="{% url "doctor_info" doctor.id %}">
+                        <img src="{{ doctor.image.url }}" 
+                            class="img-fluid" alt="Images"
+                            style="max-height: 100%; object-fit: contain;">
+                    </a>
+                </div>
+
+                <div class="card-body pb-3 d-flex flex-column">
+                    <p class="text-success small fw-semibold mb-1">
+                        <span class="me-1 fs-5">●</span>Available
+                    </p>
+                    <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
+                    <p class="text-muted small mb-0">{{ doctor.category }}</p>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+
       <div class="text-center my-5">
         <a href="{% url "doctor" 'all doctor' %}" class="btn btn-outline-primary fw-semibold rounded-pill btn-sm px-5 py-2 my-4">More</a>
       </div>

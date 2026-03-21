@@ -109,10 +109,76 @@
       to { width: 0%; }
     }
 
+    {% comment %} #loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #ddd;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    } {% endcomment %}
+
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f9fbfd, #e6eef8); /* soft gradient */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.1s ease, visibility 0.1s ease; /* smooth hide */
+}
+
+/* Spinner upgraded */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba(0, 0, 0, 0.1);
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.3); /* glow effect */
+}
+
+/* Animation */
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide effect class */
+#loader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
   </style>
 </head>
 
 <body class="bg-white text-gray-900">
+
+  <div id="loader">
+    <div class="spinner"></div>
+</div>
 
   <header class="container py-3 d-flex flex-wrap align-items-center border-bottom justify-content-between px-5">
     <div class="d-flex align-items-center gap-2">
@@ -270,6 +336,19 @@
       function closeAlert() {
         document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
       }
+
+
+      
+      {% comment %} window.addEventListener("load", function() {
+          document.getElementById("loader").style.display = "none";
+      }); {% endcomment %}
+
+
+      window.addEventListener("load", function() {
+      setTimeout(function() {
+          document.getElementById("loader").classList.add("hide");
+      }, 300);
+});
 
     </script>
 

@@ -11,7 +11,10 @@ from django.contrib.auth.hashers import make_password, check_password
 
 
 def index(request):
-    doctors = Doctor.objects.all()[:10]
+    # doctors = Doctor.objects.all()[:10:-1]
+    doctors = Doctor.objects.all().order_by('-id')[:10]
+    for i in doctors:
+        print(i.image.url)
     return render(request, 'index.html', {'doctors': doctors, })
 
 
@@ -22,7 +25,6 @@ def doctor(request, category_name):
         doctors = Doctor.objects.filter(category__name=category_name)
         
     return render(request, 'doctor.html', {'doctors': doctors, 'category_name': category_name})
-
 
 def doctor_info(request, id):
     doctor = Doctor.objects.get(id=id)

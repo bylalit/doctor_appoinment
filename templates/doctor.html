@@ -23,28 +23,33 @@
 
                 <!-- Doctor Cards -->
                 <div class="col-md-10 px-5">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
 
-                    {% for doctor in doctors %}
-                        <div class="col">
-                            <div class="card border-0 rounded shadow-sm card-hover-up">
-                                <div class="bg-light d-flex justify-content-center">
-                                    <a href="{% url "doctor_info" doctor.id %}">
-                                        <img src="{{  doctor.image.url  }}" alt="Doctor" class="img-fluid" style="width: 180px; object-fit: contain;">
-                                    </a>
-                                </div>
-                                <div class="card-body pb-3">
-                                    <p class="text-success small fw-semibold mb-1">
-                                        <span class="text-success me-1 fs-5">●</span>Available
-                                    </p>
-                                    <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
-                                    <p class="text-muted small mb-0">{{ doctor.category }}</p>
+                        {% for doctor in doctors %}
+                            <div class="col">
+                                <div class="card border-0 rounded shadow-sm h-100"> <!-- h-100 added -->
+
+                                    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
+                                        <a href="{% url "doctor_info" doctor.id %}">
+                                            <img src="{{ doctor.image.url }}" alt="Images"
+                                                class="img-fluid"
+                                                style="max-height: 100%; object-fit: contain;">
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body pb-3 d-flex flex-column">
+                                        <p class="text-success small fw-semibold mb-1">
+                                            <span class="text-success me-1 fs-5">●</span>Available
+                                        </p>
+                                        <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
+                                        <p class="text-muted small mb-0">{{ doctor.category }}</p>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
- 
-                </div>
+                        {% endfor %}
+
+                    </div>
                 </div>
             </div>
         </div>
