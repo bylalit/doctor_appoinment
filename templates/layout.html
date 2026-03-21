@@ -196,8 +196,6 @@
       <a target="_blank" href="{% url "dash_admin" %}" class="border px-2 py-1 rounded-pill text-decoration-none text-secondary hover-effect" style='font-size:10px;'>Admin Panel</a>
     </nav>
 
-    {% comment %}  {% endcomment %}
-
 
     {% if request.session.login %}
       <div class="position-relative dropdown">
@@ -205,7 +203,7 @@
           <img src="{% static "assets/assets_frontend/upload_area.png" %}" alt="Profile" height="36">
         </a>
         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-          {% comment %} <li><a class="dropdown-item" href="">My Profile</a></li> {% endcomment %}
+          <li><a class="dropdown-item" href="">My Profile</a></li>
           <li><a class="dropdown-item" href="{% url "user_appointment" %}">My Appointments</a></li>
           <li><a class="dropdown-item" href="{% url "logout_user" %}">Logout</a></li>
         </ul>
@@ -336,12 +334,6 @@
       function closeAlert() {
         document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
       }
-
-
-      
-      {% comment %} window.addEventListener("load", function() {
-          document.getElementById("loader").style.display = "none";
-      }); {% endcomment %}
 
 
       window.addEventListener("load", function() {
