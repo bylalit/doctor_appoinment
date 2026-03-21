@@ -11,7 +11,6 @@ from django.contrib.auth.hashers import make_password, check_password
 
 
 def index(request):
-    # doctors = Doctor.objects.all()[:10:-1]
     doctors = Doctor.objects.all().order_by('-id')[:10]
     for i in doctors:
         print(i.image.url)
@@ -53,9 +52,7 @@ def user_appointment(request):
 
 # @login_required(login_url='login')
 def book_appointment(request, doctor_id):
-    # print(doctor_id)
     doctor = get_object_or_404(Doctor, id=doctor_id)
-    # print(doctor)
 
     if 'login' in request.session:
         username = request.session['login']  
@@ -84,7 +81,7 @@ def book_appointment(request, doctor_id):
         
             messages.success(request, "Appointment Booked!")
             return redirect('user_appointment')
-            # return render(request, 'user_appointment.html', {'appointments': appointments})
+            
     else:
         messages.error(request, "Please Login Requered!")
         return redirect('login')
@@ -178,7 +175,6 @@ def logout_user(request):
     request.session.flush()
     messages.success(request, "Logout Succefully!")
     return redirect('home')
-
 
 
 
@@ -345,4 +341,3 @@ def add_doctor(request):
 def doctor_list(request):
     doctors = Doctor.objects.all()
     return render(request, 'dashboard/doctor_list.html', {'doctors': doctors, 'action': 'doctor_list', "role" : "admin"})
-
