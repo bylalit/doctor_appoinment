@@ -67,22 +67,29 @@
 
             <div class='pt-5 mt-5 '>
                 <h3 class='fw-semibold text-dark mb-4 fs-4'>Releted Doctors</h3>
+                
                 <div class="row row-cols-2 row-cols-sm-5 g-4">
+    
                     {% for doctor in releted_doctor %}
                         <div class="col">
-                            <div class="card border-0 rounded shadow-sm card-hover-up">
-                                <div class="bg-light d-flex justify-content-center">
+                            <div class="card border-0 rounded shadow-sm h-100"> 
+                                
+                                <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
                                     <a href="{% url "doctor_info" doctor.id %}">
-                                        <img src="{{  doctor.image.url  }}" alt="Doctor" class="img-fluid" style="width: 180px; object-fit: contain;">
+                                        <img src="{{ doctor.image.url }}" 
+                                            class="img-fluid" alt="Images"
+                                            style="max-height: 100%; object-fit: contain;">
                                     </a>
                                 </div>
-                                <div class="card-body pb-3">
+
+                                <div class="card-body pb-3 d-flex flex-column">
                                     <p class="text-success small fw-semibold mb-1">
-                                        <span class="text-success me-1 fs-5">●</span>Available
+                                        <span class="me-1 fs-5">●</span>Available
                                     </p>
                                     <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
                                     <p class="text-muted small mb-0">{{ doctor.category }}</p>
                                 </div>
+
                             </div>
                         </div>
                     {% endfor %}
