@@ -5,7 +5,6 @@
 
     <main class="container py-5 px-5">
 
-
       {% comment %} <div id="doctorSlider" class="carousel slide" data-bs-ride="carousel">
 
         <!-- Indicators -->
@@ -54,40 +53,110 @@
         </button>
 
       </div> {% endcomment %}
-      {% load static %}
+      {% comment %} {% load static %} {% endcomment %}
       <section class="position-relative overflow-hidden" style="height: 500px;">
 
-        <!-- Background Video -->
-        <video autoplay muted loop playsinline 
-            class="position-absolute top-50 start-50 translate-middle w-100 h-100 object-fit-cover">
-             {% comment %} <source src="{% static 'assets/assets_frontend/7579843-hd_1366_720_25fps.mp4' %}" type="video/mp4"> {% endcomment %}
-             
-             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        </video>
+          <!-- Background Video -->
+          <video autoplay muted loop playsinline 
+              class="position-absolute top-50 start-50 translate-middle w-100 h-100 object-fit-cover">
+              {% comment %} <source src="{% static 'assets/assets_frontend/7579843-hd_1366_720_25fps.mp4' %}" type="video/mp4"> {% endcomment %}
+              
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          </video>
 
-        <!-- Overlay (optional dark layer) -->
-        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+          <!-- Overlay (optional dark layer) -->
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
 
-        <!-- Content -->
-        <div class="container position-relative text-center text-white d-flex align-items-center justify-content-center h-100">
-            <div>
-                <h1 class="fw-bold">Welcome to Our Clinic</h1>
-                <p class="lead">Your Health is Our Priority</p>
-            </div>
-        </div>
+          <!-- Content -->
+          <div class="container position-relative text-center text-white d-flex align-items-center justify-content-center h-100">
+              <div>
+                  <h1 class="fw-bold">Welcome to Our Clinic</h1>
+                  <p class="lead">Your Health is Our Priority</p>
+              </div>
+          </div>
 
-    </section>
+      </section>
 
-    <video autoplay muted loop playsinline 
-    class="position-absolute top-50 start-50 translate-middle w-100 h-100 object-fit-cover">
-    
-    <source src="{% static 'assets/assets_frontend/Homepage_fin_10mbps.mp4' %}" type="video/mp4">
-    
-    Your browser does not support video.
-</video>
+      <section class="container my-5">
 
+          <!-- Header -->
+          <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+              <h2 class="fw-bold">
+                  Helping <span class="text-primary">Patients</span> Navigate Their 
+                  <span class="text-primary">Treatment Journey</span>
+              </h2>
 
+              <a href="#" class="btn btn-outline-primary rounded-pill">
+                  Learn More →
+              </a>
+          </div>
 
+          <!-- Cards -->
+          <div class="row g-4">
+
+              <!-- Card 1 -->
+              <div class="col-md-4">
+                  <div class="card border-0 shadow-sm h-100">
+
+                      <img src="{% static 'assets\assets_frontend\img1.webp' %}" 
+                          class="card-img-top" 
+                          style="height: 220px; object-fit: cover;">
+
+                      <div class="card-body">
+                          <h5 class="fw-bold">Vega Club</h5>
+                          <p class="text-muted">
+                              A patient support program where gastroenterologists help people with 
+                              ulcerative colitis better understand and manage Inflammatory Bowel 
+                              Disease through personalised guidance on diet, exercise, and stress.
+                          </p>
+                      </div>
+
+                  </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="col-md-4">
+                  <div class="card border-0 shadow-sm h-100">
+
+                      <img src="{% static '/assets/assets_frontend/hello.jpg' %}" 
+                          class="card-img-top" 
+                          style="height: 220px; object-fit: cover;">
+
+                      <div class="card-body">
+                          <h5 class="fw-bold">betaCare</h5>
+                          <p class="text-muted">
+                              An initiative providing useful health information to patients. 
+                              It offers certified online courses to improve patient care 
+                              and help them navigate treatment and healthcare systems.
+                          </p>
+                      </div>
+
+                  </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="col-md-4">
+                  <div class="card border-0 shadow-sm h-100">
+
+                      <img src="{% static 'assets/assets_frontend/img3.jpg' %}" 
+                          class="card-img-top" 
+                          style="height: 220px; object-fit: cover;">
+
+                      <div class="card-body">
+                          <h5 class="fw-bold">Joint Health Revolution</h5>
+                          <p class="text-muted">
+                              Sessions designed for individuals with osteoarthritis, helping 
+                              them understand joint care, exercises, healthy habits, and ways 
+                              to manage pain and stay active.
+                          </p>
+                      </div>
+
+                  </div>
+              </div>
+
+          </div>
+
+      </section>
 
 
 
@@ -207,7 +276,7 @@
     </section> {% endcomment %}
 
 
-        <!-- Hero 1 -->
+    <!-- Hero 1 -->
     <section
       class="text-white rounded p-5 p-md-5 d-flex flex-column flex-sm-row justify-content-between align-items-center mt-5"
       style="background-color: rgb(95 111 255);">
@@ -232,6 +301,73 @@
         height="700" alt="Doctors">
     </section>
 
+
+
+    <section class="container my-5">
+
+        <!-- Heading -->
+        <h2 class="fw-bold mb-4">
+            Our Efforts in the 
+            <span class="text-primary">Fight Against Cancer</span>
+        </h2>
+
+        <!-- Video Card -->
+        <div class="position-relative rounded overflow-hidden">
+
+            <!-- 🔥 Background Video -->
+            <video autoplay muted loop playsinline
+                class="w-100"
+                style="height: 400px; object-fit: cover;">
+                
+                <source src="{% static 'assets\assets_frontend\abc.mp4' %}" type="video/mp4">
+            
+            </video>
+
+            <!-- Dark Overlay -->
+            <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+            <!-- Left Content -->
+            <div class="position-absolute top-50 start-0 translate-middle-y text-white px-4" style="max-width: 500px;">
+                <p class="mb-3">
+                    "Our mission is to turn scientific possibilities into real hope,
+                    addressing urgent patient needs and helping improve lives."
+                </p>
+
+                <p class="text-info fw-semibold mb-0">
+                    Dr. Murali Ramachandra,
+                </p>
+                <small>Chief Executive Officer, Aurigene Oncology</small>
+            </div>
+
+            <!-- Play Button -->
+            <div class="position-absolute top-50 end-0 translate-middle-y me-4">
+                <button class="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
+                        style="width: 60px; height: 60px;"
+                        data-bs-toggle="modal" data-bs-target="#videoModal">
+                    ▶
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark border-0">
+
+          <div class="modal-body p-0">
+
+            <video controls class="w-100" id="modalVideo">
+              <source src="{% static 'assets\assets_frontend\abc.mp4' %}" type="video/mp4">
+            </video>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
 
 
   </main>
