@@ -12,8 +12,8 @@ from django.contrib.auth.hashers import make_password, check_password
 
 def index(request):
     doctors = Doctor.objects.all().order_by('-id')[:10]
-    for i in doctors:
-        print(i.image.url)
+    # for i in doctors:
+    #     print(i.image.url)
     return render(request, 'index.html', {'doctors': doctors, })
 
 
