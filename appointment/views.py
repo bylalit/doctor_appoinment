@@ -16,6 +16,8 @@ def index(request):
     #     print(i.image.url)
     return render(request, 'index.html', {'doctors': doctors, })
 
+def patient_programs(request):
+    return render(request, 'patient_programs.html')
 
 def doctor(request, category_name):
     if category_name == 'all doctor':
