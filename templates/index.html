@@ -98,9 +98,11 @@
               <div class="col-md-4">
                   <div class="card border-0 shadow-sm h-100">
 
-                      <img src="{% static 'assets\assets_frontend\F Vega Club.jpg.webp' %}" 
+                      <a href="{% url "patient_programs" %}">
+                        <img src="{% static 'assets\assets_frontend\F Vega Club.jpg.webp' %}" 
                           class="card-img-top" 
                           style="height: 220px; object-fit: cover;">
+                      </a>
 
                       <div class="card-body">
                           <h5 class="fw-bold">Vega Club</h5>
@@ -118,10 +120,11 @@
               <div class="col-md-4">
                   <div class="card border-0 shadow-sm h-100">
 
-                      <img src="{% static 'assets\assets_frontend\img1.webp' %}" 
+                      <a href="{% url "patient_programs" %}">
+                        <img src="{% static 'assets\assets_frontend\img1.webp' %}" 
                           class="card-img-top" 
                           style="height: 220px; object-fit: cover;">
-
+                      </a>
                       <div class="card-body">
                           <h5 class="fw-bold">betaCare</h5>
                           <p class="text-muted">
@@ -138,9 +141,12 @@
               <div class="col-md-4">
                   <div class="card border-0 shadow-sm h-100">
 
-                      <img src="{% static 'assets\assets_frontend\hello.jpg' %}" 
-                          class="card-img-top" 
-                          style="height: 220px; object-fit: cover;">
+                      <a href="{% url "patient_programs" %}">
+                        <img src="{% static 'assets\assets_frontend\hello.jpg' %}" 
+                            class="card-img-top" 
+                            style="height: 220px; object-fit: cover;">
+                      </a>
+                      
 
                       <div class="card-body">
                           <h5 class="fw-bold">Joint Health Revolution</h5>
