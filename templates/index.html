@@ -5,56 +5,6 @@
 
     <main class="container py-5 px-5">
 
-      {% comment %} <div id="doctorSlider" class="carousel slide" data-bs-ride="carousel">
-
-        <!-- Indicators -->
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#doctorSlider" data-bs-slide-to="0" class="active"></button>
-          <button type="button" data-bs-target="#doctorSlider" data-bs-slide-to="1"></button>
-          <button type="button" data-bs-target="#doctorSlider" data-bs-slide-to="2"></button>
-        </div>
-
-        <!-- Slides -->
-        <div class="carousel-inner">
-
-          <div class="carousel-item active">
-            <img src="images/doctor1.jpg" class="d-block w-100" style="height:500px; object-fit:cover;">
-            <div class="carousel-caption">
-              <h3>Best Medical Services</h3>
-              <p>Your Health is Our Priority</p>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <img src="images/doctor2.jpg" class="d-block w-100" style="height:500px; object-fit:cover;">
-            <div class="carousel-caption">
-              <h3>Expert Doctors</h3>
-              <p>Experienced & Caring Staff</p>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <img src="images/doctor3.jpg" class="d-block w-100" style="height:500px; object-fit:cover;">
-            <div class="carousel-caption">
-              <h3>24/7 Emergency</h3>
-              <p>Always Ready to Help You</p>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#doctorSlider" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#doctorSlider" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
-
-      </div> {% endcomment %}
-      {% comment %} {% load static %} {% endcomment %}
-
       <section class="position-relative overflow-hidden" style="height: 500px;">
 
           <!-- Background Video -->
@@ -76,67 +26,6 @@
           </div>
 
       </section>
-
-
-        <!-- Speciality -->
-        {% comment %} <section class="text-center mt-5">
-        <h2 class="fw-semibold fs-3 py-2 mb-1">Find by Speciality</h2>
-        <p class="text-muted small mx-auto mb-5" style="max-width: 440px;">
-            Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
-        </p>
-        <div class="d-flex flex-wrap justify-content-center gap-4">
-            <!-- Repeat for each speciality -->
-            <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
-            <a href="{% url "doctor" 'General physician' %}">
-                <img src="{% static "assets/assets_frontend/General_physician.svg" %}"
-                class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
-                height="90" alt="Specialist">
-            </a>
-            <span class="mt-2">General physician</span>
-            </div>
-            <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
-            <a href="{% url "doctor" 'Gynecologist' %}">
-                <img src="{% static "assets/assets_frontend/Gynecologist.svg" %}"
-                class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
-                height="90" alt="Specialist">
-            </a>
-            <span class="mt-2">Gynecologist</span>
-            </div>
-            <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
-            <a href="{% url "doctor" 'Dermatologist' %}">
-                <img src="{% static "assets/assets_frontend/Dermatologist.svg" %}"
-                class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
-                height="90" alt="Specialist">
-            </a>
-            <span class="mt-2">Dermatologist</span>
-            </div>
-            <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
-            <a href="{% url "doctor" 'Pediatricians' %}">
-                <img src="{% static "assets/assets_frontend/Pediatricians.svg" %}"
-                class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
-                height="90" alt="Specialist">
-            </a>
-            <span class="mt-2">Pediatricians</span>
-            </div>
-            <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
-            <a href="{% url "doctor" 'Neurologist' %}">
-                <img src="{% static "assets/assets_frontend/Neurologist.svg" %}"
-                class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
-                height="90" alt="Specialist">
-            </a>
-            <span class="mt-2">Neurologist</span>
-            </div>
-            <div class="d-flex flex-column align-items-center text-muted small card-hover-up" style="max-width: 100px;">
-            <a href="{% url "doctor" 'Gastroenterologist' %}">
-                <img src="{% static "assets/assets_frontend/Gastroenterologist.svg" %}"
-                class="rounded-circle" style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);" width="90"
-                height="90" alt="Specialist">
-            </a>
-            <span class="mt-2">Gastroenterologist</span>
-            </div>
-            
-        </div>
-        </section> {% endcomment %}
 
 
         <section class="text-center mt-5">
@@ -238,48 +127,6 @@
         </section>
 
 
-        {% comment %} <!-- Top Doctors -->
-        <section class="mt-5 px-5">
-        <h3 class="text-center fw-semibold fs-3 py-2 mb-1">Top Doctors to Book</h3>
-        <p class="text-center text-muted small mx-auto mb-5">
-            Simply browse through our extensive list of trusted doctors.
-        </p>
-
-
-        <div class="row row-cols-2 row-cols-sm-5 g-4">
-        
-            {% for doctor in doctors %}
-            <div class="col">
-                <div class="card border-0 rounded shadow-sm h-100"> 
-                    
-                    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
-                        <a href="{% url "doctor_info" doctor.id %}">
-                            <img src="{{ doctor.image.url }}" 
-                                class="img-fluid" alt="Images"
-                                style="max-height: 100%; object-fit: contain;">
-                        </a>
-                    </div>
-
-                    <div class="card-body pb-3 d-flex flex-column">
-                        <p class="text-success small fw-semibold mb-1">
-                            <span class="me-1 fs-5">●</span>Available
-                        </p>
-                        <h6 class="card-title fw-semibold mb-1">{{ doctor.name }}</h6>
-                        <p class="text-muted small mb-0">{{ doctor.category }}</p>
-                    </div>
-
-                </div>
-            </div>
-            {% endfor %}
-
-        </div>
-
-
-        <div class="text-center my-5">
-            <a href="{% url "doctor" 'all doctor' %}" class="btn btn-outline-primary fw-semibold rounded-pill btn-sm px-5 py-2 my-4">More</a>
-        </div>
-        </section> {% endcomment %}
-
         <!-- Top Doctors -->
         <section class="mt-5 px-5">
 
@@ -348,110 +195,6 @@
             </div>
 
         </section>
-
-
-
-
-        {% comment %} <!-- Hero 2 -->
-        <section
-        class="text-white rounded d-flex px-5 py-3 flex-column flex-sm-row justify-content-between align-items-center mt-5"
-        style="background-color: rgb(95 111 255);">
-        <div>
-            <h2 class="fw-bold fs-1 mb-4">Book Appointment<br>With 100+ Trusted Doctors</h2>
-            <button class="btn btn-light rounded-pill px-5 py-2 text-primary fw-semibold btn-sm">Create account</button>
-        </div>
-        <img src="{% static "assets/assets_frontend/appointment_img.png" %}" class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4" width="320"
-            alt="Doctor">
-        </section> {% endcomment %}
-
-
-
-        {% comment %} <section class="container my-5">
-
-          <!-- Header -->
-          <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-              <h2 class="fw-bold">
-                  Helping <span style="color:rgb(95 111 255);">Patients</span> Navigate Their 
-                  <span style="color:rgb(95 111 255);">Treatment Journey</span>
-              </h2>
-
-              <a href="{% url "patient_programs" %}" class="btn btn-outline-primary rounded-pill" style="background:rgb(95 111 255); color:white;">
-                  Learn More →
-              </a>
-          </div>
-
-          <!-- Cards -->
-          <div class="row g-4">
-
-              <!-- Card 1 -->
-              <div class="col-md-4">
-                  <div class="card border-0 shadow-sm h-100">
-
-                      <a href="{% url "patient_programs" %}">
-                        <img src="{% static 'assets\assets_frontend\F Vega Club.jpg.webp' %}" 
-                          class="card-img-top" 
-                          style="height: 220px; object-fit: cover;">
-                      </a>
-
-                      <div class="card-body">
-                          <h5 class="fw-bold">Vega Club</h5>
-                          <p class="text-muted">
-                              A patient support program where gastroenterologists help people with 
-                              ulcerative colitis better understand and manage Inflammatory Bowel 
-                              Disease through personalised guidance on diet, exercise, and stress.
-                          </p>
-                      </div>
-
-                  </div>
-              </div>
-
-              <!-- Card 2 -->
-              <div class="col-md-4">
-                  <div class="card border-0 shadow-sm h-100">
-
-                      <a href="{% url "patient_programs" %}">
-                        <img src="{% static 'assets\assets_frontend\img1.webp' %}" 
-                          class="card-img-top" 
-                          style="height: 220px; object-fit: cover;">
-                      </a>
-                      <div class="card-body">
-                          <h5 class="fw-bold">betaCare</h5>
-                          <p class="text-muted">
-                              An initiative providing useful health information to patients. 
-                              It offers certified online courses to improve patient care 
-                              and help them navigate treatment and healthcare systems.
-                          </p>
-                      </div>
-
-                  </div>
-              </div>
-
-              <!-- Card 3 -->
-              <div class="col-md-4">
-                  <div class="card border-0 shadow-sm h-100">
-
-                      <a href="{% url "patient_programs" %}">
-                        <img src="{% static 'assets\assets_frontend\hello.jpg' %}" 
-                            class="card-img-top" 
-                            style="height: 220px; object-fit: cover;">
-                      </a>
-                      
-
-                      <div class="card-body">
-                          <h5 class="fw-bold">Joint Health Revolution</h5>
-                          <p class="text-muted">
-                              Sessions designed for individuals with osteoarthritis, helping 
-                              them understand joint care, exercises, healthy habits, and ways 
-                              to manage pain and stay active.
-                          </p>
-                      </div>
-
-                  </div>
-              </div>
-
-          </div>
-
-        </section> {% endcomment %}
 
 
         <section class="container my-5">
@@ -562,73 +305,6 @@
         </section>
 
 
-        {% comment %} <section class="container my-5 py-5">
-
-            <!-- Heading -->
-            <h1 class="fw-bold mb-4">
-                Our Efforts in the 
-                <span style="color:rgb(95 111 255);">Fight Against Cancer</span>
-            </h1>
-
-            <!-- Video Card -->
-            <div class="position-relative rounded overflow-hidden">
-
-                <!-- 🔥 Background Video -->
-                <video autoplay muted loop playsinline
-                    class="w-100"
-                    style="height: 400px; object-fit: cover;">
-                    
-                    <source src="{% static 'assets\assets_frontend\abc.mp4' %}" type="video/mp4">
-                
-                </video>
-
-                <!-- Dark Overlay -->
-                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
-
-                <!-- Left Content -->
-                <div class="position-absolute top-50 start-0 translate-middle-y text-white px-4" style="max-width: 500px;">
-                    <p class="mb-3">
-                        "Our mission is to turn scientific possibilities into real hope,
-                        addressing urgent patient needs and helping improve lives."
-                    </p>
-
-                    <p class="text-info fw-semibold mb-0">
-                        Dr. Murali Ramachandra,
-                    </p>
-                    <small>Chief Executive Officer, Aurigene Oncology</small>
-                </div>
-
-                <!-- Play Button -->
-                <div class="position-absolute top-50 end-0 translate-middle-y me-4">
-                    <button class="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
-                            style="width: 60px; height: 60px;"
-                            data-bs-toggle="modal" data-bs-target="#videoModal">
-                        ▶
-                    </button>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- Modal -->
-        <div class="modal fade" id="videoModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content bg-dark border-0">
-
-            <div class="modal-body p-0">
-
-                <video controls class="w-100" id="modalVideo">
-                <source src="{% static 'assets\assets_frontend\abc.mp4' %}" type="video/mp4">
-                </video>
-
-            </div>
-
-            </div>
-        </div>
-        </div> {% endcomment %}
-
-
         <section class="container my-5 py-5">
 
             <!-- Heading -->
@@ -707,77 +383,6 @@
             </div>
         </div>
 
-
-
-        {% comment %} <section class="container my-5 py-5">
-
-            <div class="row align-items-center">
-
-                <!-- LEFT CONTENT -->
-                <div class="col-md-6">
-
-                    <!-- Heading -->
-                    <h1 class="fw-bold mb-3">
-                        Our <span class="text-primary">Core Businesses</span>
-                    </h1>
-
-                    <!-- Paragraph -->
-                    <p class="text-muted mb-4" style="line-height: 1.8;">
-                        We operate across four main segments: Generics (branded, unbranded, and biosimilars), 
-                        API & Services (development, manufacturing, and research support), Innovative Medicines, 
-                        and Consumer Health solutions. We are also expanding our portfolio across therapies through 
-                        in-licensing and partnering with innovative companies across the globe.
-                    </p>
-
-                    <!-- Points -->
-                    <div class="row mb-4">
-
-                        <div class="col-6 d-flex align-items-center mb-3">
-                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
-                            <span>Generics</span>
-                        </div>
-
-                        <div class="col-6 d-flex align-items-center mb-3">
-                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
-                            <span>API & Services</span>
-                        </div>
-
-                        <div class="col-6 d-flex align-items-center mb-3">
-                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
-                            <span>Innovative Medicines</span>
-                        </div>
-
-                        <div class="col-6 d-flex align-items-center mb-3">
-                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
-                            <span>Consumer Health</span>
-                        </div>
-
-                    </div>
-
-                    <!-- Button -->
-                    <a href="{% url "patient_programs" %}" class="btn btn-outline-primary rounded-pill px-4 py-2">
-                        Learn More →
-                    </a>
-
-                </div>
-
-                <!-- RIGHT IMAGE -->
-                <div class="col-md-6 text-center mt-4 mt-md-0">
-
-                    <div class="d-inline-block overflow-hidden"
-                        style="">
-
-                        <img src="{% static 'assets/assets_frontend/F Core Businesses.png.webp' %}" 
-                            class="w-100 h-100"
-                            style="object-fit: cover;">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section> {% endcomment %}
 
         <section class="container my-5 py-5">
 
@@ -859,33 +464,6 @@
         </section>
 
 
-
-        {% comment %} <!-- Hero 1 -->
-        <section
-            class="text-white rounded p-5 p-md-5 d-flex flex-column flex-sm-row justify-content-between align-items-center mt-5"
-            style="background-color: rgb(95 111 255);">
-            <div class="mb-4 mb-sm-0">
-                <h1 class="fw-bold fs-1 mb-3">
-                Book Appointment<br>With Trusted Doctors
-                </h1>
-
-                <div class="d-flex align-items-center justify-content-center mt-5">
-                <img src="{% static "assets/assets_frontend/group_profiles-BCL6AVF5.png" %}" class="me-3 mb-3" width="100" height="50"
-                    alt="Doctor 1">
-                <p class="small" style="max-width: 420px;">
-                    Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
-                </p>
-                </div>
-                <a href="{% url "doctor" 'all doctor' %}"
-                class="btn btn-light rounded-pill ps-4 mt-3 py-3 text-primary fw-semibold btn-sm d-flex align-items-center gap-2 w-50">
-                Book appointment <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <img src="{% static "assets/assets_frontend/header_img.png" %}" class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4" width="420"
-                height="700" alt="Doctors">
-        </section> {% endcomment %}
-
-
         <!-- Hero 1 -->
         <section
             class="text-white rounded p-5 p-md-5 d-flex flex-column flex-sm-row justify-content-between align-items-center mt-5"
@@ -936,7 +514,6 @@
                 onmouseout="this.style.transform='scale(1)'">
 
         </section>
-
 
   </main>
 
