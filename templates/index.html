@@ -70,17 +70,16 @@
           <!-- Content -->
           <div class="container position-relative text-center text-white d-flex align-items-center justify-content-center h-100">
               <div>
-                  <h1 class="fw-bold">Welcome to Our Clinic</h1>
-                  <p class="lead">Your Health is Our Priority</p>
+                  <h1 class="fw-bold"  data-aos="fade-up">Welcome to Our Clinic</h1>
+                  <p class="lead" data-aos="fade-up" data-aos-delay="200">Your Health is Our Priority</p>
               </div>
           </div>
 
       </section>
 
 
-
         <!-- Speciality -->
-        <section class="text-center mt-5">
+        {% comment %} <section class="text-center mt-5">
         <h2 class="fw-semibold fs-3 py-2 mb-1">Find by Speciality</h2>
         <p class="text-muted small mx-auto mb-5" style="max-width: 440px;">
             Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
@@ -137,10 +136,109 @@
             </div>
             
         </div>
+        </section> {% endcomment %}
+
+
+        <section class="text-center mt-5">
+
+            <!-- Heading -->
+            <h2 class="fw-semibold fs-3 py-2 mb-1" data-aos="fade-up">
+                Find by Speciality
+            </h2>
+
+            <!-- Subtext -->
+            <p class="text-muted small mx-auto mb-5" style="max-width: 440px;"
+            data-aos="fade-up" data-aos-delay="200">
+                Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+            </p>
+
+            <!-- Icons -->
+            <div class="d-flex flex-wrap justify-content-center gap-4">
+
+                <!-- 1 -->
+                <div class="d-flex flex-column align-items-center text-muted small card-hover-up"
+                    style="max-width: 100px;"
+                    data-aos="zoom-in" data-aos-delay="100">
+                    <a href="{% url "doctor" 'General physician' %}">
+                        <img src="{% static 'assets/assets_frontend/General_physician.svg' %}"
+                            class="rounded-circle"
+                            style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);"
+                            width="90" height="90">
+                    </a>
+                    <span class="mt-2">General physician</span>
+                </div>
+
+                <!-- 2 -->
+                <div class="d-flex flex-column align-items-center text-muted small card-hover-up"
+                    style="max-width: 100px;"
+                    data-aos="zoom-in" data-aos-delay="200">
+                    <a href="{% url "doctor" 'Gynecologist' %}">
+                        <img src="{% static 'assets/assets_frontend/Gynecologist.svg' %}"
+                            class="rounded-circle"
+                            style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);"
+                            width="90" height="90">
+                    </a>
+                    <span class="mt-2">Gynecologist</span>
+                </div>
+
+                <!-- 3 -->
+                <div class="d-flex flex-column align-items-center text-muted small card-hover-up"
+                    style="max-width: 100px;"
+                    data-aos="zoom-in" data-aos-delay="300">
+                    <a href="{% url "doctor" 'Dermatologist' %}">
+                        <img src="{% static 'assets/assets_frontend/Dermatologist.svg' %}"
+                            class="rounded-circle"
+                            style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);"
+                            width="90" height="90">
+                    </a>
+                    <span class="mt-2">Dermatologist</span>
+                </div>
+
+                <!-- 4 -->
+                <div class="d-flex flex-column align-items-center text-muted small card-hover-up"
+                    style="max-width: 100px;"
+                    data-aos="zoom-in" data-aos-delay="400">
+                    <a href="{% url "doctor" 'Pediatricians' %}">
+                        <img src="{% static 'assets/assets_frontend/Pediatricians.svg' %}"
+                            class="rounded-circle"
+                            style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);"
+                            width="90" height="90">
+                    </a>
+                    <span class="mt-2">Pediatricians</span>
+                </div>
+
+                <!-- 5 -->
+                <div class="d-flex flex-column align-items-center text-muted small card-hover-up"
+                    style="max-width: 100px;"
+                    data-aos="zoom-in" data-aos-delay="500">
+                    <a href="{% url "doctor" 'Neurologist' %}">
+                        <img src="{% static 'assets/assets_frontend/Neurologist.svg' %}"
+                            class="rounded-circle"
+                            style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);"
+                            width="90" height="90">
+                    </a>
+                    <span class="mt-2">Neurologist</span>
+                </div>
+
+                <!-- 6 -->
+                <div class="d-flex flex-column align-items-center text-muted small card-hover-up"
+                    style="max-width: 100px;"
+                    data-aos="zoom-in" data-aos-delay="600">
+                    <a href="{% url "doctor" 'Gastroenterologist' %}">
+                        <img src="{% static 'assets/assets_frontend/Gastroenterologist.svg' %}"
+                            class="rounded-circle"
+                            style="background: linear-gradient(to bottom, #cbd5e1, #94a3b8);"
+                            width="90" height="90">
+                    </a>
+                    <span class="mt-2">Gastroenterologist</span>
+                </div>
+
+            </div>
+
         </section>
 
 
-        <!-- Top Doctors -->
+        {% comment %} <!-- Top Doctors -->
         <section class="mt-5 px-5">
         <h3 class="text-center fw-semibold fs-3 py-2 mb-1">Top Doctors to Book</h3>
         <p class="text-center text-muted small mx-auto mb-5">
@@ -180,7 +278,79 @@
         <div class="text-center my-5">
             <a href="{% url "doctor" 'all doctor' %}" class="btn btn-outline-primary fw-semibold rounded-pill btn-sm px-5 py-2 my-4">More</a>
         </div>
+        </section> {% endcomment %}
+
+        <!-- Top Doctors -->
+        <section class="mt-5 px-5">
+
+            <!-- Heading -->
+            <h3 class="text-center fw-semibold fs-3 py-2 mb-1" data-aos="fade-up">
+                Top Doctors to Book
+            </h3>
+
+            <p class="text-center text-muted small mx-auto mb-5"
+            data-aos="fade-up" data-aos-delay="200">
+                Simply browse through our extensive list of trusted doctors.
+            </p>
+
+            <!-- Cards -->
+            <div class="row row-cols-2 row-cols-sm-5 g-4">
+
+                {% for doctor in doctors %}
+                <div class="col" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+
+                    <div class="card border-0 rounded shadow-sm h-100"
+                        style="transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow=''">
+
+                        <!-- Image -->
+                        <div class="bg-light d-flex justify-content-center align-items-center overflow-hidden"
+                            style="height: 200px;">
+                            <a href="{% url "doctor_info" doctor.id %}">
+                                <img src="{{ doctor.image.url }}" 
+                                    class="img-fluid"
+                                    style="max-height: 100%; object-fit: contain; transition: transform 0.4s ease;"
+                                    onmouseover="this.style.transform='scale(1.1)'"
+                                    onmouseout="this.style.transform='scale(1)'">
+                            </a>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="card-body pb-3 d-flex flex-column">
+
+                            <p class="text-success small fw-semibold mb-1">
+                                <span class="me-1 fs-5">●</span>Available
+                            </p>
+
+                            <h6 class="card-title fw-semibold mb-1">
+                                {{ doctor.name }}
+                            </h6>
+
+                            <p class="text-muted small mb-0">
+                                {{ doctor.category }}
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <!-- Button -->
+            <div class="text-center my-5" data-aos="zoom-in">
+                <a href="{% url "doctor" 'all doctor' %}" 
+                class="btn btn-outline-primary fw-semibold rounded-pill btn-sm px-5 py-2 my-4">
+                    More
+                </a>
+            </div>
+
         </section>
+
+
+
 
         {% comment %} <!-- Hero 2 -->
         <section
@@ -196,7 +366,7 @@
 
 
 
-        <section class="container my-5">
+        {% comment %} <section class="container my-5">
 
           <!-- Header -->
           <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
@@ -281,9 +451,118 @@
 
           </div>
 
+        </section> {% endcomment %}
+
+
+        <section class="container my-5">
+
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+
+                <h2 class="fw-bold" data-aos="fade-right">
+                    Helping <span style="color:rgb(95 111 255);">Patients</span> Navigate Their 
+                    <span style="color:rgb(95 111 255);">Treatment Journey</span>
+                </h2>
+
+                <a href="{% url "patient_programs" %}" 
+                class="btn btn-outline-primary rounded-pill"
+                style="background:rgb(95 111 255); color:white;"
+                data-aos="fade-left">
+                    Learn More →
+                </a>
+
+            </div>
+
+            <!-- Cards -->
+            <div class="row g-4">
+
+                <!-- Card 1 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm h-100"
+                        style="transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow=''">
+
+                        <a href="{% url "patient_programs" %}">
+                            <img src="{% static 'assets/assets_frontend/F Vega Club.jpg.webp' %}" 
+                                class="card-img-top"
+                                style="height: 220px; object-fit: cover; transition: transform 0.4s ease;"
+                                onmouseover="this.style.transform='scale(0.9)'"
+                                onmouseout="this.style.transform='scale(1)'">
+                        </a>
+
+                        <div class="card-body">
+                            <h5 class="fw-bold">Vega Club</h5>
+                            <p class="text-muted">
+                                A patient support program where gastroenterologists help people with 
+                                ulcerative colitis better understand and manage Inflammatory Bowel 
+                                Disease through personalised guidance on diet, exercise, and stress.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100"
+                        style="transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow=''">
+
+                        <a href="{% url "patient_programs" %}">
+                            <img src="{% static 'assets/assets_frontend/img1.webp' %}" 
+                                class="card-img-top"
+                                style="height: 220px; object-fit: cover; transition: transform 0.4s ease;"
+                                onmouseover="this.style.transform='scale(0.9)'"
+                                onmouseout="this.style.transform='scale(1)'">
+                        </a>
+
+                        <div class="card-body">
+                            <h5 class="fw-bold">betaCare</h5>
+                            <p class="text-muted">
+                                An initiative providing useful health information to patients. 
+                                It offers certified online courses to improve patient care 
+                                and help them navigate treatment and healthcare systems.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card border-0 shadow-sm h-100"
+                        style="transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow=''">
+
+                        <a href="{% url "patient_programs" %}">
+                            <img src="{% static 'assets/assets_frontend/hello.jpg' %}" 
+                                class="card-img-top"
+                                style="height: 220px; object-fit: cover; transition: transform 0.4s ease;"
+                                onmouseover="this.style.transform='scale(0.9)'"
+                                onmouseout="this.style.transform='scale(1)'">
+                        </a>
+
+                        <div class="card-body">
+                            <h5 class="fw-bold">Joint Health Revolution</h5>
+                            <p class="text-muted">
+                                Sessions designed for individuals with osteoarthritis, helping 
+                                them understand joint care, exercises, healthy habits, and ways 
+                                to manage pain and stay active.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
         </section>
 
-        <section class="container my-5 py-5">
+
+        {% comment %} <section class="container my-5 py-5">
 
             <!-- Heading -->
             <h1 class="fw-bold mb-4">
@@ -347,9 +626,90 @@
 
             </div>
         </div>
-        </div>
+        </div> {% endcomment %}
+
 
         <section class="container my-5 py-5">
+
+            <!-- Heading -->
+            <h1 class="fw-bold mb-4" data-aos="fade-up">
+                Our Efforts in the 
+                <span style="color:rgb(95 111 255);">Fight Against Cancer</span>
+            </h1>
+
+            <!-- Video Card -->
+            <div class="position-relative rounded overflow-hidden"
+                data-aos="zoom-in"
+                style="transition: all 0.3s ease;"
+                onmouseover="this.style.transform='scale(1.02)'"
+                onmouseout="this.style.transform='scale(1)'">
+
+                <!-- Background Video -->
+                <video autoplay muted loop playsinline
+                    class="w-100"
+                    style="height: 400px; object-fit: cover;">
+                    
+                    <source src="{% static 'assets/assets_frontend/abc.mp4' %}" type="video/mp4">
+                
+                </video>
+
+                <!-- Dark Overlay -->
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+
+                <!-- Left Content -->
+                <div class="position-absolute top-50 start-0 translate-middle-y text-white px-4"
+                    style="max-width: 500px;"
+                    data-aos="fade-right" data-aos-delay="200">
+
+                    <p class="mb-3">
+                        "Our mission is to turn scientific possibilities into real hope,
+                        addressing urgent patient needs and helping improve lives."
+                    </p>
+
+                    <p class="text-info fw-semibold mb-0">
+                        Dr. Murali Ramachandra,
+                    </p>
+                    <small>Chief Executive Officer, Aurigene Oncology</small>
+                </div>
+
+                <!-- Play Button -->
+                <div class="position-absolute top-50 end-0 translate-middle-y me-4"
+                    data-aos="zoom-in" data-aos-delay="400">
+
+                    <button class="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 60px; height: 60px; transition: all 0.3s ease;"
+                            onmouseover="this.style.transform='scale(1.2)'"
+                            onmouseout="this.style.transform='scale(1)'"
+                            data-bs-toggle="modal" data-bs-target="#videoModal">
+                        ▶
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="videoModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content bg-dark border-0">
+
+                    <div class="modal-body p-0">
+
+                        <video controls class="w-100" id="modalVideo">
+                            <source src="{% static 'assets/assets_frontend/abc.mp4' %}" type="video/mp4">
+                        </video>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        {% comment %} <section class="container my-5 py-5">
 
             <div class="row align-items-center">
 
@@ -417,9 +777,90 @@
 
             </div>
 
+        </section> {% endcomment %}
+
+        <section class="container my-5 py-5">
+
+            <div class="row align-items-center">
+
+                <!-- LEFT CONTENT -->
+                <div class="col-md-6" data-aos="fade-right">
+
+                    <!-- Heading -->
+                    <h1 class="fw-bold mb-3">
+                        Our <span class="text-primary">Core Businesses</span>
+                    </h1>
+
+                    <!-- Paragraph -->
+                    <p class="text-muted mb-4" style="line-height: 1.8;" data-aos="fade-up" data-aos-delay="200">
+                        We operate across four main segments: Generics (branded, unbranded, and biosimilars), 
+                        API & Services (development, manufacturing, and research support), Innovative Medicines, 
+                        and Consumer Health solutions. We are also expanding our portfolio across therapies through 
+                        in-licensing and partnering with innovative companies across the globe.
+                    </p>
+
+                    <!-- Points -->
+                    <div class="row mb-4">
+
+                        <div class="col-6 d-flex align-items-center mb-3" data-aos="fade-up" data-aos-delay="100">
+                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
+                            <span>Generics</span>
+                        </div>
+
+                        <div class="col-6 d-flex align-items-center mb-3" data-aos="fade-up" data-aos-delay="200">
+                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
+                            <span>API & Services</span>
+                        </div>
+
+                        <div class="col-6 d-flex align-items-center mb-3" data-aos="fade-up" data-aos-delay="300">
+                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
+                            <span>Innovative Medicines</span>
+                        </div>
+
+                        <div class="col-6 d-flex align-items-center mb-3" data-aos="fade-up" data-aos-delay="400">
+                            <span class="bg-primary rounded-circle me-2" style="width:12px; height:12px;"></span>
+                            <span>Consumer Health</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Button -->
+                    <a href="{% url "patient_programs" %}" 
+                    class="btn btn-outline-primary rounded-pill px-4 py-2"
+                    style="transition: all 0.3s ease;"
+                    onmouseover="this.style.transform='scale(1.1)'"
+                    onmouseout="this.style.transform='scale(1)'"
+                    data-aos="zoom-in" data-aos-delay="300">
+                        Learn More →
+                    </a>
+
+                </div>
+
+                <!-- RIGHT IMAGE -->
+                <div class="col-md-6 text-center mt-4 mt-md-0" data-aos="fade-left">
+
+                    <div class="d-inline-block overflow-hidden"
+                        style="border-radius: 20px; transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='scale(1.05)'"
+                        onmouseout="this.style.transform='scale(1)'">
+
+                        <img src="{% static 'assets/assets_frontend/F Core Businesses.png.webp' %}" 
+                            class="w-100 h-100"
+                            style="object-fit: cover; transition: transform 0.4s ease;"
+                            onmouseover="this.style.transform='scale(1.0)'"
+                            onmouseout="this.style.transform='scale(1)'">
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </section>
 
-        <!-- Hero 1 -->
+
+
+        {% comment %} <!-- Hero 1 -->
         <section
             class="text-white rounded p-5 p-md-5 d-flex flex-column flex-sm-row justify-content-between align-items-center mt-5"
             style="background-color: rgb(95 111 255);">
@@ -442,6 +883,58 @@
             </div>
             <img src="{% static "assets/assets_frontend/header_img.png" %}" class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4" width="420"
                 height="700" alt="Doctors">
+        </section> {% endcomment %}
+
+
+        <!-- Hero 1 -->
+        <section
+            class="text-white rounded p-5 p-md-5 d-flex flex-column flex-sm-row justify-content-between align-items-center mt-5"
+            style="background-color: rgb(95 111 255); overflow: hidden;"
+            data-aos="fade-up">
+
+            <!-- LEFT CONTENT -->
+            <div class="mb-4 mb-sm-0" data-aos="fade-right" data-aos-delay="200">
+
+                <h1 class="fw-bold fs-1 mb-3">
+                    Book Appointment<br>With Trusted Doctors
+                </h1>
+
+                <div class="d-flex align-items-center justify-content-center mt-5"
+                    data-aos="fade-up" data-aos-delay="300">
+
+                    <img src="{% static 'assets/assets_frontend/group_profiles-BCL6AVF5.png' %}" 
+                        class="me-3 mb-3"
+                        width="100" height="50">
+
+                    <p class="small" style="max-width: 420px;">
+                        Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+                    </p>
+                </div>
+
+                <!-- Button -->
+                <a href="{% url "doctor" 'all doctor' %}"
+                class="btn btn-light rounded-pill ps-4 mt-3 py-3 text-primary fw-semibold btn-sm d-flex align-items-center gap-2 w-50"
+                style="transition: all 0.3s ease;"
+                onmouseover="this.style.transform='scale(1.1)'"
+                onmouseout="this.style.transform='scale(1)'"
+                data-aos="zoom-in" data-aos-delay="400">
+
+                    Book appointment <i class="fas fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <img src="{% static 'assets/assets_frontend/header_img.png' %}" 
+                class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4"
+                width="420"
+                height="700"
+                data-aos="fade-left" data-aos-delay="300"
+                style="transition: transform 0.4s ease;"
+                onmouseover="this.style.transform='scale(1.05)'"
+                onmouseout="this.style.transform='scale(1)'">
+
         </section>
 
 
