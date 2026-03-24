@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+<section class="container my-5 py-3">
+
+    <!-- Top Small Text -->
+    <p class="text-muted mb-2">For Patients</p>
+
+    <!-- Main Heading -->
+    <h1 class="fw-bold mb-2" style="font-size: 42px; color:rgb(95 111 255);">
+        Patient Programs
+    </h1>
+
+    <!-- Subheading -->
+    <p class="text-muted" style="font-size: 16px; margin-bottom: 100px;">
+        Empowering patients through support, care, and education
+    </p>
+
+    <!-- Content Row -->
+    <div class="row align-items-center">
+
+        <!-- Left Image -->
+        <div class="col-md-5 mb-4 mb-md-0">
+            <img src="{% static 'assets/assets_frontend/hello.jpg' %}" 
+                 class="img-fluid rounded"
+                 style="border-radius: 15px;" width="70%">
+        </div>
+
+        <!-- Right Content -->
+        <div class="col-md-7">
+
+            <h3 class="fw-bold mb-3">Alivius</h3>
+
+            <p class="text-muted" style="line-height: 1.8;">
+                An integrated digital cancer care platform designed to support patients and 
+                healthcare professionals throughout the treatment journey. It combines 
+                remote monitoring, treatment management, and mental health support into 
+                a seamless experience, helping patients track their health, manage side 
+                effects, and access personalized resources. 
+
+                With clinically validated tools and real-time alerts, Alivius enhances care 
+                coordination, empowers informed decision-making, and improves overall 
+                quality of life for cancer patients across multiple geographies.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock contant %}
