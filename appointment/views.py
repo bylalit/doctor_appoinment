@@ -8,6 +8,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password, check_password
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -19,13 +20,29 @@ def index(request):
 def patient_programs(request):
     return render(request, 'patient_programs.html')
 
+# def doctor(request, category_name):
+#     if category_name == 'all doctor':
+#         doctors = Doctor.objects.all()
+#     else:
+#         doctors = Doctor.objects.filter(category__name=category_name)
+        
+#     return render(request, 'doctor.html', {'doctors': doctors, 'category_name': category_name})
+
 def doctor(request, category_name):
     if category_name == 'all doctor':
-        doctors = Doctor.objects.all()
+        doctor_list = Doctor.objects.all()
     else:
-        doctors = Doctor.objects.filter(category__name=category_name)
-        
-    return render(request, 'doctor.html', {'doctors': doctors, 'category_name': category_name})
+        doctor_list = Doctor.objects.filter(category__name=category_name)
+
+    paginator = Paginator(doctor_list, 8)  # 👉 8 doctors per page
+
+    page_number = request.GET.get('page')
+    doctors = paginator.get_page(page_number)
+
+    return render(request, 'doctor.html', {
+        'doctors': doctors,
+        'category_name': category_name
+    })
 
 def doctor_info(request, id):
     doctor = Doctor.objects.get(id=id)

@@ -178,6 +178,96 @@
 
                 </div>
 
+                {% comment %} <!-- Pagination -->
+                <div class="d-flex justify-content-center mt-5" data-aos="fade-up">
+
+                    <nav>
+                        <ul class="pagination">
+
+                            <!-- Previous -->
+                            {% if doctors.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ doctors.previous_page_number }}">Previous</a>
+                                </li>
+                            {% endif %}
+
+                            <!-- Page Numbers -->
+                            {% for num in doctors.paginator.page_range %}
+                                <li class="page-item {% if doctors.number == num %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                            {% endfor %}
+
+                            <!-- Next -->
+                            {% if doctors.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ doctors.next_page_number }}">Next</a>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </nav>
+
+                </div> {% endcomment %}
+
+                <!-- Pagination -->
+<div class="d-flex justify-content-center mt-5" data-aos="fade-up">
+
+    <nav>
+        <ul class="pagination align-items-center gap-2">
+
+            <!-- Previous -->
+            {% if doctors.has_previous %}
+            <li class="page-item">
+                <a class="page-link rounded-pill px-3"
+                   href="?page={{ doctors.previous_page_number }}"
+                   style="transition: all 0.3s ease;"
+                   onmouseover="this.style.transform='scale(1.1)'"
+                   onmouseout="this.style.transform='scale(1)'">
+                   ←
+                </a>
+            </li>
+            {% endif %}
+
+            <!-- Page Numbers -->
+            {% for num in doctors.paginator.page_range %}
+            <li class="page-item">
+
+                <a href="?page={{ num }}"
+                   class="page-link rounded-pill px-3 {% if doctors.number == num %}text-white{% endif %}"
+                   style="
+                        background: {% if doctors.number == num %}rgb(95,111,255){% else %}transparent{% endif %};
+                        border: 1px solid rgb(95,111,255);
+                        transition: all 0.3s ease;
+                   "
+                   onmouseover="this.style.transform='scale(1.15)'"
+                   onmouseout="this.style.transform='scale(1)'">
+
+                   {{ num }}
+
+                </a>
+
+            </li>
+            {% endfor %}
+
+            <!-- Next -->
+            {% if doctors.has_next %}
+            <li class="page-item">
+                <a class="page-link rounded-pill px-3"
+                   href="?page={{ doctors.next_page_number }}"
+                   style="transition: all 0.3s ease;"
+                   onmouseover="this.style.transform='scale(1.1)'"
+                   onmouseout="this.style.transform='scale(1)'">
+                   →
+                </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+</div>  
+
             </div>
 
         </div>

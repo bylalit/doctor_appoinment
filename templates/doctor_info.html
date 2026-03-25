@@ -64,7 +64,7 @@
                 </div>
             </form>
 
-            <div class='pt-5 mt-5 '>
+            {% comment %} <div class='pt-5 mt-5 '>
                 <h3 class='fw-semibold text-dark mb-4 fs-4'>Releted Doctors</h3>
                 
                 <div class="row row-cols-2 row-cols-sm-5 g-4">
@@ -94,7 +94,65 @@
                     {% endfor %}
 
                 </div>
+            </div> {% endcomment %}
+
+            <div class='pt-5 mt-5'>
+
+                <!-- Heading -->
+                <h3 class='fw-semibold text-dark mb-4 fs-4' data-aos="fade-up">
+                    Releted Doctors
+                </h3>
+                
+                <div class="row row-cols-2 row-cols-sm-5 g-4">
+
+                    {% for doctor in releted_doctor %}
+                    <div class="col" data-aos="fade-up" data-aos-delay="100">
+
+                        <div class="card border-0 rounded shadow-sm h-100"
+                            style="transition: all 0.3s ease;"
+                            onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.15)'"
+                            onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow=''">
+
+                            <!-- Image -->
+                            <div class="bg-light d-flex justify-content-center align-items-center overflow-hidden"
+                                style="height: 200px;">
+
+                                <a href="{% url "doctor_info" doctor.id %}">
+                                    <img src="{{ doctor.image.url }}" 
+                                        class="img-fluid"
+                                        style="max-height: 100%; object-fit: contain; transition: transform 0.4s ease;"
+                                        onmouseover="this.style.transform='scale(1.1)'"
+                                        onmouseout="this.style.transform='scale(1)'">
+                                </a>
+
+                            </div>
+
+                            <!-- Content -->
+                            <div class="card-body pb-3 d-flex flex-column">
+
+                                <p class="text-success small fw-semibold mb-1">
+                                    <span class="me-1 fs-5">●</span>Available
+                                </p>
+
+                                <h6 class="card-title fw-semibold mb-1">
+                                    {{ doctor.name }}
+                                </h6>
+
+                                <p class="text-muted small mb-0">
+                                    {{ doctor.category }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+
             </div>
+
 
         </div>
 
