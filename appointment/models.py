@@ -59,6 +59,10 @@ class Contact(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     subject = models.CharField(max_length=300)
-    message = models.TimeField(max_length=500)
+    message = models.TextField()   # ✅ FIXED
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)  # ✅ FIXED
+
+    def __str__(self):
+        return self.name
     
     

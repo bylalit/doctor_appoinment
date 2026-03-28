@@ -60,7 +60,15 @@ def contact(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        print(name, email, subject, message)
+        # print(name, email, subject, message)
+        Contact.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+        
+        messages.success(request, "Message Sent Successfully ✅")
         
         
     return render(request, 'contact.html')
