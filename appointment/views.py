@@ -34,7 +34,7 @@ def doctor(request, category_name):
     else:
         doctor_list = Doctor.objects.filter(category__name=category_name)
 
-    paginator = Paginator(doctor_list, 8)  # 👉 8 doctors per page
+    paginator = Paginator(doctor_list, 16)  # 👉 8 doctors per page
 
     page_number = request.GET.get('page')
     doctors = paginator.get_page(page_number)
