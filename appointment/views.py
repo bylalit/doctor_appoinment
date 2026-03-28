@@ -20,13 +20,6 @@ def index(request):
 def patient_programs(request):
     return render(request, 'patient_programs.html')
 
-# def doctor(request, category_name):
-#     if category_name == 'all doctor':
-#         doctors = Doctor.objects.all()
-#     else:
-#         doctors = Doctor.objects.filter(category__name=category_name)
-        
-#     return render(request, 'doctor.html', {'doctors': doctors, 'category_name': category_name})
 
 def doctor(request, category_name):
     if category_name == 'all doctor':
