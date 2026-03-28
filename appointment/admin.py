@@ -7,4 +7,3 @@ admin.site.register(Doctor)
 admin.site.register(Appointment)
 admin.site.register(Patients)
 admin.site.register(Contact)
-

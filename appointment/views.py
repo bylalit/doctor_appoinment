@@ -13,8 +13,6 @@ from django.core.paginator import Paginator
 
 def index(request):
     doctors = Doctor.objects.all().order_by('-id')[:10]
-    # for i in doctors:
-    #     print(i.image.url)
     return render(request, 'index.html', {'doctors': doctors, })
 
 def patient_programs(request):
@@ -53,7 +51,7 @@ def contact(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        # print(name, email, subject, message)
+        
         Contact.objects.create(
             name=name,
             email=email,
@@ -371,3 +369,4 @@ def add_doctor(request):
 def doctor_list(request):
     doctors = Doctor.objects.all()
     return render(request, 'dashboard/doctor_list.html', {'doctors': doctors, 'action': 'doctor_list', "role" : "admin"})
+
