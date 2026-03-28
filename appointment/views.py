@@ -70,6 +70,7 @@ def contact(request):
         
         messages.success(request, "Message Sent Successfully ✅")
         
+        return redirect('contact')
         
     return render(request, 'contact.html')
 
