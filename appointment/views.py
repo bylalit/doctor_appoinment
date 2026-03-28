@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Doctor, Category, Appointment, Patients
+from .models import Doctor, Category, Appointment, Patients, Contact
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
@@ -54,6 +54,15 @@ def about(request):
     return render(request, 'about.html')
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        print(name, email, subject, message)
+        
+        
     return render(request, 'contact.html')
 
 

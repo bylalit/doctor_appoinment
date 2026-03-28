@@ -54,3 +54,11 @@ class Appointment(models.Model):
     def __str__(self):
         return f"{self.user.username} -> {self.doctor.name} @ {self.appointment_date}"
     
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    subject = models.CharField(max_length=300)
+    message = models.TimeField(max_length=500)
+    
+    
