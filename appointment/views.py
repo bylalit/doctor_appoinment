@@ -175,7 +175,8 @@ def stripe_payment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
 
     base_url = request.build_absolute_uri(reverse('user_appointment'))
-
+    amount = int(appointment.doctor.fees * 100)
+    
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
 
@@ -185,7 +186,7 @@ def stripe_payment(request, appointment_id):
                 'product_data': {
                     'name': f'Doctor Appointment - {appointment.doctor.name}',
                 },
-                'unit_amount': 50000,
+                'unit_amount': amount,
             },
             'quantity': 1,
         }],
