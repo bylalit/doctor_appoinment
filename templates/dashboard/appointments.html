@@ -36,7 +36,7 @@
                                 <img src="{{ appointment.doctor.image.url }}" class="rounded-circle" width="28" height="28" alt="Doctor avatar">
                                 {{ appointment.doctor.name }}
                             </td>
-                            <td>${{ appointment.doctor.fees }}</td>
+                            <td>₹ {{ appointment.doctor.fees }}</td>
                             <td class="text-center">
                                 <span class="badge bg-secoundary border text-black fs-18 py-1 px-3">
                                     {{ appointment.payment_method }}

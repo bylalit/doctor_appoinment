@@ -20,50 +20,119 @@
                     <div class="d-flex flex-column gap-3">
 
                         <a href="{% url "doctor" 'General physician' %}"
-                        class="btn {% if category_name == 'General physician' %}btn-primary {% else %}btn-outline-primary{% endif %} btn-sm text-start"
-                        style="transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
+                        class="btn btn-sm text-start"
+                        style="
+                        transition: all 0.3s ease;
+                        border:1px solid rgb(95,111,255);
+                        {% if category_name == 'General physician' %}
+                            background: rgb(95,111,255); color: white;
+                        {% else %}
+                            background: transparent; color: rgb(95,111,255);
+                        {% endif %}
+                        "
+                        onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';"
+                        onmouseout="this.style.transform='scale(1)';
+                        {% if category_name == 'General physician' %}
+                            this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';
+                        {% else %}
+                            this.style.backgroundColor='transparent'; this.style.color='rgb(95,111,255)';
+                        {% endif %}
+                        ">
                         General physician
                         </a>
 
+
                         <a href="{% url "doctor" 'Gynecologist' %}"
-                        class="btn {% if category_name == 'Gynecologist' %}btn-primary {% else %}btn-outline-primary{% endif %} btn-sm text-start"
-                        style="transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
+                        class="btn btn-sm text-start {% if category_name == 'Gynecologist' %}active-btn{% else %}outline-btn{% endif %}"
+                        style="transition: all 0.3s ease; border:1px solid rgb(95,111,255);
+                        {% if category_name == 'Gynecologist' %}
+                        background-color: rgb(95,111,255); color: white;
+                        {% else %}
+                        color: rgb(95,111,255);
+                        {% endif %}"
+                        onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';"
+                        onmouseout="this.style.transform='scale(1)';
+                        {% if category_name == 'Gynecologist' %}
+                        this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';
+                        {% else %}
+                        this.style.backgroundColor=''; this.style.color='rgb(95,111,255)';
+                        {% endif %}">
                         Gynecologist
                         </a>
 
+
                         <a href="{% url "doctor" 'Dermatologist' %}"
-                        class="btn {% if category_name == 'Dermatologist' %}btn-primary {% else %}btn-outline-primary{% endif %} btn-sm text-start"
-                        style="transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
+                        class="btn btn-sm text-start {% if category_name == 'Dermatologist' %}active-btn{% else %}outline-btn{% endif %}"
+                        style="transition: all 0.3s ease; border:1px solid rgb(95,111,255);
+                        {% if category_name == 'Dermatologist' %}
+                        background-color: rgb(95,111,255); color: white;
+                        {% else %}
+                        color: rgb(95,111,255);
+                        {% endif %}"
+                        onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';"
+                        onmouseout="this.style.transform='scale(1)';
+                        {% if category_name == 'Dermatologist' %}
+                        this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';
+                        {% else %}
+                        this.style.backgroundColor=''; this.style.color='rgb(95,111,255)';
+                        {% endif %}">
                         Dermatologist
                         </a>
 
+
                         <a href="{% url "doctor" 'Pediatricians' %}"
-                        class="btn {% if category_name == 'Pediatricians' %}btn-primary {% else %}btn-outline-primary{% endif %} btn-sm text-start"
-                        style="transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
+                        class="btn btn-sm text-start {% if category_name == 'Pediatricians' %}active-btn{% else %}outline-btn{% endif %}"
+                        style="transition: all 0.3s ease; border:1px solid rgb(95,111,255);
+                        {% if category_name == 'Pediatricians' %}
+                        background-color: rgb(95,111,255); color: white;
+                        {% else %}
+                        color: rgb(95,111,255);
+                        {% endif %}"
+                        onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';"
+                        onmouseout="this.style.transform='scale(1)';
+                        {% if category_name == 'Pediatricians' %}
+                        this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';
+                        {% else %}
+                        this.style.backgroundColor=''; this.style.color='rgb(95,111,255)';
+                        {% endif %}">
                         Pediatricians
                         </a>
 
+
                         <a href="{% url "doctor" 'Neurologist' %}"
-                        class="btn {% if category_name == 'Neurologist' %}btn-primary {% else %}btn-outline-primary{% endif %} btn-sm text-start"
-                        style="transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
+                        class="btn btn-sm text-start {% if category_name == 'Neurologist' %}active-btn{% else %}outline-btn{% endif %}"
+                        style="transition: all 0.3s ease; border:1px solid rgb(95,111,255);
+                        {% if category_name == 'Neurologist' %}
+                        background-color: rgb(95,111,255); color: white;
+                        {% else %}
+                        color: rgb(95,111,255);
+                        {% endif %}"
+                        onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';"
+                        onmouseout="this.style.transform='scale(1)';
+                        {% if category_name == 'Neurologist' %}
+                        this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';
+                        {% else %}
+                        this.style.backgroundColor=''; this.style.color='rgb(95,111,255)';
+                        {% endif %}">
                         Neurologist
                         </a>
 
+
                         <a href="{% url "doctor" 'Gastroenterologist' %}"
-                        class="btn {% if category_name == 'Gastroenterologist' %}btn-primary {% else %}btn-outline-primary{% endif %} btn-sm text-start"
-                        style="transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
+                        class="btn btn-sm text-start {% if category_name == 'Gastroenterologist' %}active-btn{% else %}outline-btn{% endif %}"
+                        style="transition: all 0.3s ease; border:1px solid rgb(95,111,255);
+                        {% if category_name == 'Gastroenterologist' %}
+                        background-color: rgb(95,111,255); color: white;
+                        {% else %}
+                        color: rgb(95,111,255);
+                        {% endif %}"
+                        onmouseover="this.style.transform='scale(1.05)'; this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';"
+                        onmouseout="this.style.transform='scale(1)';
+                        {% if category_name == 'Gastroenterologist' %}
+                        this.style.backgroundColor='rgb(95,111,255)'; this.style.color='white';
+                        {% else %}
+                        this.style.backgroundColor=''; this.style.color='rgb(95,111,255)';
+                        {% endif %}">
                         Gastroenterologist
                         </a>
 

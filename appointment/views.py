@@ -27,12 +27,11 @@ def patient_programs(request):
 
 def doctor(request, category_name):
     if category_name == 'all doctor':
-        # doctor_list = Doctor.objects.all()
         doctor_list = Doctor.objects.filter(available=True)
     else:
         doctor_list = Doctor.objects.filter(category__name=category_name, available=True)
 
-    paginator = Paginator(doctor_list, 16)  # 👉 8 doctors per page
+    paginator = Paginator(doctor_list, 16)  
 
     page_number = request.GET.get('page')
     doctors = paginator.get_page(page_number)
@@ -43,7 +42,6 @@ def doctor(request, category_name):
     })
 
 def doctor_info(request, id):
-    # doctor = Doctor.objects.get(id=id)
     doctor = Doctor.objects.get(id=id, available=True)
     releted_doctor = Doctor.objects.filter(category=doctor.category, available=True)[:10]
     
@@ -83,7 +81,7 @@ def user_appointment(request):
 
         appointments = Appointment.objects.filter(user=user)
 
-        # 🔥 Payment message handle
+        # Payment message handle
         payment = request.GET.get('payment')
 
         if payment == "success":
@@ -264,7 +262,7 @@ def logout_user(request):
 
 
 
-# admin
+# Admin Panel Views
 
 def dash_login(request):
     if request.method == 'POST':
@@ -276,6 +274,7 @@ def dash_login(request):
         if user is not None:
             if user.is_superuser or user.is_staff:
                 auth_login(request, user)
+                request.session['username'] = user.username
                 messages.success(request, "Admin Login Successfully!")
                 return redirect(dash_admin)
             else:
@@ -319,7 +318,7 @@ def dash_admin(request):
     
     return redirect(dash_login)
 
-# @login_required(login_url=('/dash_login'))
+
 def doctor_dashboard(request):
     doctor_id = request.session.get('doctor_id')
     if not doctor_id:
@@ -470,7 +469,6 @@ def toggle_doctor(request, id):
     doctor = get_object_or_404(Doctor, id=id)
 
     if request.method == "POST":
-        # checkbox checked → True, unchecked → False
         doctor.available = 'available' in request.POST
         doctor.save()
 

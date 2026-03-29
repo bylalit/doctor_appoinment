@@ -20,7 +20,7 @@ urlpatterns = [
     path('logout_user/', views.logout_user, name='logout_user'),
     
     
-    # admin
+    # Admin
     path('dash_login/', views.dash_login, name='dash_login'),
     path('dash_logout/', views.dash_logout, name='dash_logout'),
     path('dash_admin/', views.dash_admin, name='dash_admin'),
@@ -31,9 +31,7 @@ urlpatterns = [
     path('doctor_appointments/', views.doctor_appointments, name='doctor_appointments'),
     path('doctor_profile/', views.doctor_profile, name='doctor_profile'),
     path('edit_doctor/', views.edit_doctor, name='edit_doctor'),
-    
     path('toggle-doctor/<int:id>/', views.toggle_doctor, name='toggle_doctor'),
-    
     path('doctor-edit/<int:id>/', views.doctor_edit, name='doctor_edit'),
     path('doctor-delete/<int:id>/', views.doctor_delete, name='doctor_delete'),
 
