@@ -182,7 +182,7 @@
           <img src="{% static "assets/assets_frontend/upload_area.png" %}" alt="Profile" height="36">
         </a>
         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-          <li><a class="dropdown-item" href="">My Profile</a></li>
+          <li><a class="dropdown-item" href="{% url "my_profile" %}">My Profile</a></li>
           <li><a class="dropdown-item" href="{% url "user_appointment" %}">My Appointments</a></li>
           <li><a class="dropdown-item" href="{% url "logout_user" %}">Logout</a></li>
         </ul>

@@ -203,14 +203,25 @@ def stripe_payment(request, appointment_id):
     return redirect(session.url)
 
 
+def my_profile(request):
+    if 'login' in request.session:
+        email = request.session['login']
+        user = Patients.objects.get(email=email)
+        print(user)
+
+        return render(request, 'profile.html', {'user': user})
+    else:
+        return redirect('login')
+
+
   
 def login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('username')
         password = request.POST.get('password')
         
         # user = authenticate(request, username=username, password=password)
-        patient = Patients.objects.filter(username=username).first()
+        patient = Patients.objects.filter(email=email).first()
         
         if patient is None:
             messages.error(request, "Username does not exist!")
@@ -219,7 +230,7 @@ def login(request):
         
         if check_password(password, patient.password):
             messages.success(request, "Login Successfully!")
-            request.session['login'] = username
+            request.session['login'] = email
             return redirect(index)
         else:
             messages.error(request, "Invalid Password!")

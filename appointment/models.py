@@ -34,6 +34,11 @@ class Patients(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=100)
     
+    phone = models.CharField(max_length=15, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    address = models.TextField(blank=True)
+    profile_image = CloudinaryField('image', folder='patients_image')
+    
     def __str__(self):
         return self.username
 
