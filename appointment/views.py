@@ -426,3 +426,16 @@ def doctor_list(request):
     doctors = Doctor.objects.all()
     return render(request, 'dashboard/doctor_list.html', {'doctors': doctors, 'action': 'doctor_list', "role" : "admin"})
 
+
+@login_required(login_url=('/dash_login'))
+@staff_member_required
+def toggle_doctor(request, id):
+    doctor = get_object_or_404(Doctor, id=id)
+
+    if request.method == "POST":
+        # checkbox checked → True, unchecked → False
+        doctor.available = 'available' in request.POST
+        doctor.save()
+
+    return redirect('doctor_list')
+
