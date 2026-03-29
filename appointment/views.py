@@ -9,6 +9,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator
+import stripe
+from django.conf import settings
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def index(request):
@@ -147,6 +150,8 @@ def cancel_appointment(request, id):
     else:
         messages.error(request, "Please login required!")
         return redirect('login')
+    
+
 
   
 def login(request):
