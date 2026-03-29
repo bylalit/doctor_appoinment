@@ -213,7 +213,6 @@ def my_profile(request):
     else:
         return redirect('login')
 
-
   
 def login(request):
     if request.method == 'POST':
@@ -239,30 +238,69 @@ def login(request):
     return render(request, 'login.html')
 
 
+# def register(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+
+        
+#         if Patients.objects.filter(username=username).exists():
+#             messages.error(request, "Username Already Exists")
+#             return redirect(register)
+            
+#         if Patients.objects.filter(email=email).exists():
+#             messages.error(request, 'Email Allerdy Exixst!')
+#             return redirect(register)
+        
+#         hashed_pass = make_password(password)
+        
+#         patient = Patients(username=username, email=email, password=hashed_pass)
+#         patient.save()
+        
+#         messages.success(request, 'User Created Succefully!')
+#         return redirect(login)
+        
+#     return render(request, 'register.html')
+
+
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        city = request.POST.get('city')
+        address = request.POST.get('address')
+        profile_image = request.FILES.get('image')
 
-        
-        if Patients.objects.filter(username=username).exists():
-            messages.error(request, "Username Already Exists")
-            return redirect(register)
-            
+        # print(username, email, password, phone, city, address, image)
+
+        # Check email
         if Patients.objects.filter(email=email).exists():
-            messages.error(request, 'Email Allerdy Exixst!')
-            return redirect(register)
-        
+            messages.error(request, "Email already exists")
+            return redirect('register')
+
+        # Password hash
         hashed_pass = make_password(password)
-        
-        patient = Patients(username=username, email=email, password=hashed_pass)
+
+        # Save user
+        patient = Patients(
+            username=username,
+            email=email,
+            password=hashed_pass,
+            phone=phone,
+            city=city,
+            address=address,
+            profile_image=profile_image
+        )
         patient.save()
-        
-        messages.success(request, 'User Created Succefully!')
-        return redirect(login)
-        
+
+        messages.success(request, "User created successfully!")
+        return redirect('login')
+
     return render(request, 'register.html')
+
 
 
 def logout_user(request):
