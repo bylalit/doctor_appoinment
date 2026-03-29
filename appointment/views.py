@@ -12,6 +12,8 @@ from django.core.paginator import Paginator
 import stripe
 from django.conf import settings
 from django.urls import reverse
+import cloudinary
+import cloudinary.uploader
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -212,6 +214,37 @@ def my_profile(request):
         return render(request, 'profile.html', {'user': user})
     else:
         return redirect('login')
+    
+def edit_profile(request, id):
+    patient = get_object_or_404(Patients, id=id)
+
+    if request.method == 'POST':
+        patient.username = request.POST.get('username')
+        patient.email = request.POST.get('email')
+        patient.phone = request.POST.get('phone')
+        patient.city = request.POST.get('city')
+        patient.address = request.POST.get('address')
+
+        new_image = request.FILES.get('image')
+
+        if new_image:
+            # 👉 delete old image from cloudinary
+            if patient.profile_image:
+                try:
+                    cloudinary.uploader.destroy(patient.profile_image.public_id)
+                except:
+                    pass
+
+            # 👉 assign new image
+            patient.profile_image = new_image
+
+
+        patient.save()
+        messages.success(request, "Profile Updated succfully")
+
+        return redirect('my_profile')  # ya jaha redirect karna hai
+
+    return render(request, 'edit_profile.html', {'patient': patient})
 
   
 def login(request):
