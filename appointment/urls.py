@@ -14,7 +14,9 @@ urlpatterns = [
     path('book_appointment/<int:doctor_id>/', views.book_appointment, name='book_appointment'),
     path('approved_appointment/<int:id>/', views.approved_appointment, name='approved_appointment'),
     path('cancel_appointment/<int:id>/', views.cancel_appointment, name='cancel_appointment'),
-    path('pay/<int:appointment_id>/', views.stripe_payment, name='stripe_payment'),
+    # path('pay/<int:appointment_id>/', views.stripe_payment, name='stripe_payment'),
+    path('stripe-payment/<int:appointment_id>/', views.stripe_payment, name='stripe_payment'),
+    path('stripe-success/<int:appointment_id>/', views.stripe_success, name='stripe_success'),
    
     
     path('login/', views.login, name='login'),

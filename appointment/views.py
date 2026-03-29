@@ -107,7 +107,7 @@ def book_appointment(request, doctor_id):
     if 'login' in request.session:
         email = request.session['login']  
         user = Patients.objects.get(email=email)
-        print(user)
+        
         
         if request.method == 'POST':
             date = request.POST.get('date')
@@ -193,23 +193,30 @@ def stripe_payment(request, appointment_id):
 
         mode='payment',
 
-        success_url=base_url,
+        success_url=request.build_absolute_uri(
+            reverse('stripe_success', args=[appointment.id])
+        ),
         cancel_url=base_url,
     )
     
+    return redirect(session.url)
+
+def stripe_success(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    # ✅ Payment successful hone par update
     appointment.payment_method = "Online"
     appointment.save()
-    
-    messages.success(request, "Payment succfully")
 
-    return redirect(session.url)
+    messages.success(request, "Payment successfully!")
+
+    return redirect('user_appointment')
 
 
 def my_profile(request):
     if 'login' in request.session:
         email = request.session['login']
         user = Patients.objects.get(email=email)
-        print(user)
 
         return render(request, 'profile.html', {'user': user})
     else:
@@ -429,7 +436,6 @@ def doctor_appointments(request):
     doctor = Doctor.objects.get(id=doctor_id)
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
 
-    print(appointments)
     
     return render(request, 'dashboard/appointments.html', {'action': 'doctor_appointments',"role" : "doctor", 'appointments': appointments, "doctor": doctor})
 
@@ -468,7 +474,7 @@ def add_doctor(request):
         doctor.save()
         messages.success(request, "Doctor Added Succefully!")
         
-        print("Image URL:", doctor.image.url)
+       
         
         return redirect('add_doctor')
     
