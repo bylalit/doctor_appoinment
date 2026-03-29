@@ -179,7 +179,7 @@
     {% if request.session.login %}
       <div class="position-relative dropdown">
         <a href="#" class="d-inline-block" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="{% static "assets/assets_frontend/upload_area.png" %}" alt="Profile" height="36">
+          <img src="{% static 'assets/assets_frontend/profile.avif' %}" alt="Profile" height="36">
         </a>
         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
           <li><a class="dropdown-item" href="{% url "my_profile" %}">My Profile</a></li>

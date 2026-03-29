@@ -76,8 +76,8 @@ def contact(request):
 def user_appointment(request):
     if 'login' in request.session:
 
-        username = request.session['login']
-        user = Patients.objects.get(username=username)
+        email = request.session['login']
+        user = Patients.objects.get(email=email)
 
         appointments = Appointment.objects.filter(user=user)
 
@@ -103,8 +103,8 @@ def book_appointment(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
 
     if 'login' in request.session:
-        username = request.session['login']  
-        user = Patients.objects.get(username=username)
+        email = request.session['login']  
+        user = Patients.objects.get(email=email)
         print(user)
         
         if request.method == 'POST':
@@ -139,8 +139,8 @@ def book_appointment(request, doctor_id):
 
 def approved_appointment(request, id):
     if 'login' in request.session:
-        username = request.session['login']
-        user = Patients.objects.get(username=username)
+        email = request.session['login']
+        user = Patients.objects.get(email=email)
 
         appointment = get_object_or_404(Appointment, id=id, user=user)
         appointment.status = 'Approved'
@@ -155,8 +155,8 @@ def approved_appointment(request, id):
 
 def cancel_appointment(request, id):
     if 'login' in request.session:
-        username = request.session['login']
-        user = Patients.objects.get(username=username)
+        email = request.session['login']
+        user = Patients.objects.get(email=email)
 
         appointment = get_object_or_404(Appointment, id=id, user=user)
         appointment.status = 'Cancelled'
@@ -216,7 +216,7 @@ def my_profile(request):
   
 def login(request):
     if request.method == 'POST':
-        email = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
         
         # user = authenticate(request, username=username, password=password)
@@ -238,31 +238,6 @@ def login(request):
     return render(request, 'login.html')
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-
-        
-#         if Patients.objects.filter(username=username).exists():
-#             messages.error(request, "Username Already Exists")
-#             return redirect(register)
-            
-#         if Patients.objects.filter(email=email).exists():
-#             messages.error(request, 'Email Allerdy Exixst!')
-#             return redirect(register)
-        
-#         hashed_pass = make_password(password)
-        
-#         patient = Patients(username=username, email=email, password=hashed_pass)
-#         patient.save()
-        
-#         messages.success(request, 'User Created Succefully!')
-#         return redirect(login)
-        
-#     return render(request, 'register.html')
-
 
 def register(request):
     if request.method == 'POST':
@@ -273,8 +248,6 @@ def register(request):
         city = request.POST.get('city')
         address = request.POST.get('address')
         profile_image = request.FILES.get('image')
-
-        # print(username, email, password, phone, city, address, image)
 
         # Check email
         if Patients.objects.filter(email=email).exists():
