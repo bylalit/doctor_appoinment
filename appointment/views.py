@@ -18,7 +18,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def index(request):
-    doctors = Doctor.objects.all().order_by('-id')[:10]
+    doctors = Doctor.objects.filter(available=True).order_by('-id')[:10]
     return render(request, 'index.html', {'doctors': doctors, })
 
 def patient_programs(request):
@@ -27,9 +27,10 @@ def patient_programs(request):
 
 def doctor(request, category_name):
     if category_name == 'all doctor':
-        doctor_list = Doctor.objects.all()
+        # doctor_list = Doctor.objects.all()
+        doctor_list = Doctor.objects.filter(available=True)
     else:
-        doctor_list = Doctor.objects.filter(category__name=category_name)
+        doctor_list = Doctor.objects.filter(category__name=category_name, available=True)
 
     paginator = Paginator(doctor_list, 16)  # 👉 8 doctors per page
 
@@ -42,8 +43,9 @@ def doctor(request, category_name):
     })
 
 def doctor_info(request, id):
-    doctor = Doctor.objects.get(id=id)
-    releted_doctor = Doctor.objects.filter(category=doctor.category)[:10]
+    # doctor = Doctor.objects.get(id=id)
+    doctor = Doctor.objects.get(id=id, available=True)
+    releted_doctor = Doctor.objects.filter(category=doctor.category, available=True)[:10]
     
     return render(request, 'doctor_info.html', {'doctor': doctor, 'releted_doctor': releted_doctor})
 
@@ -72,18 +74,6 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-# def user_appointment(request):
-#     if 'login' in request.session:
-#         username = request.session['login']
-#         user = Patients.objects.get(username=username)
-#         appointments = Appointment.objects.filter(user=user)
-#         return render(request, 'user_appointment.html', {'appointments': appointments})
-#     else:
-#         messages.error(request, "Please login first!")
-#         return redirect('login')
-    
-    
-from django.contrib import messages
 
 def user_appointment(request):
     if 'login' in request.session:
@@ -111,7 +101,6 @@ def user_appointment(request):
     
 
 
-# @login_required(login_url='login')
 def book_appointment(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
 
@@ -181,62 +170,6 @@ def cancel_appointment(request, id):
         messages.error(request, "Please login required!")
         return redirect('login')
     
-
-# def stripe_payment(request, appointment_id):
-#     appointment = get_object_or_404(Appointment, id=appointment_id)
-
-#     session = stripe.checkout.Session.create(
-#         payment_method_types=['card'],
-#         line_items=[{
-#             'price_data': {
-#                 'currency': 'inr',
-#                 'product_data': {
-#                     'name': f'Doctor Appointment - {appointment.doctor.name}',
-#                 },
-#                 'unit_amount': 50000,  # ₹500 (in paise)
-#             },
-#             'quantity': 1,
-#         }],
-#         mode='payment',
-#         success_url=request.build_absolute_uri(f'/payment-success/{appointment.id}/'),
-#         cancel_url=request.build_absolute_uri('/payment-cancel/'),
-#     )
-
-#     # Save payment intent id
-#     appointment.stripe_payment_intent = session.id
-#     appointment.save()
-
-#     return redirect(session.url)
-
-
-# def stripe_payment(request, appointment_id):
-#     appointment = get_object_or_404(Appointment, id=appointment_id)
-
-#     # 👉 Same page URL (IMPORTANT change karo according to your page)
-#     base_url = request.build_absolute_uri(f'/doctor/{appointment.doctor.category.name}/')
-
-#     session = stripe.checkout.Session.create(
-#         payment_method_types=['card'],
-
-#         line_items=[{
-#             'price_data': {
-#                 'currency': 'inr',
-#                 'product_data': {
-#                     'name': f'Doctor Appointment - {appointment.doctor.name}',
-#                 },
-#                 'unit_amount': 50000,  # ₹500
-#             },
-#             'quantity': 1,
-#         }],
-
-#         mode='payment',
-
-#         # 🔥 SAME PAGE REDIRECT WITH MESSAGE
-#         success_url=base_url + f'?payment=success',
-#         cancel_url=base_url + f'?payment=cancel',
-#     )
-
-#     return redirect(session.url)
 
 def stripe_payment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
