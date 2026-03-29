@@ -241,7 +241,7 @@ def cancel_appointment(request, id):
 def stripe_payment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
 
-    # 🔥 Correct URL (named URL use karo)
+
     base_url = request.build_absolute_uri(reverse('user_appointment'))
 
     session = stripe.checkout.Session.create(
@@ -260,7 +260,6 @@ def stripe_payment(request, appointment_id):
 
         mode='payment',
 
-        # ✅ Redirect to user_appointment page
         success_url=base_url,
         cancel_url=base_url,
     )
