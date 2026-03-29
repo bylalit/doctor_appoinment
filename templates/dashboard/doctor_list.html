@@ -2,7 +2,7 @@
 {% load static %}
 {% block contant %}
 
-    <section class='w-100 p-5 bg-light'>
+    {% comment %} <section class='w-100 p-5 bg-light'>
         <h3 class='mb-4 fs-4 ms-4'>All Doctors</h3>
         <div class="row row-cols-2 row-cols-sm-5 g-4 px-4">
             {% for doctor in doctors %}
@@ -27,6 +27,58 @@
                 </div>
             {% endfor %}
         </div>
+    </section> {% endcomment %}
+
+
+    <section class='w-100 p-5 bg-light'>
+        <h3 class='mb-4 fs-4 ms-4'>All Doctors</h3>
+
+        <div class="row row-cols-2 row-cols-sm-5 g-4 px-4">
+
+            {% for doctor in doctors %}
+            <div class="col">
+
+                <div class="card border-0 rounded shadow-sm h-100"
+                    style="transition:0.3s;"
+                    onmouseover="this.style.transform='translateY(-8px)'"
+                    onmouseout="this.style.transform='translateY(0)'">
+
+                    <!-- 🔹 Image Container -->
+                    <div class="bg-light d-flex justify-content-center align-items-center overflow-hidden"
+                        style="height: 200px;">
+
+                        <img src="{{ doctor.image.url }}" 
+                            alt="Doctor"
+                            class="img-fluid"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+
+                    <!-- 🔹 Content -->
+                    <div class="card-body pb-3 text-center">
+
+                        <h6 class="card-title fw-bold mb-1">
+                            {{ doctor.name }}
+                        </h6>
+
+                        <p class="text-muted small mb-2">
+                            {{ doctor.category }}
+                        </p>
+
+                        <div class='d-flex align-items-center justify-content-center'>
+                            <input type="checkbox" class='me-2'>
+                            <p class="small fw-bold m-0">Available</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
     </section>
+
+
 
 {% endblock %}

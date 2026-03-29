@@ -43,12 +43,18 @@ class Appointment(models.Model):
         ('Cancelled', 'Cancelled'),
     )
     
+    PAYMENT_METHOD = (
+        ('Cash', 'Cash'),
+        ('Online', 'Online'),
+    )
+    
     user = models.ForeignKey(Patients, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
     
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD, default='Cash')
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

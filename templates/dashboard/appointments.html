@@ -15,6 +15,7 @@
                     <th scope="col" class="text-start">Date &amp; Time</th>
                     <th scope="col" class="text-start">Doctor</th>
                     <th scope="col" class="text-start">Fees</th>
+                    <th scope="col" class="text-start">Payment</th>
                     <th scope="col" class="text-start">Action</th>
                     </tr>
                 </thead>
@@ -36,6 +37,11 @@
                                 {{ appointment.doctor.name }}
                             </td>
                             <td>${{ appointment.doctor.fees }}</td>
+                            <td class="text-center">
+                                <span class="badge bg-secoundary border text-black fs-18 py-1 px-3">
+                                    {{ appointment.payment_method }}
+                                </span>
+                            </td>
                             <td class='text-center'>
                                 {% if appointment.status == 'Pending' %}
                                     <div class='d-flex justify-content-center'>
