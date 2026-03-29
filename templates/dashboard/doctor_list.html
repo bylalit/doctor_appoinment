@@ -51,6 +51,29 @@
                             </div>
                         </form>
 
+                        <div class="d-flex gap-2 mt-2 justify-content-center">
+
+                            <!-- Edit Button -->
+                            <a href="{% url 'doctor_edit' doctor.id %}" 
+                            class="btn btn-sm btn-outline-primary"
+                            style="transition:0.3s;"
+                            onmouseover="this.style.backgroundColor='#0d6efd'; this.style.color='white';"
+                            onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                ✏️ Edit
+                            </a>
+
+                            <!-- Delete Button -->
+                            <a href="{% url 'doctor_delete' doctor.id %}" 
+                            class="btn btn-sm btn-outline-danger"
+                            style="transition:0.3s;"
+                            onclick="return confirm('Are you sure?')"
+                            onmouseover="this.style.backgroundColor='#dc3545'; this.style.color='white';"
+                            onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                🗑 Delete
+                            </a>
+
+                        </div>
+
                     </div>
 
                 </div>
