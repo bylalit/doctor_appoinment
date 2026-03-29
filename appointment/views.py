@@ -11,6 +11,9 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator
 import stripe
 from django.conf import settings
+from django.urls import reverse
+
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -69,12 +72,39 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+# def user_appointment(request):
+#     if 'login' in request.session:
+#         username = request.session['login']
+#         user = Patients.objects.get(username=username)
+#         appointments = Appointment.objects.filter(user=user)
+#         return render(request, 'user_appointment.html', {'appointments': appointments})
+#     else:
+#         messages.error(request, "Please login first!")
+#         return redirect('login')
+    
+    
+from django.contrib import messages
+
 def user_appointment(request):
     if 'login' in request.session:
+
         username = request.session['login']
         user = Patients.objects.get(username=username)
+
         appointments = Appointment.objects.filter(user=user)
-        return render(request, 'user_appointment.html', {'appointments': appointments})
+
+        # 🔥 Payment message handle
+        payment = request.GET.get('payment')
+
+        if payment == "success":
+            messages.success(request, "✅ Payment Successful!")
+        elif payment == "cancel":
+            messages.error(request, "❌ Payment Cancelled!")
+
+        return render(request, 'user_appointment.html', {
+            'appointments': appointments
+        })
+
     else:
         messages.error(request, "Please login first!")
         return redirect('login')
@@ -179,11 +209,40 @@ def cancel_appointment(request, id):
 #     return redirect(session.url)
 
 
+# def stripe_payment(request, appointment_id):
+#     appointment = get_object_or_404(Appointment, id=appointment_id)
+
+#     # 👉 Same page URL (IMPORTANT change karo according to your page)
+#     base_url = request.build_absolute_uri(f'/doctor/{appointment.doctor.category.name}/')
+
+#     session = stripe.checkout.Session.create(
+#         payment_method_types=['card'],
+
+#         line_items=[{
+#             'price_data': {
+#                 'currency': 'inr',
+#                 'product_data': {
+#                     'name': f'Doctor Appointment - {appointment.doctor.name}',
+#                 },
+#                 'unit_amount': 50000,  # ₹500
+#             },
+#             'quantity': 1,
+#         }],
+
+#         mode='payment',
+
+#         # 🔥 SAME PAGE REDIRECT WITH MESSAGE
+#         success_url=base_url + f'?payment=success',
+#         cancel_url=base_url + f'?payment=cancel',
+#     )
+
+#     return redirect(session.url)
+
 def stripe_payment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
 
-    # 👉 Same page URL (IMPORTANT change karo according to your page)
-    base_url = request.build_absolute_uri(f'/doctor/{appointment.doctor.category.name}/')
+    # 🔥 Correct URL (named URL use karo)
+    base_url = request.build_absolute_uri(reverse('user_appointment'))
 
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -194,17 +253,22 @@ def stripe_payment(request, appointment_id):
                 'product_data': {
                     'name': f'Doctor Appointment - {appointment.doctor.name}',
                 },
-                'unit_amount': 50000,  # ₹500
+                'unit_amount': 50000,
             },
             'quantity': 1,
         }],
 
         mode='payment',
 
-        # 🔥 SAME PAGE REDIRECT WITH MESSAGE
-        success_url=base_url + f'?payment=success',
-        cancel_url=base_url + f'?payment=cancel',
+        # ✅ Redirect to user_appointment page
+        success_url=base_url,
+        cancel_url=base_url,
     )
+    
+    appointment.payment_method = "Online"
+    appointment.save()
+    
+    messages.success(request, "Payment succfully")
 
     return redirect(session.url)
 
