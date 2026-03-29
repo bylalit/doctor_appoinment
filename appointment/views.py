@@ -152,6 +152,62 @@ def cancel_appointment(request, id):
         return redirect('login')
     
 
+# def stripe_payment(request, appointment_id):
+#     appointment = get_object_or_404(Appointment, id=appointment_id)
+
+#     session = stripe.checkout.Session.create(
+#         payment_method_types=['card'],
+#         line_items=[{
+#             'price_data': {
+#                 'currency': 'inr',
+#                 'product_data': {
+#                     'name': f'Doctor Appointment - {appointment.doctor.name}',
+#                 },
+#                 'unit_amount': 50000,  # ₹500 (in paise)
+#             },
+#             'quantity': 1,
+#         }],
+#         mode='payment',
+#         success_url=request.build_absolute_uri(f'/payment-success/{appointment.id}/'),
+#         cancel_url=request.build_absolute_uri('/payment-cancel/'),
+#     )
+
+#     # Save payment intent id
+#     appointment.stripe_payment_intent = session.id
+#     appointment.save()
+
+#     return redirect(session.url)
+
+
+def stripe_payment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    # 👉 Same page URL (IMPORTANT change karo according to your page)
+    base_url = request.build_absolute_uri(f'/doctor/{appointment.doctor.category.name}/')
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+
+        line_items=[{
+            'price_data': {
+                'currency': 'inr',
+                'product_data': {
+                    'name': f'Doctor Appointment - {appointment.doctor.name}',
+                },
+                'unit_amount': 50000,  # ₹500
+            },
+            'quantity': 1,
+        }],
+
+        mode='payment',
+
+        # 🔥 SAME PAGE REDIRECT WITH MESSAGE
+        success_url=base_url + f'?payment=success',
+        cancel_url=base_url + f'?payment=cancel',
+    )
+
+    return redirect(session.url)
+
 
   
 def login(request):

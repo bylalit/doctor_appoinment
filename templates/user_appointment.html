@@ -43,7 +43,7 @@
 
                                     {% else %}
 
-                                        <a href="" 
+                                        <a href="{% url 'stripe_payment' appointment.id %}" 
                                         class="btn btn-outline-success btn-sm">
                                             Pay Online
                                         </a>
