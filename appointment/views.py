@@ -481,11 +481,28 @@ def add_doctor(request):
     return render(request, 'dashboard/add_doctor.html', {'category': category, "role" : "admin", 'action': 'add_doctor'})
 
 
+# @login_required(login_url=('/dash_login'))
+# @staff_member_required
+# def doctor_list(request):
+#     doctors = Doctor.objects.all().order_by('-id')
+#     return render(request, 'dashboard/doctor_list.html', {'doctors': doctors, 'action': 'doctor_list', "role" : "admin"})
+
+
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def doctor_list(request):
-    doctors = Doctor.objects.all()
-    return render(request, 'dashboard/doctor_list.html', {'doctors': doctors, 'action': 'doctor_list', "role" : "admin"})
+    doctors = Doctor.objects.all().order_by('-id')
+
+    paginator = Paginator(doctors, 8)  # 1 page me 8 doctors
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'dashboard/doctor_list.html', {
+        'doctors': page_obj,   # ⚠️ IMPORTANT
+        'page_obj': page_obj,
+        'action': 'doctor_list',
+        "role": "admin"
+    })
 
 
 @login_required(login_url=('/dash_login'))
