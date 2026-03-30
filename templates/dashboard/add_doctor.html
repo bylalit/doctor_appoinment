@@ -1,115 +1,140 @@
 {% extends "dashboard/layout.html" %}
-
+{% load static %}
 {% block contant %}
 
-    <section class="ps-5 bg-light pt-4 w-100 hv-100">
-        <h3 class="fs-4 mb-3">Add Doctor</h3>
-        <div class="py-5 px-4 bg-white" style="width: 800px;height: 550px; overflow-y: scroll;">
-            <form class="mx-auto" method='POST' style="max-width: 800px;" enctype="multipart/form-data">
+    <section class="ps-5 bg-light pt-4 w-100 mb-5">
+
+        <!-- 🔷 Title -->
+        <div class="mb-4" data-aos="fade-right">
+            <h3 class="fw-bold" style="color:#5f6fff;">Add Doctor</h3>
+            <p class="text-muted small">Fill all details carefully</p>
+        </div>
+
+        <!-- 🔷 Card Form -->
+        <div class="bg-white rounded-4 shadow-sm p-4"
+            style="max-width:900px; border-top:4px solid #5f6fff;"
+            data-aos="fade-up">
+
+            <form method='POST' enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="mb-4">
-                    <label for="product-images" class="form-label fw-semibold text-dark opacity-75">Upload Doctor Image</label>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <!-- Repeat image input blocks -->
-                        <label for="image"
-                            class="border border-secondary border-dashed rounded d-flex flex-column align-items-center justify-content-center text-secondary text-center"
-                            style="width: 70px; height: 70px; cursor: pointer;">
-                            <img src="https://storage.googleapis.com/a1aa/image/23b54cba-4027-4999-5744-d29d18583cb7.jpg"
-                                width="20" height="20" class="mb-1" alt="Upload icon">
-                            <span class="small">Upload</span>
-                        </label>
-                        <input type="file" class="form-control w-50 h-50" id="image" name="image" accept="image/*">
+
+                <!-- 📸 Image Upload -->
+                <div class="mb-4 text-center">
+                    <label class="form-label fw-semibold text-primary">Doctor Image</label>
+
+                    <div class="d-flex flex-column align-items-center">
+
+                        <img id="previewImage"
+                            src="{% static 'assets/assets_frontend/profile.png' %}"
+                            class="rounded-circle mb-3 shadow-sm"
+                            style="width:110px;height:110px;object-fit:cover;border:4px solid #e9ecff;">
+
+                        <input type="file" name="image" id="image"
+                            class="form-control w-50"
+                            accept="image/*"
+                            onchange="previewImage(event)">
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
-                        <div class="w-50">
-                            <label for="name" class="form-label fw-semibold text-dark">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control"
-                            placeholder="Type here">
-                        </div>
-                        <div class="w-50">
-                            <label for="speciality" class="form-label fw-semibold text-dark">Speciality</label>
-                            <select name="category" class="form-select" id="speciality">
-                                {% for cat in category %}
-                                    <option value="{{ cat.id }}">{{ cat }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>    
+                <!-- 🔹 Row 1 -->
+                <div class="row mb-3">
+                    <div class="col-md-6" data-aos="fade-right">
+                        <label class="form-label fw-semibold">Doctor Name</label>
+                        <input type="text" name="name" class="form-control"
+                            style="border-radius:10px;"
+                            placeholder="Enter name">
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-left">
+                        <label class="form-label fw-semibold">Speciality</label>
+                        <select name="category" class="form-select" style="border-radius:10px;">
+                            {% for cat in category %}
+                                <option value="{{ cat.id }}">{{ cat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
 
-                <div class="mb-4">
-                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
-                        <div class="w-50">
-                            <label for="email" class="form-label fw-semibold text-dark">Doctor Email</label>
-                            <input type="email" id="email" name="email" class="form-control"
+                <!-- 🔹 Row 2 -->
+                <div class="row mb-3">
+                    <div class="col-md-6" data-aos="fade-right">
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="email" name="email" class="form-control"
+                            style="border-radius:10px;"
                             placeholder="Email">
-                        </div>
-                        <div class="w-50">
-                            <label for="degree" class="form-label fw-semibold text-dark">Degree</label>
-                            <input type="text" id="degree" name="degree" class="form-control"
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-left">
+                        <label class="form-label fw-semibold">Degree</label>
+                        <input type="text" name="degree" class="form-control"
+                            style="border-radius:10px;"
                             placeholder="Degree">
-                        </div>
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
-                        <div class="w-50">
-                            <label for="username" class="form-label fw-semibold text-dark">Set Username</label>
-                            <input type="text" id="username" name="username" class="form-control"
+                <!-- 🔹 Row 3 -->
+                <div class="row mb-3">
+                    <div class="col-md-6" data-aos="fade-right">
+                        <label class="form-label fw-semibold">Username</label>
+                        <input type="text" name="username" class="form-control"
+                            style="border-radius:10px;"
                             placeholder="Username">
-                        </div>
-                        <div class="w-50">
-                            <label for="password" class="form-label fw-semibold text-dark">Set Password</label>
-                            <input type="password" id="password" name="password" class="form-control"
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-left">
+                        <label class="form-label fw-semibold">Password</label>
+                        <input type="password" name="password" class="form-control"
+                            style="border-radius:10px;"
                             placeholder="Password">
-                        </div>
-                        
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <div class="d-flex align-items-center justify-content-between gap-5 opacity-75">
-                        <div class="w-50">
-                            <label for="address" class="form-label fw-semibold text-dark">Address</label>
-                            <input type='text' id="address" name="address" class="form-control"
+                <!-- 🔹 Row 4 -->
+                <div class="row mb-3">
+                    <div class="col-md-6" data-aos="fade-right">
+                        <label class="form-label fw-semibold">Address</label>
+                        <input type="text" name="address" class="form-control"
+                            style="border-radius:10px;"
                             placeholder="Address">
-                        </div>
-                        <div class="w-50">
-                            <label for="fees" class="form-label fw-semibold text-dark">Fees</label>
-                            <input type='number' id="fees" name="fees" class="form-control"
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-left">
+                        <label class="form-label fw-semibold">Fees</label>
+                        <input type="number" name="fees" class="form-control"
+                            style="border-radius:10px;"
                             placeholder="Fees">
-                        </div>
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <div class="w-100">
-                            <label for="experience" class="form-label fw-semibold text-dark">Experience</label>
-                                <select name="experience" class="form-select" id="experience">
-                                <option value="1">1 Year</option>
-                                <option value="2">2 Year</option>
-                                <option value="3">3 Year</option>
-                                <option value="4">4 Year</option>
-                                <option value="5">5 Year</option>
-                                <option value="6">6 Year</option>
-                                <option value="7">7 Year</option>
-                                <option value="8">8 Year</option>
-                                <option value="9">9 Year</option>
-                                <option value="10">10 Year</option>
-                            </select>
-                        </div>
+                <!-- 🔹 Experience -->
+                <div class="mb-3" data-aos="fade-up">
+                    <label class="form-label fw-semibold">Experience</label>
+                    <select name="experience" class="form-select" style="border-radius:10px;">
+                        {% for i in "12345678910"|make_list %}
+                            <option value="{{ i }}">{{ i }} Year</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
-                <div class="mb-4">
-                    <label for="about" class="form-label fw-semibold text-dark">About Doctor</label>
-                    <textarea name="about" id="about" class="form-control" rows="5"></textarea>
+                <!-- 🔹 About -->
+                <div class="mb-4" data-aos="fade-up">
+                    <label class="form-label fw-semibold">About Doctor</label>
+                    <textarea name="about" class="form-control"
+                        style="border-radius:10px;"
+                        rows="4" placeholder="Write about doctor..."></textarea>
                 </div>
 
-                <button type="submit" class="btn fw-semibold text-light rounded-pill px-5 py-2 mt-2" style="background-color: rgb(95 111 255);">ADD</button>
+                <!-- 🔘 Submit -->
+                <div class="text-center mt-3">
+                    <button type="submit"
+                        class="btn text-white px-5 py-2 rounded-pill fw-semibold"
+                        style="background: linear-gradient(135deg,#5f6fff,#7b8bff); border:none; transition:0.3s;"
+                        onmouseover="this.style.transform='scale(1.05)'"
+                        onmouseout="this.style.transform=''">
+                        Add Doctor
+                    </button>
+                </div>
+
             </form>
         </div>
 
