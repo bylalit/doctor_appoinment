@@ -3,61 +3,137 @@
 
 {% block contant %}
 
-    <section class="flex-grow p-5 bg-light w-100">
-        <h3 class="mb-4">Update Profile</h3>
+<section class="bg-light w-100 p-4" style="min-height:100vh;">
 
-        <form action="" method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm" style="max-width: 900px;">
-            {% csrf_token %}
+    <!-- 🔷 Header -->
+    <div class="mb-4" data-aos="fade-right">
+        <h3 class="fw-bold mb-1" style="color:#4f5dff;">Update Doctor Profile</h3>
+        <p class="text-muted small">Edit doctor details and keep information updated</p>
+    </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Full Name</label>
-                    <input type="text" name="name" class="form-control" value="{{ doctor.name }}" required>
-                </div>
+    <div class="row g-4">
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ doctor.email }}" required>
-                </div>
+        <!-- 🔹 LEFT SIDE (Image Card) -->
+        <div class="col-lg-4" data-aos="fade-right">
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Degree</label>
-                    <input type="text" name="degree" class="form-control" value="{{ doctor.degree }}">
-                </div>
+            <div class="bg-white rounded-4 shadow-sm p-4 text-center"
+                style="transition:0.3s;"
+                onmouseover="this.style.transform='translateY(-6px)'"
+                onmouseout="this.style.transform=''">
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Experience</label>
-                    <input type="text" name="experience" class="form-control" value="{{ doctor.experience }}">
-                </div>
+                <img id="previewImage"
+                    src="{{ doctor.image.url }}"
+                    class="rounded-circle mb-3"
+                    style="width:130px;height:130px;object-fit:cover;
+                           border:4px solid rgba(95,111,255,0.2);">
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Fees</label>
-                    <input type="number" name="fees" class="form-control" value="{{ doctor.fees }}">
-                </div>
+                <h5 class="fw-bold mb-1">{{ doctor.name }}</h5>
+                <p class="text-muted small">{{ doctor.category }}</p>
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Address</label>
-                    <textarea name="address" class="form-control" rows="2">{{ doctor.address }}</textarea>
-                </div>
+                <p class="small text-muted mb-1">
+                    <i class="fas fa-envelope me-1"></i>{{ doctor.email }}
+                </p>
 
-                <div class="col-12 mb-3">
-                    <label class="form-label fw-semibold">About</label>
-                    <textarea name="about" class="form-control" rows="3">{{ doctor.about }}</textarea>
-                </div>
+                <p class="small text-muted">
+                    <i class="fas fa-map-marker-alt me-1"></i>{{ doctor.address }}
+                </p>
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Current Image</label><br>
-                    <img src="{{ doctor.image.url }}" width="130" class="rounded shadow-sm mb-2">
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Change Image</label>
-                    <input type="file" name="image" class="form-control">
-                </div>
             </div>
 
-            <button class="btn btn-primary px-4">Update</button>
-        </form>
-    </section>
+        </div>
+
+        <!-- 🔹 RIGHT SIDE (FORM) -->
+        <div class="col-lg-8" data-aos="fade-up">
+
+            <form method="POST" enctype="multipart/form-data"
+                class="bg-white rounded-4 shadow-sm p-4">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <!-- Name -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Full Name</label>
+                        <input type="text" name="name"
+                            class="form-control"
+                            value="{{ doctor.name }}">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="email" name="email"
+                            class="form-control"
+                            value="{{ doctor.email }}">
+                    </div>
+
+                    <!-- Degree -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Degree</label>
+                        <input type="text" name="degree"
+                            class="form-control"
+                            value="{{ doctor.degree }}">
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Experience</label>
+                        <input type="text" name="experience"
+                            class="form-control"
+                            value="{{ doctor.experience }}">
+                    </div>
+
+                    <!-- Fees -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Fees</label>
+                        <input type="number" name="fees"
+                            class="form-control"
+                            value="{{ doctor.fees }}">
+                    </div>
+
+                    <!-- Address -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-semibold">Address</label>
+                        <textarea name="address"
+                            class="form-control"
+                            rows="2">{{ doctor.address }}</textarea>
+                    </div>
+
+                    <!-- About -->
+                    <div class="col-12 mb-3">
+                        <label class="form-label fw-semibold">About</label>
+                        <textarea name="about"
+                            class="form-control"
+                            rows="3">{{ doctor.about }}</textarea>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="col-12 mb-4">
+                        <label class="form-label fw-semibold">Change Image</label>
+                        <input type="file" name="image"
+                            class="form-control"
+                            onchange="previewImage(event)">
+                    </div>
+
+                </div>
+
+                <!-- 🔘 Button -->
+                <div class="text-end">
+                    <button type="submit"
+                        class="btn text-white px-5 py-2 rounded-pill fw-semibold"
+                        style="background: linear-gradient(135deg,#4f5dff,#8f9bff); border:none;">
+                        Update Profile
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 {% endblock %}
