@@ -1,0 +1,199 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block contant %}
+
+
+
+    <section class="flex-grow p-5 bg-light w-100">
+
+        {% if role == 'admin' %}
+        <!-- ================= ADMIN DASHBOARD ================= -->
+        <div class="d-flex flex-wrap gap-3 mb-4">
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-2 shadow-sm min-w-160"
+                data-aos="fade-up" data-aos-delay="100">
+                <img src="{% static "assets/assets_admin/doctor_icon.svg" %}" width="35" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_doctors }}</p>
+                    <small class="text-muted">Doctors</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160"
+                data-aos="fade-up" data-aos-delay="200">
+                <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="30" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ appointment_total }}</p>
+                    <small class="text-muted">Appointments</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160"
+                data-aos="fade-up" data-aos-delay="300">
+                <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="40" height="40" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_patients }}</p>
+                    <small class="text-muted">Patients</small>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+        {% if role == 'doctor' %}
+        <!-- ================= DOCTOR DASHBOARD ================= -->
+        <div class="mb-4" data-aos="fade-right">
+            <h4 class="fw-bold">Welcome {{ doctor.name }}</h4>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3" style="margin-bottom: 80px">
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160"
+                data-aos="zoom-in" data-aos-delay="100">
+                <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="30" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_appointments }}</p>
+                    <small class="text-muted">Appointments</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm min-w-160"
+                data-aos="zoom-in" data-aos-delay="200">
+                <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="40" height="40" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold text-dark mb-0">{{ total_patients }}</p>
+                    <small class="text-muted">Patients</small>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+        <!-- ===== Appointments List ===== -->
+        <div class="bg-white rounded shadow-sm" style="max-width: 768px;"
+            data-aos="fade-up" data-aos-duration="800">
+
+            <div class="d-flex align-items-center border-bottom px-4 py-3">
+                <i class="fas fa-list-alt text-primary me-2"></i>
+                <h6 class="mb-0 fw-semibold text-dark">
+                    {% if role == 'admin' %} Latest Bookings {% else %} Your Recent Appointments {% endif %}
+                </h6>
+            </div>
+
+            <ul class="list-unstyled mb-0">
+                {% for appointment in appointments %}
+                <li class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom"
+                    data-aos="fade-left" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+
+                    <div class="d-flex align-items-center">
+                        <img src="{{ appointment.doctor.image.url }}" class="rounded me-3"
+                            width="40" height="40" />
+                        <div class="small text-dark">
+                            <p class="mb-0 fw-semibold">{{ appointment.doctor.name }}</p>
+                            <small class="text-muted">Booking on {{ appointment.appointment_date }}</small>
+                        </div>
+                    </div>
+
+                    {% if appointment.status == 'Pending' %}
+                    <div class='d-flex justify-content-center'>
+                        <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-light border text-danger rounded-circle p-0 me-2"
+                                    style="width: 24px; height: 24px;">×</button>
+                        </form>
+                        <form method="post" action="{% url 'approved_appointment' appointment.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-light border text-success rounded-circle p-0"
+                                    style="width: 30px; height: 30px;">✓</button>
+                        </form>
+                    </div>
+                    {% elif appointment.status == 'Approved' %}
+                    <p class="text-success m-0 small">Completed</p>
+                    {% else %}
+                    <p class="text-danger m-0 small">Cancelled</p>
+                    {% endif %}
+
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </section>
+
+
+{% endblock %}
+
+
+
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block contant %}
+
+    <section class="flex-grow p-5 bg-light w-100">
+
+        <!-- 🔔 Top Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
+            <h4 class="fw-bold">Dashboard</h4>
+            <div class="position-relative">
+                <i class="fas fa-bell fs-5"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ notifications_count|default:"0" }}
+                </span>
+            </div>
+        </div>
+
+        <!-- 📊 Extra Stats -->
+        <div class="row mb-4">
+
+            <div class="col-md-4" data-aos="zoom-in">
+                <div class="bg-white p-3 rounded shadow-sm text-center hover-card">
+                    <h6 class="text-muted">Today's Appointments</h6>
+                    <h4 class="fw-bold text-primary">{{ today_appointments }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="bg-white p-3 rounded shadow-sm text-center hover-card">
+                    <h6 class="text-muted">Total Revenue</h6>
+                    <h4 class="fw-bold text-success">₹{{ total_revenue }}</h4>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="bg-white p-3 rounded shadow-sm text-center hover-card">
+                    <h6 class="text-muted">Pending Appointments</h6>
+                    <h4 class="fw-bold text-danger">{{ pending_appointments }}</h4>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 🔍 Search -->
+        <div class="mb-3" data-aos="fade-right">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search appointments...">
+        </div>
+
+        <!-- 📅 Today Appointments -->
+        <div class="bg-white p-3 rounded shadow-sm mb-4" data-aos="fade-up">
+            <h6 class="fw-bold mb-3">Today's Appointments</h6>
+
+            {% for app in today_list %}
+                <div class="d-flex justify-content-between border-bottom py-2">
+                    <span>{{ app.doctor.name }}</span>
+                    <small>{{ app.appointment_time }}</small>
+                </div>
+            {% empty %}
+                <p class="text-muted small">No appointments today</p>
+            {% endfor %}
+        </div>
+
+        <!-- 📈 Chart -->
+        <div class="bg-white p-3 rounded shadow-sm mb-4" data-aos="fade-up">
+            <h6 class="fw-bold mb-3">Appointments Overview</h6>
+            <canvas id="myChart"></canvas>
+        </div>
+
+    </section>
+
+
+{% endblock %}
