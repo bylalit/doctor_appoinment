@@ -443,7 +443,7 @@ def doctor_appointments(request):
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def appointments(request):
-    appointments = Appointment.objects.all()
+    appointments = Appointment.objects.all().order_by('-created_at')
     return render(request, 'dashboard/appointments.html', {'action': 'appointments',"role" : "admin", 'appointments': appointments})
 
 

@@ -1,73 +1,179 @@
+
 {% extends "dashboard/layout.html" %}
 {% load static %}
 {% block contant %}
 
-    <main class="flex-grow-1 overflow-auto pt-4 px-5 bg-light">
-        <h2 class="fs-6 fw-semibold mt-3 mb-4">
-            All Appointments
-        </h2>
+<main class="flex-grow-1 overflow-auto pt-4 px-5 bg-light">
+
+    <!-- 🔝 Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
+        <h4 class="fw-bold">All Appointments</h4>
+
+        <!-- Search -->
+        <input type="text" id="searchInput" class="form-control w-25"
+            placeholder="Search patient..."
+            onkeyup="searchTable()">
+    </div>
+
+
+    <!-- 📊 Quick Stats -->
+    <div class="row mb-4">
+
+        <div class="col-md-4" data-aos="zoom-in">
+            <div class="p-3 rounded-4 text-white"
+                style="background:linear-gradient(135deg,#5f6fff,#7c8bff)">
+                <h6>Total</h6>
+                <h4 class="fw-bold">{{ appointments|length }}</h4>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="p-3 rounded-4 text-white"
+                style="background:linear-gradient(135deg,#28a745,#5dd67a)">
+                <h6>Completed</h6>
+                <h4 class="fw-bold">
+                    {{ completed_count|default:"0" }}
+                </h4>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="p-3 rounded-4 text-white"
+                style="background:linear-gradient(135deg,#dc3545,#ff6b6b)">
+                <h6>Pending</h6>
+                <h4 class="fw-bold">
+                    {{ pending_count|default:"0" }}
+                </h4>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- 📋 Table Card -->
+    <div class="bg-white rounded-4 shadow-sm p-3" data-aos="fade-up">
+
         <div class="table-responsive">
-            <table class="table table-bordered align-middle text-nowrap text-secondary small">
-                <thead class="table-light">
+            <table class="table align-middle text-nowrap small" id="appointmentTable">
+
+                <!-- Header -->
+                <thead style="background:#f8f9ff;">
                     <tr>
-                    <th scope="col" class="text-start">#</th>
-                    <th scope="col" class="text-start">Patient</th>
-                    <th scope="col" class="text-start">Date &amp; Time</th>
-                    <th scope="col" class="text-start">Doctor</th>
-                    <th scope="col" class="text-start">Fees</th>
-                    <th scope="col" class="text-start">Payment</th>
-                    <th scope="col" class="text-start">Action</th>
+                        <th>#</th>
+                        <th>Patient</th>
+                        <th>Date & Time</th>
+                        <th>Doctor</th>
+                        <th>Fees</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
+
                 <tbody>
+
                     {% for appointment in appointments %}
-                        <tr>
-                            <td class="text-muted">{{ forloop.counter  }}</td>
-                            <td class="d-flex align-items-center gap-2 text-dark">
-                                <div class="rounded-circle bg-primary-subtle d-flex justify-content-center align-items-center" style="width: 24px; height: 24px;">
-                                    <img src="https://storage.googleapis.com/a1aa/image/ef585074-3191-4e32-59db-a6a809fe11aa.jpg" width="16" height="16" class="rounded-circle" alt="User avatar">
-                                    </div>
-                                    <span class='text-capitalize'>
-                                        {{ appointment.user.username }}
-                                    </span>
-                            </td>
-                            <td>{{ appointment.appointment_date }}, {{ appointment.appointment_time }}</td>
-                            <td class="d-flex align-items-center gap-2">
-                                <img src="{{ appointment.doctor.image.url }}" class="rounded-circle" width="28" height="28" alt="Doctor avatar">
-                                {{ appointment.doctor.name }}
-                            </td>
-                            <td>₹ {{ appointment.doctor.fees }}</td>
-                            <td class="text-center">
-                                <span class="badge bg-secoundary border text-black fs-18 py-1 px-3">
-                                    {{ appointment.payment_method }}
+                    <tr style="transition:0.3s;"
+                        onmouseover="this.style.background='#f8f9ff'"
+                        onmouseout="this.style.background=''">
+
+                        <!-- Index -->
+                        <td class="text-muted">{{ forloop.counter }}</td>
+
+                        <!-- Patient -->
+                        <td class="d-flex align-items-center gap-2">
+                            <img src="{% static 'assets/assets_frontend/profile.png' %}"
+                                class="rounded-circle"
+                                width="35" height="35">
+                            <span class="fw-semibold text-capitalize">
+                                {{ appointment.user.username }}
+                            </span>
+                        </td>
+
+                        <!-- Date -->
+                        <td>
+                            <div>{{ appointment.appointment_date }}</div>
+                            <small class="text-muted">{{ appointment.appointment_time }}</small>
+                        </td>
+
+                        <!-- Doctor -->
+                        <td class="d-flex align-items-center gap-2">
+                            <img src="{{ appointment.doctor.image.url }}"
+                                class="rounded-circle"
+                                width="35" height="35">
+                            {{ appointment.doctor.name }}
+                        </td>
+
+                        <!-- Fees -->
+                        <td class="fw-semibold text-dark">
+                            ₹ {{ appointment.doctor.fees }}
+                        </td>
+
+                        <!-- Payment -->
+                        <td>
+                            <span class="badge rounded-pill px-3 py-1"
+                                style="background:#eef2ff; color:#5f6fff;">
+                                {{ appointment.payment_method }}
+                            </span>
+                        </td>
+
+                        <!-- Status -->
+                        <td>
+                            {% if appointment.status == 'Pending' %}
+                                <span class="badge rounded-pill"
+                                    style="background:#fff3cd; color:#856404;">
+                                    Pending
                                 </span>
-                            </td>
-                            <td class='text-center'>
-                                {% if appointment.status == 'Pending' %}
-                                    <div class='d-flex justify-content-center'>
-                                        <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
-                                            {% csrf_token %}
-                                            <button class="btn btn-sm btn-light border text-danger rounded-circle p-0 me-2" style="width: 24px; height: 24px;">×</button>
-                                        </form>
-                                        <form method="post" action="{% url 'approved_appointment' appointment.id %}">
-                                            {% csrf_token %}
-                                            <button class="btn btn-sm btn-light border text-success rounded-circle p-0" style="width: 30px; height: 30px;">✓</button>
-                                        </form>
-                                    </div>
-                                {% elif appointment.status == 'Approved' %}
-                                    <p class="text-success m-0 small">Complated</p>
-                                {% else %}
-                                    <p class="text-danger m-0 small">Cancelled</p>
-                                {% endif %}
-                                
-                            </td>
-                        </tr>
+                            {% elif appointment.status == 'Approved' %}
+                                <span class="badge rounded-pill"
+                                    style="background:#e6fff0; color:#28a745;">
+                                    Completed
+                                </span>
+                            {% else %}
+                                <span class="badge rounded-pill"
+                                    style="background:#ffe5e5; color:#dc3545;">
+                                    Cancelled
+                                </span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Action -->
+                        <td class="text-center">
+                            {% if appointment.status == 'Pending' %}
+                            <div class="d-flex justify-content-center">
+
+                                <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-sm me-2"
+                                        style="background:#ffe5e5; color:#dc3545; border-radius:8px;">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+
+                                <form method="post" action="{% url 'approved_appointment' appointment.id %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-sm"
+                                        style="background:#e6fff0; color:#28a745; border-radius:8px;">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </form>
+
+                            </div>
+                            {% else %}
+                                <span class="text-muted small">No Action</span>
+                            {% endif %}
+                        </td>
+
+                    </tr>
                     {% endfor %}
 
                 </tbody>
+
             </table>
         </div>
-    </main>
+    </div>
+
+</main>
 
 
 {% endblock %}
