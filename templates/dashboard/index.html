@@ -42,44 +42,44 @@
     </div>
 
     {% if role == 'admin' %}
-    <!-- ================= ADMIN STATS ================= -->
-    <div class="d-flex flex-wrap gap-3 mb-4">
+        <!-- ================= ADMIN STATS ================= -->
+        <div class="d-flex flex-wrap gap-3 mb-4">
 
-        <div class="d-flex align-items-center bg-white rounded px-4 py-2 shadow-sm"
-            data-aos="fade-up" data-aos-delay="100">
-            <img src="{% static "assets/assets_admin/doctor_icon.svg" %}" width="35" class="me-3" />
-            <div>
-                <p class="h5 fw-semibold mb-0">{{ total_doctors }}</p>
-                <small class="text-muted">Doctors</small>
+            <div class="d-flex align-items-center bg-white rounded px-4 py-2 shadow-sm"
+                data-aos="fade-up" data-aos-delay="100">
+                <img src="{% static "assets/assets_admin/doctor_icon.svg" %}" width="35" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold mb-0">{{ total_doctors }}</p>
+                    <small class="text-muted">Doctors</small>
+                </div>
             </div>
-        </div>
 
-        <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm"
-            data-aos="fade-up" data-aos-delay="200">
-            <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="30" class="me-3" />
-            <div>
-                <p class="h5 fw-semibold mb-0">{{ appointment_total }}</p>
-                <small class="text-muted">Appointments</small>
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm"
+                data-aos="fade-up" data-aos-delay="200">
+                <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="30" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold mb-0">{{ appointment_total }}</p>
+                    <small class="text-muted">Appointments</small>
+                </div>
             </div>
-        </div>
 
-        <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm"
-            data-aos="fade-up" data-aos-delay="300">
-            <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="40" class="me-3" />
-            <div>
-                <p class="h5 fw-semibold mb-0">{{ total_patients }}</p>
-                <small class="text-muted">Patients</small>
+            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm"
+                data-aos="fade-up" data-aos-delay="300">
+                <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="40" class="me-3" />
+                <div>
+                    <p class="h5 fw-semibold mb-0">{{ total_patients }}</p>
+                    <small class="text-muted">Patients</small>
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     {% endif %}
 
     {% if role == 'doctor' %}
-    <!-- ================= DOCTOR ================= -->
-    <div class="mb-4" data-aos="fade-right">
-        <h4 class="fw-bold">Welcome {{ doctor.name }}</h4>
-    </div>
+        <!-- ================= DOCTOR ================= -->
+        <div class="mb-4" data-aos="fade-right">
+            <h4 class="fw-bold">Welcome {{ doctor.name }}</h4>
+        </div>
     {% endif %}
 
     <!-- 🔍 Search -->
@@ -104,7 +104,7 @@
     </div>
 
     <!-- 📈 Chart -->
-    <div class="col-md-12" data-aos="fade-up">
+    <div class="col-md-12 my-5" data-aos="fade-up">
         <div class="bg-white p-3 rounded shadow-sm mb-4" style="height:300px;">
             <h6 class="fw-bold mb-3">Appointments Overview</h6>
             <canvas id="myChart"></canvas>
@@ -113,7 +113,7 @@
 
 
     <!-- ===== Appointments List ===== -->
-    <div class="bg-white rounded shadow-sm mt-4" data-aos="fade-up">
+    <div class="bg-white rounded shadow-sm my-5" data-aos="fade-up">
 
         <div class="d-flex align-items-center border-bottom px-4 py-3">
             <i class="fas fa-list-alt text-primary me-2"></i>
@@ -159,6 +159,5 @@
 </section>
 
 
-
-
 {% endblock %}
+
