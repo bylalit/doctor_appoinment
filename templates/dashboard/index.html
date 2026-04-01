@@ -2,221 +2,79 @@
 {% load static %}
 {% block contant %}
 
-<section class="flex-grow p-5 bg-light w-100">
+    <section class="flex-grow p-5 bg-light w-100">
 
-    <!-- 🔔 Top Bar -->
-    <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
-        <h4 class="fw-bold">Dashboard</h4>
-        <div class="position-relative">
-            <i class="fas fa-bell fs-5"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{ notifications_count|default:"0" }}
-            </span>
-        </div>
-    </div>
-
-    {% comment %} <!-- 📊 Extra Stats -->
-    <div class="row mb-4">
-
-        <div class="col-md-4" data-aos="zoom-in">
-            <div class="bg-white p-3 rounded shadow-sm text-center hover-card">
-                <h6 class="text-muted">Today's Appointments</h6>
-                <h4 class="fw-bold text-primary">{{ today_appointments }}</h4>
+        <!-- 🔔 Top Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
+            <h4 class="fw-bold">Dashboard</h4>
+            <div class="position-relative">
+                <i class="fas fa-bell fs-5"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ notifications_count|default:"0" }}
+                </span>
             </div>
         </div>
 
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-            <div class="bg-white p-3 rounded shadow-sm text-center hover-card">
-                <h6 class="text-muted">Total Revenue</h6>
-                <h4 class="fw-bold text-success">₹{{ total_revenue }}</h4>
-            </div>
-        </div>
+        <!-- 📊 Extra Stats (Improved Design) -->
+        <div class="row mb-4">
 
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-            <div class="bg-white p-3 rounded shadow-sm text-center hover-card">
-                <h6 class="text-muted">Pending Appointments</h6>
-                <h4 class="fw-bold text-danger">{{ pending_appointments }}</h4>
-            </div>
-        </div>
-
-    </div> {% endcomment %}
-
-
-    <!-- 📊 Extra Stats (Improved Design) -->
-    <div class="row mb-4">
-
-        <!-- Card 1 -->
-        <div class="col-md-4 mb-3" data-aos="zoom-in">
-            <div class="p-4 rounded-4 shadow-sm text-white position-relative"
-                style="background: linear-gradient(135deg, #5f6fff, #7c8bff); transition: 0.3s;"
-                onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
-            onmouseout="this.style.transform=''; this.style.boxShadow=''">
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="mb-1 opacity-75">Today's Appointments</h6>
-                        <h3 class="fw-bold mb-0">{{ today_appointments|default:"0" }}</h3>
-                    </div>
-                    <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center"
-                        style="width:50px; height:50px;">
-                        <i class="fas fa-calendar-check fs-5"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
-            <div class="p-4 rounded-4 shadow-sm text-white position-relative"
-                style="background: linear-gradient(135deg, #28a745, #5dd67a); transition: 0.3s;" 
-                onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
-            onmouseout="this.style.transform=''; this.style.boxShadow=''">
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="mb-1 opacity-75">Total Revenue</h6>
-                        <h3 class="fw-bold mb-0">₹{{ total_revenue }}2000000</h3>
-                    </div>
-                    <div class="bg-white text-success rounded-circle d-flex align-items-center justify-content-center"
-                        style="width:50px; height:50px;">
-                        <i class="fas fa-rupee-sign fs-5"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-md-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
-            <div class="p-4 rounded-4 shadow-sm text-white position-relative"
-                style="background: linear-gradient(135deg, #dc3545, #ff6b6b); transition: 0.3s;"
-                onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
-            onmouseout="this.style.transform=''; this.style.boxShadow=''">
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="mb-1 opacity-75">Pending Appointments</h6>
-                        <h3 class="fw-bold mb-0">{{ pending_appointments }}50</h3>
-                    </div>
-                    <div class="bg-white text-danger rounded-circle d-flex align-items-center justify-content-center"
-                        style="width:50px; height:50px;">
-                        <i class="fas fa-clock fs-5"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-    {% comment %} {% if role == 'admin' %}
-        <!-- ================= ADMIN STATS ================= -->
-        <div class="d-flex flex-wrap gap-3 mb-4">
-
-            <div class="d-flex align-items-center bg-white rounded px-4 py-2 shadow-sm"
-                data-aos="fade-up" data-aos-delay="100">
-                <img src="{% static "assets/assets_admin/doctor_icon.svg" %}" width="35" class="me-3" />
-                <div>
-                    <p class="h5 fw-semibold mb-0">{{ total_doctors }}</p>
-                    <small class="text-muted">Doctors</small>
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm"
-                data-aos="fade-up" data-aos-delay="200">
-                <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="30" class="me-3" />
-                <div>
-                    <p class="h5 fw-semibold mb-0">{{ appointment_total }}</p>
-                    <small class="text-muted">Appointments</small>
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center bg-white rounded px-4 py-3 shadow-sm"
-                data-aos="fade-up" data-aos-delay="300">
-                <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="40" class="me-3" />
-                <div>
-                    <p class="h5 fw-semibold mb-0">{{ total_patients }}</p>
-                    <small class="text-muted">Patients</small>
-                </div>
-            </div>
-
-        </div>
-    {% endif %}
-
-    {% if role == 'doctor' %}
-        <!-- ================= DOCTOR ================= -->
-        <div class="mb-4" data-aos="fade-right">
-            <h4 class="fw-bold">Welcome {{ doctor.name }}</h4>
-        </div>
-    {% endif %} {% endcomment %}
-
-
-    {% if role == 'admin' %}
-        <!-- ================= ADMIN STATS (INLINE DESIGN) ================= -->
-        <div class="row g-4 mb-4">
-
-            <!-- Doctors -->
-            <div class="col-md-4" data-aos="fade-up">
-                <div class="bg-white rounded-4 shadow-sm p-3"
-                    style="transition:0.3s;"
-                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.08)'"
-                    onmouseout="this.style.transform=''; this.style.boxShadow=''">
+            <!-- Card 1 -->
+            <div class="col-md-4 mb-3" data-aos="zoom-in">
+                <div class="p-4 rounded-4 shadow-sm text-white position-relative"
+                    style="background: linear-gradient(135deg, #5f6fff, #7c8bff); transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
+                onmouseout="this.style.transform=''; this.style.boxShadow=''">
 
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <p class="text-muted small mb-1">Total Doctors</p>
-                            <h4 class="fw-bold mb-0">{{ total_doctors }}</h4>
+                            <h6 class="mb-1 opacity-75">Today's Appointments</h6>
+                            <h3 class="fw-bold mb-0">{{ today_appointments|default:"0" }}</h3>
                         </div>
-
-                        <div class="d-flex align-items-center justify-content-center"
-                            style="width:45px;height:45px;border-radius:12px;background:rgba(95,111,255,0.1);">
-                            <img src="{% static "assets/assets_admin/doctor_icon.svg" %}" width="28">
+                        <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:50px; height:50px;">
+                            <i class="fas fa-calendar-check fs-5"></i>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Appointments -->
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="bg-white rounded-4 shadow-sm p-3"
-                    style="transition:0.3s;"
-                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.08)'"
-                    onmouseout="this.style.transform=''; this.style.boxShadow=''">
+            <!-- Card 2 -->
+            <div class="col-md-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="p-4 rounded-4 shadow-sm text-white position-relative"
+                    style="background: linear-gradient(135deg, #28a745, #5dd67a); transition: 0.3s;" 
+                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
+                onmouseout="this.style.transform=''; this.style.boxShadow=''">
 
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <p class="text-muted small mb-1">Appointments</p>
-                            <h4 class="fw-bold mb-0">{{ appointment_total }}</h4>
+                            <h6 class="mb-1 opacity-75">Total Revenue</h6>
+                            <h3 class="fw-bold mb-0">₹{{ total_revenue }}2000000</h3>
                         </div>
-
-                        <div class="d-flex align-items-center justify-content-center"
-                            style="width:45px;height:45px;border-radius:12px;background:rgba(40,167,69,0.1);">
-                            <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="26">
+                        <div class="bg-white text-success rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:50px; height:50px;">
+                            <i class="fas fa-rupee-sign fs-5"></i>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Patients -->
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="bg-white rounded-4 shadow-sm p-3"
-                    style="transition:0.3s;"
-                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.08)'"
-                    onmouseout="this.style.transform=''; this.style.boxShadow=''">
+            <!-- Card 3 -->
+            <div class="col-md-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="p-4 rounded-4 shadow-sm text-white position-relative"
+                    style="background: linear-gradient(135deg, #dc3545, #ff6b6b); transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
+                onmouseout="this.style.transform=''; this.style.boxShadow=''">
 
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <p class="text-muted small mb-1">Patients</p>
-                            <h4 class="fw-bold mb-0">{{ total_patients }}</h4>
+                            <h6 class="mb-1 opacity-75">Pending Appointments</h6>
+                            <h3 class="fw-bold mb-0">{{ pending_appointments }}50</h3>
                         </div>
-
-                        <div class="d-flex align-items-center justify-content-center"
-                            style="width:45px;height:45px;border-radius:12px;background:rgba(220,53,69,0.1);">
-                            <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="28">
+                        <div class="bg-white text-danger rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:50px; height:50px;">
+                            <i class="fas fa-clock fs-5"></i>
                         </div>
                     </div>
 
@@ -224,311 +82,281 @@
             </div>
 
         </div>
-    {% endif %}
 
 
-    {% if role == 'doctor' %}
-        <!-- ================= DOCTOR (INLINE DESIGN) ================= -->
-        <div class="bg-white rounded-4 shadow-sm p-4 mb-4"
-            data-aos="fade-right"
-            style="transition:0.3s;"
-            onmouseover="this.style.transform='translateY(-4px)'"
-            onmouseout="this.style.transform=''">
+        {% if role == 'admin' %}
+            <!-- ================= ADMIN STATS (INLINE DESIGN) ================= -->
+            <div class="row g-4 mb-4">
 
-            <div class="d-flex align-items-center">
+                <!-- Doctors -->
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="bg-white rounded-4 shadow-sm p-3"
+                        style="transition:0.3s;"
+                        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.08)'"
+                        onmouseout="this.style.transform=''; this.style.boxShadow=''">
 
-                <img src="{% static 'assets/assets_frontend/profile.png' %}" 
-                    class="rounded-circle me-3"
-                    style="width:60px; height:60px; object-fit:cover; border:3px solid rgba(95,111,255,0.3);">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted small mb-1">Total Doctors</p>
+                                <h4 class="fw-bold mb-0">{{ total_doctors }}</h4>
+                            </div>
 
-                <div>
-                    <h5 class="fw-bold mb-1">Welcome, {{ doctor.name }}</h5>
-                    <p class="text-muted small mb-0">Manage your appointments and patients easily</p>
+                            <div class="d-flex align-items-center justify-content-center"
+                                style="width:45px;height:45px;border-radius:12px;background:rgba(95,111,255,0.1);">
+                                <img src="{% static "assets/assets_admin/doctor_icon.svg" %}" width="28">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Appointments -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white rounded-4 shadow-sm p-3"
+                        style="transition:0.3s;"
+                        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.08)'"
+                        onmouseout="this.style.transform=''; this.style.boxShadow=''">
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted small mb-1">Appointments</p>
+                                <h4 class="fw-bold mb-0">{{ appointment_total }}</h4>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center"
+                                style="width:45px;height:45px;border-radius:12px;background:rgba(40,167,69,0.1);">
+                                <img src="{% static "assets/assets_admin/appointment_icon.svg" %}" width="26">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Patients -->
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white rounded-4 shadow-sm p-3"
+                        style="transition:0.3s;"
+                        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.08)'"
+                        onmouseout="this.style.transform=''; this.style.boxShadow=''">
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted small mb-1">Patients</p>
+                                <h4 class="fw-bold mb-0">{{ total_patients }}</h4>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center"
+                                style="width:45px;height:45px;border-radius:12px;background:rgba(220,53,69,0.1);">
+                                <img src="{% static "assets/assets_admin/patients_icon.svg" %}" width="28">
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
-
-        </div>
-    {% endif %}
+        {% endif %}
 
 
+        {% if role == 'doctor' %}
+            <!-- ================= DOCTOR (INLINE DESIGN) ================= -->
+            <div class="bg-white rounded-4 shadow-sm p-4 mb-4"
+                data-aos="fade-right"
+                style="transition:0.3s;"
+                onmouseover="this.style.transform='translateY(-4px)'"
+                onmouseout="this.style.transform=''">
 
-{% comment %} 
-    <!-- 🔍 Search -->
-    <div class="mb-3" data-aos="fade-right">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search appointments...">
-    </div> {% endcomment %}
+                <div class="d-flex align-items-center">
 
-    {% comment %} <!-- 📅 Today Appointments -->
-    <div data-aos="fade-up">
-        <div class="bg-white p-3 rounded shadow-sm mb-4">
-            <h6 class="fw-bold mb-3">Today's Appointments</h6>
+                    <img src="{% static 'assets/assets_frontend/profile.png' %}" 
+                        class="rounded-circle me-3"
+                        style="width:60px; height:60px; object-fit:cover; border:3px solid rgba(95,111,255,0.3);">
 
-            {% for app in today_list %}
-                <div class="d-flex justify-content-between border-bottom py-2">
-                    <span>{{ app.doctor.name }}</span>
-                    <small>{{ app.appointment_time }}</small>
+                    <div>
+                        <h5 class="fw-bold mb-1">Welcome, {{ doctor.name }}</h5>
+                        <p class="text-muted small mb-0">Manage your appointments and patients easily</p>
+                    </div>
+
                 </div>
-            {% empty %}
-                <p class="text-muted small">No appointments today</p>
-            {% endfor %}
-        </div>
-    </div> {% endcomment %}
 
-    <!-- 📅 Today Appointments (Dummy Preview) -->
-    {% comment %} <div data-aos="fade-up">
-        <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+            </div>
+        {% endif %}
 
-            <!-- Header -->
+
+        <!-- 📅 Today Appointments -->
+        <div class="bg-white rounded-4 shadow-sm p-4 mb-4" data-aos="fade-up">
+
+            <!-- 🔷 Header -->
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h6 class="fw-bold mb-0">Today's Appointments</h6>
-                <span class="badge bg-primary rounded-pill">{{ today_appointments|default:"0" }}</span>
+                <span class="badge rounded-pill px-3 py-2"
+                    style="background:#eef2ff; color:#4f5dff;">
+                    {{ today_appointments }} Today
+                </span>
             </div>
 
-            <!-- Dummy List -->
-            
-            {% for doctor in today_list %}
-                <!-- Item 1 -->
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom"
+            <!-- 🔹 List -->
+            {% for app in today_list %}
+            <div class="d-flex justify-content-between align-items-center mb-3 p-3 rounded-3"
+                style="background:#f9faff; transition:0.3s;"
+                onmouseover="this.style.background='#eef2ff'"
+                onmouseout="this.style.background='#f9faff'">
+
+                <!-- 👤 Left Side -->
+                <div class="d-flex align-items-center">
+
+                    <img src="{{ app.doctor.image.url }}"
+                        class="rounded-circle me-3"
+                        style="width:45px;height:45px;object-fit:cover;">
+
+                    <div>
+                        <p class="fw-semibold mb-0">
+                            {{ app.user.username }}
+                        </p>
+                        <small class="text-muted">
+                            Dr. {{ app.doctor.name }}
+                        </small>
+                    </div>
+                </div>
+
+                <!-- ⏰ Right Side -->
+                <div class="text-end">
+                    <p class="mb-1 fw-semibold">
+                        {{ app.appointment_time }}
+                    </p>
+
+                    <!-- Status -->
+                    <span class="small px-2 py-1 rounded-pill"
+                        style="
+                        background:
+                        {% if app.status == 'Approved' %}#e6f7ee
+                        {% elif app.status == 'Pending' %}#fff4e5
+                        {% else %}#fdeaea{% endif %};
+
+                        color:
+                        {% if app.status == 'Approved' %}#28a745
+                        {% elif app.status == 'Pending' %}#ff9800
+                        {% else %}#dc3545{% endif %};
+                        ">
+                        {{ app.status }}
+                    </span>
+                </div>
+
+            </div>
+            {% empty %}
+
+            <!-- ❌ No Data -->
+            <div class="text-center py-4">
+                <p class="text-muted small mb-0">
+                    No appointments today
+                </p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- 📈 Chart -->
+        <div class="col-md-12 my-5" data-aos="fade-up">
+            <div class="bg-white p-3 rounded shadow-sm mb-4" style="height:300px;">
+                <h6 class="fw-bold mb-3">Appointments Overview</h6>
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+
+
+        <!-- ===== Appointments List (Professional UI) ===== -->
+        <div class="bg-white rounded-4 shadow-sm mt-5 overflow-hidden" data-aos="fade-up">
+
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-calendar-check text-primary me-2"></i>
+                    <h6 class="mb-0 fw-bold">
+                        {% if role == 'admin' %} Latest Appointments {% else %} Your Recent Appointments {% endif %}
+                    </h6>
+                </div>
+                <small class="text-muted">{{ appointments|length }} Records</small>
+            </div>
+
+            <!-- List -->
+            <div id="appointmentList">
+
+                {% for appointment in appointments %}
+                <div class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom"
                     style="transition:0.3s;"
                     onmouseover="this.style.background='#f8f9ff'"
                     onmouseout="this.style.background=''">
 
+                    <!-- Left -->
                     <div class="d-flex align-items-center">
-                        <img src="{% static 'assets/assets_frontend/profile.png' %}"
-                            class="rounded-circle me-2"
-                            style="width:35px;height:35px;">
-                        <span class="fw-semibold small">{{ doctor.user.username }}</span>
+
+                        <img src="{{ appointment.doctor.image.url }}"
+                            class="rounded-circle me-3"
+                            style="width:45px; height:45px; object-fit:cover; border:2px solid #eee;" />
+
+                        <div>
+                            <p class="mb-0 fw-semibold text-dark">{{ appointment.doctor.name }}</p>
+                            <small class="text-muted">
+                                {{ appointment.appointment_date }}
+                            </small>
+                        </div>
+
                     </div>
 
-                    <small class="text-muted">10:30 AM</small>
-                </div>
-            {% endfor %}
+                    <!-- Right -->
+                    <div class="d-flex align-items-center">
 
-        </div>
-    </div> {% endcomment %}
+                        {% if appointment.status == 'Pending' %}
 
-    <!-- 📅 Today Appointments -->
-    <div class="bg-white rounded-4 shadow-sm p-4 mb-4" data-aos="fade-up">
+                            <!-- Status Badge -->
+                            <span class="badge rounded-pill me-3"
+                                style="background:#fff3cd; color:#856404;">
+                                Pending
+                            </span>
 
-        <!-- 🔷 Header -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-bold mb-0">Today's Appointments</h6>
-            <span class="badge rounded-pill px-3 py-2"
-                style="background:#eef2ff; color:#4f5dff;">
-                {{ today_appointments }} Today
-            </span>
-        </div>
+                            <!-- Actions -->
+                            <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-sm me-2"
+                                    style="background:#ffe5e5; color:#dc3545; border-radius:8px;">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </form>
 
-        <!-- 🔹 List -->
-        {% for app in today_list %}
-        <div class="d-flex justify-content-between align-items-center mb-3 p-3 rounded-3"
-            style="background:#f9faff; transition:0.3s;"
-            onmouseover="this.style.background='#eef2ff'"
-            onmouseout="this.style.background='#f9faff'">
+                            <form method="post" action="{% url 'approved_appointment' appointment.id %}">
+                                {% csrf_token %}
+                                <button class="btn btn-sm"
+                                    style="background:#e6fff0; color:#28a745; border-radius:8px;">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </form>
 
-            <!-- 👤 Left Side -->
-            <div class="d-flex align-items-center">
+                        {% elif appointment.status == 'Approved' %}
 
-                <img src="{{ app.doctor.image.url }}"
-                    class="rounded-circle me-3"
-                    style="width:45px;height:45px;object-fit:cover;">
+                            <span class="badge rounded-pill"
+                                style="background:#e6fff0; color:#28a745;">
+                                Completed
+                            </span>
 
-                <div>
-                    <p class="fw-semibold mb-0">
-                        {{ app.user.username }}
-                    </p>
-                    <small class="text-muted">
-                        Dr. {{ app.doctor.name }}
-                    </small>
-                </div>
-            </div>
+                        {% else %}
 
-            <!-- ⏰ Right Side -->
-            <div class="text-end">
-                <p class="mb-1 fw-semibold">
-                    {{ app.appointment_time }}
-                </p>
+                            <span class="badge rounded-pill"
+                                style="background:#ffe5e5; color:#dc3545;">
+                                Cancelled
+                            </span>
 
-                <!-- Status -->
-                <span class="small px-2 py-1 rounded-pill"
-                    style="
-                    background:
-                    {% if app.status == 'Approved' %}#e6f7ee
-                    {% elif app.status == 'Pending' %}#fff4e5
-                    {% else %}#fdeaea{% endif %};
+                        {% endif %}
 
-                    color:
-                    {% if app.status == 'Approved' %}#28a745
-                    {% elif app.status == 'Pending' %}#ff9800
-                    {% else %}#dc3545{% endif %};
-                    ">
-                    {{ app.status }}
-                </span>
-            </div>
-
-        </div>
-        {% empty %}
-
-        <!-- ❌ No Data -->
-        <div class="text-center py-4">
-            <p class="text-muted small mb-0">
-                No appointments today
-            </p>
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-    <!-- 📈 Chart -->
-    <div class="col-md-12 my-5" data-aos="fade-up">
-        <div class="bg-white p-3 rounded shadow-sm mb-4" style="height:300px;">
-            <h6 class="fw-bold mb-3">Appointments Overview</h6>
-            <canvas id="myChart"></canvas>
-        </div>
-    </div>
-
-
-    {% comment %} <!-- ===== Appointments List ===== -->
-    <div class="bg-white rounded shadow-sm my-5" data-aos="fade-up">
-
-        <div class="d-flex align-items-center border-bottom px-4 py-3">
-            <i class="fas fa-list-alt text-primary me-2"></i>
-            <h6 class="mb-0 fw-semibold">
-                {% if role == 'admin' %} Latest Bookings {% else %} Your Recent Appointments {% endif %}
-            </h6>
-        </div>
-
-        <ul class="list-unstyled mb-0" id="appointmentList">
-            {% for appointment in appointments %}
-            <li class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
-
-                <div class="d-flex align-items-center">
-                    <img src="{{ appointment.doctor.image.url }}" class="rounded me-3" width="40" height="40" />
-                    <div class="small">
-                        <p class="mb-0 fw-semibold">{{ appointment.doctor.name }}</p>
-                        <small class="text-muted">{{ appointment.appointment_date }}</small>
-                    </div>
-                </div>
-
-                {% if appointment.status == 'Pending' %}
-                <div class='d-flex'>
-                    <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
-                        {% csrf_token %}
-                        <button class="btn btn-sm btn-danger me-2">×</button>
-                    </form>
-                    <form method="post" action="{% url 'approved_appointment' appointment.id %}">
-                        {% csrf_token %}
-                        <button class="btn btn-sm btn-success">✓</button>
-                    </form>
-                </div>
-                {% elif appointment.status == 'Approved' %}
-                <span class="text-success small">Completed</span>
-                {% else %}
-                <span class="text-danger small">Cancelled</span>
-                {% endif %}
-
-            </li>
-            {% endfor %}
-        </ul>
-    </div> {% endcomment %}
-
-    <!-- ===== Appointments List (Professional UI) ===== -->
-    <div class="bg-white rounded-4 shadow-sm mt-5 overflow-hidden" data-aos="fade-up">
-
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
-            <div class="d-flex align-items-center">
-                <i class="fas fa-calendar-check text-primary me-2"></i>
-                <h6 class="mb-0 fw-bold">
-                    {% if role == 'admin' %} Latest Appointments {% else %} Your Recent Appointments {% endif %}
-                </h6>
-            </div>
-            <small class="text-muted">{{ appointments|length }} Records</small>
-        </div>
-
-        <!-- List -->
-        <div id="appointmentList">
-
-            {% for appointment in appointments %}
-            <div class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom"
-                style="transition:0.3s;"
-                onmouseover="this.style.background='#f8f9ff'"
-                onmouseout="this.style.background=''">
-
-                <!-- Left -->
-                <div class="d-flex align-items-center">
-
-                    <img src="{{ appointment.doctor.image.url }}"
-                        class="rounded-circle me-3"
-                        style="width:45px; height:45px; object-fit:cover; border:2px solid #eee;" />
-
-                    <div>
-                        <p class="mb-0 fw-semibold text-dark">{{ appointment.doctor.name }}</p>
-                        <small class="text-muted">
-                            {{ appointment.appointment_date }}
-                        </small>
                     </div>
 
                 </div>
-
-                <!-- Right -->
-                <div class="d-flex align-items-center">
-
-                    {% if appointment.status == 'Pending' %}
-
-                        <!-- Status Badge -->
-                        <span class="badge rounded-pill me-3"
-                            style="background:#fff3cd; color:#856404;">
-                            Pending
-                        </span>
-
-                        <!-- Actions -->
-                        <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
-                            {% csrf_token %}
-                            <button class="btn btn-sm me-2"
-                                style="background:#ffe5e5; color:#dc3545; border-radius:8px;">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </form>
-
-                        <form method="post" action="{% url 'approved_appointment' appointment.id %}">
-                            {% csrf_token %}
-                            <button class="btn btn-sm"
-                                style="background:#e6fff0; color:#28a745; border-radius:8px;">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </form>
-
-                    {% elif appointment.status == 'Approved' %}
-
-                        <span class="badge rounded-pill"
-                            style="background:#e6fff0; color:#28a745;">
-                            Completed
-                        </span>
-
-                    {% else %}
-
-                        <span class="badge rounded-pill"
-                            style="background:#ffe5e5; color:#dc3545;">
-                            Cancelled
-                        </span>
-
-                    {% endif %}
-
-                </div>
+                {% endfor %}
 
             </div>
-            {% endfor %}
-
         </div>
-    </div>
 
-
-
-</section>
+    </section>
 
 
 {% endblock %}
-
