@@ -535,6 +535,18 @@ def doctor_list(request):
 
 @login_required(login_url=('/dash_login'))
 @staff_member_required
+def doctor_view(request, id):
+    doctor = get_object_or_404(Doctor, id=id)
+
+    return render(request, 'dashboard/doctor_view.html', {
+        'doctor': doctor,
+        'action': 'doctor_view',
+        'role': 'admin'
+    })
+    
+    
+@login_required(login_url=('/dash_login'))
+@staff_member_required
 def doctor_edit(request, id):
 
     doctor = Doctor.objects.get(id=id)

@@ -38,5 +38,6 @@ urlpatterns = [
     path('toggle-doctor/<int:id>/', views.toggle_doctor, name='toggle_doctor'),
     path('doctor-edit/<int:id>/', views.doctor_edit, name='doctor_edit'),
     path('doctor-delete/<int:id>/', views.doctor_delete, name='doctor_delete'),
+    path('doctor/view/<int:id>/', views.doctor_view, name='doctor_view'),
 
 ]
