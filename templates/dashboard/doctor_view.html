@@ -2,92 +2,134 @@
 {% load static %}
 {% block contant %}
 
-<section class="p-5 bg-light">
+    <section class="p-5 bg-light" style="width:100%;">
 
-    <!-- 🔷 Header -->
-    <div class="mb-4" data-aos="fade-right">
-        <h3 class="fw-bold">Doctor Profile</h3>
-        <p class="text-muted small">Detailed information</p>
-    </div>
-
-    <!-- 🔷 Card -->
-    <div class="bg-white rounded-4 shadow-sm p-4"
-        style="max-width:900px;"
-        data-aos="fade-up">
-
-        <div class="row">
-
-            <!-- 🖼 Image -->
-            <div class="col-md-4 text-center">
-                <img src="{{ doctor.image.url }}" 
-                    class="rounded-circle shadow mb-3"
-                    style="width:140px;height:140px;object-fit:cover; border:4px solid #eef2ff;">
-
-                <h5 class="fw-bold">{{ doctor.name }}</h5>
-                <p class="small text-muted">{{ doctor.category }}</p>
-
-                <!-- Status -->
-                <span class="badge px-3 py-2 rounded-pill"
-                    style="background:{% if doctor.available %}#e6f7ee{% else %}#fdeaea{% endif %};
-                           color:{% if doctor.available %}#28a745{% else %}#dc3545{% endif %};">
-                    {% if doctor.available %}Available{% else %}Unavailable{% endif %}
-                </span>
+        <!-- 🔷 Header -->
+        <div class="mb-4 d-flex justify-content-between align-items-center" data-aos="fade-down">
+            <div>
+                <h3 class="fw-bold mb-1">Doctor Profile</h3>
+                <p class="text-muted small">Complete doctor details</p>
             </div>
 
-            <!-- 📋 Info -->
-            <div class="col-md-8">
+            <a href="{% url 'doctor_list' %}" class="btn btn-sm rounded-pill px-3"
+                style="background:#eef2ff; color:#4f5dff;">
+                ← Back
+            </a>
+        </div>
 
-                <div class="row">
+        <!-- 🔷 Main Card -->
+        <div class="bg-white rounded-4 shadow-sm p-4"
+            style="max-width:1800px;"
+            data-aos="zoom-in">
 
-                    <div class="col-6 mb-3">
-                        <p class="text-muted small mb-1">Email</p>
-                        <p class="fw-semibold">{{ doctor.email }}</p>
+            <div class="row">
+
+                <!-- 🖼 LEFT SIDE -->
+                <div class="col-md-4 text-center border-end">
+
+                    <div class="position-relative mb-3">
+
+                        <img src="{{ doctor.image.url }}" 
+                            class="rounded-circle shadow"
+                            style="width:150px;height:150px;object-fit:cover; border:5px solid #eef2ff; transition:0.3s;"
+                            onmouseover="this.style.transform='scale(1.05)'"
+                            onmouseout="this.style.transform=''">
+
+                        <!-- 🟢 Status -->
+                        <span class="position-absolute bottom-0 end-0 px-3 py-1 rounded-pill small fw-semibold shadow"
+                            style="background:{% if doctor.available %}#e6f7ee{% else %}#fdeaea{% endif %};
+                                color:{% if doctor.available %}#28a745{% else %}#dc3545{% endif %};">
+                            {% if doctor.available %}Available{% else %}Unavailable{% endif %}
+                        </span>
                     </div>
 
-                    <div class="col-6 mb-3">
-                        <p class="text-muted small mb-1">Degree</p>
-                        <p class="fw-semibold">{{ doctor.degree }}</p>
-                    </div>
+                    <h5 class="fw-bold mb-1">{{ doctor.name }}</h5>
+                    <p class="small mb-2" style="color:#5f6fff;">{{ doctor.category }}</p>
 
-                    <div class="col-6 mb-3">
-                        <p class="text-muted small mb-1">Experience</p>
-                        <p class="fw-semibold">{{ doctor.experience }} Years</p>
-                    </div>
+                    <p class="small text-muted mb-1">@{{ doctor.username }}</p>
 
-                    <div class="col-6 mb-3">
-                        <p class="text-muted small mb-1">Fees</p>
-                        <p class="fw-semibold text-primary">₹{{ doctor.fees }}</p>
-                    </div>
-
-                    <div class="col-12 mb-3">
-                        <p class="text-muted small mb-1">Address</p>
-                        <p class="fw-semibold">{{ doctor.address }}</p>
-                    </div>
-
-                    <div class="col-12 mb-3">
-                        <p class="text-muted small mb-1">About</p>
-                        <p class="small text-dark">
-                            {{ doctor.about|default:"No details available" }}
-                        </p>
+                    <div class="mt-3">
+                        <span class="badge bg-light text-dark px-3 py-2 shadow-sm">
+                            {{ doctor.experience }}+ Years Experience
+                        </span>
                     </div>
 
                 </div>
 
-                <!-- 🔘 Buttons -->
-                <div class="mt-3">
+                <!-- 📋 RIGHT SIDE -->
+                <div class="col-md-8">
 
-                    <a href="{% url 'doctor_edit' doctor.id %}" 
-                        class="btn rounded-pill px-4 me-2"
-                        style="background:#eef2ff; color:#4f5dff;">
-                        ✏️ Edit
-                    </a>
+                    <div class="row">
 
-                    <a href="{% url 'doctor_delete' doctor.id %}" 
-                        class="btn rounded-pill px-4"
-                        style="background:#ffeaea; color:#dc3545;"
-                        onclick="return confirm('Are you sure?')">
-                        🗑 Delete
-                    </a>
+                        <!-- Email -->
+                        <div class="col-md-6 mb-3" data-aos="fade-right">
+                            <div class="p-3 rounded bg-light">
+                                <p class="small text-muted mb-1">Email</p>
+                                <p class="fw-semibold mb-0">{{ doctor.email }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Degree -->
+                        <div class="col-md-6 mb-3" data-aos="fade-left">
+                            <div class="p-3 rounded bg-light">
+                                <p class="small text-muted mb-1">Degree</p>
+                                <p class="fw-semibold mb-0">{{ doctor.degree }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Experience -->
+                        <div class="col-md-6 mb-3" data-aos="fade-right">
+                            <div class="p-3 rounded bg-light">
+                                <p class="small text-muted mb-1">Experience</p>
+                                <p class="fw-semibold mb-0">{{ doctor.experience }} Years</p>
+                            </div>
+                        </div>
+
+                        <!-- Fees -->
+                        <div class="col-md-6 mb-3" data-aos="fade-left">
+                            <div class="p-3 rounded bg-light">
+                                <p class="small text-muted mb-1">Consultation Fees</p>
+                                <p class="fw-bold text-primary mb-0">₹{{ doctor.fees }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="col-12 mb-3" data-aos="fade-up">
+                            <div class="p-3 rounded bg-light">
+                                <p class="small text-muted mb-1">Address</p>
+                                <p class="fw-semibold mb-0">{{ doctor.address }}</p>
+                            </div>
+                        </div>
+
+                        <!-- About -->
+                        <div class="col-12 mb-3" data-aos="fade-up">
+                            <div class="p-3 rounded bg-light">
+                                <p class="small text-muted mb-1">About Doctor</p>
+                                <p class="small mb-0">
+                                    {{ doctor.about|default:"No details available" }}
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 🔘 Buttons -->
+                    <div class="mt-4 d-flex gap-2">
+
+                        <a href="{% url 'doctor_edit' doctor.id %}" 
+                            class="btn px-4 rounded-pill"
+                            style="background:linear-gradient(135deg,#5f6fff,#7b8bff); color:white;">
+                            ✏️ Edit
+                        </a>
+
+                        <a href="{% url 'doctor_delete' doctor.id %}" 
+                            class="btn px-4 rounded-pill"
+                            style="background:#ffeaea; color:#dc3545;"
+                            onclick="return confirm('Are you sure?')">
+                            🗑 Delete
+                        </a>
+
+                    </div>
 
                 </div>
 
@@ -95,8 +137,6 @@
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 {% endblock %}
