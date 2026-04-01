@@ -55,7 +55,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h6 class="mb-1 opacity-75">Today's Appointments</h6>
-                        <h3 class="fw-bold mb-0">{{ today_appointments }} 60</h3>
+                        <h3 class="fw-bold mb-0">{{ today_appointments|default:"0" }}</h3>
                     </div>
                     <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center"
                         style="width:50px; height:50px;">
@@ -276,80 +276,110 @@
     </div> {% endcomment %}
 
     <!-- 📅 Today Appointments (Dummy Preview) -->
-<div data-aos="fade-up">
-    <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+    {% comment %} <div data-aos="fade-up">
+        <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
 
-        <!-- Header -->
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-bold mb-0">Today's Appointments</h6>
+                <span class="badge bg-primary rounded-pill">{{ today_appointments|default:"0" }}</span>
+            </div>
+
+            <!-- Dummy List -->
+            
+            {% for doctor in today_list %}
+                <!-- Item 1 -->
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom"
+                    style="transition:0.3s;"
+                    onmouseover="this.style.background='#f8f9ff'"
+                    onmouseout="this.style.background=''">
+
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'assets/assets_frontend/profile.png' %}"
+                            class="rounded-circle me-2"
+                            style="width:35px;height:35px;">
+                        <span class="fw-semibold small">{{ doctor.user.username }}</span>
+                    </div>
+
+                    <small class="text-muted">10:30 AM</small>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div> {% endcomment %}
+
+    <!-- 📅 Today Appointments -->
+    <div class="bg-white rounded-4 shadow-sm p-4 mb-4" data-aos="fade-up">
+
+        <!-- 🔷 Header -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold mb-0">Today's Appointments</h6>
-            <span class="badge bg-primary rounded-pill">4</span>
+            <span class="badge rounded-pill px-3 py-2"
+                style="background:#eef2ff; color:#4f5dff;">
+                {{ today_appointments }} Today
+            </span>
         </div>
 
-        <!-- Dummy List -->
-        
-        <!-- Item 1 -->
-        <div class="d-flex justify-content-between align-items-center py-2 border-bottom"
-            style="transition:0.3s;"
-            onmouseover="this.style.background='#f8f9ff'"
-            onmouseout="this.style.background=''">
+        <!-- 🔹 List -->
+        {% for app in today_list %}
+        <div class="d-flex justify-content-between align-items-center mb-3 p-3 rounded-3"
+            style="background:#f9faff; transition:0.3s;"
+            onmouseover="this.style.background='#eef2ff'"
+            onmouseout="this.style.background='#f9faff'">
 
+            <!-- 👤 Left Side -->
             <div class="d-flex align-items-center">
-                <img src="{% static 'assets/assets_frontend/profile.png' %}"
-                    class="rounded-circle me-2"
-                    style="width:35px;height:35px;">
-                <span class="fw-semibold small">Dr. Raj Patel</span>
+
+                <img src="{{ app.doctor.image.url }}"
+                    class="rounded-circle me-3"
+                    style="width:45px;height:45px;object-fit:cover;">
+
+                <div>
+                    <p class="fw-semibold mb-0">
+                        {{ app.user.username }}
+                    </p>
+                    <small class="text-muted">
+                        Dr. {{ app.doctor.name }}
+                    </small>
+                </div>
             </div>
 
-            <small class="text-muted">10:30 AM</small>
-        </div>
+            <!-- ⏰ Right Side -->
+            <div class="text-end">
+                <p class="mb-1 fw-semibold">
+                    {{ app.appointment_time }}
+                </p>
 
-        <!-- Item 2 -->
-        <div class="d-flex justify-content-between align-items-center py-2 border-bottom"
-            onmouseover="this.style.background='#f8f9ff'"
-            onmouseout="this.style.background=''">
+                <!-- Status -->
+                <span class="small px-2 py-1 rounded-pill"
+                    style="
+                    background:
+                    {% if app.status == 'Approved' %}#e6f7ee
+                    {% elif app.status == 'Pending' %}#fff4e5
+                    {% else %}#fdeaea{% endif %};
 
-            <div class="d-flex align-items-center">
-                <img src="{% static 'assets/assets_frontend/profile.png' %}"
-                    class="rounded-circle me-2"
-                    style="width:35px;height:35px;">
-                <span class="fw-semibold small">Dr. Mehta</span>
+                    color:
+                    {% if app.status == 'Approved' %}#28a745
+                    {% elif app.status == 'Pending' %}#ff9800
+                    {% else %}#dc3545{% endif %};
+                    ">
+                    {{ app.status }}
+                </span>
             </div>
 
-            <small class="text-muted">11:15 AM</small>
+        </div>
+        {% empty %}
+
+        <!-- ❌ No Data -->
+        <div class="text-center py-4">
+            <p class="text-muted small mb-0">
+                No appointments today
+            </p>
         </div>
 
-        <!-- Item 3 -->
-        <div class="d-flex justify-content-between align-items-center py-2 border-bottom"
-            onmouseover="this.style.background='#f8f9ff'"
-            onmouseout="this.style.background=''">
-
-            <div class="d-flex align-items-center">
-                <img src="{% static 'assets/assets_frontend/profile.png' %}"
-                    class="rounded-circle me-2"
-                    style="width:35px;height:35px;">
-                <span class="fw-semibold small">Dr. Sharma</span>
-            </div>
-
-            <small class="text-muted">01:00 PM</small>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="d-flex justify-content-between align-items-center py-2"
-            onmouseover="this.style.background='#f8f9ff'"
-            onmouseout="this.style.background=''">
-
-            <div class="d-flex align-items-center">
-                <img src="{% static 'assets/assets_frontend/profile.png' %}"
-                    class="rounded-circle me-2"
-                    style="width:35px;height:35px;">
-                <span class="fw-semibold small">Dr. Khan</span>
-            </div>
-
-            <small class="text-muted">03:45 PM</small>
-        </div>
+        {% endfor %}
 
     </div>
-</div>
 
     <!-- 📈 Chart -->
     <div class="col-md-12 my-5" data-aos="fade-up">

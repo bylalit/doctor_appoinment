@@ -14,7 +14,7 @@ from django.conf import settings
 from django.urls import reverse
 import cloudinary
 import cloudinary.uploader
-
+from django.utils import timezone
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -375,8 +375,23 @@ def dash_admin(request):
         appointment_total = Appointment.objects.count()
         total_patients = Patients.objects.count()
         latest_appointments = Appointment.objects.all().order_by('-created_at')[:10]
-
-        return render(request, 'dashboard/index.html', {'action': 'admin', "role" : "admin", 'total_doctors': total_doctors, 'appointment_total': appointment_total, 'total_patients': total_patients, 'appointments': latest_appointments})
+        
+        
+        today = timezone.localdate()
+        today_appointments = Appointment.objects.filter(appointment_date=today).count()
+        today_list = Appointment.objects.filter(appointment_date=today).order_by('appointment_time')
+        
+        return render(request, 'dashboard/index.html', {
+            'action': 'admin', 
+            "role" : "admin", 
+            'total_doctors': total_doctors, 
+            'appointment_total': appointment_total, 
+            'total_patients': total_patients, 
+            'appointments': latest_appointments, 
+            'today_appointments': today_appointments,
+            'today_list': today_list,
+            }
+        )
     
     return redirect(dash_login)
 
