@@ -520,6 +520,10 @@ def add_doctor(request):
 @staff_member_required
 def doctor_list(request):
     doctors = Doctor.objects.all().order_by('-id')
+    
+    total_doctor = doctors.count()
+    available_doctor = doctors.filter(available=True).count()
+    unavailable_doctor = doctors.filter(available=False).count()
 
     paginator = Paginator(doctors, 8)  # 1 page me 8 doctors
     page_number = request.GET.get('page')
@@ -528,6 +532,9 @@ def doctor_list(request):
     return render(request, 'dashboard/doctor_list.html', {
         'doctors': page_obj,   # ⚠️ IMPORTANT
         'page_obj': page_obj,
+        'total_doctor': total_doctor,
+        'available_doctor': available_doctor,
+        'unavailable_doctor': unavailable_doctor,
         'action': 'doctor_list',
         "role": "admin"
     })

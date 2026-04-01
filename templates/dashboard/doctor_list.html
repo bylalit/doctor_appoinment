@@ -40,7 +40,7 @@
                             </div>
                             <div>
                                 <h6 class="mb-1">Total Doctors</h6>
-                                <h3 class="mb-0 fw-bold">{{ doctors|length|default:0 }}</h3>
+                                <h3 class="mb-0 fw-bold">{{ total_doctor }}</h3>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             </div>
                             <div>
                                 <h6 class="mb-1">Available</h6>
-                                <h3 class="mb-0 fw-bold">52</h3>
+                                <h3 class="mb-0 fw-bold">{{ available_doctor }}</h3>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             </div>
                             <div>
                                 <h6 class="mb-1">Unavailable</h6>
-                                <h3 class="mb-0 fw-bold">20</h3>
+                                <h3 class="mb-0 fw-bold">{{ unavailable_doctor }}</h3>
                             </div>
                         </div>
                     </div>
