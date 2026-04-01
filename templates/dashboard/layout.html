@@ -248,9 +248,10 @@
         gradient.addColorStop(0, "rgba(95,111,255,0.5)");
         gradient.addColorStop(1, "rgba(95,111,255,0)");
 
-        // Dummy Data
-        const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        const data = [5, 9, 7, 12, 8, 15, 10];
+
+        const labels = {{ chart_labels|default:"['Mon','Tue','Wed','Thu','Fri','Sat','Sun']"|safe }};
+        const data = {{ chart_data|default:"[5,8,6,10,7,12,9]"|safe }};
+
 
         new Chart(ctx, {
             type: 'line',

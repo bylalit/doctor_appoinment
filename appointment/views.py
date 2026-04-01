@@ -15,6 +15,8 @@ from django.urls import reverse
 import cloudinary
 import cloudinary.uploader
 from django.utils import timezone
+from django.db.models import Count
+from django.db.models.functions import ExtractWeekDay
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -368,32 +370,81 @@ def dash_logout(request):
 
     return redirect('dash_login')
 
+
 @login_required(login_url=('/dash_login'))
 def dash_admin(request):
     if request.user.is_superuser:
+
         total_doctors = Doctor.objects.count()
         appointment_total = Appointment.objects.count()
         total_patients = Patients.objects.count()
-        latest_appointments = Appointment.objects.all().order_by('-created_at')[:10]
         
+        latest_appointments = Appointment.objects.select_related('doctor', 'user')\
+                                .order_by('-created_at')[:10]
+
+        today = timezone.now().date()  
+
+        today_list = Appointment.objects.filter(
+            appointment_date__year=today.year,
+            appointment_date__month=today.month,
+            appointment_date__day=today.day
+        ).select_related('doctor', 'user').order_by('appointment_time')
+
+        today_appointments = today_list.count()
+
+        appointments_chart = (
+            Appointment.objects
+            .annotate(day=ExtractWeekDay('appointment_date'))
+            .values('day')
+            .annotate(total=Count('id'))
+            .order_by('day')
+        )
+
+        days_map = {
+            1: 'Sun', 2: 'Mon', 3: 'Tue',
+            4: 'Wed', 5: 'Thu', 6: 'Fri', 7: 'Sat'
+        }
+
+        chart_labels = []
+        chart_data = []
+
+        for item in appointments_chart:
+            chart_labels.append(days_map[item['day']])
+            chart_data.append(item['total'])
+
         
-        today = timezone.localdate()
-        today_appointments = Appointment.objects.filter(appointment_date=today).count()
-        today_list = Appointment.objects.filter(appointment_date=today).order_by('appointment_time')
+        completed_appointments = Appointment.objects.filter(status='Approved').count()
+        pending_appointments = Appointment.objects.filter(status='Pending').count()
+        cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
+
         
         return render(request, 'dashboard/index.html', {
-            'action': 'admin', 
-            "role" : "admin", 
-            'total_doctors': total_doctors, 
-            'appointment_total': appointment_total, 
-            'total_patients': total_patients, 
-            'appointments': latest_appointments, 
+            'action': 'admin',
+            "role": "admin",
+
+            # Stats
+            'total_doctors': total_doctors,
+            'appointment_total': appointment_total,
+            'total_patients': total_patients,
+
+            # Appointments
+            'appointments': latest_appointments,
+
+            # Today
             'today_appointments': today_appointments,
             'today_list': today_list,
-            }
-        )
-    
-    return redirect(dash_login)
+
+            # Chart
+            'chart_labels': chart_labels,
+            'chart_data': chart_data,
+
+            # Extra Stats
+            'completed_appointments': completed_appointments,
+            'pending_appointments': pending_appointments,
+            'cancelled_appointments': cancelled_appointments,
+        })
+
+    return redirect('dash_login')
 
 
 def doctor_dashboard(request):
