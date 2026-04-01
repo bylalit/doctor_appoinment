@@ -19,30 +19,40 @@
     <!-- 📊 Quick Stats -->
     <div class="row mb-4">
 
-        <div class="col-md-4" data-aos="zoom-in">
+        <div class="col-md-3" data-aos="zoom-in">
             <div class="p-3 rounded-4 text-white"
                 style="background:linear-gradient(135deg,#5f6fff,#7c8bff)">
                 <h6>Total</h6>
-                <h4 class="fw-bold">{{ appointments|length }}</h4>
+                <h4 class="fw-bold">{{ total_appointments|default:"0" }}</h4>
             </div>
         </div>
 
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
             <div class="p-3 rounded-4 text-white"
                 style="background:linear-gradient(135deg,#28a745,#5dd67a)">
                 <h6>Completed</h6>
                 <h4 class="fw-bold">
-                    {{ completed_count|default:"0" }}
+                    {{ completed_appointments|default:"0" }}
                 </h4>
             </div>
         </div>
 
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
             <div class="p-3 rounded-4 text-white"
                 style="background:linear-gradient(135deg,#dc3545,#ff6b6b)">
                 <h6>Pending</h6>
                 <h4 class="fw-bold">
-                    {{ pending_count|default:"0" }}
+                    {{ pending_appointments|default:"0" }}
+                </h4>
+            </div>
+        </div>
+
+        <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
+            <div class="p-3 rounded-4 text-white"
+                style="background:linear-gradient(135deg,#6c757d,#adb5bd)">
+                <h6>Cancelled</h6>
+                <h4 class="fw-bold">
+                    {{ cancelled_appointments|default:"0" }}
                 </h4>
             </div>
         </div>
@@ -171,6 +181,69 @@
 
             </table>
         </div>
+
+        <!-- 🔷 Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+            <!-- 📄 Page Info -->
+            <div class="small text-muted">
+                Showing page <strong>{{ page_obj.number }}</strong> of <strong>{{ page_obj.paginator.num_pages }}</strong>
+            </div>
+
+            <!-- 🔘 Controls -->
+            <nav>
+                <ul class="pagination mb-0">
+
+                    <!-- Previous -->
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link border-0 rounded-pill me-2"
+                            href="?page={{ page_obj.previous_page_number }}"
+                            style="color:#5f6fff;">
+                                ← Prev
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <!-- Page Numbers -->
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link border-0 rounded-pill mx-1"
+                                    style="background:#5f6fff; color:white;">
+                                    {{ num }}
+                                </span>
+                            </li>
+                        {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+                            <li class="page-item">
+                                <a class="page-link border-0 rounded-pill mx-1"
+                                href="?page={{ num }}"
+                                style="color:#5f6fff;">
+                                    {{ num }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <!-- Next -->
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link border-0 rounded-pill ms-2"
+                            href="?page={{ page_obj.next_page_number }}"
+                            style="color:#5f6fff;">
+                                Next →
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
+        </div>
+        {% endif %}
+
+
     </div>
 
 </main>

@@ -440,11 +440,39 @@ def doctor_appointments(request):
     return render(request, 'dashboard/appointments.html', {'action': 'doctor_appointments',"role" : "doctor", 'appointments': appointments, "doctor": doctor})
 
 
+# @login_required(login_url=('/dash_login'))
+# @staff_member_required
+# def appointments(request):
+#     appointments = Appointment.objects.all().order_by('-created_at')
+#     return render(request, 'dashboard/appointments.html', {'action': 'appointments',"role" : "admin", 'appointments': appointments})
+
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def appointments(request):
-    appointments = Appointment.objects.all().order_by('-created_at')
-    return render(request, 'dashboard/appointments.html', {'action': 'appointments',"role" : "admin", 'appointments': appointments})
+    appointments_list = Appointment.objects.all().order_by('-created_at')
+    
+     # 🔢 Counts
+    total_appointments = appointments_list.count()
+    completed_appointments = appointments_list.filter(status='Approved').count()
+    pending_appointments = appointments_list.filter(status='Pending').count()
+    cancelled_appointments = appointments_list.filter(status='Cancelled').count()
+
+    paginator = Paginator(appointments_list, 10)  # 1 page = 10 records
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'dashboard/appointments.html', {
+        'appointments': page_obj,
+        'page_obj': page_obj,
+        
+        'total_appointments': total_appointments,
+        'completed_appointments': completed_appointments,
+        'pending_appointments': pending_appointments,
+        'cancelled_appointments': cancelled_appointments,
+        'action': 'appointments',
+        "role": "admin"
+    })
+
 
 
 @login_required(login_url=('/dash_login'))
