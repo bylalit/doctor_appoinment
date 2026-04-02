@@ -19,7 +19,6 @@ urlpatterns = [
     path('stripe-success/<int:appointment_id>/', views.stripe_success, name='stripe_success'),
     
    
-    
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('logout_user/', views.logout_user, name='logout_user'),
@@ -48,3 +47,4 @@ urlpatterns = [
     path('billing/', views.billing, name='billing'),
 
 ]
+
