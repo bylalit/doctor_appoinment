@@ -187,7 +187,7 @@
                 </a>
 
                 <!-- Billing -->
-                <a href="" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'billing' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                <a href="{% url 'billing' %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'billing' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
                     <i class="fa-solid fa-file-invoice-dollar"></i> <span class='small'>Billing</span>
                 </a>
 

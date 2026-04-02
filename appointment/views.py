@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Doctor, Category, Appointment, Patients, Contact
+from .models import Doctor, Category, Appointment, Patients, Contact, Billing
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
@@ -149,6 +149,14 @@ def approved_appointment(request, id):
         appointment = get_object_or_404(Appointment, id=id, user=user)
         appointment.status = 'Approved'
         appointment.save()
+        
+        if not appointment.is_billed:
+            Billing.objects.create(
+                appointment=appointment,
+                amount=appointment.doctor.fees
+            )
+            appointment.is_billed = True
+            appointment.save()
 
         messages.success(request, "Appointment Complated Successfully!")
         return redirect(request.META.get('HTTP_REFERER'))
@@ -734,3 +742,22 @@ def delete_patient(request, id):
         patient = get_object_or_404(Patients, id=id)
         patient.delete()
     return redirect('patient_list')
+
+
+
+@login_required(login_url='/dash_login')
+@staff_member_required
+def billing(request):
+
+    # bills = Billing.objects.select_related('patient', 'appointment', 'appointment__doctor').order_by('-created_at')
+
+    # total_revenue = bills.filter(payment_status='Paid').aggregate(total=Sum('amount'))['total'] or 0
+
+    context = {
+        # 'bills': bills,
+        # 'total_revenue': total_revenue,
+        'action': 'billing',
+        "role": "admin"
+    }
+
+    return render(request, 'dashboard/billing.html', context)

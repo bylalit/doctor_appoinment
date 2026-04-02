@@ -44,5 +44,7 @@ urlpatterns = [
     path('patient-list/', views.patient_list, name='patient_list'),
     path('patient/<int:id>/', views.patient_detail, name='patient_detail'),
     path('delete-patient/<int:id>/', views.delete_patient, name='delete_patient'),
+    
+    path('billing/', views.billing, name='billing'),
 
 ]

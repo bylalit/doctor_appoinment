@@ -1,0 +1,83 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+<section class="p-5 bg-light" style="width: 100%;">
+
+    <!-- 🔷 Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
+        <h3 class="fw-bold">Billing Management</h3>
+        <h5 class="text-success">₹ {{ total_revenue }}</h5>
+    </div>
+
+    <!-- 🔷 Table -->
+    <div class="bg-white rounded-4 shadow-sm p-3" data-aos="fade-up">
+
+        <table class="table align-middle text-center">
+
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for bill in bills %}
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+
+                    <td class="fw-semibold">
+                        {{ bill.patient.username }}
+                    </td>
+
+                    <td>
+                        {{ bill.appointment.doctor.name }}
+                    </td>
+
+                    <td class="text-success fw-bold">
+                        ₹{{ bill.amount }}
+                    </td>
+
+                    <td>
+                        {{ bill.payment_method }}
+                    </td>
+
+                    <td>
+                        {% if bill.payment_status == 'Paid' %}
+                            <span class="badge bg-success">Paid</span>
+                        {% else %}
+                            <span class="badge bg-danger">Unpaid</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {{ bill.created_at|date:"d M Y" }}
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-muted py-4">
+                        No billing records found 😔
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock contant %}
