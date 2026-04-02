@@ -12,6 +12,7 @@
             <p class="text-muted small mb-0">Manage all registered patients</p>
         </div>
     </div>
+    
 
     <!-- 🔷 Search + Stats -->
     <div class="row mb-4">
@@ -95,7 +96,7 @@
                             <div class="d-flex justify-content-center gap-2">
 
                                 <!-- View -->
-                                <a href="#" 
+                                <a href="{% url 'patient_detail' patient.id %}" 
                                    class="btn btn-sm rounded-pill px-3"
                                    style="background:#eef2ff; color:#4f5dff;">
                                     👁

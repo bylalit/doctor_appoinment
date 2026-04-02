@@ -699,6 +699,34 @@ def patient_list(request):
     return render(request, 'dashboard/patient_list.html', context)
 
 
+@login_required(login_url='/dash_login')
+@staff_member_required
+def patient_detail(request, id):
+
+    patient = get_object_or_404(Patients, id=id)
+
+    # 🔥 Stats
+    stats = Appointment.objects.filter(user=patient).aggregate(
+        total_appointments=Count('id'),
+        total_bill=Sum('doctor__fees', filter=Q(status='Approved')),
+        pending=Count('id', filter=Q(status='Pending')),
+        cancelled=Count('id', filter=Q(status='Cancelled')),
+    )
+
+    # 📋 Appointment History
+    appointments = Appointment.objects.filter(user=patient).order_by('-created_at')
+
+    context = {
+        'patient': patient,
+        'appointments': appointments,
+        'stats': stats,
+        'action': 'patient_detail',
+        "role": "admin"
+    }
+
+    return render(request, 'dashboard/patient_detail.html', context)
+
+
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def delete_patient(request, id):

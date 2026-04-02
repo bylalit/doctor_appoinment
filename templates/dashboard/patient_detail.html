@@ -1,0 +1,139 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block contant %}
+
+<section class="p-5 bg-light" style="width: 100%;">
+
+    <!-- 🔷 Header -->
+    <div class="mb-4 d-flex justify-content-between align-items-center" data-aos="fade-down">
+        <div>
+            <h3 class="fw-bold mb-1">Patient Profile</h3>
+            <p class="text-muted small">Detailed patient information</p>
+        </div>
+
+        <a href="{% url 'patient_list' %}" class="btn btn-sm rounded-pill px-3"
+            style="background:#eef2ff; color:#4f5dff;">
+            ← Back
+        </a>
+    </div>
+
+    
+
+    <!-- 🔷 Profile Card -->
+    <div class="bg-white rounded-4 shadow-sm p-4 mb-4" data-aos="fade-up">
+
+        <div class="row">
+
+            <!-- 👤 Profile -->
+            <div class="col-md-4 text-center">
+
+                <img src="{{ patient.profile_image.url }}" 
+                    class="rounded-circle shadow mb-3"
+                    style="width:120px;height:120px;object-fit:cover; border:4px solid #eef2ff;">
+
+                <h5 class="fw-bold">{{ patient.username }}</h5>
+                <p class="text-muted small">{{ patient.email }}</p>
+
+                <p class="small text-muted">
+                    📍 {{ patient.city|default:"No city" }}
+                </p>
+
+            </div>
+
+            <!-- 📊 Stats -->
+            <div class="col-md-8">
+
+                <div class="row text-center">
+
+                    <div class="col-3">
+                        <div class="p-3 rounded-3"
+                            style="background:#eef2ff;">
+                            <h5 class="fw-bold text-primary">
+                                {{ stats.total_appointments|default:"0" }}
+                            </h5>
+                            <small>Total</small>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="p-3 rounded-3"
+                            style="background:#e6f7ee;">
+                            <h5 class="fw-bold text-success">
+                                ₹{{ stats.total_bill|default:"0" }}
+                            </h5>
+                            <small>Revenue</small>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="p-3 rounded-3"
+                            style="background:#fff4e5;">
+                            <h5 class="fw-bold text-warning">
+                                {{ stats.pending|default:"0" }}
+                            </h5>
+                            <small>Pending</small>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="p-3 rounded-3"
+                            style="background:#fdeaea;">
+                            <h5 class="fw-bold text-danger">
+                                {{ stats.cancelled|default:"0" }}
+                            </h5>
+                            <small>Cancelled</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Address -->
+                <div class="mt-4">
+                    <p class="text-muted small mb-1">Address</p>
+                    <p class="fw-semibold">
+                        {{ patient.address|default:"No address available" }}
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 📋 Appointment History -->
+    <div class="bg-white rounded-4 shadow-sm p-4" data-aos="fade-up">
+
+        <h6 class="fw-bold mb-3">Appointment History</h6>
+
+        {% for app in appointments %}
+        <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+
+            <div>
+                <p class="mb-0 fw-semibold">{{ app.doctor.name }}</p>
+                <small class="text-muted">
+                    {{ app.appointment_date }} | {{ app.appointment_time }}
+                </small>
+            </div>
+
+            <span class="badge px-3 py-2 rounded-pill
+                {% if app.status == 'Approved' %}
+                    bg-success
+                {% elif app.status == 'Pending' %}
+                    bg-warning
+                {% else %}
+                    bg-danger
+                {% endif %}">
+                {{ app.status }}
+            </span>
+
+        </div>
+        {% empty %}
+        <p class="text-muted small">No appointments found</p>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
