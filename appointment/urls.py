@@ -45,6 +45,7 @@ urlpatterns = [
     path('delete-patient/<int:id>/', views.delete_patient, name='delete_patient'),
     
     path('billing/', views.billing, name='billing'),
+    
 
 ]
 
