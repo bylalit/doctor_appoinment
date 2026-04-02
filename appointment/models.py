@@ -55,7 +55,11 @@ class Appointment(models.Model):
         ('Online', 'Online'),
     )
     
-    user = models.ForeignKey(Patients, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        Patients, 
+        on_delete=models.CASCADE, 
+        related_name='appointments'   # ✅ IMPORTANT
+    )
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     appointment_date = models.DateField()
     appointment_time = models.TimeField()

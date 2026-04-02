@@ -665,16 +665,29 @@ def toggle_doctor(request, id):
 
     return redirect('doctor_list')
 
+from django.db.models import Count, Sum, Q
 
-@login_required(login_url=('/dash_login'))
+@login_required(login_url='/dash_login')
 @staff_member_required
 def patient_list(request):
+
     search_query = request.GET.get('search', '')
 
+    patients = Patients.objects.all()
+
+    # 🔍 Search
     if search_query:
-        patients = Patients.objects.filter(name__icontains=search_query)
-    else:
-        patients = Patients.objects.all().order_by('-id')
+        patients = patients.filter(username__icontains=search_query)
+
+    # 🔥 Annotate (MAIN LOGIC)
+    patients = patients.annotate(
+        total_appointments=Count('appointments'),   # ✅ related_name use
+        total_bill=Sum(
+            'appointments__doctor__fees',
+            filter=Q(appointments__status='Approved')  # ✅ only approved
+        )
+    ).order_by('-id')
+    
 
     context = {
         'patients': patients,
@@ -682,8 +695,8 @@ def patient_list(request):
         'action': 'patient_list',
         "role": "admin"
     }
-    return render(request, 'dashboard/patient_list.html', context)
 
+    return render(request, 'dashboard/patient_list.html', context)
 
 
 @login_required(login_url=('/dash_login'))
