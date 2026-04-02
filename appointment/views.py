@@ -17,6 +17,7 @@ import cloudinary.uploader
 from django.utils import timezone
 from django.db.models import Count
 from django.db.models.functions import ExtractWeekDay
+from django.db.models import Count, Sum, Q
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -673,7 +674,7 @@ def toggle_doctor(request, id):
 
     return redirect('doctor_list')
 
-from django.db.models import Count, Sum, Q
+
 
 @login_required(login_url='/dash_login')
 @staff_member_required
@@ -696,7 +697,6 @@ def patient_list(request):
         )
     ).order_by('-id')
     
-
     context = {
         'patients': patients,
         'search_query': search_query,
@@ -713,7 +713,7 @@ def patient_detail(request, id):
 
     patient = get_object_or_404(Patients, id=id)
 
-    # 🔥 Stats
+
     stats = Appointment.objects.filter(user=patient).aggregate(
         total_appointments=Count('id'),
         total_bill=Sum('doctor__fees', filter=Q(status='Approved')),
@@ -742,7 +742,6 @@ def delete_patient(request, id):
         patient = get_object_or_404(Patients, id=id)
         patient.delete()
     return redirect('patient_list')
-
 
 
 @login_required(login_url='/dash_login')
