@@ -17,6 +17,7 @@ urlpatterns = [
     # path('pay/<int:appointment_id>/', views.stripe_payment, name='stripe_payment'),
     path('stripe-payment/<int:appointment_id>/', views.stripe_payment, name='stripe_payment'),
     path('stripe-success/<int:appointment_id>/', views.stripe_success, name='stripe_success'),
+    
    
     
     path('login/', views.login, name='login'),
@@ -39,5 +40,8 @@ urlpatterns = [
     path('doctor-edit/<int:id>/', views.doctor_edit, name='doctor_edit'),
     path('doctor-delete/<int:id>/', views.doctor_delete, name='doctor_delete'),
     path('doctor/view/<int:id>/', views.doctor_view, name='doctor_view'),
+    
+    path('patient-list/', views.patient_list, name='patient_list'),
+    path('delete-patient/<int:id>/', views.delete_patient, name='delete_patient'),
 
 ]

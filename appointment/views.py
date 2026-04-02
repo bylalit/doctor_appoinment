@@ -665,3 +665,31 @@ def toggle_doctor(request, id):
 
     return redirect('doctor_list')
 
+
+@login_required(login_url=('/dash_login'))
+@staff_member_required
+def patient_list(request):
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        patients = Patients.objects.filter(name__icontains=search_query)
+    else:
+        patients = Patients.objects.all().order_by('-id')
+
+    context = {
+        'patients': patients,
+        'search_query': search_query,
+        'action': 'patient_list',
+        "role": "admin"
+    }
+    return render(request, 'dashboard/patient_list.html', context)
+
+
+
+@login_required(login_url=('/dash_login'))
+@staff_member_required
+def delete_patient(request, id):
+    if request.method == "POST":
+        patient = get_object_or_404(Patients, id=id)
+        patient.delete()
+    return redirect('patient_list')

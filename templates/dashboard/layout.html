@@ -132,7 +132,7 @@
 
     <main class="d-flex" style="min-height: calc(100vh - 64px);">
 
-        {% if role == 'admin' %}
+        {% comment %} {% if role == 'admin' %}
             <nav id="sidebar" class="border-end border-secondary p-3" style="width: 18rem;">
                 <a href="{% url "dash_admin" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'admin' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
                     <i class="fa-solid fa-house"></i> <span class='small'>Dashboard</span>
@@ -147,7 +147,64 @@
                     <i class="fas fa-list-ul"></i> <span class='small'>Doctors List</span>
                 </a>
             </nav>
+        {% endif %} {% endcomment %}
+
+        {% if role == 'admin' %}
+            <nav id="sidebar" class="border-end border-secondary p-3" style="width: 18rem;">
+
+                <!-- Dashboard -->
+                <a href="{% url "dash_admin" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'admin' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-solid fa-house"></i> <span class='small'>Dashboard</span>
+                </a>
+
+                <!-- Appointments -->
+                <a href="{% url "appointments" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'appointments' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-regular fa-calendar-check"></i> <span class='small'>Appointments</span> 
+                </a>
+
+                <!-- Doctors -->
+                <a href="{% url "add_doctor" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'add_doctor' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fas fa-plus-square"></i> <span class='small'>Add Doctor</span>
+                </a>
+
+                <a href="{% url "doctor_list" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'doctor_list' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fas fa-list-ul"></i> <span class='small'>Doctors List</span>
+                </a>
+
+                <a href="{% url "patient_list" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'patient_list' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-solid fa-users"></i> <span class='small'>Patient List</span>
+                </a>
+
+
+                <!-- Doctor Schedule -->
+                <a href="" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'doctor_schedule' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-solid fa-clock"></i> <span class='small'>Doctor Schedule</span>
+                </a>
+
+                <!-- Departments -->
+                <a href="" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'department_list' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-solid fa-building"></i> <span class='small'>Departments</span>
+                </a>
+
+                <!-- Billing -->
+                <a href="" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'billing' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> <span class='small'>Billing</span>
+                </a>
+
+                <!-- Reports -->
+                <a href="" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'reports' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-solid fa-file-medical"></i> <span class='small'>Reports</span>
+                </a>
+
+                <!-- Analytics -->
+                <a href="" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'analytics' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                    <i class="fa-solid fa-chart-line"></i> <span class='small'>Analytics</span>
+                </a>
+
+            </nav>
         {% endif %}
+
+
 
         {% if role == 'doctor' %}
             <nav id="sidebar" class="border-end border-secondary p-3" style="width: 18rem;">
@@ -320,15 +377,15 @@
 
     <!-- 🔍 Search Script -->
     <script>
-    function searchTable() {
-        let input = document.getElementById("searchInput").value.toLowerCase();
-        let rows = document.querySelectorAll("#appointmentTable tbody tr");
+        function searchTable() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let rows = document.querySelectorAll("#appointmentTable tbody tr");
 
-        rows.forEach(row => {
-            let text = row.innerText.toLowerCase();
-            row.style.display = text.includes(input) ? "" : "none";
-        });
-    }
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                row.style.display = text.includes(input) ? "" : "none";
+            });
+        }
     </script>
 
 
