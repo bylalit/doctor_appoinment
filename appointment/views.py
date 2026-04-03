@@ -763,3 +763,12 @@ def billing_invoice(request, id):
     return render(request, 'dashboard/billing_invoice.html', {
         'bill': bill
     })
+    
+
+def analytics(request):
+    context = {
+        'action': 'analytics',
+        "role": "admin"
+    }
+    return render(request, "dashboard/analytics.html", context)
+

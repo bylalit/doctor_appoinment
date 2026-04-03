@@ -197,7 +197,7 @@
                 </a>
 
                 <!-- Analytics -->
-                <a href="" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'analytics' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
+                <a href="{% url "analytics" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'analytics' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}">
                     <i class="fa-solid fa-chart-line"></i> <span class='small'>Analytics</span>
                 </a>
 
@@ -293,6 +293,7 @@
 
     </script>
 
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -385,6 +386,59 @@
                 row.style.display = text.includes(input) ? "" : "none";
             });
         }
+    </script>
+
+
+    <script>
+
+        // Line Chart
+        new Chart(document.getElementById('appointmentChart'), {
+            type: 'line',
+            data: {
+                labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+                datasets: [{
+                    label: 'Appointments',
+                    data: [5, 9, 7, 12, 8, 15, 10],
+                    borderColor: '#4f46e5',
+                    backgroundColor: 'rgba(79,70,229,0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Doughnut Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Approved','Pending','Cancelled'],
+                datasets: [{
+                    data: [60,25,15],
+                    backgroundColor: ['#16a34a','#f59e0b','#dc2626']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
     </script>
 
 
