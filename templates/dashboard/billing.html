@@ -3,21 +3,34 @@
 
 {% block contant %}
 
-    <section class="p-5 bg-light" style="width: 100%;">
+<section class="p-5 bg-light" style="width: 100%; min-height:100vh;">
 
-        <!-- 🔷 Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
-            <h3 class="fw-bold">Billing Management</h3>
-            <h5 class="text-success">₹ {{ total_revenue|default:"0" }}</h5>
+    <!-- 🔷 Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
+        
+        <div>
+            <h3 class="fw-bold mb-1" style="color:#4f46e5;">Billing Management</h3>
+            <p class="text-muted small mb-0">Track all payments & invoices</p>
         </div>
 
+        <!-- 💰 Revenue Card -->
+        <div class="px-4 py-2 rounded-4 text-white shadow-sm"
+            style="background: linear-gradient(135deg,#16a34a,#22c55e);">
+            <small>Total Revenue</small>
+            <h5 class="mb-0 fw-bold">₹ {{ total_revenue|default:"0" }}</h5>
+        </div>
+    </div>
 
-        <div class="bg-white rounded-4 shadow-sm p-3" data-aos="fade-up">
 
+    <!-- 🔷 Table Card -->
+    <div class="bg-white rounded-4 shadow-sm p-3" data-aos="fade-up">
+
+        <div class="table-responsive">
             <table class="table align-middle text-center">
 
-                <thead class="table-light">
-                    <tr>
+                <!-- 🔹 Head -->
+                <thead style="background:#f1f5f9;">
+                    <tr class="text-secondary small">
                         <th>#</th>
                         <th>Patient</th>
                         <th>Doctor</th>
@@ -29,49 +42,75 @@
                     </tr>
                 </thead>
 
+                <!-- 🔹 Body -->
                 <tbody>
-                    {% for bill in bills %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
 
-                        <td class="fw-semibold">
+                    {% for bill in bills %}
+                    <tr style="transition:0.3s;"
+                        onmouseover="this.style.background='#f9fafb'"
+                        onmouseout="this.style.background=''">
+
+                        <td class="fw-semibold">{{ forloop.counter }}</td>
+
+                        <!-- 👤 Patient -->
+                        <td class="fw-semibold text-dark">
                             {{ bill.appointment.user.username }}
                         </td>
 
-                        <td>
-                            {{ bill.appointment.doctor.name }}
+                        <!-- 👨‍⚕️ Doctor -->
+                        <td class="text-muted">
+                            Dr. {{ bill.appointment.doctor.name }}
                         </td>
 
-                        <td class="text-success fw-bold">
+                        <!-- 💰 Amount -->
+                        <td class="fw-bold" style="color:#16a34a;">
                             ₹{{ bill.amount }}
                         </td>
 
+                        <!-- 💳 Payment -->
                         <td>
-                            {{ bill.appointment.payment_method }}
+                            <span class="badge px-3 py-2 rounded-pill"
+                                style="background:#eef2ff; color:#4f46e5;">
+                                {{ bill.appointment.payment_method }}
+                            </span>
                         </td>
 
+                        <!-- 🔴🟢 Status -->
                         <td>
                             {% if bill.payment_status == 'Paid' %}
-                                <span class="badge bg-success">Paid</span>
+                                <span class="badge px-3 py-2 rounded-pill"
+                                    style="background:#e6f7ee; color:#16a34a;">
+                                    ✔ Paid
+                                </span>
                             {% else %}
-                                <span class="badge bg-danger">Unpaid</span>
+                                <span class="badge px-3 py-2 rounded-pill"
+                                    style="background:#ffeaea; color:#dc2626;">
+                                    ✖ Unpaid
+                                </span>
                             {% endif %}
                         </td>
 
-                        <td>
+                        <!-- 📅 Date -->
+                        <td class="text-muted small">
                             {{ bill.created_at|date:"d M Y" }}
                         </td>
+
+                        <!-- ⚙️ Action -->
                         <td>
                             <a href="{% url 'billing_invoice' bill.id %}" 
-                                class="btn btn-sm btn-primary">
-                                View / Print
+                                class="btn btn-sm rounded-pill px-3 fw-semibold"
+                                style="background:#4f46e5; color:white; transition:0.3s;"
+                                onmouseover="this.style.background='#4338ca'"
+                                onmouseout="this.style.background='#4f46e5'">
+                                👁 View
                             </a>
                         </td>
 
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="7" class="text-muted py-4">
+                        <td colspan="8" class="text-muted py-5">
+                            <i class="fa-solid fa-file-invoice fs-2 mb-2"></i><br>
                             No billing records found 😔
                         </td>
                     </tr>
@@ -80,9 +119,10 @@
                 </tbody>
 
             </table>
-
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 {% endblock contant %}
