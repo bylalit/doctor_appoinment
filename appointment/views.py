@@ -766,9 +766,25 @@ def billing_invoice(request, id):
     
 
 def analytics(request):
+    total_doctors = Doctor.objects.count()
+    total_patients = Patients.objects.count()
+    total_appointments = Appointment.objects.count()
+
+    # # Revenue (maan lo Appointment me fees field hai)
+    # total_revenue = Appointment.objects.aggregate(total=Sum('fees'))['total'] or 0
+
+    # # Today appointments
+    # from django.utils.timezone import now
+    # today_appointments = Appointment.objects.filter(date=now().date()).count()
+
     context = {
         'action': 'analytics',
-        "role": "admin"
+        "role": "admin",
+        "total_doctors": total_doctors,
+        "total_patients": total_patients,
+        "total_appointments": total_appointments,
+        # "today_appointments": today_appointments,
+        # "total_revenue": total_revenue
     }
     return render(request, "dashboard/analytics.html", context)
 
