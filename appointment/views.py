@@ -141,29 +141,7 @@ def book_appointment(request, doctor_id):
         
     return render(request, 'doctor_info.html', {'doctor': doctor,})
 
-
-# def approved_appointment(request, id):
-#     if 'login' in request.session:
-#         email = request.session['login']
-#         user = Patients.objects.get(email=email)
-
-#         appointment = get_object_or_404(Appointment, id=id, user=user)
-#         appointment.status = 'Approved'
-#         appointment.save()
-        
-#         if not appointment.is_billed:
-#             Billing.objects.create(
-#                 appointment=appointment,
-#                 amount=appointment.doctor.fees
-#             )
-#             appointment.is_billed = True
-#             appointment.save()
-
-#         messages.success(request, "Appointment Complated Successfully!")
-#         return redirect(request.META.get('HTTP_REFERER'))
-#     else:
-#         messages.error(request, "Please login required!")
-#         return redirect('login')   
+  
     
 def approved_appointment(request, id):
     if 'login' in request.session:
@@ -576,7 +554,6 @@ def appointments(request):
         'action': 'appointments',
         "role": "admin"
     })
-
 
 
 @login_required(login_url=('/dash_login'))

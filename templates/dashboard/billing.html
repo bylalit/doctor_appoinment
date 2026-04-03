@@ -5,7 +5,7 @@
 
 <section class="p-5 bg-light" style="width: 100%; min-height:100vh;">
 
-    <!-- 🔷 Header -->
+    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
         
         <div>
@@ -13,7 +13,7 @@
             <p class="text-muted small mb-0">Track all payments & invoices</p>
         </div>
 
-        <!-- 💰 Revenue Card -->
+        <!-- Revenue Card -->
         <div class="px-4 py-2 rounded-4 text-white shadow-sm"
             style="background: linear-gradient(135deg,#16a34a,#22c55e);">
             <small>Total Revenue</small>
@@ -22,13 +22,12 @@
     </div>
 
 
-    <!-- 🔷 Table Card -->
+    <!-- Table Card -->
     <div class="bg-white rounded-4 shadow-sm p-3" data-aos="fade-up">
 
         <div class="table-responsive">
             <table class="table align-middle text-center">
 
-                <!-- 🔹 Head -->
                 <thead style="background:#f1f5f9;">
                     <tr class="text-secondary small">
                         <th>#</th>
@@ -42,7 +41,6 @@
                     </tr>
                 </thead>
 
-                <!-- 🔹 Body -->
                 <tbody>
 
                     {% for bill in bills %}
@@ -52,22 +50,18 @@
 
                         <td class="fw-semibold">{{ forloop.counter }}</td>
 
-                        <!-- 👤 Patient -->
                         <td class="fw-semibold text-dark">
                             {{ bill.appointment.user.username }}
                         </td>
 
-                        <!-- 👨‍⚕️ Doctor -->
                         <td class="text-muted">
                             Dr. {{ bill.appointment.doctor.name }}
                         </td>
 
-                        <!-- 💰 Amount -->
                         <td class="fw-bold" style="color:#16a34a;">
                             ₹{{ bill.amount }}
                         </td>
 
-                        <!-- 💳 Payment -->
                         <td>
                             <span class="badge px-3 py-2 rounded-pill"
                                 style="background:#eef2ff; color:#4f46e5;">
@@ -75,7 +69,7 @@
                             </span>
                         </td>
 
-                        <!-- 🔴🟢 Status -->
+                        <!-- Status -->
                         <td>
                             {% if bill.payment_status == 'Paid' %}
                                 <span class="badge px-3 py-2 rounded-pill"
@@ -90,12 +84,10 @@
                             {% endif %}
                         </td>
 
-                        <!-- 📅 Date -->
                         <td class="text-muted small">
                             {{ bill.created_at|date:"d M Y" }}
                         </td>
 
-                        <!-- ⚙️ Action -->
                         <td>
                             <a href="{% url 'billing_invoice' bill.id %}" 
                                 class="btn btn-sm rounded-pill px-3 fw-semibold"
@@ -126,3 +118,4 @@
 </section>
 
 {% endblock contant %}
+
