@@ -25,6 +25,7 @@
                         <th>Payment</th>
                         <th>Status</th>
                         <th>Date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
 
@@ -59,6 +60,12 @@
 
                         <td>
                             {{ bill.created_at|date:"d M Y" }}
+                        </td>
+                        <td>
+                            <a href="{% url 'billing_invoice' bill.id %}" 
+                                class="btn btn-sm btn-primary">
+                                View / Print
+                            </a>
                         </td>
 
                     </tr>

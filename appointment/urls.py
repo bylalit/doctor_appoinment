@@ -45,6 +45,7 @@ urlpatterns = [
     path('delete-patient/<int:id>/', views.delete_patient, name='delete_patient'),
     
     path('billing/', views.billing, name='billing'),
+    path('bill/<int:id>/', views.billing_invoice, name='billing_invoice'),
     
 
 ]

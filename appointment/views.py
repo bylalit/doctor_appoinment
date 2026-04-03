@@ -778,3 +778,11 @@ def billing(request):
     }
 
     return render(request, 'dashboard/billing.html', context)
+
+
+def billing_invoice(request, id):
+    bill = get_object_or_404(Billing, id=id)
+
+    return render(request, 'dashboard/billing_invoice.html', {
+        'bill': bill
+    })
