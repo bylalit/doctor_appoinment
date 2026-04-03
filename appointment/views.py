@@ -457,13 +457,12 @@ def dash_admin(request):
         for item in appointments_chart:
             chart_labels.append(days_map[item['day']])
             chart_data.append(item['total'])
-
+            
         
         completed_appointments = Appointment.objects.filter(status='Approved').count()
         pending_appointments = Appointment.objects.filter(status='Pending').count()
         cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
 
-        
         return render(request, 'dashboard/index.html', {
             'action': 'admin',
             "role": "admin",
@@ -727,7 +726,6 @@ def patient_detail(request, id):
 
     patient = get_object_or_404(Patients, id=id)
 
-
     stats = Appointment.objects.filter(user=patient).aggregate(
         total_appointments=Count('id'),
         total_bill=Sum('doctor__fees', filter=Q(status='Approved')),
@@ -735,7 +733,6 @@ def patient_detail(request, id):
         cancelled=Count('id', filter=Q(status='Cancelled')),
     )
 
-    # 📋 Appointment History
     appointments = Appointment.objects.filter(user=patient).order_by('-created_at')
 
     context = {
@@ -761,12 +758,6 @@ def delete_patient(request, id):
 @login_required(login_url='/dash_login')
 @staff_member_required
 def billing(request):
-
-    # bills = Billing.objects.select_related('patient', 'appointment', 'appointment__doctor').order_by('-created_at')
-    # print(bills)
-
-    # total_revenue = bills.filter(payment_status='Paid').aggregate(total=Sum('amount'))['total'] or 0
-    # print(total_revenue)
     
     bills = Billing.objects.select_related(
         'appointment__user', 
