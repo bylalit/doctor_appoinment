@@ -8,7 +8,7 @@
         <!-- 🔷 Header -->
         <div class="d-flex justify-content-between align-items-center mb-4" data-aos="fade-down">
             <h3 class="fw-bold">Billing Management</h3>
-            <h5 class="text-success">₹ {{ total_revenue }}</h5>
+            <h5 class="text-success">₹ {{ total_revenue|default:"0" }}</h5>
         </div>
 
 
@@ -34,7 +34,7 @@
                         <td>{{ forloop.counter }}</td>
 
                         <td class="fw-semibold">
-                            {{ bill.patient.username }}
+                            {{ bill.appointment.user.username }}
                         </td>
 
                         <td>

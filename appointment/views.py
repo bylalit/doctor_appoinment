@@ -142,28 +142,65 @@ def book_appointment(request, doctor_id):
     return render(request, 'doctor_info.html', {'doctor': doctor,})
 
 
+# def approved_appointment(request, id):
+#     if 'login' in request.session:
+#         email = request.session['login']
+#         user = Patients.objects.get(email=email)
+
+#         appointment = get_object_or_404(Appointment, id=id, user=user)
+#         appointment.status = 'Approved'
+#         appointment.save()
+        
+#         if not appointment.is_billed:
+#             Billing.objects.create(
+#                 appointment=appointment,
+#                 amount=appointment.doctor.fees
+#             )
+#             appointment.is_billed = True
+#             appointment.save()
+
+#         messages.success(request, "Appointment Complated Successfully!")
+#         return redirect(request.META.get('HTTP_REFERER'))
+#     else:
+#         messages.error(request, "Please login required!")
+#         return redirect('login')   
+    
 def approved_appointment(request, id):
     if 'login' in request.session:
-        email = request.session['login']
-        user = Patients.objects.get(email=email)
+        try:
+            email = request.session['login']
+            user = Patients.objects.get(email=email)
 
-        appointment = get_object_or_404(Appointment, id=id, user=user)
-        appointment.status = 'Approved'
-        appointment.save()
-        
-        if not appointment.is_billed:
-            Billing.objects.create(
-                appointment=appointment,
-                amount=appointment.doctor.fees
-            )
-            appointment.is_billed = True
+            appointment = get_object_or_404(Appointment, id=id, user=user)
+
+            # ✅ Already approved check
+            if appointment.status == 'Approved':
+                messages.info(request, "Already Approved!")
+                return redirect(request.META.get('HTTP_REFERER'))
+
+            # ✅ Update status
+            appointment.status = 'Approved'
+
+            # ✅ Billing create (safe)
+            if not appointment.is_billed:
+                Billing.objects.create(
+                    appointment=appointment,
+                    amount=appointment.doctor.fees,
+                    payment_status="Paid"
+                )
+                appointment.is_billed = True
+
             appointment.save()
 
-        messages.success(request, "Appointment Complated Successfully!")
-        return redirect(request.META.get('HTTP_REFERER'))
+            messages.success(request, "Appointment Completed & Billing Generated ✅")
+
+        except Patients.DoesNotExist:
+            messages.error(request, "User not found ❌")
+
     else:
         messages.error(request, "Please login required!")
-        return redirect('login')
+
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def cancel_appointment(request, id):
@@ -515,18 +552,11 @@ def doctor_appointments(request):
     return render(request, 'dashboard/appointments.html', {'action': 'doctor_appointments',"role" : "doctor", 'appointments': appointments, "doctor": doctor})
 
 
-# @login_required(login_url=('/dash_login'))
-# @staff_member_required
-# def appointments(request):
-#     appointments = Appointment.objects.all().order_by('-created_at')
-#     return render(request, 'dashboard/appointments.html', {'action': 'appointments',"role" : "admin", 'appointments': appointments})
-
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def appointments(request):
     appointments_list = Appointment.objects.all().order_by('-created_at')
     
-     # 🔢 Counts
     total_appointments = appointments_list.count()
     completed_appointments = appointments_list.filter(status='Approved').count()
     pending_appointments = appointments_list.filter(status='Pending').count()
@@ -576,19 +606,10 @@ def add_doctor(request):
         
         doctor.save()
         messages.success(request, "Doctor Added Succefully!")
-        
-       
-        
+         
         return redirect('add_doctor')
     
     return render(request, 'dashboard/add_doctor.html', {'category': category, "role" : "admin", 'action': 'add_doctor'})
-
-
-# @login_required(login_url=('/dash_login'))
-# @staff_member_required
-# def doctor_list(request):
-#     doctors = Doctor.objects.all().order_by('-id')
-#     return render(request, 'dashboard/doctor_list.html', {'doctors': doctors, 'action': 'doctor_list', "role" : "admin"})
 
 
 @login_required(login_url=('/dash_login'))
@@ -680,26 +701,19 @@ def toggle_doctor(request, id):
 @staff_member_required
 def patient_list(request):
 
-    search_query = request.GET.get('search', '')
-
     patients = Patients.objects.all()
 
-    # 🔍 Search
-    if search_query:
-        patients = patients.filter(username__icontains=search_query)
-
-    # 🔥 Annotate (MAIN LOGIC)
+    # Annotate (MAIN LOGIC)
     patients = patients.annotate(
-        total_appointments=Count('appointments'),   # ✅ related_name use
+        total_appointments=Count('appointments'),  
         total_bill=Sum(
             'appointments__doctor__fees',
-            filter=Q(appointments__status='Approved')  # ✅ only approved
+            filter=Q(appointments__status='Approved')
         )
     ).order_by('-id')
     
     context = {
         'patients': patients,
-        'search_query': search_query,
         'action': 'patient_list',
         "role": "admin"
     }
@@ -749,12 +763,25 @@ def delete_patient(request, id):
 def billing(request):
 
     # bills = Billing.objects.select_related('patient', 'appointment', 'appointment__doctor').order_by('-created_at')
+    # print(bills)
 
     # total_revenue = bills.filter(payment_status='Paid').aggregate(total=Sum('amount'))['total'] or 0
+    # print(total_revenue)
+    
+    bills = Billing.objects.select_related(
+        'appointment__user', 
+        'appointment__doctor'
+    ).order_by('-created_at')
 
+    # Total Revenue (Only Paid)
+    total_revenue = bills.filter(
+        payment_status='Paid'
+    ).aggregate(total=Sum('amount'))['total'] or 0
+    
+    
     context = {
-        # 'bills': bills,
-        # 'total_revenue': total_revenue,
+        'bills': bills,
+        'total_revenue': total_revenue,
         'action': 'billing',
         "role": "admin"
     }
