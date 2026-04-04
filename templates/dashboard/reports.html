@@ -1,0 +1,182 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+{% block contant %}
+
+<section class="p-4 bg-light" style="min-height:100vh; width: 100%;">
+
+    <!-- Header -->
+    <div class="mb-4" data-aos="fade-down">
+        <h3 class="fw-bold text-success">Reports & Insights</h3>
+        <p class="text-muted small">Track system performance & generate reports</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="btn btn-outline-primary btn-sm">Today</button>
+        <button class="btn btn-outline-success btn-sm">This Week</button>
+        <button class="btn btn-outline-danger btn-sm">This Month</button>
+        <button class="btn btn-dark btn-sm ms-auto">
+            <i class="fa fa-download me-1"></i> Export PDF
+        </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-3 col-6">
+            <div class="bg-white p-3 rounded-4 shadow-sm border-start border-4 border-primary">
+                <h6>Total Appointments</h6>
+                <h4>340</h4>
+                <small class="text-muted">+12%</small>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="bg-white p-3 rounded-4 shadow-sm border-start border-4 border-success">
+                <h6>Revenue</h6>
+                <h4>₹ 45,000</h4>
+                <small class="text-muted">+8% growth</small>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="bg-white p-3 rounded-4 shadow-sm border-start border-4 border-warning">
+                <h6>Pending</h6>
+                <h4>25</h4>
+                <small class="text-muted">Needs attention</small>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="bg-white p-3 rounded-4 shadow-sm border-start border-4 border-danger">
+                <h6>Cancelled</h6>
+                <h4>15</h4>
+                <small class="text-muted">-2%</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-8">
+            <div class="bg-white p-3 rounded-4 shadow-sm border" style="height:350px;">
+                <h6 class="fw-bold">Appointment Trend</h6>
+                <canvas id="reportLineChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="bg-white p-3 rounded-4 shadow-sm border" style="height:350px;">
+                <h6 class="fw-bold">Status Distribution</h6>
+                <canvas id="reportPieChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white p-3 rounded-4 shadow-sm border">
+        <div class="d-flex justify-content-between mb-3">
+            <h6 class="fw-bold">Recent Reports</h6>
+            <input type="text" class="form-control w-25" placeholder="Search...">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+
+                <thead class="table-light">
+                    <tr>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Rahul</td>
+                        <td>Dr. Patel</td>
+                        <td>12 Mar 2026</td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                        <td><span class="text-success fw-bold">₹500</span></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary">View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Amit</td>
+                        <td>Dr. Shah</td>
+                        <td>13 Mar 2026</td>
+                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                        <td><span class="text-primary fw-bold">₹700</span></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary">View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Priya</td>
+                        <td>Dr. Mehta</td>
+                        <td>14 Mar 2026</td>
+                        <td><span class="badge bg-danger">Cancelled</span></td>
+                        <td><span class="text-danger fw-bold">₹0</span></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary">View</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</section>
+
+<!-- Charts Script -->
+<script>
+
+new Chart(document.getElementById('reportLineChart'), {
+    type: 'line',
+    data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+            label: 'Appointments',
+            data: [5, 8, 6, 10, 7, 12, 9],
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99,102,241,0.1)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+new Chart(document.getElementById('reportPieChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Approved','Pending','Cancelled'],
+        datasets: [{
+            data: [60,25,15],
+            backgroundColor: ['#16a34a','#f59e0b','#dc2626']
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+
+</script>
+
+{% endblock contant %}

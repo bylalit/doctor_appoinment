@@ -49,6 +49,10 @@ urlpatterns = [
     
     path('analytics', views.analytics, name='analytics'),
     
+    path('doctor-schedule/', views.doctor_schedule, name='doctor_schedule'),
+    
+    path('reports/', views.reports, name='reports'),
+    
 
 ]
 

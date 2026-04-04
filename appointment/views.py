@@ -877,3 +877,23 @@ def analytics(request):
     }
 
     return render(request, "dashboard/analytics.html", context)
+
+
+def doctor_schedule(request):
+
+    context = {
+        "action": "doctor_schedule",
+        "role": "admin",
+    }
+
+    return render(request, "dashboard/doctor_schedule.html", context)
+
+def reports(request):
+
+    context = {
+        "action": "reports",
+        "role": "admin",
+    }
+
+    return render(request, "dashboard/reports.html", context)
+
