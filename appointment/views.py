@@ -17,7 +17,8 @@ import cloudinary.uploader
 from django.utils import timezone
 from django.db.models import Count
 from django.db.models.functions import ExtractWeekDay
-from django.db.models import Count, Sum, Q
+from django.db.models import Count, Sum, Q, F
+from datetime import timedelta
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -772,7 +773,37 @@ def analytics(request):
     total_doctors = Doctor.objects.count()
     total_patients = Patients.objects.count()
     total_appointments = Appointment.objects.count()
+    
+    # ✅ Dates
+    today = timezone.now().date()
+    week_start = today - timedelta(days=7)
+    month_start = today.replace(day=1)
 
+    # ✅ Revenue Calculation (Doctor fees se)
+    today_revenue = (
+        Appointment.objects
+        .filter(appointment_date=today, status='Approved')
+        .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
+    )
+
+    weekly_revenue = (
+        Appointment.objects
+        .filter(appointment_date__gte=week_start, status='Approved')
+        .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
+    )
+
+    monthly_revenue = (
+        Appointment.objects
+        .filter(appointment_date__gte=month_start, status='Approved')
+        .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
+    )
+
+    # ✅ Total Revenue
+    total_revenue = (
+        Appointment.objects
+        .filter(status='Approved')
+        .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
+    )
     
     appointments_chart = (
         Appointment.objects
@@ -815,8 +846,6 @@ def analytics(request):
         .order_by('-total')[:5]
     )
     
-    print(top_doctors)
-    print(top_patients)
 
     context = {
         'action': 'analytics',
@@ -838,6 +867,12 @@ def analytics(request):
         # Top Lists
         "top_doctors": top_doctors,
         "top_patients": top_patients,
+        
+        # 💰 Revenue
+        "today_revenue": today_revenue,
+        "weekly_revenue": weekly_revenue,
+        "monthly_revenue": monthly_revenue,
+        "total_revenue": total_revenue,
     }
 
     return render(request, "dashboard/analytics.html", context)
