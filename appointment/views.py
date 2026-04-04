@@ -798,6 +798,25 @@ def analytics(request):
     completed_appointments = Appointment.objects.filter(status='Approved').count()
     pending_appointments = Appointment.objects.filter(status='Pending').count()
     cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
+    
+    # ✅ 🔥 Top Doctors (Correct)
+    top_doctors = (
+        Appointment.objects
+        .values('doctor__id', 'doctor__name')   # ✅ correct field
+        .annotate(total=Count('id'))
+        .order_by('-total')[:3]
+    )
+
+    # ✅ 🔥 Top Patients (Correct)
+    top_patients = (
+        Appointment.objects
+        .values('user__id', 'user__username')   # ✅ correct field
+        .annotate(total=Count('id'))
+        .order_by('-total')[:3]
+    )
+    
+    print(top_doctors)
+    print(top_patients)
 
     context = {
         'action': 'analytics',
@@ -815,6 +834,10 @@ def analytics(request):
         "completed_appointments": completed_appointments,
         "pending_appointments": pending_appointments,
         "cancelled_appointments": cancelled_appointments,
+        
+        # Top Lists
+        "top_doctors": top_doctors,
+        "top_patients": top_patients,
     }
 
     return render(request, "dashboard/analytics.html", context)

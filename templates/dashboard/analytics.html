@@ -68,15 +68,23 @@
         </div>
     </div>
 
-    
+
     <!-- Top Lists -->
     <div class="row mt-4 g-3">
 
         <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="bg-white p-3 rounded-4 shadow-sm border">
                 <h6 class="fw-bold border-bottom pb-2">Top Doctors</h6>
+                {% for doc in top_doctors %}
+                    <div class="d-flex justify-content-between py-2 border-bottom">
+                        <span>{{ doc.doctor__name }}</span>
+                        <span class="text-success fw-bold">{{ doc.total }} Appts</span>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">No data</p>
+                {% endfor %}
 
-                <div class="d-flex justify-content-between py-2 border-bottom">
+                {% comment %} <div class="d-flex justify-content-between py-2 border-bottom">
                     <span>Dr. Patel</span>
                     <span class="text-success fw-bold">45 Appts</span>
                 </div>
@@ -89,7 +97,7 @@
                 <div class="d-flex justify-content-between py-2">
                     <span>Dr. Mehta</span>
                     <span class="text-success fw-bold">30 Appts</span>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
 
@@ -97,20 +105,14 @@
             <div class="bg-white p-3 rounded-4 shadow-sm border">
                 <h6 class="fw-bold border-bottom pb-2">Top Patients</h6>
 
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                    <span>Rahul</span>
-                    <span class="text-primary fw-bold">10 Visits</span>
-                </div>
-
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                    <span>Amit</span>
-                    <span class="text-primary fw-bold">8 Visits</span>
-                </div>
-
-                <div class="d-flex justify-content-between py-2">
-                    <span>Priya</span>
-                    <span class="text-primary fw-bold">7 Visits</span>
-                </div>
+                {% for pat in top_patients %}
+                    <div class="d-flex justify-content-between py-2 border-bottom">
+                        <span>{{ pat.user__username }}</span>
+                        <span class="text-primary fw-bold">{{ pat.total }} Visits</span>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">No data</p>
+                {% endfor %}
             </div>
         </div>
 
