@@ -673,14 +673,12 @@ def toggle_doctor(request, id):
     return redirect('doctor_list')
 
 
-
 @login_required(login_url='/dash_login')
 @staff_member_required
 def patient_list(request):
 
     patients = Patients.objects.all()
 
-    # Annotate (MAIN LOGIC)
     patients = patients.annotate(
         total_appointments=Count('appointments'),  
         total_bill=Sum(
