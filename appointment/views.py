@@ -799,20 +799,20 @@ def analytics(request):
     pending_appointments = Appointment.objects.filter(status='Pending').count()
     cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
     
-    # ✅ 🔥 Top Doctors (Correct)
+    # Top Doctors
     top_doctors = (
         Appointment.objects
-        .values('doctor__id', 'doctor__name')   # ✅ correct field
+        .values('doctor__id', 'doctor__name')
         .annotate(total=Count('id'))
-        .order_by('-total')[:3]
+        .order_by('-total')[:5]
     )
 
-    # ✅ 🔥 Top Patients (Correct)
+    # Top Patients
     top_patients = (
         Appointment.objects
-        .values('user__id', 'user__username')   # ✅ correct field
+        .values('user__id', 'user__username')
         .annotate(total=Count('id'))
-        .order_by('-total')[:3]
+        .order_by('-total')[:5]
     )
     
     print(top_doctors)
