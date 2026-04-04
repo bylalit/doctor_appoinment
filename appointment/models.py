@@ -57,7 +57,7 @@ class Appointment(models.Model):
     user = models.ForeignKey(
         Patients, 
         on_delete=models.CASCADE, 
-        related_name='appointments'   # ✅ IMPORTANT
+        related_name='appointments' 
     )
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     appointment_date = models.DateField()
@@ -79,7 +79,7 @@ class Billing(models.Model):
         ('Unpaid', 'Unpaid'),
     )
 
-    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE)  # 🔥 IMPORTANT
+    appointment = models.OneToOneField(Appointment, on_delete=models.CASCADE) 
     
     amount = models.FloatField()
     payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS, default='Unpaid')
@@ -94,9 +94,8 @@ class Contact(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     subject = models.CharField(max_length=300)
-    message = models.TextField()   # ✅ FIXED
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)  # ✅ FIXED
+    message = models.TextField()  
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True) 
 
     def __str__(self):
         return self.name
-    
