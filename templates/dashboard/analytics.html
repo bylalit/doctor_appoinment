@@ -53,20 +53,35 @@
 
         <!-- Charts -->
         <div class="row g-3">
+
             <div class="col-md-8" data-aos="fade-right">
-                <div class="bg-white p-3 rounded-4 shadow-sm border" style="height:400px;">
+                <div class="bg-white p-3 rounded-4 shadow-sm border d-flex flex-column" 
+                    style="height:400px;">
+                    
                     <h6 class="fw-bold">Weekly Appointments</h6>
-                    <canvas id="appointmentChart"></canvas>
+
+                    <div style="flex:1; position:relative;">
+                        <canvas id="appointmentChart"></canvas>
+                    </div>
+
                 </div>
             </div>
 
             <div class="col-md-4" data-aos="fade-left">
-                <div class="bg-white p-3 rounded-4 shadow-sm border" style="height:400px;">
+                <div class="bg-white p-3 rounded-4 shadow-sm border d-flex flex-column" 
+                    style="height:400px;">
+                    
                     <h6 class="fw-bold">Status</h6>
-                    <canvas id="statusChart"></canvas>
+
+                    <div style="flex:1; position:relative;">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+
                 </div>
             </div>
+
         </div>
+
 
 
         <!-- Top Lists -->
