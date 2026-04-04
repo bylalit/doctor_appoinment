@@ -765,26 +765,72 @@ def billing_invoice(request, id):
     })
     
 
+# def analytics(request):
+#     total_doctors = Doctor.objects.count()
+#     total_patients = Patients.objects.count()
+#     total_appointments = Appointment.objects.count()
+
+
+#     context = {
+#         'action': 'analytics',
+#         "role": "admin",
+#         "total_doctors": total_doctors,
+#         "total_patients": total_patients,
+#         "total_appointments": total_appointments,
+#     }
+#     return render(request, "dashboard/analytics.html", context)
+
+
+
 def analytics(request):
+
+    # Basic Stats
     total_doctors = Doctor.objects.count()
     total_patients = Patients.objects.count()
     total_appointments = Appointment.objects.count()
 
-    # # Revenue (maan lo Appointment me fees field hai)
-    # total_revenue = Appointment.objects.aggregate(total=Sum('fees'))['total'] or 0
+    # ✅ Weekly Chart (same as dashboard)
+    appointments_chart = (
+        Appointment.objects
+        .annotate(day=ExtractWeekDay('appointment_date'))
+        .values('day')
+        .annotate(total=Count('id'))
+        .order_by('day')
+    )
 
-    # # Today appointments
-    # from django.utils.timezone import now
-    # today_appointments = Appointment.objects.filter(date=now().date()).count()
+    days_map = {
+        1: 'Sun', 2: 'Mon', 3: 'Tue',
+        4: 'Wed', 5: 'Thu', 6: 'Fri', 7: 'Sat'
+    }
+
+    chart_labels = []
+    chart_data = []
+
+    for item in appointments_chart:
+        chart_labels.append(days_map[item['day']])
+        chart_data.append(item['total'])
+
+    # ✅ Status Chart
+    completed_appointments = Appointment.objects.filter(status='Approved').count()
+    pending_appointments = Appointment.objects.filter(status='Pending').count()
+    cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
 
     context = {
         'action': 'analytics',
         "role": "admin",
+
+        # Stats
         "total_doctors": total_doctors,
         "total_patients": total_patients,
         "total_appointments": total_appointments,
-        # "today_appointments": today_appointments,
-        # "total_revenue": total_revenue
-    }
-    return render(request, "dashboard/analytics.html", context)
 
+        # Charts
+        "chart_labels": chart_labels,
+        "chart_data": chart_data,
+
+        "completed_appointments": completed_appointments,
+        "pending_appointments": pending_appointments,
+        "cancelled_appointments": cancelled_appointments,
+    }
+
+    return render(request, "dashboard/analytics.html", context)
