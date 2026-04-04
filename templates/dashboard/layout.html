@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <!-- ✅ AOS CSS -->
+    <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -207,7 +207,6 @@
             {% endif %}
 
 
-
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert-box {{ message.tags }}" id="alertBox">
@@ -232,16 +231,15 @@
             {% endif %}
 
             {% block contant %}
-            
             {% endblock %}
         
         </main>
 
 
-        <!-- Bootstrap Bundle JS (includes Popper) -->
+        <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- ✅ AOS JS -->
+        <!-- AOS JS -->
         <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     
         <script>
@@ -356,7 +354,7 @@
 
         </script>
 
-        <!-- 🔍 Search Script -->
+        <!-- Search Script -->
         <script>
             function searchTable() {
                 let input = document.getElementById("searchInput").value.toLowerCase();
@@ -425,7 +423,6 @@
 
         </script>
 
-
     </body>
-
+    
 </html>
