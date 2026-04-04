@@ -399,55 +399,6 @@
                 }
             });
 
-            {% comment %} // Line Chart
-            new Chart(document.getElementById('appointmentChart'), {
-                type: 'line',
-                data: {
-                    labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-                    datasets: [{
-                        label: 'Appointments',
-                        data: [5, 9, 7, 12, 8, 15, 10],
-                        borderColor: '#4f46e5',
-                        backgroundColor: 'rgba(79,70,229,0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top' }
-                    },
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
-            }); {% endcomment %}
-
-            {% comment %} // Doughnut Chart
-            new Chart(document.getElementById('statusChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Approved','Pending','Cancelled'],
-                    datasets: [{
-                        data: [60,25,15],
-                        backgroundColor: ['#16a34a','#f59e0b','#dc2626']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '65%',
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    }
-                }
-            }); {% endcomment %}
-
-
 
             new Chart(document.getElementById('statusChart'), {
                 type: 'doughnut',
