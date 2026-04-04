@@ -763,22 +763,6 @@ def billing_invoice(request, id):
     return render(request, 'dashboard/billing_invoice.html', {
         'bill': bill
     })
-    
-
-# def analytics(request):
-#     total_doctors = Doctor.objects.count()
-#     total_patients = Patients.objects.count()
-#     total_appointments = Appointment.objects.count()
-
-
-#     context = {
-#         'action': 'analytics',
-#         "role": "admin",
-#         "total_doctors": total_doctors,
-#         "total_patients": total_patients,
-#         "total_appointments": total_appointments,
-#     }
-#     return render(request, "dashboard/analytics.html", context)
 
 
 
@@ -789,7 +773,7 @@ def analytics(request):
     total_patients = Patients.objects.count()
     total_appointments = Appointment.objects.count()
 
-    # ✅ Weekly Chart (same as dashboard)
+    
     appointments_chart = (
         Appointment.objects
         .annotate(day=ExtractWeekDay('appointment_date'))
@@ -810,7 +794,7 @@ def analytics(request):
         chart_labels.append(days_map[item['day']])
         chart_data.append(item['total'])
 
-    # ✅ Status Chart
+    # Status Chart
     completed_appointments = Appointment.objects.filter(status='Approved').count()
     pending_appointments = Appointment.objects.filter(status='Pending').count()
     cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
