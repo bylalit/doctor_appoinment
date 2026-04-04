@@ -758,6 +758,8 @@ def billing(request):
     return render(request, 'dashboard/billing.html', context)
 
 
+@login_required(login_url='/dash_login')
+@staff_member_required
 def billing_invoice(request, id):
     bill = get_object_or_404(Billing, id=id)
 
@@ -766,7 +768,8 @@ def billing_invoice(request, id):
     })
 
 
-
+@login_required(login_url='/dash_login')
+@staff_member_required
 def analytics(request):
 
     # Basic Stats
@@ -774,12 +777,12 @@ def analytics(request):
     total_patients = Patients.objects.count()
     total_appointments = Appointment.objects.count()
     
-    # ✅ Dates
+    # Dates
     today = timezone.now().date()
     week_start = today - timedelta(days=7)
     month_start = today.replace(day=1)
 
-    # ✅ Revenue Calculation (Doctor fees se)
+    # Revenue Calculation (Doctor fees se)
     today_revenue = (
         Appointment.objects
         .filter(appointment_date=today, status='Approved')
@@ -798,7 +801,7 @@ def analytics(request):
         .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
     )
 
-    # ✅ Total Revenue
+    # Total Revenue
     total_revenue = (
         Appointment.objects
         .filter(status='Approved')
