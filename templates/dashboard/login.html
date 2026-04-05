@@ -1,171 +1,179 @@
 <html lang="en">
 {% load static %}
 <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <title>
-    Prescripto
-  </title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Prescripto | Admin Login</title>
 
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
-
-  <style>
-        .card-hover-up {
-        transition: transform 0.3s ease;
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Modern Gradient Background */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .card-hover-up:hover {
-        transform: translateY(-5px);
+
+        /* Floating Background Shapes for Animation */
+        .shape {
+            position: absolute;
+            z-index: -1;
+            filter: blur(50px);
+            border-radius: 50%;
+            animation: move 10s infinite alternate;
+        }
+        .shape-1 { width: 300px; height: 300px; background: rgba(95, 111, 255, 0.2); top: -50px; left: -50px; }
+        .shape-2 { width: 250px; height: 250px; background: rgba(28, 200, 138, 0.2); bottom: -50px; right: -50px; }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
         }
 
+        /* Glassmorphism Card */
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            padding: 45px;
+            width: 100%;
+            max-width: 450px;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 4px rgba(95, 111, 255, 0.15);
+            border-color: rgb(95, 111, 255);
+        }
+
+        .btn-login {
+            background: rgb(95, 111, 255);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: #4a59e0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(95, 111, 255, 0.3);
+        }
+
+        /* Alert Styling */
         .alert-box {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 16px;
-        width: 320px;
-        background: #fff;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        border-radius: 10px;
-        z-index: 9999;
-        margin-bottom: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            animation: slideInRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        .alert-box.success {
-        border-left: 5px solid #28a745;
-        }
-
-        .alert-box.error, .alert-box.danger {
-        border-left: 5px solid #dc3545;
-        }
-
-        .alert-box.warning {
-        border-left: 5px solid #ffc107;
-        }
-
-        .alert-box.info {
-        border-left: 5px solid #0dcaf0;
-        }
-
-        .alert-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        }
-
-        .icon {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: bold;
-        }
-
-        .close {
-        cursor: pointer;
-        font-size: 18px;
-        color: #aaa;
-        }
-
-        .progress-bar {
-        position: relative;
-        height: 4px;
-        background: #eee;
-        margin-top: 10px;
-        overflow: hidden;
-        border-radius: 3px;
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         .progress-bar span {
-        display: block;
-        height: 100%;
-        width: 100%;
-        animation: shrink 4s linear forwards;
+            animation: shrink 4s linear forwards;
         }
-
-        /* Progress bar color matching type */
-        .alert-box.success .progress-bar span { background-color: #28a745; }
-        .alert-box.error .progress-bar span,
-        .alert-box.danger .progress-bar span { background-color: #dc3545; }
-        .alert-box.warning .progress-bar span { background-color: #ffc107; }
-        .alert-box.info .progress-bar span { background-color: #0dcaf0; }
-
-        @keyframes shrink {
-        from { width: 100%; }
-        to { width: 0%; }
-        }
-
     </style>
-
 </head>
 
-<body class="bg-white text-gray-900">
+<body>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
 
     {% if messages %}
-            {% for message in messages %}
-                <div class="alert-box {{ message.tags }}" id="alertBox">
-                <div class="alert-header">
-                    <div class="icon">
-                    {% if 'success' in message.tags %}
-                        <i style="color: #28a745;">✔</i>
-                    {% elif 'error' in message.tags or 'danger' in message.tags %}
-                        <i style="color: #dc3545;">❗</i>
-                    {% elif 'warning' in message.tags %}
-                        <i style="color: #ffc107;">⚠</i>
-                    {% else %}
-                        <i style="color: #0dcaf0;">ℹ</i>
-                    {% endif %}
-                    <span class="small">{{ message }}</span>
+        {% for message in messages %}
+            <div class="alert-box bg-white shadow-lg p-3 rounded-3 border-start border-4 {% if 'success' in message.tags %}border-success{% else %}border-danger{% endif %}" id="alertBox">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                        {% if 'success' in message.tags %}
+                            <i class="fas fa-check-circle text-success"></i>
+                        {% else %}
+                            <i class="fas fa-exclamation-circle text-danger"></i>
+                        {% endif %}
+                        <span class="small fw-medium">{{ message }}</span>
                     </div>
-                    <div class="close" onclick="closeAlert()">✖</div>
+                    <i class="fas fa-times text-muted cursor-pointer ps-3" onclick="closeAlert()" style="cursor:pointer"></i>
                 </div>
-                <div class="progress-bar"><span></span></div>
+                <div class="progress mt-2" style="height: 3px;">
+                    <div class="progress-bar {% if 'success' in message.tags %}bg-success{% else %}bg-danger{% endif %}" style="width: 100%"></div>
                 </div>
-            {% endfor %}
-        {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
 
-    <section class="d-flex align-items-center justify-content-around h-100 w-100">
-        <div>
-            <form class="bg-white rounded shadow" method='POST' style="padding:35px 70px; max-width:600px" aria-label="Create Account Form">
+    <div class="container d-flex justify-content-center">
+        <div class="login-card">
+            <div class="text-center mb-4">
+                <img src="{% static 'assets/assets_frontend/logo.svg' %}" alt="Logo" class="mb-3" style="width: 140px;">
+                <h3 class="fw-bold text-dark">Admin <span style="color: rgb(95, 111, 255);">Login</span></h3>
+                <p class="text-muted small">Please enter your credentials to continue</p>
+            </div>
+
+            <form method="POST">
                 {% csrf_token %}
-                <h2 class="text-primary fw-semibold fs-3 mb-4 text-center">Admin <span class='text-dark'>Login</span></h2>
-
                 <div class="mb-3">
-                    <label for="username" class="form-label text-muted small mb-1">UserName</label>
-                    <input type="text" class="form-control form-control-sm py-2" id="username" name="username">
+                    <label class="form-label text-muted small fw-medium">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0" name="username" placeholder="Enter username" required>
+                    </div>
                 </div>
 
                 <div class="mb-4">
-                    <label for="password" class="form-label text-muted small mb-1">Password</label>
-                    <input type="password" class="form-control form-control-sm py-2" id="password" name="password">
+                    <label class="form-label text-muted small fw-medium">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock text-muted"></i></span>
+                        <input type="password" class="form-control border-start-0" name="password" placeholder="Enter password" required>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-sm text-white w-100 mb-3 py-2" style="background-color: rgb(95 111 255);">
-                    Login
+                <button type="submit" class="btn btn-login text-white w-100 mb-3">
+                    Sign In
                 </button>
-
-                <p class="text-muted small mb-0">
-                    Create an new account?
-                    <a href="" class="text-decoration-underline text-primary">Click here</a>
-                </p>
             </form>
         </div>
-    </section>
+    </div>
 
     <script>
+        // Auto-close alert
         window.onload = function() {
             setTimeout(() => {
-            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+                let alert = document.getElementById("alertBox");
+                if(alert) alert.style.display = "none";
             }, 4000);
         }
 
         function closeAlert() {
-            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+            let alert = document.getElementById("alertBox");
+            if(alert) alert.style.display = "none";
         }
     </script>
-
 </body>
 </html>
-
