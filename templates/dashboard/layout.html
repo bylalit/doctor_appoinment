@@ -299,8 +299,6 @@
             {% endif %} {% endcomment %}
 
             {% if role == 'admin' %}
-                {% comment %} <nav id="sidebar" class="border-end bg-light p-3" 
-                    style="width: 18rem; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; box-shadow: 2px 0 5px rgba(0,0,0,0.05); overflow-y: auto;"> {% endcomment %}
                 <nav id="sidebar" class="border-end bg-light p-3" 
                     style="width: 18rem; height: calc(100vh - 64px); position: fixed; top: 70px; left: 0; z-index: 1000; overflow-y: auto;">
                     <div class="mb-4 ps-2">
@@ -360,9 +358,9 @@
 
             {% if role == 'doctor' %}
                 <nav id="sidebar" class="border-end bg-light p-3" 
-                    style="width: 18rem; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto;">
+                    style="width: 18rem; height: calc(100vh - 64px); position: fixed; top: 70px; left: 0; z-index: 1000; overflow-y: auto;">
                     
-                    <div class="mb-4 ps-2">
+                    <div class="mb-4 ps-2 pt-3">
                         <h6 class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px; font-size: 1rem;">Doctor Panel</h6>
                     </div>
 
