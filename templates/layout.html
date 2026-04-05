@@ -112,53 +112,40 @@
         to { width: 0%; }
         }
 
-
-        #loader {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f9fbfd, #e6eef8); /* soft gradient */
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.1s ease, visibility 0.1s ease; /* smooth hide */
-        }
-
-        /* Spinner upgraded */
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid rgba(0, 0, 0, 0.1);
-            border-top: 6px solid #3498db;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            box-shadow: 0 0 15px rgba(52, 152, 219, 0.3); /* glow effect */
-        }
-
-        /* Animation */
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-
-        /* Hide effect class */
-        #loader.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
-
     </style>
 
 </head>
 
 <body class="bg-white text-gray-900">
 
-    <div id="loader">
-        <div class="spinner"></div>
+    <div id="loader" 
+        style="position: fixed; width: 100%; height: 100%; background: #ffffff; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s ease;">
+        
+        <div class="position-relative d-flex justify-content-center align-items-center" style="width: 120px; height: 120px;">
+            
+            <div id="pulse-circle" 
+                style="position: absolute; width: 100%; height: 100%; border: 4px solid #5f6fff; border-radius: 50%; opacity: 0.2; transform: scale(1);">
+            </div>
+
+            <div style="z-index: 2;">
+                <i class="fas fa-hand-holding-medical" style="color: #5f6fff; font-size: 40px; animation: heartbeat 1.5s infinite;"></i>
+            </div>
+
+            <div id="spinner-ring" 
+                style="position: absolute; width: 80px; height: 80px; border: 3px solid transparent; border-top: 3px solid #5f6fff; border-radius: 50%;">
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <span class="fw-bold text-dark text-uppercase small" style="letter-spacing: 2px; opacity: 0.7;">Prescripto</span>
+            <div class="d-flex justify-content-center mt-1">
+                <div class="bg-primary rounded-circle me-1" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.1s;"></div>
+                <div class="bg-primary rounded-circle me-1" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.2s;"></div>
+                <div class="bg-primary rounded-circle" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.3s;"></div>
+            </div>
+        </div>
     </div>
+
 
     <header class="bg-white border-bottom shadow-sm sticky-top" style="height: 80px; z-index: 1060; transition: all 0.3s ease;">
         <div class="container h-100 d-flex align-items-center justify-content-between px-4 px-md-5">
@@ -392,14 +379,6 @@
             document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
         }
 
-
-        window.addEventListener("load", function() {
-            setTimeout(function() {
-                document.getElementById("loader").classList.add("hide");
-            }, 200);
-
-        });
-
         const modal = document.getElementById('videoModal');
         const video = document.getElementById('modalVideo');
 
@@ -408,6 +387,49 @@
             video.currentTime = 0;
         });
 
+    </script>
+
+
+    {% comment %} Loader Code Js {% endcomment %}
+    <script>
+        window.addEventListener("load", function() {
+            // Create dynamic animations without <style> tag
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes heartbeat {
+                    0% { transform: scale(1); }
+                    15% { transform: scale(1.2); }
+                    30% { transform: scale(1); }
+                    45% { transform: scale(1.1); }
+                    70% { transform: scale(1); }
+                }
+                @keyframes dot-blink {
+                    0%, 100% { opacity: 0.2; }
+                    50% { opacity: 1; }
+                }
+                #spinner-ring {
+                    animation: spin-loader 1s linear infinite;
+                }
+                #pulse-circle {
+                    animation: pulse-ring 2s ease-out infinite;
+                }
+                @keyframes spin-loader {
+                    100% { transform: rotate(360deg); }
+                }
+                @keyframes pulse-ring {
+                    0% { transform: scale(0.6); opacity: 0.8; }
+                    100% { transform: scale(1.4); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Hide Loader
+            setTimeout(function() {
+                const loader = document.getElementById("loader");
+                loader.style.opacity = "0";
+                loader.style.visibility = "hidden";
+            }, 800); // 800ms tak dikhega taki animation pura ho
+        });
     </script>
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
