@@ -160,41 +160,88 @@
         <div class="spinner"></div>
     </div>
 
-    <header class="container py-3 d-flex flex-wrap align-items-center border-bottom justify-content-between px-5">
-        <div class="d-flex align-items-center gap-2">
-        <a href="{% url "home" %}">
-            <img src="{% static "assets/assets_frontend/logo.svg" %}" alt="Prescripto logo icon of a house with a medical cross inside"
-            width="80%" height="80%">
-        </a>
+    <header class="bg-white border-bottom shadow-sm sticky-top" style="height: 80px; z-index: 1060; transition: all 0.3s ease;">
+        <div class="container h-100 d-flex align-items-center justify-content-between px-4 px-md-5">
+            
+            <div class="d-flex align-items-center">
+                <a href="{% url 'home' %}" class="d-block">
+                    <img src="{% static 'assets/assets_frontend/logo.svg' %}" alt="Prescripto Logo" 
+                        style="width: 150px; transition: transform 0.3s;"
+                        onmouseover="this.style.transform='scale(1.05)'" 
+                        onmouseout="this.style.transform='scale(1)'">
+                </a>
+            </div>
+
+            <nav class="d-none d-lg-flex align-items-center gap-4 fw-bold" style="font-size: 13px; letter-spacing: 0.5px;">
+                <a class="text-decoration-none" href="{% url 'home' %}" 
+                style="color: #5f6fff; transition: 0.3s;" 
+                onmouseover="this.style.color='#4a59e0'" 
+                onmouseout="this.style.color='#5f6fff'">HOME</a>
+                
+                <a class="text-decoration-none text-secondary" href="{% url 'doctor' 'all doctor' %}" 
+                style="transition: 0.3s;" 
+                onmouseover="this.style.color='#5f6fff'" 
+                onmouseout="this.style.color='#6c757d'">ALL DOCTORS</a>
+                
+                <a class="text-decoration-none text-secondary" href="{% url 'about' %}" 
+                style="transition: 0.3s;" 
+                onmouseover="this.style.color='#5f6fff'" 
+                onmouseout="this.style.color='#6c757d'">ABOUT</a>
+                
+                <a class="text-decoration-none text-secondary" href="{% url 'contact' %}" 
+                style="transition: 0.3s;" 
+                onmouseover="this.style.color='#5f6fff'" 
+                onmouseout="this.style.color='#6c757d'">CONTACT</a>
+                
+                <a href="{% url 'dash_admin' %}" target="_blank" 
+                class="badge rounded-pill border border-primary text-primary text-decoration-none px-3 py-2" 
+                style="font-size: 10px; background-color: rgba(95, 111, 255, 0.05); transition: 0.3s;"
+                onmouseover="this.style.backgroundColor='#5f6fff'; this.style.color='#ffffff';"
+                onmouseout="this.style.backgroundColor='rgba(95, 111, 255, 0.05)'; this.style.color='#5f6fff';">
+                    ADMIN PANEL
+                </a>
+            </nav>
+
+            <div class="d-flex align-items-center gap-3">
+                {% if request.session.login %}
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="rounded-circle border border-2 p-1 shadow-sm" 
+                                style="width: 42px; height: 42px; overflow: hidden; transition: 0.3s; border-color: #5f6fff;"
+                                onmouseover="this.style.transform='rotate(10deg) scale(1.1)'"
+                                onmouseout="this.style.transform='rotate(0deg) scale(1)'">
+                                <img src="{% static 'assets/assets_frontend/profile.avif' %}" alt="Profile" class="w-100 h-100 object-fit-cover rounded-circle">
+                            </div>
+                        </a>
+                        
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-3 py-2" 
+                            style="border-radius: 15px; min-width: 210px; overflow: hidden;">
+                            <li class="px-3 py-2 border-bottom mb-2 bg-light">
+                                <p class="mb-0 text-muted" style="font-size: 11px;">Signed in as</p>
+                                <p class="mb-0 fw-bold text-dark small">Patient Account</p>
+                            </li>
+                            <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2" href="{% url 'my_profile' %}" onmouseover="this.style.backgroundColor='#f8f9ff'" onmouseout="this.style.backgroundColor='transparent'">
+                                <i class="fa-regular fa-user text-primary"></i> My Profile</a></li>
+                            <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2" href="{% url 'user_appointment' %}" onmouseover="this.style.backgroundColor='#f8f9ff'" onmouseout="this.style.backgroundColor='transparent'">
+                                <i class="fa-regular fa-calendar-check text-success"></i> My Appointments</a></li>
+                            <li><hr class="dropdown-divider opacity-50"></li>
+                            <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2 text-danger" href="{% url 'logout_user' %}" onmouseover="this.style.backgroundColor='#fff5f5'" onmouseout="this.style.backgroundColor='transparent'">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a href="{% url 'register' %}" 
+                    class="btn rounded-pill px-4 py-2 text-white fw-bold shadow-sm d-flex align-items-center gap-2"
+                    style="background-color: #5f6fff; border: none; font-size: 13px; transition: 0.4s;"
+                    onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='translateY(-2px) shadow(0 5px 15px rgba(0,0,0,0.1))'"
+                    onmouseout="this.style.backgroundColor='#5f6fff'; this.style.transform='translateY(0px)'">
+                        <span>Create account</span>
+                        <i class="fa-solid fa-arrow-right-long" style="font-size: 11px;"></i>
+                    </a>
+                {% endif %}
+            </div>
+
         </div>
-
-        <nav class="d-flex gap-3 fw-semibold text-secondary small">
-        <a class="text-decoration-none text-secondary hover-effect" href="{% url "home" %}">HOME</a>
-        <a class="text-decoration-none text-secondary hover-effect" href="{% url "doctor" 'all doctor' %}">ALL DOCTORS</a>
-        <a class="text-decoration-none text-secondary hover-effect" href="{% url "about" %}">ABOUT</a>
-        <a class="text-decoration-none text-secondary hover-effect" href="{% url "contact" %}">CONTACT</a>
-        <a target="_blank" href="{% url "dash_admin" %}" class="border px-2 py-1 rounded-pill text-decoration-none text-secondary hover-effect" style='font-size:10px;'>Admin Panel</a>
-        </nav>
-
-
-        {% if request.session.login %}
-        <div class="position-relative dropdown">
-            <a href="#" class="d-inline-block" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{% static 'assets/assets_frontend/profile.avif' %}" alt="Profile" height="36">
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
-            <li><a class="dropdown-item" href="{% url "my_profile" %}">My Profile</a></li>
-            <li><a class="dropdown-item" href="{% url "user_appointment" %}">My Appointments</a></li>
-            <li><a class="dropdown-item" href="{% url "logout_user" %}">Logout</a></li>
-            </ul>
-        </div>
-        {% else %}
-        <a href="{% url "register" %}" type="button" class="btn btn-sm text-sm rounded-pill px-4 py-2 text-white text-uppercase fw-semibold"
-            style="background-color: rgb(95 111 255);">
-            Create account
-        </a>
-        {% endif %}
-        
     </header>
 
     {% if messages %}
@@ -250,9 +297,10 @@
                     <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Company</h6>
                     <ul class="list-unstyled small">
                         <li class="mb-2"><a href="{% url 'home' %}" class="text-decoration-none text-muted hover-link">Home</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">About Us</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Our Services</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Find a Doctor</a></li>
+                        <li class="mb-2"><a href="{% url "about" %}" class="text-decoration-none text-muted hover-link">About Us</a></li>
+                        <li class="mb-2"><a href="{% url "patient_programs" %}" class="text-decoration-none text-muted hover-link">Our Services</a></li>
+                        <li class="mb-2"><a href="{% url "doctor" 'all doctor' %}" class="text-decoration-none text-muted hover-link">Find a Doctor</a></li>
+                        <li class="mb-2"><a href="{% url "contact" %}" class="text-decoration-none text-muted hover-link">Contact</a></li>
                         <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Privacy Policy</a></li>
                     </ul>
                 </div>
@@ -261,7 +309,7 @@
                     <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Get In Touch</h6>
                     <div class="small text-muted">
                         <p class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i> +1-212-456-7890</p>
-                        <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> lalit0101kp@gmail.com</p>
+                        <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> prescripto@gmail.com</p>
                         <p class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i> 123 Healthcare St, Medical City, NY</p>
                         <hr class="w-25">
                         <p class="mb-0 fw-medium text-dark">Clinic Hours:</p>
