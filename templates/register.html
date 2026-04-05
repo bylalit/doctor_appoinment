@@ -2,139 +2,119 @@
 {% load static %}
 
 {% block contant %}
-    <section class="my-5">
-        <div class="my-5 py-5">
-
-            <!-- Form -->
-            {% comment %} <form class="w-100 bg-white rounded shadow p-4 py-5 mx-auto" method="POST" enctype="multipart/form-data" style="max-width: 400px;" aria-label="Create Account Form">
-                {% csrf_token %}
-
-                <h2 class="text-dark fw-semibold fs-4 mb-2">Create Account</h2>
-                <p class="text-muted small mb-4">Please sign up to book appointment</p>
-
-                <!-- Full Name -->
-                <div class="mb-3">
-                    <label for="username" class="form-label text-muted small mb-1">FullName</label>
-                    <input type="text" class="form-control form-control-sm py-2" id="username" name="username" required>
-                </div>
-
-                <!-- Email -->
-                <div class="mb-3">
-                    <label for="email" class="form-label text-muted small mb-1">Email</label>
-                    <input type="email" class="form-control form-control-sm py-2" id="email" name="email" required>
-                </div>
-
-                <!-- Password -->
-                <div class="mb-4">
-                    <label for="password" class="form-label text-muted small mb-1">Password</label>
-                    <input type="password" class="form-control form-control-sm py-2" id="password" name="password" required>
-                </div>
-
-
-                <!-- Phone -->
-                <div class="mb-3">
-                    <label class="form-label text-muted small mb-1">Phone</label>
-                    <input type="text" class="form-control form-control-sm py-2" name="phone" required>
-                </div>
-
-                <!-- City -->
-                <div class="mb-3">
-                    <label class="form-label text-muted small mb-1">City</label>
-                    <input type="text" class="form-control form-control-sm py-2" name="city" required>
-                </div>
-
-                <!-- Address -->
-                <div class="mb-3">
-                    <label class="form-label text-muted small mb-1">Address</label>
-                    <textarea class="form-control form-control-sm py-2" name="address" rows="2" required></textarea>
-                </div>
-
-                <!-- Profile Image -->
-                <div class="mb-4">
-                    <label class="form-label text-muted small mb-1">Profile Image</label>
-                    <input type="file" class="form-control form-control-sm py-2" name="image" accept="image/*">
-                </div>
-
-                <!-- Submit -->
-                <button type="submit" class="btn btn-sm text-white w-100 mb-3 py-2" style="background-color: rgb(95 111 255);">
-                    Create account
-                </button>
-
-                <!-- Login Redirect -->
-                <p class="text-muted small mb-0">
-                    Already have an account?
-                    <a href="{% url 'login' %}" class="text-decoration-underline text-primary">Login here</a>
-                </p>
-            </form> {% endcomment %}
-
-            <form class="w-100 bg-white rounded shadow p-4 py-5 mx-auto" method="POST" enctype="multipart/form-data"
-                style="max-width: 500px;" aria-label="Create Account Form">
-                {% csrf_token %}
-
-                <h2 class="text-dark fw-semibold fs-4 mb-2">Create <span style="color: rgb(95 111 255);">Account</span></h2>
-                <p class="text-muted small mb-4">Please sign up to book appointment</p>
-
-                <div class="row">
-                    
-                    <!-- Full Name -->
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label text-muted small mb-1">Full Name</label>
-                        <input type="text" class="form-control form-control-sm py-2" name="username" required>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label text-muted small mb-1">Email</label>
-                        <input type="email" class="form-control form-control-sm py-2" name="email" required>
-                    </div>
-
-                    <!-- Password -->
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label text-muted small mb-1">Password</label>
-                        <input type="password" class="form-control form-control-sm py-2" name="password" required>
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label text-muted small mb-1">Phone</label>
-                        <input type="text" class="form-control form-control-sm py-2" name="phone" required>
-                    </div>
-
-                    <!-- City -->
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label text-muted small mb-1">City</label>
-                        <input type="text" class="form-control form-control-sm py-2" name="city" required>
-                    </div>
-
-                    <!-- Profile Image -->
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label text-muted small mb-1">Profile Image</label>
-                        <input type="file" class="form-control form-control-sm py-2" name="image" accept="image/*">
-                    </div>
-
-                    <!-- Address (full width) -->
-                    <div class="col-12 mb-3">
-                        <label class="form-label text-muted small mb-1">Address</label>
-                        <textarea class="form-control form-control-sm py-2" name="address" rows="2" required></textarea>
-                    </div>
-
-                </div>
-
-                <!-- Submit -->
-                <button type="submit" class="btn btn-sm text-white w-100 mb-3 py-2"
-                        style="background-color: rgb(95 111 255);">
-                    Create account
-                </button>
-
-                <!-- Login Redirect -->
-                <p class="text-muted small mb-0">
-                    Already have an account?
-                    <a href="{% url 'login' %}" class="text-decoration-underline text-primary">Login here</a>
-                </p>
-            </form>
-
-        </div>
-    </section>
+<section class="min-vh-100 d-flex align-items-center justify-content-center py-5" 
+         style="background-color: #f4f7fe;">
     
-{% endblock %}
+    <div class="container">
+        <div class="mx-auto bg-white shadow-lg border-0" 
+             style="max-width: 650px; border-radius: 25px; overflow: hidden;">
+            
+            <div style="height: 10px; background: linear-gradient(90deg, #5f6fff, #9ca6ff);"></div>
 
+            <div class="p-4 p-md-5">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-dark mb-1" style="letter-spacing: -0.5px;">Join <span style="color: #5f6fff;">Prescripto</span></h2>
+                    <p class="text-muted small">Create your patient account in just a few steps</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-muted ms-2">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light" style="border-radius: 12px 0 0 12px;">
+                                    <i class="fas fa-user text-muted small"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-light p-3" 
+                                       style="border-radius: 0 12px 12px 0; font-size: 14px;" 
+                                       name="username" placeholder="Enter your full name" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted ms-2">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light" style="border-radius: 12px 0 0 12px;">
+                                    <i class="fas fa-envelope text-muted small"></i>
+                                </span>
+                                <input type="email" class="form-control border-0 bg-light p-3" 
+                                       style="border-radius: 0 12px 12px 0; font-size: 14px;" 
+                                       name="email" placeholder="name@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted ms-2">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light" style="border-radius: 12px 0 0 12px;">
+                                    <i class="fas fa-lock text-muted small"></i>
+                                </span>
+                                <input type="password" class="form-control border-0 bg-light p-3" 
+                                       style="border-radius: 0 12px 12px 0; font-size: 14px;" 
+                                       name="password" placeholder="••••••••" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted ms-2">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light" style="border-radius: 12px 0 0 12px;">
+                                    <i class="fas fa-phone text-muted small"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-light p-3" 
+                                       style="border-radius: 0 12px 12px 0; font-size: 14px;" 
+                                       name="phone" placeholder="+91 00000 00000" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted ms-2">City</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-0 bg-light" style="border-radius: 12px 0 0 12px;">
+                                    <i class="fas fa-city text-muted small"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-light p-3" 
+                                       style="border-radius: 0 12px 12px 0; font-size: 14px;" 
+                                       name="city" placeholder="Ahmedabad" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-muted ms-2">Profile Picture</label>
+                            <div class="p-3 border-2 border-dashed rounded-4 text-center" 
+                                 style="border: 2px dashed #dee2e6; background-color: #fafbff;">
+                                <input type="file" class="form-control form-control-sm border-0 bg-transparent" 
+                                       name="image" accept="image/*">
+                                <p class="text-muted mb-0 mt-2" style="font-size: 11px;">PNG, JPG up to 5MB</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-muted ms-2">Complete Address</label>
+                            <textarea class="form-control border-0 bg-light p-3" 
+                                      style="border-radius: 15px; font-size: 14px;" 
+                                      name="address" rows="3" placeholder="Enter your full address..." required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <button type="submit" class="btn w-100 py-3 fw-bold text-white shadow-sm" 
+                                style="background: #5f6fff; border-radius: 12px; border: none; transition: 0.4s;"
+                                onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(95,111,255,0.2)'"
+                                onmouseout="this.style.backgroundColor='#5f6fff'; this.style.transform='translateY(0px)'; this.style.boxShadow='none'">
+                            Sign Up Now
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <span class="text-muted small">Already part of our clinic? </span>
+                        <a href="{% url 'login' %}" class="fw-bold text-decoration-none" style="color: #5f6fff;">Log In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
