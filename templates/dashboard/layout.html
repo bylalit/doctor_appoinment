@@ -113,7 +113,7 @@
 
     <body>
 
-        <header class="d-flex justify-content-between align-items-center border-bottom border-secondary px-4"
+        {% comment %} <header class="d-flex justify-content-between align-items-center border-bottom border-secondary px-4"
             style="height: 64px;">
             <div class="d-flex align-items-center position-relative">
                 <a href="{% url "dash_admin" %}">
@@ -128,12 +128,29 @@
                 {% endif %}
                 <a href="{% url "dash_logout" %}" class="btn btn-outline-primary btn-sm rounded-pill px-3 py-1">Logout</a>
             </div>
+        </header> {% endcomment %}
+
+        <header class="d-flex justify-content-between align-items-center border-bottom bg-white px-4"
+                style="height: 70px; position: fixed; top: 0; width: 100%; z-index: 1050; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <div class="d-flex align-items-center">
+                <a href="{% url 'dash_admin' %}">
+                    <img src="{% static 'assets/assets_frontend/logo.svg' %}" alt="Logo" style="width: 120px;">
+                </a>
+            </div>
+            <div class="d-flex align-items-center gap-3 text-secondary small">
+                {% if role == 'admin' %}
+                    <span class="text-capitalize fw-medium">Hi! {{ request.session.username }}</span>
+                {% else %}
+                    <span class="fw-medium">Hi! {{ doctor.name }}</span>
+                {% endif %}
+                <a href="{% url 'dash_logout' %}" class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 fw-bold" style="font-size: 12px;">Logout</a>
+            </div>
         </header>
 
         <main class="d-flex" style="min-height: calc(100vh - 64px);">
 
 
-            {% if role == 'admin' %}
+            {% comment %} {% if role == 'admin' %}
                 <nav id="sidebar" class="border-end border-secondary p-3" style="width: 18rem;">
 
                     <!-- Dashboard -->
@@ -188,6 +205,185 @@
                     </a>
                     <a href="{% url "edit_doctor" %}" class="nav-link d-flex align-items-center gap-2 p-3 fs-5 text-dark {% if action == 'edit_doctor' %}bg-success bg-opacity-25 border-start border-success fw-medium{% endif %}" data-id="add">
                         <i class="fa-solid fa-upload"></i> <span class='small'>Update Profile</span>
+                    </a>
+                </nav>
+            {% endif %} {% endcomment %}
+
+            {% comment %} {% if role == 'admin' %}
+                <nav id="sidebar" class="border-end bg-light p-3" style="width: 18rem; min-height: 100vh; box-shadow: 2px 0 5px rgba(0,0,0,0.05);">
+                    
+                    <div class="mb-4 ps-2">
+                        <h6 class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px; font-size: 1rem;">Admin Panel</h6>
+                    </div>
+
+                    <a href="{% url 'dash_admin' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 transition-all {% if action == 'admin' %}bg-white shadow-sm border-start border-4 border-primary fw-bold text-primary{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-solid fa-house" style="color: #4e73df; width: 20px;"></i> 
+                        <span class="small">Dashboard</span>
+                    </a>
+
+                    <a href="{% url 'appointments' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'appointments' %}bg-white shadow-sm border-start border-4 border-success fw-bold text-success{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-regular fa-calendar-check" style="color: #1cc88a; width: 20px;"></i> 
+                        <span class="small">Appointments</span>
+                    </a>
+
+                    <a href="{% url 'add_doctor' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'add_doctor' %}bg-white shadow-sm border-start border-4 border-warning fw-bold text-warning{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fas fa-plus-square" style="color: #f6c23e; width: 20px;"></i> 
+                        <span class="small">Add Doctor</span>
+                    </a>
+
+                    <a href="{% url 'doctor_list' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor_list' %}bg-white shadow-sm border-start border-4 border-info fw-bold text-info{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fas fa-list-ul" style="color: #36b9cc; width: 20px;"></i> 
+                        <span class="small">Doctors List</span>
+                    </a>
+
+                    <a href="{% url 'patient_list' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'patient_list' %}bg-white shadow-sm border-start border-4 border-danger fw-bold text-danger{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-solid fa-users" style="color: #e74a3b; width: 20px;"></i> 
+                        <span class="small">Patient List</span>
+                    </a>
+
+                    <a href="{% url 'billing' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'billing' %}bg-white shadow-sm border-start border-4 border-secondary fw-bold text-secondary{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-solid fa-file-invoice-dollar" style="color: #fd7e14; width: 20px;"></i> 
+                        <span class="small">Billing</span>
+                    </a>
+
+                    <a href="{% url 'analytics' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'analytics' %}bg-white shadow-sm border-start border-4 border-dark fw-bold text-dark{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-solid fa-chart-line" style="color: #6f42c1; width: 20px;"></i> 
+                        <span class="small">Analytics</span>
+                    </a>
+
+                </nav>
+            {% endif %}
+
+            {% if role == 'doctor' %}
+                <nav id="sidebar" class="border-end bg-light p-3" style="width: 18rem; min-height: 100vh;">
+                    
+                    <div class="mb-4 ps-2">
+                        <h6 class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px; font-size: 1rem;">Doctor Panel</h6>
+                    </div>
+
+                    <a href="{% url 'doctor_dashboard' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor' %}bg-white shadow-sm border-start border-4 border-primary fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-solid fa-house" style="color: #4e73df; width: 20px;"></i> <span class="small">Dashboard</span>
+                    </a>
+
+                    <a href="{% url 'doctor_appointments' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor_appointments' %}bg-white shadow-sm border-start border-4 border-success fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-regular fa-calendar-check" style="color: #1cc88a; width: 20px;"></i> <span class="small">My Appointments</span>
+                    </a>
+
+                    <a href="{% url 'doctor_profile' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'profile' %}bg-white shadow-sm border-start border-4 border-info fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-solid fa-user" style="color: #e83e8c; width: 20px;"></i> <span class="small">My Profile</span>
+                    </a>
+
+                    <a href="{% url 'edit_doctor' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'edit_doctor' %}bg-white shadow-sm border-start border-4 border-warning fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px;">
+                        <i class="fa-solid fa-upload" style="color: #fd7e14; width: 20px;"></i> <span class="small">Update Profile</span>
+                    </a>
+                </nav>
+            {% endif %} {% endcomment %}
+
+            {% if role == 'admin' %}
+                {% comment %} <nav id="sidebar" class="border-end bg-light p-3" 
+                    style="width: 18rem; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; box-shadow: 2px 0 5px rgba(0,0,0,0.05); overflow-y: auto;"> {% endcomment %}
+                <nav id="sidebar" class="border-end bg-light p-3" 
+                    style="width: 18rem; height: calc(100vh - 64px); position: fixed; top: 70px; left: 0; z-index: 1000; overflow-y: auto;">
+                    <div class="mb-4 ps-2">
+                        <h6 class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px; font-size: 1rem;">Admin Panel</h6>
+                    </div>
+
+                    <a href="{% url 'dash_admin' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'admin' %}bg-white shadow-sm border-start border-4 border-primary fw-bold text-primary{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-house" style="color: #4e73df; width: 20px;"></i> 
+                        <span class="small">Dashboard</span>
+                    </a>
+
+                    <a href="{% url 'appointments' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'appointments' %}bg-white shadow-sm border-start border-4 border-success fw-bold text-success{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-regular fa-calendar-check" style="color: #1cc88a; width: 20px;"></i> 
+                        <span class="small">Appointments</span>
+                    </a>
+
+                    <a href="{% url 'add_doctor' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'add_doctor' %}bg-white shadow-sm border-start border-4 border-warning fw-bold text-warning{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fas fa-plus-square" style="color: #f6c23e; width: 20px;"></i> 
+                        <span class="small">Add Doctor</span>
+                    </a>
+
+                    <a href="{% url 'doctor_list' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor_list' %}bg-white shadow-sm border-start border-4 border-info fw-bold text-info{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fas fa-list-ul" style="color: #36b9cc; width: 20px;"></i> 
+                        <span class="small">Doctors List</span>
+                    </a>
+
+                    <a href="{% url 'patient_list' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'patient_list' %}bg-white shadow-sm border-start border-4 border-danger fw-bold text-danger{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-users" style="color: #e74a3b; width: 20px;"></i> 
+                        <span class="small">Patient List</span>
+                    </a>
+
+                    <a href="{% url 'billing' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'billing' %}bg-white shadow-sm border-start border-4 border-secondary fw-bold text-secondary{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-file-invoice-dollar" style="color: #fd7e14; width: 20px;"></i> 
+                        <span class="small">Billing</span>
+                    </a>
+
+                    <a href="{% url 'analytics' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'analytics' %}bg-white shadow-sm border-start border-4 border-dark fw-bold text-dark{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-chart-line" style="color: #6f42c1; width: 20px;"></i> 
+                        <span class="small">Analytics</span>
+                    </a>
+                </nav>
+            {% endif %}
+
+            {% if role == 'doctor' %}
+                <nav id="sidebar" class="border-end bg-light p-3" 
+                    style="width: 18rem; height: 100vh; position: fixed; top: 0; left: 0; z-index: 1000; overflow-y: auto;">
+                    
+                    <div class="mb-4 ps-2">
+                        <h6 class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px; font-size: 1rem;">Doctor Panel</h6>
+                    </div>
+
+                    <a href="{% url 'doctor_dashboard' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor' %}bg-white shadow-sm border-start border-4 border-primary fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-house" style="color: #4e73df; width: 20px;"></i> <span class="small">Dashboard</span>
+                    </a>
+
+                    <a href="{% url 'doctor_appointments' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor_appointments' %}bg-white shadow-sm border-start border-4 border-success fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-regular fa-calendar-check" style="color: #1cc88a; width: 20px;"></i> <span class="small">My Appointments</span>
+                    </a>
+
+                    <a href="{% url 'doctor_profile' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'profile' %}bg-white shadow-sm border-start border-4 border-info fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-user" style="color: #e83e8c; width: 20px;"></i> <span class="small">My Profile</span>
+                    </a>
+
+                    <a href="{% url 'edit_doctor' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'edit_doctor' %}bg-white shadow-sm border-start border-4 border-warning fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-upload" style="color: #fd7e14; width: 20px;"></i> <span class="small">Update Profile</span>
                     </a>
                 </nav>
             {% endif %}
