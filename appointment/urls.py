@@ -48,7 +48,7 @@ urlpatterns = [
     path('bill/<int:id>/', views.billing_invoice, name='billing_invoice'),
     
     path('analytics', views.analytics, name='analytics'),
+    path('settings', views.settings, name='settings'),
     
 
 ]
-

@@ -1,0 +1,127 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block contant %}
+
+<section class="bg-light" style="min-height:100vh; width:100%; margin-top: 70px; margin-left: 18rem; padding: 50px;">
+
+    <!-- 🔷 Header -->
+    <div class="mb-4">
+        <h3 class="fw-bold text-primary">Settings</h3>
+        <p class="text-muted small">Manage your system preferences</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- 🔹 Profile Settings -->
+        <div class="col-md-6">
+            <div class="bg-white p-4 rounded-4 shadow-sm border">
+                <h5 class="fw-bold mb-3">Profile Settings</h5>
+
+                <div class="mb-3">
+                    <label class="form-label small">Full Name</label>
+                    <input type="text" class="form-control" value="Admin User">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small">Email</label>
+                    <input type="email" class="form-control" value="admin@gmail.com">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small">Phone</label>
+                    <input type="text" class="form-control" value="9876543210">
+                </div>
+
+                <button class="btn btn-primary w-100">Save Changes</button>
+            </div>
+        </div>
+
+        <!-- 🔹 Password Settings -->
+        <div class="col-md-6">
+            <div class="bg-white p-4 rounded-4 shadow-sm border">
+                <h5 class="fw-bold mb-3">Change Password</h5>
+
+                <div class="mb-3">
+                    <label class="form-label small">Current Password</label>
+                    <input type="password" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small">New Password</label>
+                    <input type="password" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small">Confirm Password</label>
+                    <input type="password" class="form-control">
+                </div>
+
+                <button class="btn btn-danger w-100">Update Password</button>
+            </div>
+        </div>
+
+        <!-- 🔹 Notification Settings -->
+        <div class="col-md-6">
+            <div class="bg-white p-4 rounded-4 shadow-sm border">
+                <h5 class="fw-bold mb-3">Notifications</h5>
+
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" checked>
+                    <label class="form-check-label">Email Notifications</label>
+                </div>
+
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" checked>
+                    <label class="form-check-label">SMS Alerts</label>
+                </div>
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label">Push Notifications</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔹 System Settings -->
+        <div class="col-md-6">
+            <div class="bg-white p-4 rounded-4 shadow-sm border">
+                <h5 class="fw-bold mb-3">System Settings</h5>
+
+                <div class="mb-3">
+                    <label class="form-label small">Language</label>
+                    <select class="form-select">
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>Gujarati</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label small">Timezone</label>
+                    <select class="form-select">
+                        <option>India (IST)</option>
+                        <option>UTC</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-success w-100">Save Preferences</button>
+            </div>
+        </div>
+
+        <!-- 🔹 Danger Zone -->
+        <div class="col-12">
+            <div class="bg-white p-4 rounded-4 shadow-sm border border-danger">
+                <h5 class="fw-bold text-danger mb-3">Danger Zone</h5>
+
+                <p class="small text-muted">Once you delete your account, there is no going back.</p>
+
+                <button class="btn btn-outline-danger">Delete Account</button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock contant %}

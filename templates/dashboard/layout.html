@@ -187,6 +187,15 @@
                         <i class="fa-solid fa-chart-line" style="color: #6f42c1; width: 20px;"></i> 
                         <span class="small">Analytics</span>
                     </a>
+
+                    <a href="{% url 'settings' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'settings' %}bg-white shadow-sm border-start border-4 border-secondary fw-bold text-secondary{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-gear" style="color: #495057; width: 20px;"></i> 
+                        <span class="small">Settings</span>
+                    </a>
+
+
                 </nav>
             {% endif %}
 

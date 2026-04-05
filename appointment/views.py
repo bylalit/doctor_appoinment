@@ -879,3 +879,9 @@ def analytics(request):
     return render(request, "dashboard/analytics.html", context)
 
 
+def settings(request):
+    context = {
+        'action': 'settings',
+        "role": "admin",
+    }
+    return render(request, "dashboard/settings.html", context)
