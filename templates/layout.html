@@ -1,449 +1,449 @@
 <html lang="en">
 {% load static %}
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>
-        Prescripto
-    </title>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <title>
+            Prescripto
+        </title>
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet" />
 
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 
-    <style>
-        body {
-        font-family: "Poppins", sans-serif;
-        }
+        <style>
+            body {
+            font-family: "Poppins", sans-serif;
+            }
 
-        .hover-effect:hover {
-        color: #212529 !important;
-        /* Bootstrap's text-dark */
-        }
-    </style>
+            .hover-effect:hover {
+            color: #212529 !important;
+            /* Bootstrap's text-dark */
+            }
+        </style>
 
-    <style>
-    
-        .card-hover-up {
-        transition: transform 0.3s ease;
-        }
-        .card-hover-up:hover {
-        transform: translateY(-5px);
-        }
-
-        .alert-box {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 16px;
-        width: 320px;
-        background: #fff;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        border-radius: 10px;
-        z-index: 9999;
-        margin-bottom: 10px;
-        }
-
-        .alert-box.success {
-        border-left: 5px solid #28a745;
-        }
-
-        .alert-box.error, .alert-box.danger {
-        border-left: 5px solid #dc3545;
-        }
-
-        .alert-box.warning {
-        border-left: 5px solid #ffc107;
-        }
-
-        .alert-box.info {
-        border-left: 5px solid #0dcaf0;
-        }
-
-        .alert-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        }
-
-        .icon {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: bold;
-        }
-
-        .close {
-        cursor: pointer;
-        font-size: 18px;
-        color: #aaa;
-        }
-
-        .progress-bar {
-        position: relative;
-        height: 4px;
-        background: #eee;
-        margin-top: 10px;
-        overflow: hidden;
-        border-radius: 3px;
-        }
-
-        .progress-bar span {
-        display: block;
-        height: 100%;
-        width: 100%;
-        animation: shrink 4s linear forwards;
-        }
-
-        /* Progress bar color matching type */
-        .alert-box.success .progress-bar span { background-color: #28a745; }
-        .alert-box.error .progress-bar span,
-        .alert-box.danger .progress-bar span { background-color: #dc3545; }
-        .alert-box.warning .progress-bar span { background-color: #ffc107; }
-        .alert-box.info .progress-bar span { background-color: #0dcaf0; }
-
-        @keyframes shrink {
-        from { width: 100%; }
-        to { width: 0%; }
-        }
-
-    </style>
-
-</head>
-
-<body class="bg-white text-gray-900">
-
-    <div id="loader" 
-        style="position: fixed; width: 100%; height: 100%; background: #ffffff; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s ease;">
+        <style>
         
-        <div class="position-relative d-flex justify-content-center align-items-center" style="width: 120px; height: 120px;">
+            .card-hover-up {
+            transition: transform 0.3s ease;
+            }
+            .card-hover-up:hover {
+            transform: translateY(-5px);
+            }
+
+            .alert-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px;
+            width: 320px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 9999;
+            margin-bottom: 10px;
+            }
+
+            .alert-box.success {
+            border-left: 5px solid #28a745;
+            }
+
+            .alert-box.error, .alert-box.danger {
+            border-left: 5px solid #dc3545;
+            }
+
+            .alert-box.warning {
+            border-left: 5px solid #ffc107;
+            }
+
+            .alert-box.info {
+            border-left: 5px solid #0dcaf0;
+            }
+
+            .alert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            }
+
+            .icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            }
+
+            .close {
+            cursor: pointer;
+            font-size: 18px;
+            color: #aaa;
+            }
+
+            .progress-bar {
+            position: relative;
+            height: 4px;
+            background: #eee;
+            margin-top: 10px;
+            overflow: hidden;
+            border-radius: 3px;
+            }
+
+            .progress-bar span {
+            display: block;
+            height: 100%;
+            width: 100%;
+            animation: shrink 4s linear forwards;
+            }
+
+            /* Progress bar color matching type */
+            .alert-box.success .progress-bar span { background-color: #28a745; }
+            .alert-box.error .progress-bar span,
+            .alert-box.danger .progress-bar span { background-color: #dc3545; }
+            .alert-box.warning .progress-bar span { background-color: #ffc107; }
+            .alert-box.info .progress-bar span { background-color: #0dcaf0; }
+
+            @keyframes shrink {
+            from { width: 100%; }
+            to { width: 0%; }
+            }
+
+        </style>
+
+    </head>
+
+    <body class="bg-white text-gray-900">
+
+        <div id="loader" 
+            style="position: fixed; width: 100%; height: 100%; background: #ffffff; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s ease;">
             
-            <div id="pulse-circle" 
-                style="position: absolute; width: 100%; height: 100%; border: 4px solid #5f6fff; border-radius: 50%; opacity: 0.2; transform: scale(1);">
+            <div class="position-relative d-flex justify-content-center align-items-center" style="width: 120px; height: 120px;">
+                
+                <div id="pulse-circle" 
+                    style="position: absolute; width: 100%; height: 100%; border: 4px solid #5f6fff; border-radius: 50%; opacity: 0.2; transform: scale(1);">
+                </div>
+
+                <div style="z-index: 2;">
+                    <i class="fas fa-hand-holding-medical" style="color: #5f6fff; font-size: 40px; animation: heartbeat 1.5s infinite;"></i>
+                </div>
+
+                <div id="spinner-ring" 
+                    style="position: absolute; width: 80px; height: 80px; border: 3px solid transparent; border-top: 3px solid #5f6fff; border-radius: 50%;">
+                </div>
             </div>
 
-            <div style="z-index: 2;">
-                <i class="fas fa-hand-holding-medical" style="color: #5f6fff; font-size: 40px; animation: heartbeat 1.5s infinite;"></i>
-            </div>
-
-            <div id="spinner-ring" 
-                style="position: absolute; width: 80px; height: 80px; border: 3px solid transparent; border-top: 3px solid #5f6fff; border-radius: 50%;">
+            <div class="mt-3">
+                <span class="fw-bold text-dark text-uppercase small" style="letter-spacing: 2px; opacity: 0.7;">Prescripto</span>
+                <div class="d-flex justify-content-center mt-1">
+                    <div class="bg-primary rounded-circle me-1" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.1s;"></div>
+                    <div class="bg-primary rounded-circle me-1" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.2s;"></div>
+                    <div class="bg-primary rounded-circle" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.3s;"></div>
+                </div>
             </div>
         </div>
 
-        <div class="mt-3">
-            <span class="fw-bold text-dark text-uppercase small" style="letter-spacing: 2px; opacity: 0.7;">Prescripto</span>
-            <div class="d-flex justify-content-center mt-1">
-                <div class="bg-primary rounded-circle me-1" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.1s;"></div>
-                <div class="bg-primary rounded-circle me-1" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.2s;"></div>
-                <div class="bg-primary rounded-circle" style="width: 5px; height: 5px; animation: dot-blink 1s infinite 0.3s;"></div>
-            </div>
-        </div>
-    </div>
 
+        <header class="bg-white border-bottom shadow-sm sticky-top" style="height: 80px; z-index: 1060; transition: all 0.3s ease;">
+            <div class="container h-100 d-flex align-items-center justify-content-between px-4 px-md-5">
+                
+                <div class="d-flex align-items-center">
+                    <a href="{% url 'home' %}" class="d-block">
+                        <img src="{% static 'assets/assets_frontend/logo.svg' %}" alt="Prescripto Logo" 
+                            style="width: 150px; transition: transform 0.3s;"
+                            onmouseover="this.style.transform='scale(1.05)'" 
+                            onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </div>
 
-    <header class="bg-white border-bottom shadow-sm sticky-top" style="height: 80px; z-index: 1060; transition: all 0.3s ease;">
-        <div class="container h-100 d-flex align-items-center justify-content-between px-4 px-md-5">
-            
-            <div class="d-flex align-items-center">
-                <a href="{% url 'home' %}" class="d-block">
-                    <img src="{% static 'assets/assets_frontend/logo.svg' %}" alt="Prescripto Logo" 
-                        style="width: 150px; transition: transform 0.3s;"
-                        onmouseover="this.style.transform='scale(1.05)'" 
-                        onmouseout="this.style.transform='scale(1)'">
-                </a>
-            </div>
+                <nav class="d-none d-lg-flex align-items-center gap-4 fw-bold" style="font-size: 13px; letter-spacing: 0.5px;">
+                    <a class="text-decoration-none" href="{% url 'home' %}" 
+                    style="color: #5f6fff; transition: 0.3s;" 
+                    onmouseover="this.style.color='#4a59e0'" 
+                    onmouseout="this.style.color='#5f6fff'">HOME</a>
+                    
+                    <a class="text-decoration-none text-secondary" href="{% url 'doctor' 'all doctor' %}" 
+                    style="transition: 0.3s;" 
+                    onmouseover="this.style.color='#5f6fff'" 
+                    onmouseout="this.style.color='#6c757d'">ALL DOCTORS</a>
+                    
+                    <a class="text-decoration-none text-secondary" href="{% url 'about' %}" 
+                    style="transition: 0.3s;" 
+                    onmouseover="this.style.color='#5f6fff'" 
+                    onmouseout="this.style.color='#6c757d'">ABOUT</a>
+                    
+                    <a class="text-decoration-none text-secondary" href="{% url 'contact' %}" 
+                    style="transition: 0.3s;" 
+                    onmouseover="this.style.color='#5f6fff'" 
+                    onmouseout="this.style.color='#6c757d'">CONTACT</a>
+                    
+                    <a href="{% url 'dash_admin' %}" target="_blank" 
+                    class="badge rounded-pill border border-primary text-primary text-decoration-none px-3 py-2" 
+                    style="font-size: 10px; background-color: rgba(95, 111, 255, 0.05); transition: 0.3s;"
+                    onmouseover="this.style.backgroundColor='#5f6fff'; this.style.color='#ffffff';"
+                    onmouseout="this.style.backgroundColor='rgba(95, 111, 255, 0.05)'; this.style.color='#5f6fff';">
+                        ADMIN PANEL
+                    </a>
+                </nav>
 
-            <nav class="d-none d-lg-flex align-items-center gap-4 fw-bold" style="font-size: 13px; letter-spacing: 0.5px;">
-                <a class="text-decoration-none" href="{% url 'home' %}" 
-                style="color: #5f6fff; transition: 0.3s;" 
-                onmouseover="this.style.color='#4a59e0'" 
-                onmouseout="this.style.color='#5f6fff'">HOME</a>
-                
-                <a class="text-decoration-none text-secondary" href="{% url 'doctor' 'all doctor' %}" 
-                style="transition: 0.3s;" 
-                onmouseover="this.style.color='#5f6fff'" 
-                onmouseout="this.style.color='#6c757d'">ALL DOCTORS</a>
-                
-                <a class="text-decoration-none text-secondary" href="{% url 'about' %}" 
-                style="transition: 0.3s;" 
-                onmouseover="this.style.color='#5f6fff'" 
-                onmouseout="this.style.color='#6c757d'">ABOUT</a>
-                
-                <a class="text-decoration-none text-secondary" href="{% url 'contact' %}" 
-                style="transition: 0.3s;" 
-                onmouseover="this.style.color='#5f6fff'" 
-                onmouseout="this.style.color='#6c757d'">CONTACT</a>
-                
-                <a href="{% url 'dash_admin' %}" target="_blank" 
-                class="badge rounded-pill border border-primary text-primary text-decoration-none px-3 py-2" 
-                style="font-size: 10px; background-color: rgba(95, 111, 255, 0.05); transition: 0.3s;"
-                onmouseover="this.style.backgroundColor='#5f6fff'; this.style.color='#ffffff';"
-                onmouseout="this.style.backgroundColor='rgba(95, 111, 255, 0.05)'; this.style.color='#5f6fff';">
-                    ADMIN PANEL
-                </a>
-            </nav>
-
-            <div class="d-flex align-items-center gap-3">
-                {% if request.session.login %}
-                    <div class="dropdown">
-                        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="rounded-circle border border-2 p-1 shadow-sm" 
-                                style="width: 42px; height: 42px; overflow: hidden; transition: 0.3s; border-color: #5f6fff;"
-                                onmouseover="this.style.transform='rotate(10deg) scale(1.1)'"
-                                onmouseout="this.style.transform='rotate(0deg) scale(1)'">
-                                <img src="{% static 'assets/assets_frontend/profile.avif' %}" alt="Profile" class="w-100 h-100 object-fit-cover rounded-circle">
-                            </div>
+                <div class="d-flex align-items-center gap-3">
+                    {% if request.session.login %}
+                        <div class="dropdown">
+                            <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="rounded-circle border border-2 p-1 shadow-sm" 
+                                    style="width: 42px; height: 42px; overflow: hidden; transition: 0.3s; border-color: #5f6fff;"
+                                    onmouseover="this.style.transform='rotate(10deg) scale(1.1)'"
+                                    onmouseout="this.style.transform='rotate(0deg) scale(1)'">
+                                    <img src="{% static 'assets/assets_frontend/profile.avif' %}" alt="Profile" class="w-100 h-100 object-fit-cover rounded-circle">
+                                </div>
+                            </a>
+                            
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-3 py-2" 
+                                style="border-radius: 15px; min-width: 210px; overflow: hidden;">
+                                <li class="px-3 py-2 border-bottom mb-2 bg-light">
+                                    <p class="mb-0 text-muted" style="font-size: 11px;">Signed in as</p>
+                                    <p class="mb-0 fw-bold text-dark small">Patient Account</p>
+                                </li>
+                                <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2" href="{% url 'my_profile' %}" onmouseover="this.style.backgroundColor='#f8f9ff'" onmouseout="this.style.backgroundColor='transparent'">
+                                    <i class="fa-regular fa-user text-primary"></i> My Profile</a></li>
+                                <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2" href="{% url 'user_appointment' %}" onmouseover="this.style.backgroundColor='#f8f9ff'" onmouseout="this.style.backgroundColor='transparent'">
+                                    <i class="fa-regular fa-calendar-check text-success"></i> My Appointments</a></li>
+                                <li><hr class="dropdown-divider opacity-50"></li>
+                                <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2 text-danger" href="{% url 'logout_user' %}" onmouseover="this.style.backgroundColor='#fff5f5'" onmouseout="this.style.backgroundColor='transparent'">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'register' %}" 
+                        class="btn rounded-pill px-4 py-2 text-white fw-bold shadow-sm d-flex align-items-center gap-2"
+                        style="background-color: #5f6fff; border: none; font-size: 13px; transition: 0.4s;"
+                        onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='translateY(-2px) shadow(0 5px 15px rgba(0,0,0,0.1))'"
+                        onmouseout="this.style.backgroundColor='#5f6fff'; this.style.transform='translateY(0px)'">
+                            <span>Create account</span>
+                            <i class="fa-solid fa-arrow-right-long" style="font-size: 11px;"></i>
                         </a>
-                        
-                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-3 py-2" 
-                            style="border-radius: 15px; min-width: 210px; overflow: hidden;">
-                            <li class="px-3 py-2 border-bottom mb-2 bg-light">
-                                <p class="mb-0 text-muted" style="font-size: 11px;">Signed in as</p>
-                                <p class="mb-0 fw-bold text-dark small">Patient Account</p>
-                            </li>
-                            <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2" href="{% url 'my_profile' %}" onmouseover="this.style.backgroundColor='#f8f9ff'" onmouseout="this.style.backgroundColor='transparent'">
-                                <i class="fa-regular fa-user text-primary"></i> My Profile</a></li>
-                            <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2" href="{% url 'user_appointment' %}" onmouseover="this.style.backgroundColor='#f8f9ff'" onmouseout="this.style.backgroundColor='transparent'">
-                                <i class="fa-regular fa-calendar-check text-success"></i> My Appointments</a></li>
-                            <li><hr class="dropdown-divider opacity-50"></li>
-                            <li><a class="dropdown-item py-2 px-3 small d-flex align-items-center gap-2 text-danger" href="{% url 'logout_user' %}" onmouseover="this.style.backgroundColor='#fff5f5'" onmouseout="this.style.backgroundColor='transparent'">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                    {% endif %}
+                </div>
+
+            </div>
+        </header>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert-box {{ message.tags }}" id="alertBox">
+                <div class="alert-header">
+                    <div class="icon">
+                    {% if 'success' in message.tags %}
+                        <i style="color: #28a745;">✔</i>
+                    {% elif 'error' in message.tags or 'danger' in message.tags %}
+                        <i style="color: #dc3545;">❗</i>
+                    {% elif 'warning' in message.tags %}
+                        <i style="color: #ffc107;">⚠</i>
+                    {% else %}
+                        <i style="color: #0dcaf0;">ℹ</i>
+                    {% endif %}
+                    <span class="small">{{ message }}</span>
+                    </div>
+                    <div class="close" onclick="closeAlert()">✖</div>
+                </div>
+                <div class="progress-bar"><span></span></div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        {% block contant %}
+        {% endblock %}
+
+
+        <footer class="bg-light pt-5 pb-4 border-top">
+            <div class="container">
+                <div class="row g-4 px-2 px-md-4">
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="mb-3">
+                            <a href="{% url 'home' %}">
+                                <img src="{% static 'assets/assets_frontend/logo.svg' %}" alt="Prescripto Logo" style="width: 160px;" />
+                            </a>
+                        </div>
+                        <p class="text-muted small pe-lg-5" style="line-height: 1.6;">
+                            Prescripto is a leading healthcare platform dedicated to bridging the gap between patients and specialized doctors. We prioritize your health with seamless booking and 24/7 support.
+                        </p>
+                        <div class="d-flex gap-3 mt-4">
+                            <a href="#" class="text-primary fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="text-info fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-danger fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-primary fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Company</h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2"><a href="{% url 'home' %}" class="text-decoration-none text-muted hover-link">Home</a></li>
+                            <li class="mb-2"><a href="{% url "about" %}" class="text-decoration-none text-muted hover-link">About Us</a></li>
+                            <li class="mb-2"><a href="{% url "patient_programs" %}" class="text-decoration-none text-muted hover-link">Our Services</a></li>
+                            <li class="mb-2"><a href="{% url "doctor" 'all doctor' %}" class="text-decoration-none text-muted hover-link">Find a Doctor</a></li>
+                            <li class="mb-2"><a href="{% url "contact" %}" class="text-decoration-none text-muted hover-link">Contact</a></li>
+                            <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Privacy Policy</a></li>
                         </ul>
                     </div>
-                {% else %}
-                    <a href="{% url 'register' %}" 
-                    class="btn rounded-pill px-4 py-2 text-white fw-bold shadow-sm d-flex align-items-center gap-2"
-                    style="background-color: #5f6fff; border: none; font-size: 13px; transition: 0.4s;"
-                    onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='translateY(-2px) shadow(0 5px 15px rgba(0,0,0,0.1))'"
-                    onmouseout="this.style.backgroundColor='#5f6fff'; this.style.transform='translateY(0px)'">
-                        <span>Create account</span>
-                        <i class="fa-solid fa-arrow-right-long" style="font-size: 11px;"></i>
-                    </a>
-                {% endif %}
-            </div>
 
-        </div>
-    </header>
+                    <div class="col-lg-3 col-md-6">
+                        <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Get In Touch</h6>
+                        <div class="small text-muted">
+                            <p class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i> +1-212-456-7890</p>
+                            <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> prescripto@gmail.com</p>
+                            <p class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i> 123 Healthcare St, Medical City, NY</p>
+                            <hr class="w-25">
+                            <p class="mb-0 fw-medium text-dark">Clinic Hours:</p>
+                            <p class="mb-0">Mon - Sat: 9:00 AM - 8:00 PM</p>
+                        </div>
+                    </div>
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert-box {{ message.tags }}" id="alertBox">
-            <div class="alert-header">
-                <div class="icon">
-                {% if 'success' in message.tags %}
-                    <i style="color: #28a745;">✔</i>
-                {% elif 'error' in message.tags or 'danger' in message.tags %}
-                    <i style="color: #dc3545;">❗</i>
-                {% elif 'warning' in message.tags %}
-                    <i style="color: #ffc107;">⚠</i>
-                {% else %}
-                    <i style="color: #0dcaf0;">ℹ</i>
-                {% endif %}
-                <span class="small">{{ message }}</span>
+                    <div class="col-lg-3 col-md-6">
+                        <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Newsletter</h6>
+                        <p class="small text-muted mb-3">Subscribe to get the latest health tips and updates.</p>
+                        <form class="input-group mb-3">
+                            <input type="email" class="form-control form-control-sm border-end-0 rounded-start-pill ps-3" placeholder="Your Email" aria-label="Email">
+                            <button class="btn btn-primary btn-sm rounded-end-pill px-3" type="submit">Join</button>
+                        </form>
+                        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2 fw-normal">
+                            <i class="fas fa-shield-alt me-1"></i> HIPAA Compliant
+                        </span>
+                    </div>
+
                 </div>
-                <div class="close" onclick="closeAlert()">✖</div>
-            </div>
-            <div class="progress-bar"><span></span></div>
-            </div>
-        {% endfor %}
-    {% endif %}
 
-
-    {% block contant %}
-    {% endblock %}
-
-
-    <footer class="bg-light pt-5 pb-4 border-top">
-        <div class="container">
-            <div class="row g-4 px-2 px-md-4">
+                <hr class="mt-5 mb-4 opacity-50" />
                 
-                <div class="col-lg-4 col-md-6">
-                    <div class="mb-3">
-                        <a href="{% url 'home' %}">
-                            <img src="{% static 'assets/assets_frontend/logo.svg' %}" alt="Prescripto Logo" style="width: 160px;" />
-                        </a>
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="text-muted small mb-0">
+                            &copy; 2026 <span class="fw-semibold">Prescripto</span>. Designed by Lalit Kumar Prajapati.
+                        </p>
                     </div>
-                    <p class="text-muted small pe-lg-5" style="line-height: 1.6;">
-                        Prescripto is a leading healthcare platform dedicated to bridging the gap between patients and specialized doctors. We prioritize your health with seamless booking and 24/7 support.
-                    </p>
-                    <div class="d-flex gap-3 mt-4">
-                        <a href="#" class="text-primary fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-info fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-danger fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-primary fs-5 transition-all" style="transition: 0.3s;"><i class="fab fa-linkedin"></i></a>
+                    <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" height="20" class="me-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" height="15" class="me-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" height="20">
                     </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6">
-                    <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Company</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="{% url 'home' %}" class="text-decoration-none text-muted hover-link">Home</a></li>
-                        <li class="mb-2"><a href="{% url "about" %}" class="text-decoration-none text-muted hover-link">About Us</a></li>
-                        <li class="mb-2"><a href="{% url "patient_programs" %}" class="text-decoration-none text-muted hover-link">Our Services</a></li>
-                        <li class="mb-2"><a href="{% url "doctor" 'all doctor' %}" class="text-decoration-none text-muted hover-link">Find a Doctor</a></li>
-                        <li class="mb-2"><a href="{% url "contact" %}" class="text-decoration-none text-muted hover-link">Contact</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted hover-link">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Get In Touch</h6>
-                    <div class="small text-muted">
-                        <p class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i> +1-212-456-7890</p>
-                        <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> prescripto@gmail.com</p>
-                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i> 123 Healthcare St, Medical City, NY</p>
-                        <hr class="w-25">
-                        <p class="mb-0 fw-medium text-dark">Clinic Hours:</p>
-                        <p class="mb-0">Mon - Sat: 9:00 AM - 8:00 PM</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <h6 class="fw-bold text-dark mb-4 text-uppercase small" style="letter-spacing: 1px;">Newsletter</h6>
-                    <p class="small text-muted mb-3">Subscribe to get the latest health tips and updates.</p>
-                    <form class="input-group mb-3">
-                        <input type="email" class="form-control form-control-sm border-end-0 rounded-start-pill ps-3" placeholder="Your Email" aria-label="Email">
-                        <button class="btn btn-primary btn-sm rounded-end-pill px-3" type="submit">Join</button>
-                    </form>
-                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2 fw-normal">
-                        <i class="fas fa-shield-alt me-1"></i> HIPAA Compliant
-                    </span>
-                </div>
-
-            </div>
-
-            <hr class="mt-5 mb-4 opacity-50" />
-            
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="text-muted small mb-0">
-                        &copy; 2026 <span class="fw-semibold">Prescripto</span>. Designed by Lalit Kumar Prajapati.
-                    </p>
-                </div>
-                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" height="20" class="me-3">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" height="15" class="me-3">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" height="20">
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        const timeButtons = document.querySelectorAll('#timeButtons button');
-        const selectedTimeInput = document.getElementById('selectedTime');
+        <script>
+            const timeButtons = document.querySelectorAll('#timeButtons button');
+            const selectedTimeInput = document.getElementById('selectedTime');
 
-        timeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active classes from all buttons
-                timeButtons.forEach(b => {
-                    b.classList.remove('bg-primary', 'text-white');
-                    b.classList.add('text-secondary');
+            timeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active classes from all buttons
+                    timeButtons.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-white');
+                        b.classList.add('text-secondary');
+                    });
+
+                    // Set selected time
+                    selectedTimeInput.value = btn.getAttribute('data-time');
+
+                    // Highlight selected button
+                    btn.classList.remove('text-secondary');
+                    btn.classList.add('bg-primary', 'text-white');
                 });
-
-                // Set selected time
-                selectedTimeInput.value = btn.getAttribute('data-time');
-
-                // Highlight selected button
-                btn.classList.remove('text-secondary');
-                btn.classList.add('bg-primary', 'text-white');
             });
-        });
 
 
-        setTimeout(function () {
-            const container = document.getElementById('message-container');
-            if (container) {
-                container.style.display = 'none';
+            setTimeout(function () {
+                const container = document.getElementById('message-container');
+                if (container) {
+                    container.style.display = 'none';
+                }
+            }, 2000);
+
+
+
+            window.onload = function() {
+                setTimeout(() => {
+                document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+                }, 4000);
             }
-        }, 2000);
 
+            function closeAlert() {
+                document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
+            }
 
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
 
-        window.onload = function() {
-            setTimeout(() => {
-            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
-            }, 4000);
-        }
-
-        function closeAlert() {
-            document.querySelectorAll(".alert-box").forEach(el => el.style.display = "none");
-        }
-
-        const modal = document.getElementById('videoModal');
-        const video = document.getElementById('modalVideo');
-
-        modal.addEventListener('hidden.bs.modal', function () {
-            video.pause();
-            video.currentTime = 0;
-        });
-
-    </script>
-
-
-    {% comment %} Loader Code Js {% endcomment %}
-    <script>
-        window.addEventListener("load", function() {
-            // Create dynamic animations without <style> tag
-            const style = document.createElement('style');
-            style.innerHTML = `
-                @keyframes heartbeat {
-                    0% { transform: scale(1); }
-                    15% { transform: scale(1.2); }
-                    30% { transform: scale(1); }
-                    45% { transform: scale(1.1); }
-                    70% { transform: scale(1); }
-                }
-                @keyframes dot-blink {
-                    0%, 100% { opacity: 0.2; }
-                    50% { opacity: 1; }
-                }
-                #spinner-ring {
-                    animation: spin-loader 1s linear infinite;
-                }
-                #pulse-circle {
-                    animation: pulse-ring 2s ease-out infinite;
-                }
-                @keyframes spin-loader {
-                    100% { transform: rotate(360deg); }
-                }
-                @keyframes pulse-ring {
-                    0% { transform: scale(0.6); opacity: 0.8; }
-                    100% { transform: scale(1.4); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-
-            // Hide Loader
-            setTimeout(function() {
-                const loader = document.getElementById("loader");
-                loader.style.opacity = "0";
-                loader.style.visibility = "hidden";
-            }, 800); // 800ms tak dikhega taki animation pura ho
-        });
-    </script>
-
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            AOS.init({
-            duration: 1000,
-            once: true
+            modal.addEventListener('hidden.bs.modal', function () {
+                video.pause();
+                video.currentTime = 0;
             });
-        });
-    </script>
 
-</body>
+        </script>
+
+
+        {% comment %} Loader Code Js {% endcomment %}
+        <script>
+            window.addEventListener("load", function() {
+                // Create dynamic animations without <style> tag
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @keyframes heartbeat {
+                        0% { transform: scale(1); }
+                        15% { transform: scale(1.2); }
+                        30% { transform: scale(1); }
+                        45% { transform: scale(1.1); }
+                        70% { transform: scale(1); }
+                    }
+                    @keyframes dot-blink {
+                        0%, 100% { opacity: 0.2; }
+                        50% { opacity: 1; }
+                    }
+                    #spinner-ring {
+                        animation: spin-loader 1s linear infinite;
+                    }
+                    #pulse-circle {
+                        animation: pulse-ring 2s ease-out infinite;
+                    }
+                    @keyframes spin-loader {
+                        100% { transform: rotate(360deg); }
+                    }
+                    @keyframes pulse-ring {
+                        0% { transform: scale(0.6); opacity: 0.8; }
+                        100% { transform: scale(1.4); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Hide Loader
+                setTimeout(function() {
+                    const loader = document.getElementById("loader");
+                    loader.style.opacity = "0";
+                    loader.style.visibility = "hidden";
+                }, 800); // 800ms tak dikhega taki animation pura ho
+            });
+        </script>
+
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                AOS.init({
+                duration: 1000,
+                once: true
+                });
+            });
+        </script>
+
+    </body>
 
 </html>
 
