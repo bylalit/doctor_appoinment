@@ -28,7 +28,7 @@
       </section>
 
 
-        <section class="text-center mt-5">
+        {% comment %} <section class="text-center mt-5">
 
             <!-- Heading -->
             <h2 class="fw-semibold fs-3 py-2 mb-1" data-aos="fade-up">
@@ -121,6 +121,115 @@
                     </a>
                     <span class="mt-2">Gastroenterologist</span>
                 </div>
+
+            </div>
+
+        </section> {% endcomment %}
+
+        <section class="text-center mt-5 py-5" style="background-color: #ffffff;">
+
+            <div class="mb-5" data-aos="fade-up">
+                <h2 class="fw-bold text-dark display-6 mb-2" style="letter-spacing: -1px;">
+                    Find by <span style="color: #5f6fff;">Speciality</span>
+                </h2>
+                <div class="mx-auto mb-3" style="height: 3px; width: 50px; background: #5f6fff; border-radius: 10px;"></div>
+                <p class="text-muted small mx-auto" style="max-width: 480px; line-height: 1.6;">
+                    Simply browse through our extensive list of trusted doctors and schedule your appointment hassle-free.
+                </p>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-center gap-5 px-3">
+
+                {% with specialities=SpecialityList %} 
+                <div class="d-flex flex-column align-items-center" 
+                    style="width: 120px; transition: 0.3s;"
+                    data-aos="zoom-in" data-aos-delay="100"
+                    onmouseover="this.style.transform='translateY(-8px)'"
+                    onmouseout="this.style.transform='translateY(0px)'">
+                    
+                    <a href="{% url 'doctor' 'General physician' %}" class="text-decoration-none">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm mb-3" 
+                            style="width: 100px; height: 100px; background: #f0f4ff; border: 2px solid transparent; transition: 0.3s;"
+                            onmouseover="this.style.borderColor='#5f6fff'; this.style.backgroundColor='#ffffff'; this.style.shadow='0 10px 20px rgba(95,111,255,0.1)'"
+                            onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='#f0f4ff'">
+                            <img src="{% static 'assets/assets_frontend/General_physician.svg' %}" 
+                                style="width: 60px; height: 60px; object-fit: contain;">
+                        </div>
+                        <span class="fw-bold text-dark small" style="font-size: 13px; letter-spacing: 0.3px;">General Physician</span>
+                    </a>
+                </div>
+
+                <div class="d-flex flex-column align-items-center" style="width: 120px; transition: 0.3s;" data-aos="zoom-in" data-aos-delay="200"
+                    onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0px)'">
+                    <a href="{% url 'doctor' 'Gynecologist' %}" class="text-decoration-none">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm mb-3" 
+                            style="width: 100px; height: 100px; background: #fff0f6; border: 2px solid transparent; transition: 0.3s;"
+                            onmouseover="this.style.borderColor='#ff4d94'; this.style.backgroundColor='#ffffff'"
+                            onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='#fff0f6'">
+                            <img src="{% static 'assets/assets_frontend/Gynecologist.svg' %}" style="width: 60px; height: 60px; object-fit: contain;">
+                        </div>
+                        <span class="fw-bold text-dark small" style="font-size: 13px;">Gynecologist</span>
+                    </a>
+                </div>
+
+                <div class="d-flex flex-column align-items-center" style="width: 120px; transition: 0.3s;" data-aos="zoom-in" data-aos-delay="300"
+                    onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0px)'">
+                    <a href="{% url 'doctor' 'Dermatologist' %}" class="text-decoration-none">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm mb-3" 
+                            style="width: 100px; height: 100px; background: #e6fffa; border: 2px solid transparent; transition: 0.3s;"
+                            onmouseover="this.style.borderColor='#38b2ac'; this.style.backgroundColor='#ffffff'"
+                            onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='#e6fffa'">
+                            <img src="{% static 'assets/assets_frontend/Dermatologist.svg' %}" style="width: 60px; height: 60px; object-fit: contain;">
+                        </div>
+                        <span class="fw-bold text-dark small" style="font-size: 13px;">Dermatologist</span>
+                    </a>
+                </div>
+
+                <div class="d-flex flex-column align-items-center" style="width: 120px; transition: 0.3s;" data-aos="zoom-in" data-aos-delay="400"
+                    onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0px)'">
+                    <a href="{% url 'doctor' 'Pediatricians' %}" class="text-decoration-none">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm mb-3" 
+                            style="width: 100px; height: 100px; background: #fffbe6; border: 2px solid transparent; transition: 0.3s;"
+                            onmouseover="this.style.borderColor='#ecc94b'; this.style.backgroundColor='#ffffff'"
+                            onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='#fffbe6'">
+                            <img src="{% static 'assets/assets_frontend/Pediatricians.svg' %}" style="width: 60px; height: 60px; object-fit: contain;">
+                        </div>
+                        <span class="fw-bold text-dark small" style="font-size: 13px;">Pediatricians</span>
+                    </a>
+                </div>
+
+                <div class="d-flex flex-column align-items-center" style="width: 120px; transition: 0.3s;" data-aos="zoom-in" data-aos-delay="500"
+                    onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0px)'">
+                    <a href="{% url 'doctor' 'Neurologist' %}" class="text-decoration-none">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm mb-3" 
+                            style="width: 100px; height: 100px; background: #ebf8ff; border: 2px solid transparent; transition: 0.3s;"
+                            onmouseover="this.style.borderColor='#4299e1'; this.style.backgroundColor='#ffffff'"
+                            onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='#ebf8ff'">
+                            <img src="{% static 'assets/assets_frontend/Neurologist.svg' %}" style="width: 60px; height: 60px; object-fit: contain;">
+                        </div>
+                        <span class="fw-bold text-dark small" style="font-size: 13px;">Neurologist</span>
+                    </a>
+                </div>
+                
+                <div class="d-flex flex-column align-items-center" 
+                     style="width: 120px; transition: 0.3s;" 
+                     data-aos="zoom-in" data-aos-delay="600"
+                     onmouseover="this.style.transform='translateY(-8px)'" 
+                     onmouseout="this.style.transform='translateY(0px)'">
+                    
+                    <a href="{% url 'doctor' 'Gastroenterologist' %}" class="text-decoration-none">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center shadow-sm mb-3" 
+                             style="width: 100px; height: 100px; background: #f3e8ff; border: 2px solid transparent; transition: 0.3s;"
+                             onmouseover="this.style.borderColor='#9333ea'; this.style.backgroundColor='#ffffff'"
+                             onmouseout="this.style.borderColor='transparent'; this.style.backgroundColor='#f3e8ff'">
+                            <img src="{% static 'assets/assets_frontend/Gastroenterologist.svg' %}" 
+                                 style="width: 60px; height: 60px; object-fit: contain;">
+                        </div>
+                        <span class="fw-bold text-dark small" style="font-size: 13px;">Gastroenterologist</span>
+                    </a>
+                </div>
+
+                {% endwith %}
 
             </div>
 
