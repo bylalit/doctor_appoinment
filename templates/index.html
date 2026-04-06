@@ -5,27 +5,64 @@
 
     <main class="container py-5 px-5">
 
-      <section class="position-relative overflow-hidden" style="height: 500px;">
 
-          <!-- Background Video -->
-          <video autoplay muted loop playsinline 
-              class="position-absolute top-50 start-50 translate-middle w-100 h-100 object-fit-cover">
-              <source src="{% static 'assets/assets_frontend/7579843-hd_1366_720_25fps.mp4' %}" type="video/mp4">
- 
-          </video>
+        <section class="position-relative overflow-hidden" style="height: 600px; background-color: #000;">
 
-          <!-- Overlay (optional dark layer) -->
-          <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+            <video autoplay muted loop playsinline 
+                class="position-absolute top-50 start-50 translate-middle w-100 h-100" 
+                style="object-fit: cover; filter: brightness(0.8);">
+                <source src="{% static 'assets/assets_frontend/7579843-hd_1366_720_25fps.mp4' %}" type="video/mp4">
+            </video>
 
-          <!-- Content -->
-          <div class="container position-relative text-center text-white d-flex align-items-center justify-content-center h-100">
-              <div>
-                  <h1 class="fw-bold"  data-aos="fade-up">Welcome to Our Clinic</h1>
-                  <p class="lead" data-aos="fade-up" data-aos-delay="200">Your Health is Our Priority</p>
-              </div>
-          </div>
+            <div class="position-absolute top-0 start-0 w-100 h-100" 
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(28, 35, 114, 0.6) 100%);">
+            </div>
 
-      </section>
+            <div class="container position-relative text-center text-white d-flex align-items-center justify-content-center h-100" style="z-index: 2;">
+                <div class="px-3">
+                    
+                    <div class="d-inline-block px-3 py-1 rounded-pill mb-3" 
+                        style="background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); font-size: 12px; letter-spacing: 2px; font-weight: 600;">
+                        <i class="fas fa-check-circle me-2"></i> TRUSTED BY 10,000+ PATIENTS
+                    </div>
+
+                    <h1 class="fw-bold display-3 mb-3" 
+                        style="letter-spacing: -2px; line-height: 1.1; text-shadow: 0 4px 15px rgba(0,0,0,0.3);" 
+                        data-aos="fade-up">
+                        Welcome to <span style="color: #5f6fff; background: white; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-image: linear-gradient(45deg, #fff, #9ca6ff);">Our Clinic</span>
+                    </h1>
+
+                    <p class="mx-auto mb-5 opacity-90 fw-light" 
+                    style="max-width: 600px; font-size: 1.2rem; letter-spacing: 0.5px; line-height: 1.6;" 
+                    data-aos="fade-up" data-aos-delay="200">
+                        Your health is our top priority. Experience world-class medical care with the latest technology and expert doctors.
+                    </p>
+
+                    <div class="d-flex flex-wrap justify-content-center gap-3" data-aos="fade-up" data-aos-delay="400">
+                        <a href="{% url 'register' %}" 
+                        class="btn rounded-pill px-5 py-3 fw-bold shadow-lg d-flex align-items-center gap-2"
+                        style="background-color: #5f6fff; color: white; border: none; transition: 0.3s;"
+                        onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='translateY(-3px)';"
+                        onmouseout="this.style.backgroundColor='#5f6fff'; this.style.transform='translateY(0px)';">
+                            Get Started Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                        
+                        <a href="{% url 'doctor' 'all doctor' %}" 
+                        class="btn rounded-pill px-5 py-3 fw-bold text-white border border-white border-2"
+                        style="background: transparent; backdrop-filter: blur(5px); transition: 0.3s;"
+                        onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(-3px)';"
+                        onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0px)';"
+                        data-bs-toggle="modal" data-bs-target="#videoModal">
+                            Learn More
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="position-absolute bottom-0 start-0 w-100" style="height: 50px; background: linear-gradient(to top, #fff, transparent); z-index: 1;"></div>
+
+        </section>
 
         <section class="text-center mt-5 py-5" style="background-color: #ffffff;">
 
