@@ -498,55 +498,51 @@
         </section>
 
 
-        <!-- Hero 1 -->
-        <section
-            class="text-white rounded p-5 p-md-5 d-flex flex-column flex-sm-row justify-content-between align-items-center mt-5"
-            style="background-color: rgb(95 111 255); overflow: hidden;"
-            data-aos="fade-up">
-
-            <!-- LEFT CONTENT -->
-            <div class="mb-4 mb-sm-0" data-aos="fade-right" data-aos-delay="200">
-
-                <h1 class="fw-bold fs-1 mb-3">
-                    Book Appointment<br>With Trusted Doctors
-                </h1>
-
-                <div class="d-flex align-items-center justify-content-center mt-5"
-                    data-aos="fade-up" data-aos-delay="300">
-
-                    <img src="{% static 'assets/assets_frontend/group_profiles-BCL6AVF5.png' %}" 
-                        class="me-3 mb-3"
-                        width="100" height="50">
-
-                    <p class="small" style="max-width: 420px;">
-                        Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
-                    </p>
+        <section class="container mt-5" data-aos="fade-up">
+            <div class="row align-items-end rounded-5 shadow-lg overflow-hidden" 
+                style="background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); min-height: 480px; position: relative;">
+                
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.1; pointer-events: none;">
+                    <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: white; border-radius: 50%;"></div>
+                    <div style="position: absolute; bottom: 10%; right: 5%; width: 100px; height: 100px; background: white; border-radius: 50%;"></div>
                 </div>
 
-                <!-- Button -->
-                <a href="{% url "doctor" 'all doctor' %}"
-                class="btn btn-light rounded-pill ps-4 mt-3 py-3 text-primary fw-semibold btn-sm d-flex align-items-center gap-2 w-50"
-                style="transition: all 0.3s ease;"
-                onmouseover="this.style.transform='scale(1.1)'"
-                onmouseout="this.style.transform='scale(1)'"
-                data-aos="zoom-in" data-aos-delay="400">
+                <div class="col-lg-7 p-5 text-white" data-aos="fade-right" data-aos-delay="200" style="z-index: 2;">
+                    
+                    <h1 class="fw-bold display-4 mb-4" style="line-height: 1.1; letter-spacing: -1px;">
+                        Book Appointment <br> With <span style="color: #c9d1ff;">Trusted Doctors</span>
+                    </h1>
 
-                    Book appointment <i class="fas fa-arrow-right"></i>
+                    <div class="d-flex align-items-center mb-5 gap-3">
+                        <img src="{% static 'assets/assets_frontend/group_profiles-BCL6AVF5.png' %}" 
+                            class="img-fluid" style="width: 110px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));">
+                        <p class="small mb-0 opacity-90" style="max-width: 350px; line-height: 1.5;">
+                            Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+                        </p>
+                    </div>
 
-                </a>
+                    <a href="{% url 'doctor' 'all doctor' %}"
+                    class="btn btn-white rounded-pill px-5 py-3 shadow-lg d-inline-flex align-items-center gap-3 fw-bold text-primary"
+                    style="background: white; border: none; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);"
+                    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.2)';"
+                    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                        Book Appointment 
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                            <i class="fas fa-arrow-right text-white" style="font-size: 10px;"></i>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-5 text-center text-lg-end px-0 d-flex align-items-end justify-content-center" 
+                    data-aos="fade-left" data-aos-delay="300" style="z-index: 1;">
+                    <img src="{% static 'assets/assets_frontend/header_img.png' %}" 
+                        class="img-fluid" 
+                        style="max-width: 90%; height: auto; transform-origin: bottom; transition: transform 0.5s ease;"
+                        onmouseover="this.style.transform='scale(1.03) translateY(-5px)'"
+                        onmouseout="this.style.transform='scale(1) translateY(0px)'">
+                </div>
 
             </div>
-
-            <!-- RIGHT IMAGE -->
-            <img src="{% static 'assets/assets_frontend/header_img.png' %}" 
-                class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4"
-                width="420"
-                height="700"
-                data-aos="fade-left" data-aos-delay="300"
-                style="transition: transform 0.4s ease;"
-                onmouseover="this.style.transform='scale(1.05)'"
-                onmouseout="this.style.transform='scale(1)'">
-
         </section>
 
   </main>
