@@ -356,7 +356,7 @@
         </section>
 
 
-        <section class="container my-5 py-5">
+        {% comment %} <section class="container my-5 py-5">
 
             <!-- Heading -->
             <div class="mb-5 text-start" data-aos="fade-up">
@@ -433,6 +433,81 @@
 
                     </div>
 
+                </div>
+            </div>
+        </div> {% endcomment %}
+
+        <section class="container my-5 py-5">
+            <div class="mb-5 text-start" data-aos="fade-up">
+                <div style="height: 4px; width: 60px; background-color: #5f6fff; border-radius: 10px; margin-bottom: 15px;"></div>
+                <h1 class="fw-bold display-7 text-dark" style="letter-spacing: -1px;">
+                    Our Efforts in the <br>
+                    <span style="color: #5f6fff; background: linear-gradient(90deg, #5f6fff, #9ca6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Fight Against Cancer</span>
+                </h1>
+            </div>
+
+            <div class="position-relative shadow-lg border-0"
+                data-aos="zoom-in"
+                style="border-radius: 30px; overflow: hidden; height: 450px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;"
+                onmouseover="this.style.transform='scale(1.02)'"
+                onmouseout="this.style.transform='scale(1)'">
+
+                <video autoplay muted loop playsinline class="w-100 h-100" style="object-fit: cover; filter: brightness(0.9);">
+                    <source src="{% static 'assets/assets_frontend/abc.mp4' %}" type="video/mp4">
+                </video>
+
+                <div class="position-absolute top-0 start-0 w-100 h-100" 
+                    style="background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.6) 100%);">
+                </div>
+
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center px-4 px-md-5">
+                    <div class="row w-100 align-items-center">
+                        
+                        <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
+                            <div class="p-4 p-md-5 border border-white border-opacity-10" 
+                                style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); border-radius: 25px; max-width: 550px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);">
+                                
+                                <i class="fas fa-quote-left text-white opacity-50 mb-3 fs-3"></i>
+                                
+                                <p class="text-white fs-5 fw-light lh-base mb-4" style="font-style: italic; letter-spacing: 0.5px;">
+                                    "Our mission is to turn scientific possibilities into real hope,
+                                    addressing urgent patient needs and helping improve lives."
+                                </p>
+
+                                <div class="d-flex align-items-center gap-3">
+                                    <div style="width: 40px; height: 2px; background: #5f6fff;"></div>
+                                    <div>
+                                        <p class="text-white fw-bold mb-0" style="letter-spacing: 0.5px;">Dr. Murali Ramachandra</p>
+                                        <p class="small mb-0" style="color: #9ca6ff; font-weight: 500;">Chief Executive Officer, Aurigene Oncology</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 text-center text-lg-end mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="400">
+                            <button class="btn btn-white rounded-circle shadow-lg d-inline-flex align-items-center justify-content-center"
+                                    style="width: 85px; height: 85px; background: white; border: none; transition: 0.4s; color: #5f6fff;"
+                                    onmouseover="this.style.backgroundColor='#5f6fff'; this.style.color='white'; this.style.transform='scale(1.1)';"
+                                    onmouseout="this.style.backgroundColor='white'; this.style.color='#5f6fff'; this.style.transform='scale(1)';"
+                                    data-bs-toggle="modal" data-bs-target="#videoModal">
+                                <i class="fas fa-play fs-3 ps-1"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="videoModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content bg-dark border-0" style="border-radius: 20px; overflow: hidden;">
+                    <div class="modal-body p-0 text-end">
+                        <button type="button" class="btn-close btn-close-white p-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <video controls class="w-100" id="modalVideo">
+                            <source src="{% static 'assets/assets_frontend/abc.mp4' %}" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
         </div>
