@@ -3,7 +3,7 @@
 
 {% block contant %}
 
-
+{% comment %} 
     <section class="container py-5">
 
         <!-- 🔹 Heading -->
@@ -201,6 +201,162 @@
                 style="background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent);">
             </div>
 
+        </div>
+
+    </section> {% endcomment %}
+
+    <section class="container py-4 mt-4">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h6 class="text-uppercase fw-bold mb-2" style="color: #5f6fff; letter-spacing: 2px; font-size: 13px;">Get In Touch</h6>
+            <h1 class="fw-bold display-5 text-dark" style="letter-spacing: -1.5px;">Contact <span style="color: #5f6fff;">Us</span></h1>
+            <div class="mx-auto mt-2 mb-3" style="height: 4px; width: 50px; background: #5f6fff; border-radius: 10px;"></div>
+            <p class="text-muted mx-auto" style="max-width: 500px;">We would love to hear from you. Our team is available 24/7 to assist with your healthcare needs.</p>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="card border-0 shadow-sm p-4 text-center h-100"
+                    style="border-radius: 20px; transition: 0.4s; background: #f8f9ff;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#5f6fff'; this.querySelectorAll('h5, p, i').forEach(el => el.style.color='white');"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#f8f9ff'; this.querySelector('h5').style.color='#212529'; this.querySelector('p').style.color='#6c757d'; this.querySelector('i').style.color='#5f6fff';">
+                    
+                    <i class="fas fa-map-marker-alt mb-3 fs-3" style="color: #5f6fff;"></i>
+                    <h5 class="fw-bold mb-1">Office Address</h5>
+                    <p class="text-muted small mb-0">Ahmedabad, Gujarat, India</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card border-0 shadow-sm p-4 text-center h-100"
+                    style="border-radius: 20px; transition: 0.4s; background: #f8f9ff;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#5f6fff'; this.querySelectorAll('h5, p, i').forEach(el => el.style.color='white');"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#f8f9ff'; this.querySelector('h5').style.color='#212529'; this.querySelector('p').style.color='#6c757d'; this.querySelector('i').style.color='#5f6fff';">
+                    
+                    <i class="fas fa-phone-volume mb-3 fs-3" style="color: #5f6fff;"></i>
+                    <h5 class="fw-bold mb-1">Phone Number</h5>
+                    <p class="text-muted small mb-0">+91 00000 00000</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="card border-0 shadow-sm p-4 text-center h-100"
+                    style="border-radius: 20px; transition: 0.4s; background: #f8f9ff;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#5f6fff'; this.querySelectorAll('h5, p, i').forEach(el => el.style.color='white');"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#f8f9ff'; this.querySelector('h5').style.color='#212529'; this.querySelector('p').style.color='#6c757d'; this.querySelector('i').style.color='#5f6fff';">
+                    
+                    <i class="fas fa-envelope-open-text mb-3 fs-3" style="color: #5f6fff;"></i>
+                    <h5 class="fw-bold mb-1">Email Support</h5>
+                    <p class="text-muted small mb-0">prescripto@gmail.com</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-0 shadow-lg rounded-5 overflow-hidden mb-5" style="border: 1px solid rgba(0,0,0,0.05);">
+            
+            <div class="col-lg-6 bg-white p-4 p-md-5" data-aos="fade-right">
+                <h3 class="fw-bold text-dark mb-4">Send a <span class="text-primary">Message</span></h3>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted">Full Name</label>
+                            <input type="text" name="name" class="form-control bg-light border-0 p-3 rounded-3" style="font-size: 14px;" placeholder="John Doe" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted">Email Address</label>
+                            <input type="email" name="email" class="form-control bg-light border-0 p-3 rounded-3" style="font-size: 14px;" placeholder="john@example.com" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-muted">Subject</label>
+                            <input type="text" name="subject" class="form-control bg-light border-0 p-3 rounded-3" style="font-size: 14px;" placeholder="How can we help?">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-muted">Message</label>
+                            <textarea name="message" rows="4" class="form-control bg-light border-0 p-3 rounded-3" style="font-size: 14px;" placeholder="Describe your inquiry..."></textarea>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn w-100 py-3 fw-bold text-white shadow"
+                                    style="background: #5f6fff; border-radius: 12px; border: none; transition: 0.3s;"
+                                    onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='scale(1.02)';"
+                                    onmouseout="this.style.backgroundColor='#5f6fff'; this.style.transform='scale(1)';">
+                                Submit Message <i class="fas fa-paper-plane ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left">
+                <div class="h-100 w-100">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235014.2991065113!2d72.4149269566863!3d23.020181763135124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                        width="100%" height="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="py-5" data-aos="fade-up">
+            <h3 class="fw-bold text-center mb-5">Why Patients <span class="text-primary">Trust Us</span></h3>
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="p-4" style="transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px;">
+                            <i class="fas fa-user-md fs-3 text-primary"></i>
+                        </div>
+                        <h5 class="fw-bold">Expert Doctors</h5>
+                        <p class="text-muted small">Access to highly experienced and trusted medical professionals.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4" style="transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px;">
+                            <i class="fas fa-clock fs-3 text-success"></i>
+                        </div>
+                        <h5 class="fw-bold">Quick Service</h5>
+                        <p class="text-muted small">Our digital system ensures 0 waiting time for appointments.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4" style="transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div class="bg-danger bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px;">
+                            <i class="fas fa-heart fs-3 text-danger"></i>
+                        </div>
+                        <h5 class="fw-bold">Patient Care</h5>
+                        <p class="text-muted small">We prioritize your health and comfort above everything else.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 mb-4 rounded-5 overflow-hidden position-relative shadow-lg"
+            style="background: linear-gradient(135deg, #5f6fff, #4338ca); padding: 80px 20px;"
+            data-aos="zoom-in">
+            
+            <div class="text-center text-white position-relative" style="z-index: 2;">
+                <h2 class="fw-bold mb-3 display-5">Need Medical Help?</h2>
+                <p class="mb-5 opacity-75 fs-5 mx-auto" style="max-width: 600px;">Our expert doctors are available to guide you 24/7. Your wellness journey starts with a single click.</p>
+                
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="tel:+910000000000" class="btn btn-white rounded-pill px-5 py-3 fw-bold text-primary shadow-lg"
+                    style="background: white; border: none; transition: 0.3s;"
+                    onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+                        <i class="fas fa-phone-alt me-2"></i> Call Us Now
+                    </a>
+                    <a href="{% url 'doctor' 'all doctor' %}" class="btn rounded-pill px-5 py-3 fw-bold text-white border-2"
+                    style="border: 2px solid white; transition: 0.3s;"
+                    onmouseover="this.style.color='#5f6fff'; this.style.transform='scale(1.05)';"
+                    onmouseout="this.style.background='transparent'; this.style.color='white'; this.style.transform='scale(1)';">
+                        Book Appointment <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="position-absolute top-0 end-0 opacity-10" style="font-size: 300px; transform: rotate(15deg); margin-right: -100px; margin-top: -50px;">
+                <i class="fas fa-notes-medical text-white"></i>
+            </div>
         </div>
 
     </section>
