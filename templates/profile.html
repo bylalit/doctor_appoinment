@@ -3,7 +3,7 @@
 
 {% block contant %}
 
-    <section class="container my-5 py-5">
+    {% comment %} <section class="container my-5 py-5">
 
         <!-- 🔹 Heading -->
         <div class="text-center mb-5" data-aos="fade-down">
@@ -114,6 +114,114 @@
 
         </div>
 
+    </section> {% endcomment %}
+
+    <section class="container my-3 py-5 overflow-hidden" style="overflow-x: hidden;">
+
+        <div class="text-center mb-5" data-aos="fade-down">
+            <h6 class="text-uppercase fw-bold mb-2" style="color: #5f6fff; letter-spacing: 2px; font-size: 13px;">User Settings</h6>
+            <h2 class="fw-bold display-5 text-dark" style="letter-spacing: -1.5px;">My <span style="color: #5f6fff;">Profile</span></h2>
+            <div class="mx-auto mt-2 mb-3" style="height: 4px; width: 50px; background: #5f6fff; border-radius: 10px;"></div>
+            <p class="text-muted mx-auto">Review and manage your personal healthcare account details.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-lg-4" data-aos="zoom-in">
+                <div class="card border-0 shadow-lg text-center p-4 p-md-5 h-100"
+                    style="border-radius: 30px; background: white; transition: 0.4s;"
+                    onmouseover="this.style.transform='translateY(-10px)';"
+                    onmouseout="this.style.transform='translateY(0px)';" >
+
+                    <div class="position-relative d-inline-block mx-auto mb-4">
+                        <div class="rounded-circle p-1" style="background: linear-gradient(45deg, #5f6fff, #9ca6ff); width: 140px; height: 140px;">
+                            <div class="bg-white rounded-circle p-1 w-100 h-100">
+                                {% if user.profile_image %}
+                                    <img src="{{ user.profile_image.url }}" class="rounded-circle w-100 h-100 shadow-sm" style="object-fit: cover;">
+                                {% else %}
+                                    <img src="{% static 'assets/assets_frontend/profile.avif' %}" class="rounded-circle w-100 h-100 shadow-sm" style="object-fit: cover;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <span class="position-absolute bottom-0 end-0 border border-3 border-white rounded-circle bg-success" 
+                            style="width: 20px; height: 20px; margin-right: 10px; margin-bottom: 10px;"></span>
+                    </div>
+
+                    <h4 class="fw-bold text-dark mb-1">{{ user.username }}</h4>
+                    <p class="text-primary small fw-semibold mb-4">{{ user.email }}</p>
+
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'edit_profile' user.id %}" class="btn py-2 rounded-pill fw-bold text-white shadow-sm"
+                        style="background: #5f6fff; border: none; transition: 0.3s;"
+                        onmouseover="this.style.backgroundColor='#4a59e0';"
+                        onmouseout="this.style.backgroundColor='#5f6fff';">
+                            <i class="fas fa-user-edit me-2"></i> Edit Profile
+                        </a>
+                        <a href="{% url 'logout_user' %}" class="btn py-2 rounded-pill fw-bold"
+                        style="color: #dc3545; background: rgba(220, 53, 69, 0.05); border: 1px solid rgba(220, 53, 69, 0.2); transition: 0.3s;"
+                        onmouseover="this.style.background='#dc3545'; this.style.color='white';"
+                        onmouseout="this.style.background='rgba(220, 53, 69, 0.05)'; this.style.color='#dc3545';">
+                            Logout Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="card border-0 shadow-sm p-4 p-md-5 h-100" style="border-radius: 30px; background: white;">
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary bg-opacity-10 rounded-3 p-2 me-3">
+                            <i class="fas fa-id-card text-primary"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-0">Personal Details</h5>
+                    </div>
+
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Full Name</label>
+                            <div class="p-3 rounded-3 bg-light fw-semibold text-dark">{{ user.username }}</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Email Address</label>
+                            <div class="p-3 rounded-3 bg-light fw-semibold text-dark">{{ user.email }}</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Phone Number</label>
+                            <div class="p-3 rounded-3 bg-light fw-semibold {% if user.phone %}text-dark{% else %}text-muted font-italic{% endif %}">
+                                {{ user.phone|default:"Not provided" }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Current City</label>
+                            <div class="p-3 rounded-3 bg-light fw-semibold {% if user.city %}text-dark{% else %}text-muted font-italic{% endif %}">
+                                {{ user.city|default:"Not provided" }}
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="small text-muted fw-bold text-uppercase mb-1" style="letter-spacing: 0.5px;">Residential Address</label>
+                            <div class="p-3 rounded-3 bg-light fw-semibold {% if user.address %}text-dark{% else %}text-muted font-italic{% endif %}" style="min-height: 80px;">
+                                {{ user.address|default:"Please update your complete address details." }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto p-3 rounded-4 d-flex align-items-center" style="background: rgba(25, 135, 84, 0.05); border: 1px dashed rgba(25, 135, 84, 0.3);">
+                        <i class="fas fa-shield-check text-success me-3 fs-4"></i>
+                        <div>
+                            <p class="mb-0 fw-bold text-dark small">Account Verified</p>
+                            <p class="mb-0 text-muted" style="font-size: 11px;">Your personal health data is encrypted and secure.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </section>
 
 
