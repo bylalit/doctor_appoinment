@@ -362,7 +362,7 @@
         </div>
     </section>
 
-    <section class="container my-5 py-5">
+    {% comment %} <section class="container my-5 py-5">
 
         <!-- Heading -->
         <div class="text-center mb-5" data-aos="fade-up">
@@ -528,6 +528,126 @@
 
             </div>
 
+        </div>
+
+    </section> {% endcomment %}
+
+    <section class="container mt-3 pt-3 mb-5 pb-5">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h6 class="text-uppercase fw-bold mb-2" style="color: #5f6fff; letter-spacing: 2px; font-size: 13px;">Our Commitments</h6>
+            <h1 class="fw-bold display-5 text-dark" style="letter-spacing: -1px;">
+                Our <span style="color: #5f6fff;">Promises</span> to Patients
+            </h1>
+            <div class="mx-auto mt-3 mb-4" style="height: 4px; width: 60px; background: #5f6fff; border-radius: 10px;"></div>
+            <p class="text-muted mx-auto" style="max-width: 700px; font-size: 16px; line-height: 1.6;">
+                Our five promises define what we do, what we offer, and the commitments we make. 
+                Centred on patient trust, they guide us to reach new levels of excellence every day.
+            </p>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-7" data-aos="fade-right">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="height: 350px; border-radius: 25px; cursor: pointer; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.2)';"
+                    onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='none';">
+                    
+                    <img src="{% static 'assets/assets_frontend/F helping patients manage diseases better.jpg.webp' %}"
+                        class="w-100 h-100" style="object-fit: cover;">
+                    
+                    <div class="position-absolute top-0 start-0 w-100 h-100"
+                        style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);">
+                    </div>
+
+                    <div class="position-absolute bottom-0 start-0 p-4 p-md-5">
+                        <span class="badge rounded-pill mb-3 px-3 py-2" style="background: #5f6fff;">Promise 01</span>
+                        <h3 class="text-white fw-bold mb-0">Helping patients manage <br> diseases better</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5" data-aos="fade-left">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="height: 350px; border-radius: 25px; cursor: pointer; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.2)';"
+                    onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='none';">
+                    
+                    <img src="{% static 'assets/assets_frontend/F Bringing expensive medicines within reach.jpg.webp' %}"
+                        class="w-100 h-100" style="object-fit: cover;">
+                    
+                    <div class="position-absolute top-0 start-0 w-100 h-100"
+                        style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);">
+                    </div>
+
+                    <div class="position-absolute bottom-0 start-0 p-4 p-md-5">
+                        <span class="badge rounded-pill mb-3 px-3 py-2" style="background: #5f6fff;">Promise 02</span>
+                        <h3 class="text-white fw-bold mb-0 text-truncate" style="max-width: 100%;">Affordable <br> Medicines</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="height: 320px; border-radius: 25px; cursor: pointer; transition: 0.5s;"
+                    onmouseover="this.style.transform='translateY(-10px)';"
+                    onmouseout="this.style.transform='translateY(0px)';">
+                    
+                    <img src="{% static 'assets/assets_frontend/F Addressing unmet patient needs.jpg.webp' %}"
+                        class="w-100 h-100" style="object-fit: cover;">
+                    
+                    <div class="position-absolute top-0 start-0 w-100 h-100"
+                        style="background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);">
+                    </div>
+
+                    <div class="position-absolute bottom-0 start-0 p-4">
+                        <p class="text-white-50 small mb-1 fw-bold text-uppercase">Promise 03</p>
+                        <h5 class="text-white fw-bold mb-0">Addressing unmet <br> patient needs</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="height: 320px; border-radius: 25px; cursor: pointer; transition: 0.5s;"
+                    onmouseover="this.style.transform='translateY(-10px)';"
+                    onmouseout="this.style.transform='translateY(0px)';">
+                    
+                    <img src="{% static 'assets/assets_frontend/F medicines are available where needed.jpg.webp' %}"
+                        class="w-100 h-100" style="object-fit: cover;">
+                    
+                    <div class="position-absolute top-0 start-0 w-100 h-100"
+                        style="background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);">
+                    </div>
+
+                    <div class="position-absolute bottom-0 start-0 p-4">
+                        <p class="text-white-50 small mb-1 fw-bold text-uppercase">Promise 04</p>
+                        <h5 class="text-white fw-bold mb-0">Global Availability <br> of Medicines</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="height: 320px; border-radius: 25px; cursor: pointer; transition: 0.5s;"
+                    onmouseover="this.style.transform='translateY(-10px)';"
+                    onmouseout="this.style.transform='translateY(0px)';">
+                    
+                    <img src="{% static 'assets/assets_frontend/F Working with partners to help them succeed.jpg.webp' %}"
+                        class="w-100 h-100" style="object-fit: cover;">
+                    
+                    <div class="position-absolute top-0 start-0 w-100 h-100"
+                        style="background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);">
+                    </div>
+
+                    <div class="position-absolute bottom-0 start-0 p-4">
+                        <p class="text-white-50 small mb-1 fw-bold text-uppercase">Promise 05</p>
+                        <h5 class="text-white fw-bold mb-0">Partnering for <br> Shared Success</h5>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>
