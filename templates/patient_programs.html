@@ -3,7 +3,7 @@
 
 {% block contant %}
 
-    <main class="container py-5 px-5">
+    {% comment %} <main class="container py-5 px-5">
         <section class="container my-5 py-3">
 
             <!-- Top Small Text -->
@@ -218,6 +218,134 @@
         </div>
         <img src="{% static "assets/assets_frontend/appointment_img.png" %}" class="img-fluid rounded mt-4 mt-sm-0 ms-sm-4" width="320"
             alt="Doctor">
+        </section>
+
+    </main> {% endcomment %}
+
+    <main class="container py-3 px-4 px-md-5 overflow-hidden" style="overflow-x: hidden;">
+    
+        <section class="container my-3 py-3" data-aos="fade-up">
+            <div class="text-start">
+                <h6 class="text-uppercase fw-bold mb-2" style="color: #5f6fff; letter-spacing: 2px; font-size: 13px;">For Patients</h6>
+                <h1 class="fw-bold display-4 text-dark mb-3" style="letter-spacing: -1.5px;">
+                    Patient <span style="color: #5f6fff;">Programs</span>
+                </h1>
+                <div style="height: 4px; width: 60px; background: #5f6fff; border-radius: 10px; margin-bottom: 20px;"></div>
+                <p class="text-muted fs-5 fw-light" style="max-width: 600px;">
+                    Empowering patients through support, care, and education. We bridge the gap between medical possibilities and real-world hope.
+                </p>
+            </div>
+        </section>
+
+        <section class="container mb-5">
+            
+            <div class="row align-items-center mb-5 g-5 py-4 border-bottom border-light" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="overflow-hidden shadow-sm" style="border-radius: 20px; transition: 0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="{% static 'assets/assets_frontend/Alivius_1.jpg' %}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <span class="badge rounded-pill mb-2 px-3 py-2" style="background: rgba(95, 111, 255, 0.1); color: #5f6fff;">Digital Platform</span>
+                    <h3 class="fw-bold text-dark mb-3">Alivius</h3>
+                    <p class="text-secondary lh-lg mb-0" style="font-size: 15px;">
+                        An integrated digital cancer care platform designed to support patients and healthcare professionals throughout the treatment journey. It combines remote monitoring, treatment management, and mental health support into a seamless experience, helping patients track their health and manage side effects.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5 g-5 py-4 border-bottom border-light flex-md-row-reverse" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="overflow-hidden shadow-sm" style="border-radius: 20px; transition: 0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="{% static 'assets/assets_frontend/hello.jpg' %}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-md-8 text-md-end">
+                    <span class="badge rounded-pill mb-2 px-3 py-2" style="background: rgba(28, 200, 138, 0.1); color: #1cc88a;">Chronic Care</span>
+                    <h3 class="fw-bold text-dark mb-3">Joint Health Revolution</h3>
+                    <p class="text-secondary lh-lg mb-0" style="font-size: 15px;">
+                        Supporting people living with osteoarthritis by helping them understand joint care. These doctor-led sessions focus on corrective exercises, healthy habits, and effective pain management to ensure patients stay active and independent.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5 g-5 py-4 border-bottom border-light" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="overflow-hidden shadow-sm" style="border-radius: 20px;">
+                        <img src="{% static 'assets/assets_frontend/Radar Nasofaringe.jpg' %}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <span class="badge rounded-pill mb-2 px-3 py-2" style="background: rgba(246, 194, 62, 0.1); color: #f6c23e;">Oncology Awareness</span>
+                    <h3 class="fw-bold text-dark mb-3">Radar Nasofaringe</h3>
+                    <p class="text-secondary lh-lg mb-0" style="font-size: 15px;">
+                        An awareness initiative focused on nasopharyngeal cancer (NPC)—a rare disease. Through advocacy partnerships like Oncoguia, the program promotes early diagnosis, patient education, and advanced treatment preparedness.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-4 p-md-5 my-5 shadow-sm border-0" style="background-color: #f8f9ff; border-radius: 30px;" data-aos="zoom-in">
+                <div class="row align-items-center g-4">
+                    <div class="col-md-4">
+                        <img src="{% static 'assets/assets_frontend/Awareness.jpg' %}" class="img-fluid rounded-4 shadow-sm">
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="fw-bold text-dark">Awareness For Life</h4>
+                        <p class="text-muted mb-0 lh-lg">Launched in 2010, it's one of India’s largest preventive health initiatives. Delivering over 17,000 sessions across 450+ cities, reaching over 700,000 people with timely, doctor-led health education in schools and corporates.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5 g-5 py-4 border-bottom border-light flex-md-row-reverse" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="overflow-hidden shadow-sm" style="border-radius: 20px;">
+                        <img src="{% static 'assets/assets_frontend/img1.webp' %}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-md-8 text-md-end">
+                    <h3 class="fw-bold text-dark mb-3">BetaCare</h3>
+                    <p class="text-secondary lh-lg mb-0" style="font-size: 15px;">
+                        A patient assistance initiative offering both medical and emotional support. Aims to enhance treatment adherence and health outcomes through tailored educational materials and proactive condition management.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-5 g-5 py-4 border-bottom border-light" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="overflow-hidden shadow-sm" style="border-radius: 20px;">
+                        <img src="{% static 'assets/assets_frontend/FNFNF Mintop Daily_1.jpg' %}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h3 class="fw-bold text-dark mb-3">Mintop Daily</h3>
+                    <p class="text-secondary lh-lg mb-0" style="font-size: 15px;">
+                        A digital platform supporting hair regrowth journeys. Backed by dermatology expertise, it offers product tips and real success stories to guide users toward healthier, fuller hair with clinically trusted advice.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="container mb-5" data-aos="zoom-in">
+            <div class="text-white shadow-lg d-flex flex-column flex-md-row align-items-center justify-content-between p-5" 
+                style="background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); border-radius: 40px; position: relative; overflow: hidden;">
+                
+                <div style="z-index: 2; max-width: 500px;">
+                    <h2 class="fw-bold display-5 mb-4">Ready to Start Your Journey?</h2>
+                    <p class="mb-4 opacity-75">Connect with 100+ trusted doctors and manage your appointments seamlessly from our dashboard.</p>
+                    <a href="{% url 'register' %}" class="btn btn-white rounded-pill px-5 py-3 fw-bold text-primary shadow"
+                    style="background: white; border: none; transition: 0.3s;"
+                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        Create Patient Account
+                    </a>
+                </div>
+
+                <div class="mt-4 mt-md-0" style="z-index: 2;">
+                    <img src="{% static 'assets/assets_frontend/appointment_img.png' %}" class="img-fluid" style="max-height: 350px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));">
+                </div>
+
+                <div class="position-absolute" style="width: 300px; height: 300px; background: rgba(255,255,255,0.05); border-radius: 50%; top: -100px; right: -50px;"></div>
+            </div>
         </section>
 
     </main>
