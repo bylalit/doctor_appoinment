@@ -3,58 +3,6 @@
 
 {% block contant %}
 
-    {% comment %} <section class="mt-5 px-5">
-        <div class="container py-5 my-4 px-3 px-md-5">
-            <h2 class="text-center text-muted fs-5 fw-medium mb-2">
-                ABOUT <span class="fw-bold text-dark">US</span>
-            </h2>
-
-            <div class="row align-items-center mb-5">
-                <!-- Image -->
-                <div class="col-md-4 mb-4 mb-md-0">
-                <img src="{% static "assets/assets_frontend/about_image.png" %}"
-                    alt="Two doctors in clinic"
-                    class="img-fluid rounded" width="340" height="340" style="object-fit: cover;">
-                </div>
-
-                <!-- Text -->
-                <div class="col-md-8 small text-muted">
-                <p class="mb-4">
-                    Welcome to Prescripto, your trusted partner in managing your healthcare needs conveniently and efficiently.
-                    At Prescripto, we understand the challenges individuals face when it comes to scheduling doctor appointments
-                    and managing their health records.
-                </p>
-                <p class="mb-4">
-                    Prescripto is committed to excellence in healthcare technology. We continuously strive to enhance our platform,
-                    integrating the latest advancements to improve user experience and deliver superior service. Whether you're booking
-                    your first appointment or managing ongoing care, Prescripto is here to support you every step of the way.
-                </p>
-                <p class="fw-bold mb-2 text-dark">Our Vision</p>
-                <p>
-                    Our vision at Prescripto is to create a seamless healthcare experience for every user. We aim to bridge the gap
-                    between patients and healthcare providers, making it easier for you to access the care you need, when you need it.
-                </p>
-                </div>
-            </div>
-
-            <!-- Why Choose Us -->
-            <h3 class="text-dark small fw-semibold pt-5 fs-5 mb-4">WHY <span class="fw-bold">CHOOSE US</span></h3>
-            <div class="row text-muted small border rounded overflow-hidden">
-                <div class="col-md-4 border-end p-5">
-                    <p class="fw-bold text-dark mb-4 fs-5">EFFICIENCY:</p>
-                    <p>Streamlined appointment scheduling that fits into your busy lifestyle.</p>
-                </div>
-                <div class="col-md-4 border-end p-5">
-                    <p class="fw-bold text-dark mb-4 fs-5">CONVENIENCE:</p>
-                    <p>Access to a network of trusted healthcare professionals in your area.</p>
-                </div>
-                <div class="col-md-4 p-5">
-                    <p class="fw-bold text-dark mb-4 fs-5">PERSONALIZATION:</p>
-                    <p>Tailored recommendations and reminders to help you stay on top of your health.</p>
-                </div>
-            </div>
-        </div>
-    </section> {% endcomment %}
     <section class="mt-5 px-4 px-md-5">
         <div class="container py-5 my-4">
             
@@ -146,7 +94,7 @@
         </div>
     </section>
 
-    <section class="container py-5">
+    {% comment %} <section class="container py-5">
 
         <!-- Heading -->
         <div class="text-center mb-5" data-aos="fade-up">
@@ -272,6 +220,146 @@
 
         </div>
 
+    </section> {% endcomment %}
+
+    <section class="container py-3 my-3">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h6 class="text-uppercase fw-bold mb-2" style="color: #5f6fff; letter-spacing: 2px; font-size: 13px;">Our Foundations</h6>
+            <h1 class="fw-bold display-5 text-dark" style="letter-spacing: -1px;">Our <span style="color: #5f6fff;">Values</span></h1>
+            <div class="mx-auto mt-3 mb-4" style="height: 4px; width: 60px; background: #5f6fff; border-radius: 10px;"></div>
+            <p class="text-muted mx-auto lh-lg" style="max-width: 750px; font-size: 16px;">
+                In pursuit of our purpose of providing affordable and innovative medicines for healthier lives, 
+                we create an environment of innovation while reaching for higher levels of excellence.
+            </p>
+        </div>
+
+        <div class="row g-4 text-center">
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+                <div class="p-4 h-100 border-0 shadow-sm transition-all"
+                    style="background: #ffffff; border-radius: 20px; transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(95,111,255,0.15)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    
+                    <div class="d-flex align-items-center justify-content-center mx-auto mb-4 rounded-circle" 
+                        style="width: 70px; height: 70px; background: rgba(95,111,255,0.1);">
+                        <i class="fas fa-eye" style="color: #5f6fff; font-size: 24px;"></i>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-3">Integrity & Transparency</h6>
+                    <p class="text-muted small mb-0 lh-base">
+                        Uphold the highest standards of integrity and transparency in all our conversations.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-4 h-100 border-0 shadow-sm transition-all"
+                    style="background: #ffffff; border-radius: 20px; transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(28,200,138,0.15)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    
+                    <div class="d-flex align-items-center justify-content-center mx-auto mb-4 rounded-circle" 
+                        style="width: 70px; height: 70px; background: rgba(28, 200, 138, 0.1);">
+                        <i class="fas fa-shield-alt" style="color: #1cc88a; font-size: 24px;"></i>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-3">Safety First</h6>
+                    <p class="text-muted small mb-0 lh-base">
+                        Committed to providing safe working environments through continuous improvements.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-4 h-100 border-0 shadow-sm transition-all"
+                    style="background: #ffffff; border-radius: 20px; transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(246,194,62,0.15)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    
+                    <div class="d-flex align-items-center justify-content-center mx-auto mb-4 rounded-circle" 
+                        style="width: 70px; height: 70px; background: rgba(246, 194, 62, 0.1);">
+                        <i class="fas fa-award" style="color: #f6c23e; font-size: 24px;"></i>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-3">Excellence in Quality</h6>
+                    <p class="text-muted small mb-0 lh-base">
+                        Be dedicated to designing quality into our products and processes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="p-4 h-100 border-0 shadow-sm transition-all"
+                    style="background: #ffffff; border-radius: 20px; transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 30px rgba(54,185,204,0.15)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    
+                    <div class="d-flex align-items-center justify-content-center mx-auto mb-4 rounded-circle" 
+                        style="width: 70px; height: 70px; background: rgba(54, 185, 204, 0.1);">
+                        <i class="fas fa-sync-alt" style="color: #36b9cc; font-size: 24px;"></i>
+                    </div>
+                    <h6 class="fw-bold text-dark mb-3">Productivity</h6>
+                    <p class="text-muted small mb-0 lh-base">
+                        Strive to achieve more with less through innovation and improvements.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row g-4 text-center mt-2">
+
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                <div class="p-5 h-100 border-0 shadow-sm transition-all"
+                    style="background: #ffffff; border-radius: 25px; transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#f8f9ff'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#ffffff'">
+                    
+                    <div class="d-flex align-items-center justify-content-center mx-auto mb-4 rounded-circle" 
+                        style="width: 60px; height: 60px; background: #5f6fff; color: white;">
+                        <i class="fas fa-users" style="font-size: 20px;"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Respect for Individuals</h5>
+                    <p class="text-muted small mb-0 lh-lg">
+                        Encouraging diverse perspectives and upholding the dignity of work and every individual.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-5 h-100 border-0 shadow-sm transition-all"
+                    style="background: #ffffff; border-radius: 25px; transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#f8f9ff'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#ffffff'">
+                    
+                    <div class="d-flex align-items-center justify-content-center mx-auto mb-4 rounded-circle" 
+                        style="width: 60px; height: 60px; background: #1cc88a; color: white;">
+                        <i class="fas fa-handshake" style="font-size: 20px;"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Collaboration</h5>
+                    <p class="text-muted small mb-0 lh-lg">
+                        Leverage expertise across our global network to create greater value for our stakeholders.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-5 h-100 border-0 shadow-sm transition-all"
+                    style="background: #ffffff; border-radius: 25px; transition: 0.3s;"
+                    onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#f8f9ff'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.backgroundColor='#ffffff'">
+                    
+                    <div class="d-flex align-items-center justify-content-center mx-auto mb-4 rounded-circle" 
+                        style="width: 60px; height: 60px; background: #e74a3b; color: white;">
+                        <i class="fas fa-leaf" style="font-size: 20px;"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Sustainability</h5>
+                    <p class="text-muted small mb-0 lh-lg">
+                        Creating value while respecting our natural environment and the communities we serve.
+                    </p>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <section class="container my-5 py-5">
