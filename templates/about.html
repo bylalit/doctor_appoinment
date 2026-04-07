@@ -3,7 +3,7 @@
 
 {% block contant %}
 
-    <section class="mt-5 px-5">
+    {% comment %} <section class="mt-5 px-5">
         <div class="container py-5 my-4 px-3 px-md-5">
             <h2 class="text-center text-muted fs-5 fw-medium mb-2">
                 ABOUT <span class="fw-bold text-dark">US</span>
@@ -51,6 +51,96 @@
                 <div class="col-md-4 p-5">
                     <p class="fw-bold text-dark mb-4 fs-5">PERSONALIZATION:</p>
                     <p>Tailored recommendations and reminders to help you stay on top of your health.</p>
+                </div>
+            </div>
+        </div>
+    </section> {% endcomment %}
+    <section class="mt-5 px-4 px-md-5">
+        <div class="container py-5 my-4">
+            
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="text-muted fs-5 fw-medium mb-2" style="letter-spacing: 2px;">
+                    ABOUT <span class="fw-bold text-dark border-bottom border-3 border-primary pb-1">US</span>
+                </h2>
+            </div>
+
+            <div class="row align-items-center mb-5 g-5">
+                <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+                    <div class="position-relative d-inline-block">
+                        <div class="position-absolute top-0 start-0 translate-middle-x mt-n4 ms-n4 d-none d-md-block" 
+                            style="width: 150px; height: 150px; background: rgba(95, 111, 255, 0.1); border-radius: 50%; z-index: -1;"></div>
+                        
+                        <img src="{% static 'assets/assets_frontend/about_image.png' %}"
+                            alt="About Prescripto"
+                            class="img-fluid shadow-lg" 
+                            style="border-radius: 30px; width: 100%; max-width: 450px; object-fit: cover;">
+                    </div>
+                </div>
+
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="pe-lg-5">
+                        <p class="text-secondary lh-lg mb-4" style="font-size: 15px;">
+                            Welcome to <span class="fw-bold text-primary">Prescripto</span>, your trusted partner in managing your healthcare needs conveniently and efficiently. 
+                            At Prescripto, we understand the challenges individuals face when it comes to scheduling doctor appointments 
+                            and managing their health records.
+                        </p>
+                        <p class="text-secondary lh-lg mb-4" style="font-size: 15px;">
+                            Prescripto is committed to excellence in healthcare technology. We continuously strive to enhance our platform, 
+                            integrating the latest advancements to improve user experience and deliver superior service. Whether you're booking 
+                            your first appointment or managing ongoing care, Prescripto is here to support you every step of the way.
+                        </p>
+                        
+                        <div class="p-4 rounded-4 shadow-sm border-start border-5 border-primary" 
+                            style="background-color: #f8f9ff;">
+                            <h6 class="fw-bold text-dark mb-2">Our Vision</h6>
+                            <p class="text-muted small mb-0 lh-base">
+                                Our vision at Prescripto is to create a seamless healthcare experience for every user. 
+                                We aim to bridge the gap between patients and healthcare providers, making it easier 
+                                for you to access the care you need, when you need it.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-5 mt-5">
+                <h3 class="text-dark small fw-bold text-uppercase mb-4" style="letter-spacing: 1px;">
+                    Why <span class="text-primary">Choose Us</span>
+                </h3>
+                
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-5 h-100 transition-all border border-light shadow-sm" 
+                            style="border-radius: 20px; background: white; transition: 0.4s;"
+                            onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#5f6fff'; this.querySelectorAll('p').forEach(p => p.style.color='white');"
+                            onmouseout="this.style.transform='translateY(0px)'; this.style.backgroundColor='white'; this.querySelector('.title-text').style.color='#212529'; this.querySelector('.desc-text').style.color='#6c757d';">
+                            <i class="fas fa-bolt mb-4 fs-3 title-text" style="color: #5f6fff; transition: 0.3s;"></i>
+                            <h5 class="fw-bold title-text mb-3" style="transition: 0.3s;">EFFICIENCY:</h5>
+                            <p class="desc-text text-muted small mb-0" style="transition: 0.3s;">Streamlined appointment scheduling that fits into your busy lifestyle flawlessly.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="p-5 h-100 transition-all border border-light shadow-sm" 
+                            style="border-radius: 20px; background: white; transition: 0.4s;"
+                            onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#5f6fff'; this.querySelectorAll('p, h5, i').forEach(el => el.style.color='white');"
+                            onmouseout="this.style.transform='translateY(0px)'; this.style.backgroundColor='white'; this.querySelector('.title-text').style.color='#212529'; this.querySelector('.desc-text').style.color='#6c757d'; this.querySelector('i').style.color='#5f6fff';">
+                            <i class="fas fa-map-marker-alt mb-4 fs-3 title-text" style="color: #5f6fff; transition: 0.3s;"></i>
+                            <h5 class="fw-bold title-text mb-3" style="transition: 0.3s;">CONVENIENCE:</h5>
+                            <p class="desc-text text-muted small mb-0" style="transition: 0.3s;">Access to a network of trusted healthcare professionals in your local area easily.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="p-5 h-100 transition-all border border-light shadow-sm" 
+                            style="border-radius: 20px; background: white; transition: 0.4s;"
+                            onmouseover="this.style.transform='translateY(-10px)'; this.style.backgroundColor='#5f6fff'; this.querySelectorAll('p, h5, i').forEach(el => el.style.color='white');"
+                            onmouseout="this.style.transform='translateY(0px)'; this.style.backgroundColor='white'; this.querySelector('.title-text').style.color='#212529'; this.querySelector('.desc-text').style.color='#6c757d'; this.querySelector('i').style.color='#5f6fff';">
+                            <i class="fas fa-user-check mb-4 fs-3 title-text" style="color: #5f6fff; transition: 0.3s;"></i>
+                            <h5 class="fw-bold title-text mb-3" style="transition: 0.3s;">PERSONALIZATION:</h5>
+                            <p class="desc-text text-muted small mb-0" style="transition: 0.3s;">Tailored recommendations and reminders to help you stay on top of your health.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
