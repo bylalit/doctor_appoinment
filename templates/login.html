@@ -5,7 +5,6 @@
     <section class="min-vh-100 d-flex align-items-center justify-content-center py-5" 
             style="background-color: #f4f7fe;">
         
-            
         <div class="container">
             <div class="mx-auto bg-white shadow-lg border-0" 
                 style="max-width: 450px; border-radius: 25px; overflow: hidden;">
@@ -51,7 +50,7 @@
                         </div>
 
 
-                        <div class="mt-5">
+                        {% comment %} <div class="mt-5">
                             <button type="submit" class="btn w-100 py-3 fw-bold text-white shadow-sm" 
                                     style="background: #5f6fff; border-radius: 12px; border: none; transition: 0.4s;"
                                     onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(95,111,255,0.2)'"
@@ -63,7 +62,7 @@
                         <div class="text-center mt-4">
                             <span class="text-muted small">New to our platform? </span>
                             <a href="{% url 'register' %}" class="fw-bold text-decoration-none" style="color: #5f6fff;">Create Account</a>
-                        </div>
+                        </div> {% endcomment %}
                     </form>
                 </div>
             </div>
