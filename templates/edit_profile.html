@@ -38,7 +38,7 @@
                         <p class="text-muted" style="font-size: 11px;">Click the camera icon to change photo</p>
                     </div>
 
-                    <div class="row g-4">
+                    {% comment %} <div class="row g-4">
                         <div class="col-md-6">
                             <label class="form-label small fw-bold text-muted ms-1">FULL NAME</label>
                             <input type="text" name="username" class="form-control border-0 bg-light p-3" 
@@ -68,7 +68,7 @@
                             <textarea name="address" class="form-control border-0 bg-light p-3" 
                                     style="border-radius: 15px; font-size: 14px;" rows="3" placeholder="Flat, Street, Area...">{{ patient.address }}</textarea>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
 
                     <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 gap-3">
                         <a href="{% url 'my_profile' %}" class="btn btn-link text-decoration-none fw-bold text-muted px-4" style="font-size: 14px;">
