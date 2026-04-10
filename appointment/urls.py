@@ -50,5 +50,4 @@ urlpatterns = [
     path('analytics', views.analytics, name='analytics'),
     path('settings', views.setting, name='settings'),
     
-
 ]
