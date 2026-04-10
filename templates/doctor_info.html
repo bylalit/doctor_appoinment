@@ -5,7 +5,7 @@
 
     <section class="mt-4">
         <div class="container p-5">
-            <div class="d-flex flex-column flex-md-row gap-4">
+            {% comment %} <div class="d-flex flex-column flex-md-row gap-4">
                 <div class="rounded d-flex align-items-center justify-content-center flex-shrink-0"
                     style="width: 224px; height: 288px;background-color: rgb(95 111 255);" >
                     <img src="{{  doctor.image.url  }}"
@@ -62,9 +62,9 @@
                         Confirm Appointment
                     </button>
                 </div>
-            </form> 
+            </form>  {% endcomment %}
 
-                {% comment %} <div class="d-flex flex-column flex-md-row gap-4 mb-5" data-aos="fade-up">
+                <div class="d-flex flex-column flex-md-row gap-4 mb-5" data-aos="fade-up">
                     
                     <div class="rounded-4 d-flex align-items-end justify-content-center flex-shrink-0 shadow-lg position-relative overflow-hidden"
                         style="width: 240px; height: 300px; background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); transition: 0.4s;"
@@ -107,9 +107,9 @@
                             <h4 class="fw-bold text-dark mb-0">₹ {{ doctor.fees }}</h4>
                         </div>
                     </div>
-                </div> {% endcomment %}
+                </div>
 
-                {% comment %} <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
+                <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
                     {% csrf_token %}
 
                     <div class="mt-5">
@@ -134,95 +134,8 @@
                             Confirm Appointment
                         </button>
                     </div>
-                </form> {% endcomment %}
+                </form>
                 
-
-                {% comment %} <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
-                    {% csrf_token %}
-
-                    <div class="mt-5 p-4 p-md-5 rounded-5 shadow-sm" style="background-color: #ffffff; border: 1px solid #f0f0f0;" data-aos="fade-up">
-                        <h4 class="fw-bold text-dark mb-4 d-flex align-items-center gap-3">
-                            <span class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-size: 16px;">1</span>
-                            Select Booking Schedule
-                        </h4>
-
-                        <div class="row g-4">
-                            <div class="col-md-5">
-                                <label class="form-label small fw-bold text-muted mb-2">PICK A DATE</label>
-                                <input type="date" name="date" class="form-control border-0 shadow-sm p-3" 
-                                    required style="border-radius: 15px; background: #f0f2ff; font-weight: 600; color: #5f6fff;" />
-                            </div>
-
-                            <div class="col-12 mt-5">
-                                <label class="form-label small fw-bold text-muted mb-3">AVAILABLE TIME SLOTS</label>
-                                
-                                <input type="hidden" name="time" id="selectedTime">
-                                
-                                <div class="d-flex gap-3 mb-5 flex-wrap" id="timeButtons">
-                                    {% for t in "08:00 AM,08:30 AM,09:00 AM,09:30 AM,10:00 AM"|split:"," %}
-                                    <button type="button" 
-                                            onclick="document.getElementById('selectedTime').value='{{ t }}'; this.parentElement.querySelectorAll('button').forEach(b => { b.style.background='white'; b.style.color='#6c757d'; b.style.borderColor='#eee'; }); this.style.background='#5f6fff'; this.style.color='white'; this.style.borderColor='#5f6fff';"
-                                            class="btn shadow-sm py-2 px-4 transition-all"
-                                            style="border-radius: 50px; border: 1px solid #eee; background: white; color: #6c757d; font-size: 13px; font-weight: 500; transition: 0.3s;"
-                                            onmouseover="if(this.style.background != 'rgb(95, 111, 255)') { this.style.borderColor='#5f6fff'; this.style.color='#5f6fff'; }"
-                                            onmouseout="if(this.style.background != 'rgb(95, 111, 255)') { this.style.borderColor='#eee'; this.style.color='#6c757d'; }">
-                                        {{ t }}
-                                    </button>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn text-white w-100 rounded-pill py-3 fw-bold shadow-lg mt-2"
-                            style="background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); max-width: 400px; border: none; transition: 0.4s;"
-                            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 24px rgba(95,111,255,0.4)';"
-                            onmouseout="this.style.transform='translateY(0px)';">
-                            Confirm Appointment Now <i class="fas fa-arrow-right ms-2"></i>
-                        </button>
-                    </div>
-                </form> {% endcomment %}
-
-                {% comment %} <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
-                    {% csrf_token %}
-
-                    <div class="mt-5 p-4 p-md-5 rounded-5 shadow-sm" style="background-color: #ffffff; border: 1px solid #f0f0f0;" data-aos="fade-up">
-                        <h4 class="fw-bold text-dark mb-4 d-flex align-items-center gap-3">
-                            <span class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-size: 16px;">1</span>
-                            Select Booking Schedule
-                        </h4>
-
-                        <div class="row g-4">
-                            <div class="col-md-5">
-                                <label class="form-label small fw-bold text-muted mb-2">PICK A DATE</label>
-                                <input type="date" name="date" class="form-control border-0 shadow-sm p-3" 
-                                    required style="border-radius: 15px; background: #f0f2ff; font-weight: 600; color: #5f6fff;" />
-                            </div>
-
-                            <div class="col-12 mt-5">
-                                <label class="form-label small fw-bold text-muted mb-3">AVAILABLE TIME SLOTS</label>
-                                
-                                <input type="hidden" name="time" id="selectedTime" required>
-                                
-                                <div class="d-flex gap-3 mb-5 flex-wrap" id="timeButtons">
-                                    <button type="button" onclick="setTime('08:00 AM', this)" class="btn shadow-sm py-2 px-4 transition-all" style="border-radius: 50px; border: 1px solid #eee; background: white; color: #6c757d; font-size: 13px; font-weight: 500; transition: 0.3s;">08:00 AM</button>
-                                    <button type="button" onclick="setTime('08:30 AM', this)" class="btn shadow-sm py-2 px-4 transition-all" style="border-radius: 50px; border: 1px solid #eee; background: white; color: #6c757d; font-size: 13px; font-weight: 500; transition: 0.3s;">08:30 AM</button>
-                                    <button type="button" onclick="setTime('09:00 AM', this)" class="btn shadow-sm py-2 px-4 transition-all" style="border-radius: 50px; border: 1px solid #eee; background: white; color: #6c757d; font-size: 13px; font-weight: 500; transition: 0.3s;">09:00 AM</button>
-                                    <button type="button" onclick="setTime('09:30 AM', this)" class="btn shadow-sm py-2 px-4 transition-all" style="border-radius: 50px; border: 1px solid #eee; background: white; color: #6c757d; font-size: 13px; font-weight: 500; transition: 0.3s;">09:30 AM</button>
-                                    <button type="button" onclick="setTime('10:00 AM', this)" class="btn shadow-sm py-2 px-4 transition-all" style="border-radius: 50px; border: 1px solid #eee; background: white; color: #6c757d; font-size: 13px; font-weight: 500; transition: 0.3s;">10:00 AM</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn text-white w-100 rounded-pill py-3 fw-bold shadow-lg mt-2"
-                                style="background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); max-width: 400px; border: none; transition: 0.4s;"
-                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 24px rgba(95,111,255,0.4)';"
-                                onmouseout="this.style.transform='translateY(0px)';">
-                            Confirm Appointment Now <i class="fas fa-arrow-right ms-2"></i>
-                        </button>
-                    </div>
-                </form> {% endcomment %}
-
- 
 
             <div class='pt-5 mt-5'>
 
