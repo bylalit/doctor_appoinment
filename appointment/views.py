@@ -134,17 +134,7 @@ def book_appointment(request, doctor_id):
                 status='Pending'
             )
             appointment.save()
-            
-            # send_mail(
-            #     subject= 'Your Appointment is Confirmed',
-            #     message=f"Dear {user.username}, \n\nYour appointment with {doctor.name} has been successfully booked on {date} at {time}",
-            #     from_email= settings.EMAIL_HOST_USER,
-            #     recipient_list=[user.email],
-            #     fail_silently=False
-            # )
-            # print(settings.EMAIL_HOST_USER)
-            # print(settings.EMAIL_HOST_PASSWORD)
-            
+
             try:
                 send_mail(
                     subject='Your Appointment is Confirmed',
@@ -153,8 +143,6 @@ def book_appointment(request, doctor_id):
                     recipient_list=[user.email],
                     fail_silently=False
                 )
-                # print("EMAIL USER:", settings.EMAIL_HOST_USER)
-                # print("EMAIL PASS:", settings.EMAIL_HOST_PASSWORD)
             except Exception as e:
                 print("EMAIL ERROR:", e)
         
