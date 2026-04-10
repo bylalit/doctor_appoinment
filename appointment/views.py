@@ -5,12 +5,12 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.core.mail import send_mail
 from django.conf import settings
+from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator
 import stripe
-from django.conf import settings
+# from django.conf import settings
 from django.urls import reverse
 import cloudinary
 import cloudinary.uploader
@@ -19,6 +19,9 @@ from django.db.models import Count
 from django.db.models.functions import ExtractWeekDay
 from django.db.models import Count, Sum, Q, F
 from datetime import timedelta
+
+# from django.conf import settings
+# from django.core.mail import send_mail
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -107,15 +110,21 @@ def user_appointment(request):
 
 def book_appointment(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
+    print(doctor)
 
     if 'login' in request.session:
         email = request.session['login']  
         user = Patients.objects.get(email=email)
+        print(email, user)   
         
-        
+        if not user:
+            messages.error(request, "User not found")
+            return redirect('login') 
+
         if request.method == 'POST':
             date = request.POST.get('date')
             time = request.POST.get('time')
+            print(date, time)
             
             appointment = Appointment.objects.create(
                 user = user,
@@ -124,14 +133,30 @@ def book_appointment(request, doctor_id):
                 appointment_time = time,
                 status='Pending'
             )
+            appointment.save()
             
-            send_mail(
-                subject= 'Your Appointment is Confirmed',
-                message=f"Dear {user.username}, \n\nYour appointment with {doctor.name} has been successfully booked on {date} at {time}",
-                from_email= settings.EMAIL_HOST_USER,
-                recipient_list=[user.email],
-                fail_silently=False
-            )
+            # send_mail(
+            #     subject= 'Your Appointment is Confirmed',
+            #     message=f"Dear {user.username}, \n\nYour appointment with {doctor.name} has been successfully booked on {date} at {time}",
+            #     from_email= settings.EMAIL_HOST_USER,
+            #     recipient_list=[user.email],
+            #     fail_silently=False
+            # )
+            # print(settings.EMAIL_HOST_USER)
+            # print(settings.EMAIL_HOST_PASSWORD)
+            
+            try:
+                send_mail(
+                    subject='Your Appointment is Confirmed',
+                    message=f"Dear {user.username}, \n\nYour appointment with {doctor.name} has been successfully booked on {date} at {time}",
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[user.email],
+                    fail_silently=False
+                )
+                # print("EMAIL USER:", settings.EMAIL_HOST_USER)
+                # print("EMAIL PASS:", settings.EMAIL_HOST_PASSWORD)
+            except Exception as e:
+                print("EMAIL ERROR:", e)
         
             messages.success(request, "Appointment Booked!")
             return redirect('user_appointment')
@@ -879,7 +904,7 @@ def analytics(request):
     return render(request, "dashboard/analytics.html", context)
 
 
-def settings(request):
+def setting(request):
     context = {
         'action': 'settings',
         "role": "admin",
