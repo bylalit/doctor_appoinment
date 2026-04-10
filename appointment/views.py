@@ -107,7 +107,6 @@ def user_appointment(request):
         return redirect('login')
     
 
-
 def book_appointment(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     print(doctor)
@@ -155,8 +154,7 @@ def book_appointment(request, doctor_id):
         
     return render(request, 'doctor_info.html', {'doctor': doctor,})
 
-  
-    
+   
 def approved_appointment(request, id):
     if 'login' in request.session:
         try:

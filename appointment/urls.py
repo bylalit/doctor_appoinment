@@ -24,6 +24,7 @@ urlpatterns = [
     path('logout_user/', views.logout_user, name='logout_user'),
     
     
+    
     # Admin
     path('dash_login/', views.dash_login, name='dash_login'),
     path('dash_logout/', views.dash_logout, name='dash_logout'),
