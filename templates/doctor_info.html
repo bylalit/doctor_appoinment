@@ -64,78 +64,78 @@
                 </div>
             </form>  {% endcomment %}
 
-                <div class="d-flex flex-column flex-md-row gap-4 mb-5" data-aos="fade-up">
+            <div class="d-flex flex-column flex-md-row gap-4 mb-5" data-aos="fade-up">
+                
+                <div class="rounded-4 d-flex align-items-end justify-content-center flex-shrink-0 shadow-lg position-relative overflow-hidden"
+                    style="width: 240px; height: 300px; background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); transition: 0.4s;"
+                    onmouseover="this.style.transform='translateY(-5px)';"
+                    onmouseout="this.style.transform='translateY(0px)';" >
                     
-                    <div class="rounded-4 d-flex align-items-end justify-content-center flex-shrink-0 shadow-lg position-relative overflow-hidden"
-                        style="width: 240px; height: 300px; background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); transition: 0.4s;"
-                        onmouseover="this.style.transform='translateY(-5px)';"
-                        onmouseout="this.style.transform='translateY(0px)';" >
-                        
-                        <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" 
-                            class="img-fluid" width="220" style="object-fit: contain; z-index: 2;">
-                        
-                        <div class="position-absolute" style="width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; top: -50px; left: -50px;"></div>
-                    </div>
-
-                    <div class="border-0 shadow-sm rounded-4 p-4 p-md-5 flex-fill bg-white" 
-                        style="border: 1px solid rgba(0,0,0,0.05) !important;">
-                        
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <h1 class="h3 fw-bold text-dark mb-0">{{ doctor.name }}</h1>
-                            <i class="fas fa-check-circle shadow-sm rounded-circle" style="color: #5f6fff; font-size: 18px;"></i>
-                        </div>
-                        
-                        <div class="d-flex align-items-center flex-wrap gap-2 mb-4">
-                            <p class="text-muted mb-0 fw-medium">{{ doctor.degree }} — {{ doctor.category }}</p>
-                            <span class="badge rounded-pill px-3 py-1 text-primary fw-bold" 
-                                style="background: rgba(95, 111, 255, 0.1); border: 1px solid rgba(95, 111, 255, 0.2); font-size: 11px;">
-                                {{ doctor.experience }} Years Experience
-                            </span>
-                        </div>
-
-                        <div class="mb-4">
-                            <p class="fw-bold text-dark d-flex align-items-center gap-2 mb-2">
-                                About Specialist <i class="fas fa-info-circle text-muted" style="font-size: 14px;"></i>
-                            </p>
-                            <p class="text-secondary small lh-lg" style="max-width: 650px;">
-                                {{ doctor.about }}
-                            </p>
-                        </div>
-
-                        <div class="p-3 rounded-4 d-inline-block shadow-sm" style="background-color: #f8faff; border-left: 5px solid #5f6fff;">
-                            <p class="text-muted small fw-bold mb-1 text-uppercase" style="letter-spacing: 0.5px;">Appointment fee</p>
-                            <h4 class="fw-bold text-dark mb-0">₹ {{ doctor.fees }}</h4>
-                        </div>
-                    </div>
+                    <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" 
+                        class="img-fluid" width="220" style="object-fit: contain; z-index: 2;">
+                    
+                    <div class="position-absolute" style="width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; top: -50px; left: -50px;"></div>
                 </div>
 
-                <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
-                    {% csrf_token %}
-
-                    <div class="mt-5">
-                        <p class="fw-semibold text-dark mb-3 fs-5">Booking Date</p>
-
-                        <input type="date" name="date" class="form-control mb-4" required style="max-width: 300px;" />
-                        <p class="fw-semibold text-dark mb-3 fs-5">Select Time</p>
-
-                        <!-- Hidden field to store selected time -->
-                        <input type="hidden" name="time" id="selectedTime">
-
-                        <div class="d-flex gap-3 mb-4 flex-wrap" id="timeButtons">
-                            <button type="button" data-time="08:00" class="btn border rounded-pill px-4 py-2 text-secondary small">08:00 AM</button>
-                            <button type="button" data-time="08:30" class="btn border rounded-pill px-4 py-2 text-secondary small">08:30 AM</button>
-                            <button type="button" data-time="09:00" class="btn border rounded-pill px-4 py-2 text-secondary small">09:00 AM</button>
-                            <button type="button" data-time="09:30" class="btn border rounded-pill px-4 py-2 text-secondary small">09:30 AM</button>
-                            <button type="button" data-time="10:00" class="btn border rounded-pill px-4 py-2 text-secondary small">10:00 AM</button>
-                        </div>
-
-                        <button type="submit" class="btn text-white w-100 rounded-pill mt-3 py-2 small"
-                            style="background-color: #5F73FF; max-width: 300px;">
-                            Confirm Appointment
-                        </button>
+                <div class="border-0 shadow-sm rounded-4 p-4 p-md-5 flex-fill bg-white" 
+                    style="border: 1px solid rgba(0,0,0,0.05) !important;">
+                    
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <h1 class="h3 fw-bold text-dark mb-0">{{ doctor.name }}</h1>
+                        <i class="fas fa-check-circle shadow-sm rounded-circle" style="color: #5f6fff; font-size: 18px;"></i>
                     </div>
-                </form>
-                
+                    
+                    <div class="d-flex align-items-center flex-wrap gap-2 mb-4">
+                        <p class="text-muted mb-0 fw-medium">{{ doctor.degree }} — {{ doctor.category }}</p>
+                        <span class="badge rounded-pill px-3 py-1 text-primary fw-bold" 
+                            style="background: rgba(95, 111, 255, 0.1); border: 1px solid rgba(95, 111, 255, 0.2); font-size: 11px;">
+                            {{ doctor.experience }} Years Experience
+                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="fw-bold text-dark d-flex align-items-center gap-2 mb-2">
+                            About Specialist <i class="fas fa-info-circle text-muted" style="font-size: 14px;"></i>
+                        </p>
+                        <p class="text-secondary small lh-lg" style="max-width: 650px;">
+                            {{ doctor.about }}
+                        </p>
+                    </div>
+
+                    <div class="p-3 rounded-4 d-inline-block shadow-sm" style="background-color: #f8faff; border-left: 5px solid #5f6fff;">
+                        <p class="text-muted small fw-bold mb-1 text-uppercase" style="letter-spacing: 0.5px;">Appointment fee</p>
+                        <h4 class="fw-bold text-dark mb-0">₹ {{ doctor.fees }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
+                {% csrf_token %}
+
+                <div class="mt-5">
+                    <p class="fw-semibold text-dark mb-3 fs-5">Booking Date</p>
+
+                    <input type="date" name="date" class="form-control mb-4" required style="max-width: 300px;" />
+                    <p class="fw-semibold text-dark mb-3 fs-5">Select Time</p>
+
+                    <!-- Hidden field to store selected time -->
+                    <input type="hidden" name="time" id="selectedTime">
+
+                    <div class="d-flex gap-3 mb-4 flex-wrap" id="timeButtons">
+                        <button type="button" data-time="08:00" class="btn border rounded-pill px-4 py-2 text-secondary small">08:00 AM</button>
+                        <button type="button" data-time="08:30" class="btn border rounded-pill px-4 py-2 text-secondary small">08:30 AM</button>
+                        <button type="button" data-time="09:00" class="btn border rounded-pill px-4 py-2 text-secondary small">09:00 AM</button>
+                        <button type="button" data-time="09:30" class="btn border rounded-pill px-4 py-2 text-secondary small">09:30 AM</button>
+                        <button type="button" data-time="10:00" class="btn border rounded-pill px-4 py-2 text-secondary small">10:00 AM</button>
+                    </div>
+
+                    <button type="submit" class="btn text-white w-100 rounded-pill mt-3 py-2 small"
+                        style="background-color: #5F73FF; max-width: 300px;">
+                        Confirm Appointment
+                    </button>
+                </div>
+            </form>
+
 
             <div class='pt-5 mt-5'>
 
