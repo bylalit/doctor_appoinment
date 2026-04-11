@@ -60,7 +60,7 @@
     </div>
 
 
-    <!-- 📋 Table Card -->
+    <!-- Table Card -->
     <div class="bg-white rounded-4 shadow-sm p-3" data-aos="fade-up">
 
         <div class="table-responsive">
@@ -182,16 +182,16 @@
             </table>
         </div>
 
-        <!-- 🔷 Pagination -->
+        <!-- Pagination -->
         {% if page_obj.has_other_pages %}
         <div class="d-flex justify-content-between align-items-center mt-4">
 
-            <!-- 📄 Page Info -->
+            <!-- Page Info -->
             <div class="small text-muted">
                 Showing page <strong>{{ page_obj.number }}</strong> of <strong>{{ page_obj.paginator.num_pages }}</strong>
             </div>
 
-            <!-- 🔘 Controls -->
+            <!-- Controls -->
             <nav>
                 <ul class="pagination mb-0">
 
@@ -242,7 +242,6 @@
 
         </div>
         {% endif %}
-
 
     </div>
 
