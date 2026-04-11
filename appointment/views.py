@@ -10,7 +10,6 @@ from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator
 import stripe
-# from django.conf import settings
 from django.urls import reverse
 import cloudinary
 import cloudinary.uploader
@@ -20,8 +19,6 @@ from django.db.models.functions import ExtractWeekDay
 from django.db.models import Count, Sum, Q, F
 from datetime import timedelta
 
-# from django.conf import settings
-# from django.core.mail import send_mail
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -491,8 +488,21 @@ def doctor_dashboard(request):
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
     total_appointments = appointments.count()
     total_patients = appointments.values('user').distinct().count()
+    
+    # today = timezone.now().date()  
 
-    return render(request, 'dashboard/index.html', {"role" : "doctor", 'action': 'doctor', "doctor": doctor, "appointments": appointments, "total_appointments": total_appointments, "total_patients": total_patients})
+    # today_list = Appointment.objects.filter(
+    #     appointment_date__year=today.year,
+    #     appointment_date__month=today.month,
+    #     appointment_date__day=today.day
+    # ).select_related('doctor', 'user').order_by('appointment_time')
+
+    # today_appointments = today_list.count()
+    
+    # print(today_list)
+    # print(today_appointments)
+
+    return render(request, 'dashboard/index.html', {"role" : "doctor", 'action': 'doctor', "doctor": doctor, "appointments": appointments, "total_appointments": total_appointments, "total_patients": total_patients,})
 
 
 def doctor_profile(request):
@@ -535,9 +545,31 @@ def doctor_appointments(request):
   
     doctor = Doctor.objects.get(id=doctor_id)
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
+    
+    total_appointments = appointments.count()
+    completed_appointments = appointments.filter(status='Approved').count()
+    pending_appointments = appointments.filter(status='Pending').count()
+    cancelled_appointments = appointments.filter(status='Cancelled').count()
+    
+    # print(total_appointments, completed_appointments, pending_appointments, cancelled_appointments)
+    
+    paginator = Paginator(appointments, 10)  # 1 page = 10 records
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     
-    return render(request, 'dashboard/appointments.html', {'action': 'doctor_appointments',"role" : "doctor", 'appointments': appointments, "doctor": doctor})
+    return render(request, 'dashboard/appointments.html', {
+        'action': 'doctor_appointments',
+        "role" : "doctor",           
+        'appointments': appointments, 
+        "doctor": doctor, 
+        'total_appointments': total_appointments,
+        'completed_appointments': completed_appointments,
+        'pending_appointments': pending_appointments,
+        'cancelled_appointments': cancelled_appointments,
+        'appointments': page_obj,
+        'page_obj': page_obj,
+    })
 
 
 @login_required(login_url=('/dash_login'))
