@@ -78,7 +78,6 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-
 def user_appointment(request):
     if 'login' in request.session:
 
@@ -110,7 +109,7 @@ def book_appointment(request, doctor_id):
     if 'login' in request.session:
         email = request.session['login']  
         user = Patients.objects.get(email=email)
-        # print(email, user)   
+        
         
         if not user:
             messages.error(request, "User not found")
@@ -159,15 +158,15 @@ def approved_appointment(request, id):
 
             appointment = get_object_or_404(Appointment, id=id, user=user)
 
-            # ✅ Already approved check
+            # Already approved check
             if appointment.status == 'Approved':
                 messages.info(request, "Already Approved!")
                 return redirect(request.META.get('HTTP_REFERER'))
 
-            # ✅ Update status
+            # Update status
             appointment.status = 'Approved'
 
-            # ✅ Billing create (safe)
+            # Billing create 
             if not appointment.is_billed:
                 Billing.objects.create(
                     appointment=appointment,
@@ -238,7 +237,7 @@ def stripe_payment(request, appointment_id):
 def stripe_success(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
 
-    # ✅ Payment successful hone par update
+    # Payment successful hone par update
     appointment.payment_method = "Online"
     appointment.save()
 
@@ -269,14 +268,14 @@ def edit_profile(request, id):
         new_image = request.FILES.get('image')
 
         if new_image:
-            # 👉 delete old image from cloudinary
+            # delete old image from cloudinary
             if patient.profile_image:
                 try:
                     cloudinary.uploader.destroy(patient.profile_image.public_id)
                 except:
                     pass
 
-            # 👉 assign new image
+            # assign new image
             patient.profile_image = new_image
 
 
@@ -926,3 +925,4 @@ def setting(request):
         "role": "admin",
     }
     return render(request, "dashboard/settings.html", context)
+
