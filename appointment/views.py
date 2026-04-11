@@ -109,12 +109,11 @@ def user_appointment(request):
 
 def book_appointment(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
-    print(doctor)
 
     if 'login' in request.session:
         email = request.session['login']  
         user = Patients.objects.get(email=email)
-        print(email, user)   
+        # print(email, user)   
         
         if not user:
             messages.error(request, "User not found")
@@ -123,7 +122,7 @@ def book_appointment(request, doctor_id):
         if request.method == 'POST':
             date = request.POST.get('date')
             time = request.POST.get('time')
-            print(date, time)
+            # print(date, time)
             
             appointment = Appointment.objects.create(
                 user = user,
