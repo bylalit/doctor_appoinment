@@ -3,61 +3,117 @@
 
 {% block contant %}
 
-<section class="flex-grow p-4 bg-light w-100" style="margin-top: 70px; margin-left: 3rem;">
-    
-    <div class="container">
-        <h3 class="mb-4" style="color: rgb(95 111 255);">Doctor Full Profile</h3>
-
-        <div class="card shadow-sm p-4">
-            <div class="row">
-                
-                <div class="col-md-4 text-center">
-                    <img src="{{ doctor.image.url }}" 
-                         alt="Doctor Image" 
-                         class="img-fluid rounded shadow-sm mb-3"
-                         style="max-height: 280px; object-fit: cover;">
-                </div>
-
-                <div class="col-md-8">
-                    <h3 class="fw-bold">{{ doctor.name }}</h3>
-                    <p class="text-secondary mb-1">👨‍⚕️ {{ doctor.degree }}</p>
-                    <p class="text-secondary mb-3">🩺 {{ doctor.category.name }}</p>
-
-                    <table class="table table-bordered">
-                        <tr>
-                            <th class="bg-light">Email</th>
-                            <td>{{ doctor.email }}</td>
-                        </tr>
-                        <tr>
-                            <th class="bg-light">Username</th>
-                            <td>{{ doctor.username }}</td>
-                        </tr>
-                        <tr>
-                            <th class="bg-light">Experience</th>
-                            <td>{{ doctor.experience }} Years</td>
-                        </tr>
-                        <tr>
-                            <th class="bg-light">Fees</th>
-                            <td>₹ {{ doctor.fees }}</td>
-                        </tr>
-                        <tr>
-                            <th class="bg-light">Address</th>
-                            <td>{{ doctor.address }}</td>
-                        </tr>
-                    </table>
-                </div>
+    <section class="flex-grow p-4 bg-light w-100 overflow-hidden" 
+            style="margin-top: 64px; margin-left: 18rem; min-height: 100vh; overflow-x: hidden;">
+        
+        <div class="container-fluid">
+            <div class="d-flex align-items-center gap-2 mb-4" data-aos="fade-down">
+                <h4 class="fw-bold mb-0" style="color: rgb(95 111 255);">Doctor Full Profile</h4>
+                <span class="text-muted small">/ Details</span>
             </div>
 
-            <hr>
+            <div class="card border-0 shadow-sm" style="border-radius: 24px; background: white;" data-aos="fade-up">
+                
+                <div class="position-relative" style="height: 140px; background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%); border-radius: 24px 24px 0 0;">
+                    <div class="position-absolute top-0 end-0 p-5 opacity-10">
+                        <i class="fas fa-stethoscope text-white" style="font-size: 100px; transform: rotate(-15deg);"></i>
+                    </div>
+                </div>
+                
+                <div class="card-body px-4 px-md-5 pb-5" style="margin-top: -70px; position: relative; z-index: 5;">
+                    <div class="row align-items-end mb-4">
+                        <div class="col-lg-3 text-center text-lg-start" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="position-relative d-inline-block">
+                                <div class="bg-white p-2 rounded-circle shadow-lg" style="width: 200px; height: 200px;">
+                                    <img src="{{ doctor.image.url }}" 
+                                        alt="{{ doctor.name }}" 
+                                        class="rounded-circle border border-4 border-white h-100 w-100"
+                                        style="object-fit: cover;">
+                                </div>
+                            </div>
+                        </div>
 
-            <h5 class="fw-bold">About Doctor</h5>
-            <p class="text-muted" style="white-space: pre-line;">
-                {{ doctor.about }}
-            </p>
+                        <div class="col-lg-6 mt-3 mt-lg-0 text-center text-lg-start" data-aos="fade-up" data-aos-delay="300">
+                            <div class="ps-lg-3">
+                                <h2 class="fw-bold text-dark mb-1">{{ doctor.name }}</h2>
+                                <div class="d-flex justify-content-center justify-content-lg-start align-items-center gap-2">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold" style="font-size: 13px;">
+                                        <i class="fas fa-certificate me-1"></i> {{ doctor.degree }}
+                                    </span>
+                                    <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 rounded-pill fw-bold" style="font-size: 13px;">
+                                        <i class="fas fa-stethoscope me-1"></i> {{ doctor.category.name }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-3 mt-4 mt-lg-0 text-center text-lg-end" data-aos="fade-left" data-aos-delay="400">
+                            <div class="d-flex flex-column gap-2">
+                                <a href="{% url "edit_doctor" %}" class="btn btn-primary rounded-pill py-2 shadow-sm fw-bold" style="background-color: #5f6fff; border: none;">
+                                    <i class="fas fa-edit me-2"></i> Edit Record
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-5 opacity-25">
+
+                    <div class="row g-4">
+                        <div class="col-lg-8" data-aos="fade-right" data-aos-delay="500">
+                            <h5 class="fw-bold text-dark mb-4 d-flex align-items-center gap-2">
+                                <i class="fas fa-user-tie text-primary"></i> Professional Background
+                            </h5>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="p-3 rounded-4 bg-light border-0 h-100">
+                                        <label class="small text-muted fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Username</label>
+                                        <div class="fw-semibold text-dark">{{ doctor.username }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 rounded-4 bg-light border-0 h-100">
+                                        <label class="small text-muted fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Experience</label>
+                                        <div class="fw-semibold text-dark">{{ doctor.experience }} Years Experience</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 rounded-4 bg-light border-0 h-100">
+                                        <label class="small text-muted fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Email Address</label>
+                                        <div class="fw-semibold text-dark">{{ doctor.email }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 rounded-4 bg-light border-0 h-100">
+                                        <label class="small text-muted fw-bold text-uppercase mb-1" style="font-size: 10px; letter-spacing: 1px;">Consultation Fees</label>
+                                        <div class="fw-semibold text-success">₹ {{ doctor.fees }} <span class="small text-muted">/ session</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4" data-aos="fade-up" data-aos-delay="600">
+                                <div class="p-3 rounded-4" style="background-color: #f0f4ff;">
+                                    <label class="small text-muted fw-bold text-uppercase mb-2 d-block" style="font-size: 10px; letter-spacing: 1px;">Clinic Address</label>
+                                    <div class="fw-medium text-dark lh-base"><i class="fas fa-map-marker-alt text-primary me-2"></i> {{ doctor.address }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4" data-aos="fade-left" data-aos-delay="500">
+                            <div class="card border-0 h-100 p-4" style="background-color: #f8f9ff; border-radius: 20px;">
+                                <h5 class="fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+                                    <i class="fas fa-info-circle text-primary"></i> About
+                                </h5>
+                                <p class="text-secondary small mb-0 lh-lg" style="white-space: pre-line; text-align: justify;">
+                                    {{ doctor.about }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </div>
-
-</section>
+    </section>
 
 {% endblock %}
