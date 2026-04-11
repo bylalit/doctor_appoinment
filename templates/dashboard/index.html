@@ -15,74 +15,6 @@
             </div>
         </div>
 
-        <!-- Extra Stats -->
-        {% comment %} <div class="row mb-4">
-
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in">
-                <div class="p-4 rounded-4 shadow-sm text-white position-relative"
-                    style="background: linear-gradient(135deg, #5f6fff, #7c8bff); transition: 0.3s;"
-                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
-                onmouseout="this.style.transform=''; this.style.boxShadow=''">
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h6 class="mb-1 opacity-75">Today's Appointments</h6>
-                            <h3 class="fw-bold mb-0">{{ today_appointments|default:"0" }}</h3>
-                        </div>
-                        <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:50px; height:50px;">
-                            <i class="fas fa-calendar-check fs-5"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
-                <div class="p-4 rounded-4 shadow-sm text-white position-relative"
-                    style="background: linear-gradient(135deg, #28a745, #5dd67a); transition: 0.3s;" 
-                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
-                onmouseout="this.style.transform=''; this.style.boxShadow=''">
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h6 class="mb-1 opacity-75">Total Revenue</h6>
-                            <h3 class="fw-bold mb-0">₹{{ total_revenue }}2000000</h3>
-                        </div>
-                        <div class="bg-white text-success rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:50px; height:50px;">
-                            <i class="fas fa-rupee-sign fs-5"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
-                <div class="p-4 rounded-4 shadow-sm text-white position-relative"
-                    style="background: linear-gradient(135deg, #dc3545, #ff6b6b); transition: 0.3s;"
-                    onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 25px rgba(0,0,0,0.1)'"
-                onmouseout="this.style.transform=''; this.style.boxShadow=''">
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h6 class="mb-1 opacity-75">Pending Appointments</h6>
-                            <h3 class="fw-bold mb-0">{{ pending_appointments }}50</h3>
-                        </div>
-                        <div class="bg-white text-danger rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:50px; height:50px;">
-                            <i class="fas fa-clock fs-5"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div> {% endcomment %}
-
 
         {% if role == 'admin' %}
             <!-- Extra Stats -->
@@ -153,7 +85,6 @@
 
             </div>
 
-            <!-- ================= ADMIN STATS (INLINE DESIGN) ================= -->
             <div class="row g-4 mb-4">
 
                 <!-- Doctors -->

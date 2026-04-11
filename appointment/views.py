@@ -551,7 +551,6 @@ def doctor_appointments(request):
     pending_appointments = appointments.filter(status='Pending').count()
     cancelled_appointments = appointments.filter(status='Cancelled').count()
     
-    # print(total_appointments, completed_appointments, pending_appointments, cancelled_appointments)
     
     paginator = Paginator(appointments, 10)  # 1 page = 10 records
     page_number = request.GET.get('page')
