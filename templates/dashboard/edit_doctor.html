@@ -2,60 +2,108 @@
 {% load static %}
 
 {% block contant %}
-<section class="flex-grow p-5 bg-light w-100" style="margin-top: 70px; margin-left: 18rem; padding: 20px;">
-    <h3 class="mb-4" style="color: rgb(95 111 255);">Update Profile</h3>
 
-    <form action="" method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm" style="max-width: 900px;">
-        {% csrf_token %}
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Full Name</label>
-                <input type="text" name="name" class="form-control" value="{{ doctor.name }}" required>
+    <section class="flex-grow p-4 bg-light w-100 overflow-hidden" 
+         style="margin-top: 64px; margin-left: 18rem; min-height: 100vh; overflow-x: hidden;">
+    
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between mb-4" data-aos="fade-down">
+                <div>
+                    <h4 class="fw-bold mb-0" style="color: rgb(95 111 255);">Update Profile</h4>
+                    <p class="text-muted small mb-0">Manage doctor account and professional settings</p>
+                </div>
             </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Email</label>
-                <input type="email" name="email" class="form-control" value="{{ doctor.email }}" required>
-            </div>
+            <div class="card border-0 shadow-sm" style="border-radius: 25px; background: white;" data-aos="fade-up">
+                
+                <form action="" method="POST" enctype="multipart/form-data" class="card-body p-4 p-md-5">
+                    {% csrf_token %}
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Degree</label>
-                <input type="text" name="degree" class="form-control" value="{{ doctor.degree }}">
-            </div>
+                    <div class="row g-4">
+                        
+                        <div class="col-12 mb-4">
+                            <div class="d-flex align-items-center gap-4 flex-wrap">
+                                <div class="position-relative">
+                                    <div class="bg-light rounded-circle p-1" style="width: 120px; height: 120px; border: 3px solid #5f6fff;">
+                                        <img src="{{ doctor.image.url }}" 
+                                            class="rounded-circle w-100 h-100" 
+                                            style="object-fit: cover;">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Profile Photo</h5>
+                                    <p class="text-muted small mb-3">Update your professional headshot</p>
+                                    <input type="file" name="image" class="form-control form-control-sm border-0 shadow-sm" 
+                                        style="background: #f0f2ff; border-radius: 10px; max-width: 300px;">
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Experience</label>
-                <input type="text" name="experience" class="form-control" value="{{ doctor.experience }}">
-            </div>
+                        <hr class="opacity-25">
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Fees</label>
-                <input type="number" name="fees" class="form-control" value="{{ doctor.fees }}">
-            </div>
+                        <div class="col-md-6" data-aos="fade-right">
+                            <label class="form-label small fw-bold text-muted text-uppercase mb-2">Full Name</label>
+                            <input type="text" name="name" class="form-control border-0 p-3 shadow-none" 
+                                style="border-radius: 12px; background: #f8f9ff; font-weight: 500;" 
+                                value="{{ doctor.name }}" required>
+                        </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Address</label>
-                <textarea name="address" class="form-control" rows="2">{{ doctor.address }}</textarea>
-            </div>
+                        <div class="col-md-6" data-aos="fade-left">
+                            <label class="form-label small fw-bold text-muted text-uppercase mb-2">Email Address</label>
+                            <input type="email" name="email" class="form-control border-0 p-3 shadow-none" 
+                                style="border-radius: 12px; background: #f8f9ff; font-weight: 500;" 
+                                value="{{ doctor.email }}" required>
+                        </div>
 
-            <div class="col-12 mb-3">
-                <label class="form-label fw-semibold">About</label>
-                <textarea name="about" class="form-control" rows="3">{{ doctor.about }}</textarea>
-            </div>
+                        <div class="col-md-6" data-aos="fade-right">
+                            <label class="form-label small fw-bold text-muted text-uppercase mb-2">Medical Degree</label>
+                            <input type="text" name="degree" class="form-control border-0 p-3 shadow-none" 
+                                style="border-radius: 12px; background: #f8f9ff; font-weight: 500;" 
+                                value="{{ doctor.degree }}">
+                        </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Current Image</label><br>
-                <img src="{{ doctor.image.url }}" width="130" class="rounded shadow-sm mb-2">
-            </div>
+                        <div class="col-md-6" data-aos="fade-left">
+                            <label class="form-label small fw-bold text-muted text-uppercase mb-2">Years of Practice</label>
+                            <input type="text" name="experience" class="form-control border-0 p-3 shadow-none" 
+                                style="border-radius: 12px; background: #f8f9ff; font-weight: 500;" 
+                                value="{{ doctor.experience }}">
+                        </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Change Image</label>
-                <input type="file" name="image" class="form-control">
+                        <div class="col-md-6" data-aos="fade-right">
+                            <label class="form-label small fw-bold text-muted text-uppercase mb-2">Consultation Fee (₹)</label>
+                            <input type="number" name="fees" class="form-control border-0 p-3 shadow-none fw-bold text-primary" 
+                                style="border-radius: 12px; background: #f8f9ff;" 
+                                value="{{ doctor.fees }}">
+                        </div>
+
+                        <div class="col-md-6" data-aos="fade-left">
+                            <label class="form-label small fw-bold text-muted text-uppercase mb-2">Clinic Location</label>
+                            <input type="text" name="address" class="form-control border-0 p-3 shadow-none" 
+                                style="border-radius: 12px; background: #f8f9ff; font-weight: 500;" 
+                                value="{{ doctor.address }}">
+                        </div>
+
+                        <div class="col-12" data-aos="fade-up">
+                            <label class="form-label small fw-bold text-muted text-uppercase mb-2">Biography / About</label>
+                            <textarea name="about" class="form-control border-0 p-3 shadow-none" 
+                                    style="border-radius: 15px; background: #f8f9ff; line-height: 1.6;" 
+                                    rows="4">{{ doctor.about }}</textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5 pt-4 border-top">
+                        <button type="submit" class="btn text-white px-5 py-3 fw-bold shadow-lg"
+                                style="background: #5f6fff; border-radius: 15px; border: none; transition: 0.4s;"
+                                onmouseover="this.style.backgroundColor='#4a59e0'; this.style.transform='translateY(-3px)';"
+                                onmouseout="this.style.backgroundColor='#5f6fff'; this.style.transform='translateY(0px)';" >
+                            Save and Update Profile
+                        </button>
+                    </div>
+
+                </form>
             </div>
         </div>
+    </section>
 
-        <button class="btn btn-primary px-4">Update</button>
-    </form>
-</section>
 {% endblock %}
