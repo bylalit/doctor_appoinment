@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
+            {% comment %} <form action="{% url 'book_appointment' doctor.id %}" method="POST" id="appointmentForm">
                 {% csrf_token %}
 
                 <div class="mt-5">
@@ -133,6 +133,84 @@
                         style="background-color: #5F73FF; max-width: 300px;">
                         Confirm Appointment
                     </button>
+                </div>
+            </form> {% endcomment %}
+
+            <form action="{% url 'book_appointment' doctor.id %}" method="POST">
+                {% csrf_token %}
+
+                <div class="container-fluid mt-4">
+                    <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5">
+
+                        <!-- Title -->
+                        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                            <h4 class="fw-bold mb-2" style="color:#5F73FF;">
+                                Book Appointment
+                            </h4>
+                            <span class="badge bg-light text-dark px-3 py-2 rounded-pill shadow-sm">
+                                Quick & Easy
+                            </span>
+                        </div>
+
+                        <div class="row g-4">
+
+                            <!-- Date -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Select Date</label>
+                                <input type="date" name="date"
+                                    class="form-control rounded-3 shadow-sm py-2"
+                                    style="border-color:#e0e4ff;" required>
+                            </div>
+
+                            <!-- Time -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Select Time</label>
+
+                                <div class="d-flex flex-wrap gap-2 mt-2">
+
+                                    <input type="radio" class="btn-check" name="time" id="t1" value="08:00" required>
+                                    <label class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" for="t1">
+                                        08:00 AM
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="time" id="t2" value="08:30">
+                                    <label class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" for="t2">
+                                        08:30 AM
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="time" id="t3" value="09:00">
+                                    <label class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" for="t3">
+                                        09:00 AM
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="time" id="t4" value="09:30">
+                                    <label class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" for="t4">
+                                        09:30 AM
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="time" id="t5" value="10:00">
+                                    <label class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" for="t5">
+                                        10:00 AM
+                                    </label>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Divider -->
+                        <hr class="my-4">
+
+                        <!-- Submit -->
+                        <div class="d-flex justify-content-end">
+                            <button type="submit"
+                                class="btn px-5 py-2 text-white fw-semibold rounded-pill shadow"
+                                style="background: linear-gradient(135deg, #5F73FF, #8FA2FF);">
+                                Confirm Appointment
+                            </button>
+                        </div>
+
+                    </div>
                 </div>
             </form>
 
