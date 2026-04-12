@@ -23,6 +23,7 @@ from datetime import timedelta
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+
 def index(request):
     doctors = Doctor.objects.filter(available=True).order_by('-id')[:10]
     return render(request, 'index.html', {'doctors': doctors, })
