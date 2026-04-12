@@ -119,7 +119,6 @@ def book_appointment(request, doctor_id):
         if request.method == 'POST':
             date = request.POST.get('date')
             time = request.POST.get('time')
-            # print(date, time)
             
             appointment = Appointment.objects.create(
                 user = user,
@@ -283,7 +282,7 @@ def edit_profile(request, id):
         patient.save()
         messages.success(request, "Profile Updated succfully")
 
-        return redirect('my_profile')  # ya jaha redirect karna hai
+        return redirect('my_profile') 
 
     return render(request, 'edit_profile.html', {'patient': patient})
 
