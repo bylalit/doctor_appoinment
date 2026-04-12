@@ -926,4 +926,3 @@ def setting(request):
         "role": "admin",
     }
     return render(request, "dashboard/settings.html", context)
-
