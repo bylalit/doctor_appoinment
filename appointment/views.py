@@ -479,31 +479,115 @@ def dash_admin(request):
     return redirect('dash_login')
 
 
+# def doctor_dashboard(request):
+#     doctor_id = request.session.get('doctor_id')
+#     if not doctor_id:
+#         return redirect(dash_login)
+    
+#     doctor = Doctor.objects.get(id=doctor_id)
+    
+#     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
+#     total_appointments = appointments.count()
+#     total_patients = appointments.values('user').distinct().count()
+    
+#     # today = timezone.now().date()  
+
+#     # today_list = Appointment.objects.filter(
+#     #     appointment_date__year=today.year,
+#     #     appointment_date__month=today.month,
+#     #     appointment_date__day=today.day
+#     # ).select_related('doctor', 'user').order_by('appointment_time')
+
+#     # today_appointments = today_list.count()
+    
+#     # print(today_list)
+#     # print(today_appointments)
+
+#     return render(request, 'dashboard/index.html', {"role" : "doctor", 'action': 'doctor', "doctor": doctor, "appointments": appointments, "total_appointments": total_appointments, "total_patients": total_patients,})
+
+
 def doctor_dashboard(request):
     doctor_id = request.session.get('doctor_id')
+    
     if not doctor_id:
-        return redirect(dash_login)
+        return redirect('dash_login')
     
     doctor = Doctor.objects.get(id=doctor_id)
-    
+
+    # 🔷 All Appointments of this doctor
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
+
     total_appointments = appointments.count()
     total_patients = appointments.values('user').distinct().count()
-    
-    # today = timezone.now().date()  
 
-    # today_list = Appointment.objects.filter(
-    #     appointment_date__year=today.year,
-    #     appointment_date__month=today.month,
-    #     appointment_date__day=today.day
-    # ).select_related('doctor', 'user').order_by('appointment_time')
+    # 🔷 Today Data
+    today = timezone.now().date()
 
-    # today_appointments = today_list.count()
-    
-    # print(today_list)
-    # print(today_appointments)
+    today_list = Appointment.objects.filter(
+        doctor=doctor,
+        appointment_date__year=today.year,
+        appointment_date__month=today.month,
+        appointment_date__day=today.day
+    ).select_related('doctor', 'user').order_by('appointment_time')
 
-    return render(request, 'dashboard/index.html', {"role" : "doctor", 'action': 'doctor', "doctor": doctor, "appointments": appointments, "total_appointments": total_appointments, "total_patients": total_patients,})
+    today_appointments = today_list.count()
+
+    # 🔷 Weekly Chart (Doctor specific)
+    appointments_chart = (
+        Appointment.objects
+        .filter(doctor=doctor)
+        .annotate(day=ExtractWeekDay('appointment_date'))
+        .values('day')
+        .annotate(total=Count('id'))
+        .order_by('day')
+    )
+
+    days_map = {
+        1: 'Sun', 2: 'Mon', 3: 'Tue',
+        4: 'Wed', 5: 'Thu', 6: 'Fri', 7: 'Sat'
+    }
+
+    chart_labels = []
+    chart_data = []
+
+    for item in appointments_chart:
+        chart_labels.append(days_map[item['day']])
+        chart_data.append(item['total'])
+
+    # 🔷 Status Counts (Doctor specific)
+    completed_appointments = appointments.filter(status='Approved').count()
+    pending_appointments = appointments.filter(status='Pending').count()
+    cancelled_appointments = appointments.filter(status='Cancelled').count()
+
+    # 🔷 Latest Appointments (Top 10)
+    latest_appointments = appointments.select_related('user')[:10]
+
+    return render(request, 'dashboard/index.html', {
+        "role": "doctor",
+        "action": "doctor",
+
+        "doctor": doctor,
+
+        # Stats
+        "total_appointments": total_appointments,
+        "total_patients": total_patients,
+
+        # Today
+        "today_appointments": today_appointments,
+        "today_list": today_list,
+
+        # Appointments
+        "appointments": latest_appointments,
+
+        # Chart
+        "chart_labels": chart_labels,
+        "chart_data": chart_data,
+
+        # Status
+        "completed_appointments": completed_appointments,
+        "pending_appointments": pending_appointments,
+        "cancelled_appointments": cancelled_appointments,
+    })
 
 
 def doctor_profile(request):
