@@ -358,7 +358,6 @@ def logout_user(request):
 
 
 
-
 # Admin Panel Views
 
 def dash_login(request):
@@ -532,7 +531,7 @@ def doctor_dashboard(request):
     pending_appointments = appointments.filter(status='Pending').count()
     cancelled_appointments = appointments.filter(status='Cancelled').count()
 
-    # Latest Appointments (Top 10)
+    # Latest Appointments Top 10
     latest_appointments = appointments.select_related('user')[:10]
 
     return render(request, 'dashboard/index.html', {
