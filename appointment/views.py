@@ -479,33 +479,6 @@ def dash_admin(request):
     return redirect('dash_login')
 
 
-# def doctor_dashboard(request):
-#     doctor_id = request.session.get('doctor_id')
-#     if not doctor_id:
-#         return redirect(dash_login)
-    
-#     doctor = Doctor.objects.get(id=doctor_id)
-    
-#     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
-#     total_appointments = appointments.count()
-#     total_patients = appointments.values('user').distinct().count()
-    
-#     # today = timezone.now().date()  
-
-#     # today_list = Appointment.objects.filter(
-#     #     appointment_date__year=today.year,
-#     #     appointment_date__month=today.month,
-#     #     appointment_date__day=today.day
-#     # ).select_related('doctor', 'user').order_by('appointment_time')
-
-#     # today_appointments = today_list.count()
-    
-#     # print(today_list)
-#     # print(today_appointments)
-
-#     return render(request, 'dashboard/index.html', {"role" : "doctor", 'action': 'doctor', "doctor": doctor, "appointments": appointments, "total_appointments": total_appointments, "total_patients": total_patients,})
-
-
 def doctor_dashboard(request):
     doctor_id = request.session.get('doctor_id')
     
@@ -514,13 +487,13 @@ def doctor_dashboard(request):
     
     doctor = Doctor.objects.get(id=doctor_id)
 
-    # 🔷 All Appointments of this doctor
+    # All Appointments of this doctor
     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
 
     total_appointments = appointments.count()
     total_patients = appointments.values('user').distinct().count()
 
-    # 🔷 Today Data
+    # Today Data
     today = timezone.now().date()
 
     today_list = Appointment.objects.filter(
@@ -532,7 +505,7 @@ def doctor_dashboard(request):
 
     today_appointments = today_list.count()
 
-    # 🔷 Weekly Chart (Doctor specific)
+    # Weekly Chart (Doctor specific)
     appointments_chart = (
         Appointment.objects
         .filter(doctor=doctor)
@@ -554,12 +527,12 @@ def doctor_dashboard(request):
         chart_labels.append(days_map[item['day']])
         chart_data.append(item['total'])
 
-    # 🔷 Status Counts (Doctor specific)
+    # Status Counts (Doctor specific)
     completed_appointments = appointments.filter(status='Approved').count()
     pending_appointments = appointments.filter(status='Pending').count()
     cancelled_appointments = appointments.filter(status='Cancelled').count()
 
-    # 🔷 Latest Appointments (Top 10)
+    # Latest Appointments (Top 10)
     latest_appointments = appointments.select_related('user')[:10]
 
     return render(request, 'dashboard/index.html', {
