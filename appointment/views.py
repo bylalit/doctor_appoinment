@@ -723,6 +723,36 @@ def doctor_view(request, id):
     })
     
     
+# @login_required(login_url=('/dash_login'))
+# @staff_member_required
+# def doctor_edit(request, id):
+
+#     doctor = Doctor.objects.get(id=id)
+#     print(doctor)
+
+#     if request.method == "POST":
+#         doctor.name = request.POST.get('name')
+#         doctor.email = request.POST.get('email')
+#         doctor.degree = request.POST.get('degree')
+#         doctor.address = request.POST.get('address')
+#         doctor.experience = request.POST.get('experience')
+#         doctor.fees = request.POST.get('fees')
+#         doctor.about = request.POST.get('about')
+
+#         if request.FILES.get('image'):
+#             doctor.image = request.FILES.get('image')
+
+#         doctor.save()
+#         messages.success(request, "Profile Updated Successfully!")
+#         return redirect('doctor_list')
+
+#     return render(request, "dashboard/admin_doc_edit.html", {
+#         "doctor": doctor,
+#         "action": "doctor_list",
+#         "role": "admin",
+#     })
+
+
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def doctor_edit(request, id):
@@ -738,10 +768,18 @@ def doctor_edit(request, id):
         doctor.fees = request.POST.get('fees')
         doctor.about = request.POST.get('about')
 
-        if request.FILES.get('image'):
-            doctor.image = request.FILES.get('image')
 
+        if request.FILES.get('image'):
+
+            if doctor.image:
+                try:
+                    cloudinary.uploader.destroy(doctor.image.public_id)
+                except:
+                    pass
+
+            doctor.image = request.FILES.get('image')
         doctor.save()
+
         messages.success(request, "Profile Updated Successfully!")
         return redirect('doctor_list')
 
@@ -752,11 +790,30 @@ def doctor_edit(request, id):
     })
 
 
+
+# @login_required(login_url=('/dash_login'))
+# @staff_member_required
+# def doctor_delete(request, id):
+#     doctor = get_object_or_404(Doctor, id=id)
+#     doctor.delete()
+#     return redirect('doctor_list')
+
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def doctor_delete(request, id):
+
     doctor = get_object_or_404(Doctor, id=id)
+
+    # 🔥 Cloudinary Image Delete
+    if doctor.image:
+        try:
+            cloudinary.uploader.destroy(doctor.image.public_id)
+        except Exception as e:
+            print("Image delete error:", e)
+
+    # 🔥 Doctor Delete
     doctor.delete()
+
     return redirect('doctor_list')
 
 @login_required(login_url=('/dash_login'))
