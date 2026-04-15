@@ -608,35 +608,35 @@ def edit_doctor(request):
     })
 
 
-# def doctor_appointments(request):
-#     doctor_id = request.session.get('doctor_id')
+def doctor_appointments(request):
+    doctor_id = request.session.get('doctor_id')
   
-#     doctor = Doctor.objects.get(id=doctor_id)
-#     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
+    doctor = Doctor.objects.get(id=doctor_id)
+    appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
     
-#     total_appointments = appointments.count()
-#     completed_appointments = appointments.filter(status='Approved').count()
-#     pending_appointments = appointments.filter(status='Pending').count()
-#     cancelled_appointments = appointments.filter(status='Cancelled').count()
+    total_appointments = appointments.count()
+    completed_appointments = appointments.filter(status='Approved').count()
+    pending_appointments = appointments.filter(status='Pending').count()
+    cancelled_appointments = appointments.filter(status='Cancelled').count()
     
     
-#     paginator = Paginator(appointments, 10)  # 1 page = 10 records
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
+    paginator = Paginator(appointments, 10)  # 1 page = 10 records
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     
-#     return render(request, 'dashboard/appointments.html', {
-#         'action': 'doctor_appointments',
-#         "role" : "doctor",           
-#         'appointments': appointments, 
-#         "doctor": doctor, 
-#         'total_appointments': total_appointments,
-#         'completed_appointments': completed_appointments,
-#         'pending_appointments': pending_appointments,
-#         'cancelled_appointments': cancelled_appointments,
-#         'appointments': page_obj,
-#         'page_obj': page_obj,
-#     })
+    return render(request, 'dashboard/appointments.html', {
+        'action': 'doctor_appointments',
+        "role" : "doctor",           
+        'appointments': appointments, 
+        "doctor": doctor, 
+        'total_appointments': total_appointments,
+        'completed_appointments': completed_appointments,
+        'pending_appointments': pending_appointments,
+        'cancelled_appointments': cancelled_appointments,
+        'appointments': page_obj,
+        'page_obj': page_obj,
+    })
 
 
 @login_required(login_url=('/dash_login'))
