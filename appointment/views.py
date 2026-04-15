@@ -567,36 +567,6 @@ def doctor_profile(request):
     doctor = Doctor.objects.get(id=doctor_id)
     return render(request, 'dashboard/doctor_profile.html', {"role" : "doctor", 'action': 'profile', 'doctor': doctor})
 
-# def edit_doctor(request):
-#     doctor_id = request.session.get('doctor_id')
-#     print(doctor_id)
-
-#     if not doctor_id:
-#         return redirect('dash_login')
-
-#     doctor = Doctor.objects.get(id=doctor_id)
-
-#     if request.method == "POST":
-#         doctor.name = request.POST.get('name')
-#         doctor.email = request.POST.get('email')
-#         doctor.degree = request.POST.get('degree')
-#         doctor.address = request.POST.get('address')
-#         doctor.experience = request.POST.get('experience')
-#         doctor.fees = request.POST.get('fees')
-#         doctor.about = request.POST.get('about')
-
-#         if request.FILES.get('image'):
-#             doctor.image = request.FILES.get('image')
-
-#         doctor.save()
-#         messages.success(request, "Profile Updated Successfully!")
-#         return redirect('edit_doctor')
-
-#     return render(request, "dashboard/edit_doctor.html", {
-#         "doctor": doctor,
-#         "action": "edit_doctor",
-#         "role": "doctor",
-#     })
 
 def edit_doctor(request):
     doctor_id = request.session.get('doctor_id')
@@ -615,7 +585,7 @@ def edit_doctor(request):
         doctor.fees = request.POST.get('fees')
         doctor.about = request.POST.get('about')
 
-        # 🔥 Image Update Logic (Same Style as You Wanted)
+        
         if request.FILES.get('image'):
 
             if doctor.image:
@@ -636,6 +606,7 @@ def edit_doctor(request):
         "action": "edit_doctor",
         "role": "doctor",
     })
+
 
 def doctor_appointments(request):
     doctor_id = request.session.get('doctor_id')
