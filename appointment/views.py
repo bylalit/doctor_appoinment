@@ -952,165 +952,45 @@ def billing_invoice(request, id):
     })
 
 
-# @login_required(login_url='/dash_login')
-# @staff_member_required
-# def analytics(request):
-
-#     # Basic Stats
-#     total_doctors = Doctor.objects.count()
-#     total_patients = Patients.objects.count()
-#     total_appointments = Appointment.objects.count()
-    
-#     # Dates
-#     today = timezone.now().date()
-#     week_start = today - timedelta(days=7)
-#     month_start = today.replace(day=1)
-
-#     # Revenue Calculation (Doctor fees se)
-#     today_revenue = (
-#         Appointment.objects
-#         .filter(appointment_date=today, status='Approved')
-#         .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
-#     )
-
-#     weekly_revenue = (
-#         Appointment.objects
-#         .filter(appointment_date__gte=week_start, status='Approved')
-#         .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
-#     )
-
-#     monthly_revenue = (
-#         Appointment.objects
-#         .filter(appointment_date__gte=month_start, status='Approved')
-#         .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
-#     )
-
-#     # Total Revenue
-#     total_revenue = (
-#         Appointment.objects
-#         .filter(status='Approved')
-#         .aggregate(total=Sum(F('doctor__fees')))['total'] or 0
-#     )
-    
-#     appointments_chart = (
-#         Appointment.objects
-#         .annotate(day=ExtractWeekDay('appointment_date'))
-#         .values('day')
-#         .annotate(total=Count('id'))
-#         .order_by('day')
-#     )
-
-#     days_map = {
-#         1: 'Sun', 2: 'Mon', 3: 'Tue',
-#         4: 'Wed', 5: 'Thu', 6: 'Fri', 7: 'Sat'
-#     }
-
-#     chart_labels = []
-#     chart_data = []
-
-#     for item in appointments_chart:
-#         chart_labels.append(days_map[item['day']])
-#         chart_data.append(item['total'])
-
-#     # Status Chart
-#     completed_appointments = Appointment.objects.filter(status='Approved').count()
-#     pending_appointments = Appointment.objects.filter(status='Pending').count()
-#     cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
-    
-#     # Top Doctors
-#     top_doctors = (
-#         Appointment.objects
-#         .values('doctor__id', 'doctor__name')
-#         .annotate(total=Count('id'))
-#         .order_by('-total')[:5]
-#     )
-
-#     # Top Patients
-#     top_patients = (
-#         Appointment.objects
-#         .values('user__id', 'user__username')
-#         .annotate(total=Count('id'))
-#         .order_by('-total')[:5]
-#     )
-    
-
-#     context = {
-#         'action': 'analytics',
-#         "role": "admin",
-
-#         # Stats
-#         "total_doctors": total_doctors,
-#         "total_patients": total_patients,
-#         "total_appointments": total_appointments,
-
-#         # Charts
-#         "chart_labels": chart_labels,
-#         "chart_data": chart_data,
-
-#         "completed_appointments": completed_appointments,
-#         "pending_appointments": pending_appointments,
-#         "cancelled_appointments": cancelled_appointments,
-        
-#         # Top Lists
-#         "top_doctors": top_doctors,
-#         "top_patients": top_patients,
-        
-#         # 💰 Revenue
-#         "today_revenue": today_revenue,
-#         "weekly_revenue": weekly_revenue,
-#         "monthly_revenue": monthly_revenue,
-#         "total_revenue": total_revenue,
-#     }
-
-#     return render(request, "dashboard/analytics.html", context)
-
-
 
 @login_required(login_url='/dash_login')
 @staff_member_required
 def analytics(request):
 
-    # 🔷 Basic Stats
+    # Basic Stats
     total_doctors = Doctor.objects.count()
     total_patients = Patients.objects.count()
     total_appointments = Appointment.objects.count()
 
-    # 🔷 Dates
+    # Dates
     today = timezone.now().date()
     week_start = today - timedelta(days=7)
 
-    # =========================
-    # 💰 REVENUE (CORRECT WAY)
-    # =========================
 
-    # 🔥 Today Revenue
+    # Today Revenue
     today_revenue = Billing.objects.filter(
         payment_status='Paid',
         created_at__date=today
     ).aggregate(total=Sum('amount'))['total'] or 0
 
-    # 🔥 Weekly Revenue (Last 7 days)
+    # Weekly Revenue (Last 7 days)
     weekly_revenue = Billing.objects.filter(
         payment_status='Paid',
         created_at__date__gte=week_start
     ).aggregate(total=Sum('amount'))['total'] or 0
 
-    # 🔥 Monthly Revenue
+    # Monthly Revenue
     monthly_revenue = Billing.objects.filter(
         payment_status='Paid',
         created_at__year=today.year,
         created_at__month=today.month
     ).aggregate(total=Sum('amount'))['total'] or 0
 
-    # 🔥 Total Revenue
+    # Total Revenue
     total_revenue = Billing.objects.filter(
         payment_status='Paid'
     ).aggregate(total=Sum('amount'))['total'] or 0
 
-
-    # =========================
-    # 📊 APPOINTMENT CHART
-    # =========================
 
     appointments_chart = (
         Appointment.objects
@@ -1133,18 +1013,10 @@ def analytics(request):
         chart_data.append(item['total'])
 
 
-    # =========================
-    # 📊 STATUS COUNTS
-    # =========================
-
     completed_appointments = Appointment.objects.filter(status='Approved').count()
     pending_appointments = Appointment.objects.filter(status='Pending').count()
     cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
 
-
-    # =========================
-    # 🏆 TOP DOCTORS
-    # =========================
 
     top_doctors = (
         Appointment.objects
@@ -1153,22 +1025,12 @@ def analytics(request):
         .order_by('-total')[:5]
     )
 
-
-    # =========================
-    # 👤 TOP PATIENTS
-    # =========================
-
     top_patients = (
         Appointment.objects
         .values('user__id', 'user__username')
         .annotate(total=Count('id'))
         .order_by('-total')[:5]
     )
-
-
-    # =========================
-    # 🔷 CONTEXT
-    # =========================
 
     context = {
         'action': 'analytics',
@@ -1192,7 +1054,7 @@ def analytics(request):
         "top_doctors": top_doctors,
         "top_patients": top_patients,
 
-        # 💰 Revenue (FINAL)
+        #  Revenue (FINAL)
         "today_revenue": today_revenue,
         "weekly_revenue": weekly_revenue,
         "monthly_revenue": monthly_revenue,
@@ -1200,6 +1062,7 @@ def analytics(request):
     }
 
     return render(request, "dashboard/analytics.html", context)
+
 
 @login_required(login_url='/dash_login')
 @staff_member_required
@@ -1209,4 +1072,3 @@ def setting(request):
         "role": "admin",
     }
     return render(request, "dashboard/settings.html", context)
-
