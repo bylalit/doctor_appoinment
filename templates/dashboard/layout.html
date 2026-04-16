@@ -199,7 +199,7 @@
                 </nav>
             {% endif %}
 
-            {% if role == 'doctor' %}
+            {% comment %} {% if role == 'doctor' %}
                 <nav id="sidebar" class="border-end bg-light p-3" 
                     style="width: 18rem; height: calc(100vh - 64px); position: fixed; top: 70px; left: 0; z-index: 1000; overflow-y: auto;">
                     
@@ -226,6 +226,49 @@
                     style="transition: 0.3s; font-size: 18px; text-decoration: none;">
                         <i class="fa-solid fa-upload" style="color: #fd7e14; width: 20px;"></i> <span class="small">Update Profile</span>
                     </a>
+                </nav>
+            {% endif %} {% endcomment %}
+
+            {% if role == 'doctor' %}
+                <nav id="sidebar" class="border-end bg-light p-3" 
+                    style="width: 18rem; height: calc(100vh - 64px); position: fixed; top: 70px; left: 0; z-index: 1000; overflow-y: auto;">
+                    
+                    <div class="mb-4 ps-2 pt-3">
+                        <h6 class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px; font-size: 1rem;">Doctor Panel</h6>
+                    </div>
+
+                    <a href="{% url 'doctor_dashboard' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor' %}bg-white shadow-sm border-start border-4 border-primary fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-house" style="color: #4e73df; width: 20px;"></i> <span class="small">Dashboard</span>
+                    </a>
+
+
+                    <a href="{% url 'doctor_appointments' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'doctor_appointments' %}bg-white shadow-sm border-start border-4 border-success fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-regular fa-calendar-check" style="color: #1cc88a; width: 20px;"></i> <span class="small">My Appointments</span>
+                    </a>
+
+                    <a href="{% url 'analytics_doc' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'analytics' %}bg-white shadow-sm border-start border-4 border-dark fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;"
+                    onmouseout="if(!this.classList.contains('bg-white')) this.style.backgroundColor='transparent'">
+                        <i class="fa-solid fa-chart-line" style="color: #6610f2; width: 20px;"></i> <span class="small">Performance Analytics</span>
+                    </a>
+
+                    <a href="{% url 'doctor_profile' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'profile' %}bg-white shadow-sm border-start border-4 border-info fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-user" style="color: #e83e8c; width: 20px;"></i> <span class="small">My Profile</span>
+                    </a>
+
+                    <a href="{% url 'edit_doctor' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'edit_doctor' %}bg-white shadow-sm border-start border-4 border-warning fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-upload" style="color: #fd7e14; width: 20px;"></i> <span class="small">Update Profile</span>
+                    </a>
+
+                    <a href="{% url 'doctor_feedback' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'feedback' %}bg-white shadow-sm border-start border-4 border-danger fw-bold{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fa-solid fa-star" style="color: #ffc107; width: 20px;"></i> <span class="small">Patient Feedback</span>
+                    </a>
+
                 </nav>
             {% endif %}
 

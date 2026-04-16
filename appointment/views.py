@@ -1088,3 +1088,21 @@ def setting(request):
         "role": "admin",
     }
     return render(request, "dashboard/settings.html", context)
+
+
+def analytics_doc(request):
+    context = {
+        'action': 'analytics',
+        "role": "doctor",
+    }
+    
+    return render(request, "dashboard/analytics_doc.html", context)
+
+
+def doctor_feedback(request):
+    # Context mein action='feedback' bhejna zaruri hai taaki sidebar link active dikhe
+    context = {
+        'action': 'feedback',
+        'role': 'doctor', # Agar aap role base check kar rahe hain
+    }
+    return render(request, 'dashboard/doctor_feedback.html', context)

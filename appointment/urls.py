@@ -49,4 +49,10 @@ urlpatterns = [
     path('analytics', views.analytics, name='analytics'),
     path('settings', views.setting, name='settings'),
     
+    
+    path('analytics_doc', views.analytics_doc, name='analytics_doc'),
+    path('feedback/', views.doctor_feedback, name='doctor_feedback'),
+    
+    
+    
 ]
