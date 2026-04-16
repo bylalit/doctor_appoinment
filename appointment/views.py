@@ -155,20 +155,17 @@ def approved_appointment(request, id):
 
     appointment = get_object_or_404(Appointment, id=id)
 
-    # 🔥 Case 1: Admin Login
     if request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff):
         pass  # full access
 
-    # 🔥 Case 2: Doctor Login
+
     elif 'doctor_id' in request.session:
         doctor_id = request.session.get('doctor_id')
 
-        # Doctor can approve only his own appointments
         if appointment.doctor.id != doctor_id:
             messages.error(request, "You are not allowed ❌")
             return redirect(request.META.get('HTTP_REFERER'))
 
-    # 🔥 Case 3: Patient Login
     elif 'login' in request.session:
         try:
             email = request.session['login']
@@ -182,7 +179,6 @@ def approved_appointment(request, id):
             messages.error(request, "User not found ❌")
             return redirect('dash_login')
 
-    # ❌ Not logged in
     else:
         messages.error(request, "Login required ❌")
         return redirect('dash_login')
@@ -232,7 +228,6 @@ def cancel_appointment(request, id):
             email = request.session['login']
             user = Patients.objects.get(email=email)
 
-            # Patient can cancel only own appointment
             if appointment.user != user:
                 messages.error(request, "You are not allowed ❌")
                 return redirect(request.META.get('HTTP_REFERER'))
@@ -241,7 +236,6 @@ def cancel_appointment(request, id):
             messages.error(request, "User not found ❌")
             return redirect('dash_login')
 
-    # Not logged in
     else:
         messages.error(request, "Login required ❌")
         return redirect('dash_login')
