@@ -150,58 +150,225 @@ def book_appointment(request, doctor_id):
     return render(request, 'doctor_info.html', {'doctor': doctor,})
 
    
+# def approved_appointment(request, id):
+#     if 'login' in request.session:
+#         try:
+#             email = request.session['login']
+#             user = Patients.objects.get(email=email)
+
+#             appointment = get_object_or_404(Appointment, id=id, user=user)
+
+#             # Already approved check
+#             if appointment.status == 'Approved':
+#                 messages.info(request, "Already Approved!")
+#                 return redirect(request.META.get('HTTP_REFERER'))
+
+#             # Update status
+#             appointment.status = 'Approved'
+
+#             # Billing create 
+#             if not appointment.is_billed:
+#                 Billing.objects.create(
+#                     appointment=appointment,
+#                     amount=appointment.doctor.fees,
+#                     payment_status="Paid"
+#                 )
+#                 appointment.is_billed = True
+
+#             appointment.save()
+
+#             messages.success(request, "Appointment Completed & Billing Generated ✅")
+
+#         except Patients.DoesNotExist:
+#             messages.error(request, "User not found ❌")
+
+#     else:
+#         messages.error(request, "Please login required!")
+
+#     return redirect(request.META.get('HTTP_REFERER'))
+
+
+# def approved_appointment(request, id):
+
+#     appointment = get_object_or_404(Appointment, id=id)
+
+#     # 🔥 Case 1: Admin Login
+#     if request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff):
+
+#         # Admin can approve any appointment
+#         pass
+
+#     # 🔥 Case 2: Patient Login
+#     elif 'login' in request.session:
+#         try:
+#             email = request.session['login']
+#             user = Patients.objects.get(email=email)
+
+#             # Patient can approve only own appointment
+#             if appointment.user != user:
+#                 messages.error(request, "You are not allowed to approve this ❌")
+#                 return redirect(request.META.get('HTTP_REFERER'))
+
+#         except Patients.DoesNotExist:
+#             messages.error(request, "User not found ❌")
+#             return redirect('dash_login')
+
+#     # Not logged in
+#     else:
+#         messages.error(request, "Login required ❌")
+#         return redirect('dash_login')
+
+#     # Already approved check
+#     if appointment.status == 'Approved':
+#         messages.info(request, "Already Approved!")
+#         return redirect(request.META.get('HTTP_REFERER'))
+
+#     # Update status
+#     appointment.status = 'Approved'
+
+#     # Billing create
+#     if not appointment.is_billed:
+#         Billing.objects.create(
+#             appointment=appointment,
+#             amount=appointment.doctor.fees,
+#             payment_status="Paid"
+#         )
+#         appointment.is_billed = True
+
+#     appointment.save()
+
+#     messages.success(request, "Appointment Approved & Billing Generated ✅")
+
+#     return redirect(request.META.get('HTTP_REFERER'))
+
+
 def approved_appointment(request, id):
-    if 'login' in request.session:
+
+    appointment = get_object_or_404(Appointment, id=id)
+
+    # 🔥 Case 1: Admin Login
+    if request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff):
+        pass  # full access
+
+    # 🔥 Case 2: Doctor Login
+    elif 'doctor_id' in request.session:
+        doctor_id = request.session.get('doctor_id')
+
+        # Doctor can approve only his own appointments
+        if appointment.doctor.id != doctor_id:
+            messages.error(request, "You are not allowed ❌")
+            return redirect(request.META.get('HTTP_REFERER'))
+
+    # 🔥 Case 3: Patient Login
+    elif 'login' in request.session:
         try:
             email = request.session['login']
             user = Patients.objects.get(email=email)
 
-            appointment = get_object_or_404(Appointment, id=id, user=user)
-
-            # Already approved check
-            if appointment.status == 'Approved':
-                messages.info(request, "Already Approved!")
+            if appointment.user != user:
+                messages.error(request, "You are not allowed ❌")
                 return redirect(request.META.get('HTTP_REFERER'))
-
-            # Update status
-            appointment.status = 'Approved'
-
-            # Billing create 
-            if not appointment.is_billed:
-                Billing.objects.create(
-                    appointment=appointment,
-                    amount=appointment.doctor.fees,
-                    payment_status="Paid"
-                )
-                appointment.is_billed = True
-
-            appointment.save()
-
-            messages.success(request, "Appointment Completed & Billing Generated ✅")
 
         except Patients.DoesNotExist:
             messages.error(request, "User not found ❌")
+            return redirect('dash_login')
 
+    # ❌ Not logged in
     else:
-        messages.error(request, "Please login required!")
+        messages.error(request, "Login required ❌")
+        return redirect('dash_login')
+
+    # 🔷 Already approved check
+    if appointment.status == 'Approved':
+        messages.info(request, "Already Approved!")
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    # 🔷 Update status
+    appointment.status = 'Approved'
+
+    # 🔷 Billing create
+    if not appointment.is_billed:
+        Billing.objects.create(
+            appointment=appointment,
+            amount=appointment.doctor.fees,
+            payment_status="Paid"
+        )
+        appointment.is_billed = True
+
+    appointment.save()
+
+    messages.success(request, "Appointment Approved & Billing Generated ✅")
 
     return redirect(request.META.get('HTTP_REFERER'))
 
 
+
+# def cancel_appointment(request, id):
+#     if 'login' in request.session:
+#         email = request.session['login']
+#         user = Patients.objects.get(email=email)
+
+#         appointment = get_object_or_404(Appointment, id=id, user=user)
+#         appointment.status = 'Cancelled'
+#         appointment.save()
+
+#         messages.success(request, "Appointment Cancelled Successfully!")
+#         return redirect(request.META.get('HTTP_REFERER'))
+#     else:
+#         messages.error(request, "Please login required!")
+#         return redirect('login')
+    
+
 def cancel_appointment(request, id):
-    if 'login' in request.session:
-        email = request.session['login']
-        user = Patients.objects.get(email=email)
 
-        appointment = get_object_or_404(Appointment, id=id, user=user)
-        appointment.status = 'Cancelled'
-        appointment.save()
+    appointment = get_object_or_404(Appointment, id=id)
 
-        messages.success(request, "Appointment Cancelled Successfully!")
-        return redirect(request.META.get('HTTP_REFERER'))
+    # 🔥 Case 1: Admin Login
+    if request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff):
+        pass  # full access
+
+    # 🔥 Case 2: Doctor Login
+    elif 'doctor_id' in request.session:
+        doctor_id = request.session.get('doctor_id')
+
+        # Doctor can cancel only his appointments
+        if appointment.doctor.id != doctor_id:
+            messages.error(request, "You are not allowed ❌")
+            return redirect(request.META.get('HTTP_REFERER'))
+
+    # 🔥 Case 3: Patient Login
+    elif 'login' in request.session:
+        try:
+            email = request.session['login']
+            user = Patients.objects.get(email=email)
+
+            # Patient can cancel only own appointment
+            if appointment.user != user:
+                messages.error(request, "You are not allowed ❌")
+                return redirect(request.META.get('HTTP_REFERER'))
+
+        except Patients.DoesNotExist:
+            messages.error(request, "User not found ❌")
+            return redirect('dash_login')
+
+    # ❌ Not logged in
     else:
-        messages.error(request, "Please login required!")
-        return redirect('login')
+        messages.error(request, "Login required ❌")
+        return redirect('dash_login')
+
+    # 🔷 Already Cancelled check
+    if appointment.status == 'Cancelled':
+        messages.info(request, "Already Cancelled!")
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    # 🔷 Update status
+    appointment.status = 'Cancelled'
+    appointment.save()
+
+    messages.success(request, "Appointment Cancelled Successfully ❌")
+
+    return redirect(request.META.get('HTTP_REFERER'))
+    
     
 
 def stripe_payment(request, appointment_id):
@@ -712,7 +879,7 @@ def doctor_list(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'dashboard/doctor_list.html', {
-        'doctors': page_obj,   # ⚠️ IMPORTANT
+        'doctors': page_obj,  
         'page_obj': page_obj,
         'total_doctor': total_doctor,
         'available_doctor': available_doctor,
@@ -778,14 +945,14 @@ def doctor_delete(request, id):
 
     doctor = get_object_or_404(Doctor, id=id)
 
-    # 🔥 Cloudinary Image Delete
+    # Cloudinary Image Delete
     if doctor.image:
         try:
             cloudinary.uploader.destroy(doctor.image.public_id)
         except Exception as e:
             print("Image delete error:", e)
 
-    # 🔥 Doctor Delete
+    # Doctor Delete
     doctor.delete()
 
     return redirect('doctor_list')
