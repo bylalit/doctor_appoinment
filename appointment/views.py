@@ -590,6 +590,19 @@ def doctor_dashboard(request):
 
     # Latest Appointments Top 10
     latest_appointments = appointments.select_related('user')[:10]
+    
+    # 🔥 Revenue (Doctor specific)
+    total_revenue = Billing.objects.filter(
+        payment_status='Paid',
+        appointment__doctor=doctor
+    ).aggregate(total=Sum('amount'))['total'] or 0
+
+    # today_revenue = Billing.objects.filter(
+    #     payment_status='Paid',
+    #     appointment__doctor=doctor,
+    #     created_at__date=today
+    # ).aggregate(total=Sum('amount'))['total'] or 0
+
 
     return render(request, 'dashboard/index.html', {
         "role": "doctor",
@@ -600,6 +613,9 @@ def doctor_dashboard(request):
         # Stats
         "total_appointments": total_appointments,
         "total_patients": total_patients,
+        
+        # 💰 Revenue
+        "total_revenue": total_revenue,
 
         # Today
         "today_appointments": today_appointments,
