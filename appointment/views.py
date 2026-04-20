@@ -1034,69 +1034,69 @@ def analytics(request):
     cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
 
 
-    top_doctors = (
-        Appointment.objects
-        .values('doctor__id', 'doctor__name')
-        .annotate(total=Count('id'))
-        .order_by('-total')[:5]
-    )
+#     top_doctors = (
+#         Appointment.objects
+#         .values('doctor__id', 'doctor__name')
+#         .annotate(total=Count('id'))
+#         .order_by('-total')[:5]
+#     )
 
-    top_patients = (
-        Appointment.objects
-        .values('user__id', 'user__username')
-        .annotate(total=Count('id'))
-        .order_by('-total')[:5]
-    )
+#     top_patients = (
+#         Appointment.objects
+#         .values('user__id', 'user__username')
+#         .annotate(total=Count('id'))
+#         .order_by('-total')[:5]
+#     )
 
-    context = {
-        'action': 'analytics',
-        "role": "admin",
+#     context = {
+#         'action': 'analytics',
+#         "role": "admin",
 
-        # Stats
-        "total_doctors": total_doctors,
-        "total_patients": total_patients,
-        "total_appointments": total_appointments,
+#         # Stats
+#         "total_doctors": total_doctors,
+#         "total_patients": total_patients,
+#         "total_appointments": total_appointments,
 
-        # Charts
-        "chart_labels": chart_labels,
-        "chart_data": chart_data,
+#         # Charts
+#         "chart_labels": chart_labels,
+#         "chart_data": chart_data,
 
-        # Status
-        "completed_appointments": completed_appointments,
-        "pending_appointments": pending_appointments,
-        "cancelled_appointments": cancelled_appointments,
+#         # Status
+#         "completed_appointments": completed_appointments,
+#         "pending_appointments": pending_appointments,
+#         "cancelled_appointments": cancelled_appointments,
 
-        # Top Lists
-        "top_doctors": top_doctors,
-        "top_patients": top_patients,
+#         # Top Lists
+#         "top_doctors": top_doctors,
+#         "top_patients": top_patients,
 
-        #  Revenue (FINAL)
-        "today_revenue": today_revenue,
-        "weekly_revenue": weekly_revenue,
-        "monthly_revenue": monthly_revenue,
-        "total_revenue": total_revenue,
-    }
+#         #  Revenue (FINAL)
+#         "today_revenue": today_revenue,
+#         "weekly_revenue": weekly_revenue,
+#         "monthly_revenue": monthly_revenue,
+#         "total_revenue": total_revenue,
+#     }
 
-    return render(request, "dashboard/analytics.html", context)
-
-
-@login_required(login_url='/dash_login')
-@staff_member_required
-def setting(request):
-    context = {
-        'action': 'settings',
-        "role": "admin",
-    }
-    return render(request, "dashboard/settings.html", context)
+#     return render(request, "dashboard/analytics.html", context)
 
 
-def analytics_doc(request):
-    context = {
-        'action': 'analytics',
-        "role": "doctor",
-    }
+# @login_required(login_url='/dash_login')
+# @staff_member_required
+# def setting(request):
+#     context = {
+#         'action': 'settings',
+#         "role": "admin",
+#     }
+#     return render(request, "dashboard/settings.html", context)
+
+
+# def analytics_doc(request):
+#     context = {
+#         'action': 'analytics',
+#         "role": "doctor",
+#     }
     
-    return render(request, "dashboard/analytics_doc.html", context)
+#     return render(request, "dashboard/analytics_doc.html", context)
 
 
 def doctor_feedback(request):
