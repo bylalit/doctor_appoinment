@@ -172,7 +172,7 @@
                     style="transition: 0.3s; font-size: 18px; text-decoration: none;">
                         <i class="fa-solid fa-users" style="color: #e74a3b; width: 20px;"></i> 
                         <span class="small">Patient List</span>
-                    </a>
+                    {% comment %} </a>
 
                     <a href="{% url 'billing' %}" 
                     class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'billing' %}bg-white shadow-sm border-start border-4 border-secondary fw-bold text-secondary{% else %}text-dark{% endif %}"
@@ -270,7 +270,7 @@
                     </a>
 
                 </nav>
-            {% endif %}
+            {% endif %} {% endcomment %}
 
 
             {% if messages %}
