@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Doctor, Category, Appointment, Patients, Contact, Billing
+from .models import Doctor, Category, Appointment, Patients, Contact, Billing, Comment
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
@@ -102,7 +102,46 @@ def user_appointment(request):
     else:
         messages.error(request, "Please login first!")
         return redirect('login')
+
+
+def add_comment(request, doctor_id):
+    if request.method == "POST":
+        # 1. Check if user is logged in via your custom session
+        user_email = request.session.get('login')
+        
+        if not user_email:
+            messages.error(request, "You must be logged in to post a review.")
+            return redirect('login')
+
+        # 2. Get the data from the form
+        comment_text = request.POST.get('comment_text')
+        rating_value = request.POST.get('rating') # New: Get rating from the select/input
+        
+        # Using get_object_or_404 is safer than .get()
+        doctor = get_object_or_404(Doctor, id=doctor_id)
+        
+        # 3. Get the patient object using the session email
+        patient = Patients.objects.filter(email=user_email).first()
+
+        if patient and comment_text and rating_value:
+            try:
+                # 4. Create the comment with the rating
+                Comment.objects.create(
+                    doctor=doctor,
+                    patient=patient,
+                    text=comment_text,
+                    rating=int(rating_value) # New: Saving the rating column
+                )
+                messages.success(request, "Your review has been posted!")
+            except Exception as e:
+                messages.error(request, f"Error saving review: {e}")
+        else:
+            messages.error(request, "Please provide both a rating and a comment.")
+
+    # Redirect back to the doctor profile page (ensure 'id' matches your URL parameter)
+    return redirect('doctor_info', id=doctor_id)  
     
+
 
 def book_appointment(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
@@ -336,6 +375,8 @@ def edit_profile(request, id):
         return redirect('my_profile') 
 
     return render(request, 'edit_profile.html', {'patient': patient})
+
+
 
   
 def login(request):

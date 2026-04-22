@@ -16,6 +16,7 @@ urlpatterns = [
     path('cancel_appointment/<int:id>/', views.cancel_appointment, name='cancel_appointment'),
     path('stripe-payment/<int:appointment_id>/', views.stripe_payment, name='stripe_payment'),
     path('stripe-success/<int:appointment_id>/', views.stripe_success, name='stripe_success'),
+    path('add_comment/<int:doctor_id>/', views.add_comment, name='add_comment'),
     
    
     path('login/', views.login, name='login'),

@@ -131,6 +131,90 @@
             </form>
 
 
+            <div class="mt-5 pt-4" data-aos="fade-up">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+                    
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <h4 class="fw-bold text-dark mb-0">Patient Reviews</h4>
+                        <span class="badge rounded-pill bg-primary px-3">{{ comments.count|default:"0" }}</span>
+                    </div>
+
+                    <div class="comment-list mb-5" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+                        {% for comment in comments %}
+                        <div class="d-flex gap-3 mb-4 pb-4 border-bottom">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white shadow-sm" 
+                                    style="width: 50px; height: 50px; background: linear-gradient(135deg, #5f6fff 0%, #3f4ed0 100%);">
+                                    {{ comment.user.username|slice:":1"|upper }}
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <h6 class="fw-bold mb-0">{{ comment.user.username }}</h6>
+                                    <small class="text-muted">{{ comment.created_at|date:"d M Y" }}</small>
+                                </div>
+                                <div class="mb-2" style="color: #ffc107; font-size: 12px;">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-secondary small mb-0 lh-base">
+                                    {{ comment.text }}
+                                </p>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-4">
+                            <i class="far fa-comment-dots text-muted fa-3x mb-3"></i>
+                            <p class="text-muted">No reviews yet. Be the first to share your experience!</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+
+                    {% if request.session.login %}
+                    <div class="p-4 rounded-4" style="background-color: #f8faff; border: 1px dashed #5f6fff;">
+                        <h6 class="fw-bold text-dark mb-3">Leave a Review</h6>
+                        
+                        <form action="{% url 'add_comment' doctor.id %}" method="POST">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold text-muted">Select Rating</label>
+                                <div class="d-flex align-items-center gap-2">
+                                    <select name="rating" class="form-select form-select-sm border-0 shadow-sm rounded-3 w-auto" style="cursor: pointer;" required>
+                                        <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                                        <option value="4">⭐⭐⭐⭐ (Good)</option>
+                                        <option value="3">⭐⭐⭐ (Average)</option>
+                                        <option value="2">⭐⭐ (Poor)</option>
+                                        <option value="1">⭐ (Terrible)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <textarea name="comment_text" class="form-control border-0 shadow-sm rounded-3" 
+                                        rows="3" placeholder="How was your experience with Dr. {{ doctor.name }}?" required></textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary btn-sm px-4 rounded-pill shadow-sm" 
+                                        style="background-color: #5f6fff; border: none;">
+                                    Post Review
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    {% else %}
+                    <div class="text-center p-4 rounded-4 bg-light">
+                        <p class="mb-0 small text-muted">
+                            Please <a href="{% url 'login' %}" class="text-primary fw-bold">Login</a> to leave a review.
+                        </p>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+
             <div class='pt-5 mt-5'>
 
                 <!-- Heading -->

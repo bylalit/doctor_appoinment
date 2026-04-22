@@ -1,5 +1,6 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -99,3 +100,28 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    # Star rating choices
+    RATING_CHOICES = [
+        (1, '1 Star'),
+        (2, '2 Stars'),
+        (3, '3 Stars'),
+        (4, '4 Stars'),
+        (5, '5 Stars'),
+    ]
+
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='comments')
+    patient = models.ForeignKey(Patients, on_delete=models.CASCADE)
+    text = models.TextField()
+    # New Column: Rating
+    rating = models.IntegerField(
+        choices=RATING_CHOICES, 
+        default=5,
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.rating} Stars - {self.patient.email} for {self.doctor.name}"
