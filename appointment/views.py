@@ -51,8 +51,8 @@ def doctor(request, category_name):
 def doctor_info(request, id):
     doctor = Doctor.objects.get(id=id, available=True)
     releted_doctor = Doctor.objects.filter(category=doctor.category, available=True)[:10]
-    
-    return render(request, 'doctor_info.html', {'doctor': doctor, 'releted_doctor': releted_doctor})
+    comments = Comment.objects.filter(doctor=doctor).order_by('-created_at')
+    return render(request, 'doctor_info.html', {'doctor': doctor, 'releted_doctor': releted_doctor, 'comments': comments})
 
 def about(request):
     return render(request, 'about.html')
