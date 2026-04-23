@@ -139,7 +139,7 @@
                         <span class="badge rounded-pill bg-primary px-3">{{ comments.count|default:"0" }}</span>
                     </div>
 
-                    {% comment %} <div class="comment-list mb-5" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+                    <div class="comment-list mb-5" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
                         {% for comment in comments %}
                         <div class="d-flex gap-3 mb-4 pb-4 border-bottom">
                             <div class="flex-shrink-0">
@@ -174,7 +174,7 @@
                     <div class="p-4 rounded-4" style="background-color: #f8faff; border: 1px dashed #5f6fff;">
                         <h6 class="fw-bold text-dark mb-3">Leave a Review</h6>
                         
-                        <form action="{% url 'add_comment' doctor.id %}" method="POST"> {% endcomment %}
+                        <form action="{% url 'add_comment' doctor.id %}" method="POST">
                             {% csrf_token %}
                             
                             <div class="mb-3">
