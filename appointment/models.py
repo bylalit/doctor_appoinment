@@ -103,7 +103,6 @@ class Contact(models.Model):
 
 
 class Comment(models.Model):
-    # Star rating choices
     RATING_CHOICES = [
         (1, '1 Star'),
         (2, '2 Stars'),
