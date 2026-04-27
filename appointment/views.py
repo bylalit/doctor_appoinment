@@ -51,7 +51,7 @@ def doctor(request, category_name):
 def doctor_info(request, id):
     doctor = Doctor.objects.get(id=id, available=True)
     releted_doctor = Doctor.objects.filter(category=doctor.category, available=True)[:10]
-    comments = Comment.objects.filter(doctor=doctor).order_by('-created_at')
+    comments = Comment.objects.filter(doctor=doctor, is_approved=True).order_by('-created_at')
     return render(request, 'doctor_info.html', {'doctor': doctor, 'releted_doctor': releted_doctor, 'comments': comments})
 
 def about(request):
@@ -1142,14 +1142,12 @@ def doctor_feedback(request):
     if not doctor_id:
         return redirect('dash_login')
 
-
     doctor = get_object_or_404(Doctor, id=doctor_id)
 
     comments_list = Comment.objects.filter(doctor=doctor)\
         .select_related('patient')\
         .order_by('-created_at')
         
-    print(comments_list)
 
     # pagination
     paginator = Paginator(comments_list, 5)
@@ -1164,3 +1162,19 @@ def doctor_feedback(request):
     }
 
     return render(request, 'dashboard/doctor_feedback.html', context)
+
+def approve_comment(request, comment_id):
+
+    doctor_id = request.session.get('doctor_id')
+
+    if not doctor_id:
+        return redirect('dash_login')
+
+    comment = get_object_or_404(Comment, id=comment_id)
+
+
+    if comment.doctor.id == doctor_id:
+        comment.is_approved = True
+        comment.save()
+
+    return redirect('doctor_feedback')

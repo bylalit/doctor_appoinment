@@ -114,6 +114,9 @@ class Comment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='comments')
     patient = models.ForeignKey(Patients, on_delete=models.CASCADE)
     text = models.TextField()
+    
+    is_approved = models.BooleanField(default=False)
+    
     # New Column: Rating
     rating = models.IntegerField(
         choices=RATING_CHOICES, 
@@ -124,3 +127,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.rating} Stars - {self.patient.email} for {self.doctor.name}"
+    

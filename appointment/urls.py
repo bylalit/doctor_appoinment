@@ -53,5 +53,6 @@ urlpatterns = [
     
     path('analytics_doc/', views.analytics_doc, name='analytics_doc'),
     path('feedback/', views.doctor_feedback, name='doctor_feedback'),
+    path('approve-comment/<int:comment_id>/', views.approve_comment, name='approve_comment'),
      
 ]
