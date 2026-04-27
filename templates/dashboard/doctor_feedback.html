@@ -26,7 +26,7 @@
                         <th style="padding: 1.5rem; color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; border: 0; font-weight: 700; text-align: center;">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                {% comment %} <tbody>
                     <tr class="table-row-hover" style="transition: all 0.3s ease; border-bottom: 1px solid #f1f5f9;">
                         <td style="padding: 1.5rem;">
                             <div class="d-flex align-items-center gap-3">
@@ -102,11 +102,78 @@
                             </button>
                         </td>
                     </tr>
+                </tbody> {% endcomment %}
+                <tbody>
+                    {% for comment in comments %}
+                    <tr class="table-row-hover">
+
+                        <!-- Patient -->
+                        <td style="padding: 1.5rem;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div style="width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #6366f1, #4338ca); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px;">
+                                    {{ comment.patient.email|first|upper }}
+                                </div>
+                                <div>
+                                    <div style="font-weight: 700;">{{ comment.patient.email }}</div>
+                                </div>
+                            </div>
+                        </td>
+
+                        <!-- Doctor -->
+                        <td>
+                            <span style="font-weight: 600;">{{ comment.doctor.name }}</span>
+                        </td>
+
+                        <!-- Comment -->
+                        <td>
+                            <div style="max-width: 280px;">
+                                {{ comment.text|truncatechars:60 }}
+                            </div>
+                        </td>
+
+                        <!-- Rating -->
+                        <td>
+                            <div style="display: flex; gap: 3px;">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= comment.rating %}
+                                        <i class="fas fa-star" style="color:#f59e0b;"></i>
+                                    {% else %}
+                                        <i class="far fa-star" style="color:#cbd5e1;"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </td>
+
+                        <!-- Status -->
+                        <td>
+                            {% if comment.rating >= 4 %}
+                                <span style="background:#ecfdf5; color:#10b981; padding:4px 12px; border-radius:20px;">Published</span>
+                            {% else %}
+                                <span style="background:#fffbeb; color:#d97706; padding:4px 12px; border-radius:20px;">Pending</span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Action -->
+                        <td class="text-center">
+                            <a href="#" class="btn btn-hover-delete">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            No feedback found 😕
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
 
-        <div class="card-footer p-4 d-flex justify-content-between align-items-center" style="background: white; border: none;">
+        {% comment %} <div class="card-footer p-4 d-flex justify-content-between align-items-center" style="background: white; border: none;">
             <p class="m-0 text-muted fw-medium" style="font-size: 13px;">Showing <span class="text-dark fw-bold">1-5</span> of 9 reviews</p>
             <nav>
                 <ul class="pagination m-0 gap-2">
@@ -116,7 +183,63 @@
                     <li class="page-item"><a class="page-link" href="#" style="border: 1px solid #e2e8f0; border-radius: 10px; color: #64748b; font-weight: 600;">Next</a></li>
                 </ul>
             </nav>
+        </div> {% endcomment %}
+
+        <div class="card-footer p-4 d-flex justify-content-between align-items-center" style="background: white; border: none;">
+    
+            <!-- Showing Text -->
+            <p class="m-0 text-muted fw-medium" style="font-size: 13px;">
+                Showing 
+                <span class="text-dark fw-bold">{{ comments.start_index }}</span>
+                -
+                <span class="text-dark fw-bold">{{ comments.end_index }}</span>
+                of 
+                <span class="text-dark fw-bold">{{ comments.paginator.count }}</span> reviews
+            </p>
+
+            <!-- Pagination -->
+            <nav>
+                <ul class="pagination m-0 gap-2">
+
+                    <!-- Previous -->
+                    {% if comments.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ comments.previous_page_number }}"
+                            style="border: 1px solid #e2e8f0; border-radius: 10px; color: #64748b; font-weight: 600;">
+                                Previous
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <!-- Page Numbers -->
+                    {% for num in comments.paginator.page_range %}
+                        <li class="page-item {% if comments.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}"
+                            style="{% if comments.number == num %}
+                                    background: #5f6fff; border: none; color: white; border-radius: 10px; padding: 0.5rem 1rem; box-shadow: 0 4px 10px rgba(95,111,255,0.3);
+                                    {% else %}
+                                    background: white; border: 1px solid #e2e8f0; color: #1e293b; border-radius: 10px; padding: 0.5rem 1rem;
+                                    {% endif %}">
+                                {{ num }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                    <!-- Next -->
+                    {% if comments.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ comments.next_page_number }}"
+                            style="border: 1px solid #e2e8f0; border-radius: 10px; color: #64748b; font-weight: 600;">
+                                Next
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
         </div>
+
     </div>
 </div>
 

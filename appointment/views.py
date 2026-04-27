@@ -1134,12 +1134,68 @@ def analytics_doc(request):
     return render(request, "dashboard/analytics_doc.html", context)
 
 
+# def doctor_feedback(request):
+    
+    
+#     context = {
+#         'action': 'feedback',
+#         'role': 'doctor',
+#     }
+#     return render(request, 'dashboard/doctor_feedback.html', context)
+
+
+# def doctor_feedback(request, doctor_id):
+    
+#     doctor = get_object_or_404(Doctor, id=doctor_id)
+
+#     # particular doctor ke comments
+#     comments_list = Comment.objects.filter(doctor=doctor).select_related('patient').order_by('-created_at')
+#     print(comments_list)
+
+#     # pagination
+#     paginator = Paginator(comments_list, 5)  # 5 per page
+#     page_number = request.GET.get('page')
+#     comments = paginator.get_page(page_number)
+    
+#     print(comments)
+
+#     context = {
+#         'comments': comments,
+#         'doctor': doctor,
+#         'action': 'feedback',
+#         'role': 'doctor',
+#     }
+
+#     return render(request, 'dashboard/doctor_feedback.html', context)
+
 def doctor_feedback(request):
-    
-    
-    
+
+    # session se doctor_id lo
+    doctor_id = request.session.get('doctor_id')
+
+    if not doctor_id:
+        return redirect('dash_login')  # agar login nahi hai
+
+    # doctor fetch karo
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+
+    # us doctor ke comments
+    comments_list = Comment.objects.filter(doctor=doctor)\
+        .select_related('patient')\
+        .order_by('-created_at')
+        
+    print(comments_list)
+
+    # pagination
+    paginator = Paginator(comments_list, 5)  # 5 per page
+    page_number = request.GET.get('page')
+    comments = paginator.get_page(page_number)
+
     context = {
+        'comments': comments,
+        'doctor': doctor,
         'action': 'feedback',
         'role': 'doctor',
     }
+
     return render(request, 'dashboard/doctor_feedback.html', context)
