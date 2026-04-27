@@ -801,25 +801,60 @@ def add_doctor(request):
     return render(request, 'dashboard/add_doctor.html', {'category': category, "role" : "admin", 'action': 'add_doctor'})
 
 
-@login_required(login_url=('/dash_login'))
+# @login_required(login_url=('/dash_login'))
+# @staff_member_required
+# def doctor_list(request):
+#     doctors = Doctor.objects.all().order_by('-id')
+    
+#     total_doctor = doctors.count()
+#     available_doctor = doctors.filter(available=True).count()
+#     unavailable_doctor = doctors.filter(available=False).count()
+
+#     paginator = Paginator(doctors, 8)  # 1 page me 8 doctors
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+
+#     return render(request, 'dashboard/doctor_list.html', {
+#         'doctors': page_obj,  
+#         'page_obj': page_obj,
+#         'total_doctor': total_doctor,
+#         'available_doctor': available_doctor,
+#         'unavailable_doctor': unavailable_doctor,
+#         'action': 'doctor_list',
+#         "role": "admin"
+#     })
+
+@login_required(login_url='/dash_login')
 @staff_member_required
 def doctor_list(request):
-    doctors = Doctor.objects.all().order_by('-id')
-    
-    total_doctor = doctors.count()
-    available_doctor = doctors.filter(available=True).count()
-    unavailable_doctor = doctors.filter(available=False).count()
 
-    paginator = Paginator(doctors, 8)  # 1 page me 8 doctors
+    filter_status = request.GET.get('status')  # 👈 NEW
+
+    doctors = Doctor.objects.all().order_by('-id')
+
+    # 👉 Filter Apply
+    if filter_status == 'available':
+        doctors = doctors.filter(available=True)
+    elif filter_status == 'unavailable':
+        doctors = doctors.filter(available=False)
+
+    # 👉 Counts (Always total from ALL doctors)
+    total_doctor = Doctor.objects.count()
+    available_doctor = Doctor.objects.filter(available=True).count()
+    unavailable_doctor = Doctor.objects.filter(available=False).count()
+
+    # 👉 Pagination
+    paginator = Paginator(doctors, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'dashboard/doctor_list.html', {
-        'doctors': page_obj,  
+        'doctors': page_obj,
         'page_obj': page_obj,
         'total_doctor': total_doctor,
         'available_doctor': available_doctor,
         'unavailable_doctor': unavailable_doctor,
+        'filter_status': filter_status,   # 👈 send to template
         'action': 'doctor_list',
         "role": "admin"
     })
