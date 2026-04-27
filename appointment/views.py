@@ -632,11 +632,6 @@ def doctor_dashboard(request):
         appointment__doctor=doctor
     ).aggregate(total=Sum('amount'))['total'] or 0
 
-    # today_revenue = Billing.objects.filter(
-    #     payment_status='Paid',
-    #     appointment__doctor=doctor,
-    #     created_at__date=today
-    # ).aggregate(total=Sum('amount'))['total'] or 0
 
 
     return render(request, 'dashboard/index.html', {
@@ -1115,14 +1110,50 @@ def analytics(request):
     return render(request, "dashboard/analytics.html", context)
 
 
+
 @login_required(login_url='/dash_login')
 @staff_member_required
 def setting(request):
+
+    user = request.user   # current logged-in admin
+
+    if request.method == "POST":
+
+        # 👉 Profile Update
+        if "profile_update" in request.POST:
+            user.first_name = request.POST.get('full_name')
+            user.email = request.POST.get('email')
+
+
+            user.save()
+            messages.success(request, "Profile updated successfully!")
+            return redirect('settings')
+
+
+        # 👉 Password Update
+        if "password_update" in request.POST:
+            current_password = request.POST.get('current_password')
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('confirm_password')
+
+            if not user.check_password(current_password):
+                messages.error(request, "Current password is incorrect!")
+            elif new_password != confirm_password:
+                messages.error(request, "Passwords do not match!")
+            else:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password updated successfully!")
+                return redirect('dash_login')  
+
     context = {
+        'user': user,
         'action': 'settings',
-        "role": "admin",
+        'role': 'admin',
     }
+
     return render(request, "dashboard/settings.html", context)
+
 
 
 def analytics_doc(request):
