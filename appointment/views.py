@@ -1178,3 +1178,19 @@ def approve_comment(request, comment_id):
         comment.save()
 
     return redirect('doctor_feedback')
+
+
+def delete_comment(request, comment_id):
+
+    doctor_id = request.session.get('doctor_id')
+
+    if not doctor_id:
+        return redirect('dash_login')
+
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    # ✅ security check
+    if comment.doctor.id == doctor_id:
+        comment.delete()
+
+    return redirect('doctor_feedback')
