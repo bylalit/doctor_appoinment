@@ -1135,9 +1135,11 @@ def analytics_doc(request):
 
 
 def doctor_feedback(request):
-    # Context mein action='feedback' bhejna zaruri hai taaki sidebar link active dikhe
+    
+    
+    
     context = {
         'action': 'feedback',
-        'role': 'doctor', # Agar aap role base check kar rahe hain
+        'role': 'doctor',
     }
     return render(request, 'dashboard/doctor_feedback.html', context)
