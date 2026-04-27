@@ -742,31 +742,70 @@ def doctor_appointments(request):
     })
 
 
-@login_required(login_url=('/dash_login'))
+# @login_required(login_url=('/dash_login'))
+# @staff_member_required
+# def appointments(request):
+#     appointments_list = Appointment.objects.all().order_by('-created_at')
+    
+#     total_appointments = appointments_list.count()
+#     completed_appointments = appointments_list.filter(status='Approved').count()
+#     pending_appointments = appointments_list.filter(status='Pending').count()
+#     cancelled_appointments = appointments_list.filter(status='Cancelled').count()
+
+#     paginator = Paginator(appointments_list, 10)  # 1 page = 10 records
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+
+#     return render(request, 'dashboard/appointments.html', {
+#         'appointments': page_obj,
+#         'page_obj': page_obj,
+        
+#         'total_appointments': total_appointments,
+#         'completed_appointments': completed_appointments,
+#         'pending_appointments': pending_appointments,
+#         'cancelled_appointments': cancelled_appointments,
+#         'action': 'appointments',
+#         "role": "admin"
+#     })
+
+
+@login_required(login_url='/dash_login')
 @staff_member_required
 def appointments(request):
-    appointments_list = Appointment.objects.all().order_by('-created_at')
-    
-    total_appointments = appointments_list.count()
-    completed_appointments = appointments_list.filter(status='Approved').count()
-    pending_appointments = appointments_list.filter(status='Pending').count()
-    cancelled_appointments = appointments_list.filter(status='Cancelled').count()
 
-    paginator = Paginator(appointments_list, 10)  # 1 page = 10 records
+    appointments_list = Appointment.objects.all().order_by('-created_at')
+
+    status = request.GET.get('status')
+
+    if status and status != "All":
+        appointments_list = appointments_list.filter(status=status)
+
+
+    total_appointments = Appointment.objects.count()
+    completed_appointments = Appointment.objects.filter(status='Approved').count()
+    pending_appointments = Appointment.objects.filter(status='Pending').count()
+    cancelled_appointments = Appointment.objects.filter(status='Cancelled').count()
+
+    # Pagination
+    paginator = Paginator(appointments_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'dashboard/appointments.html', {
         'appointments': page_obj,
         'page_obj': page_obj,
-        
+
         'total_appointments': total_appointments,
         'completed_appointments': completed_appointments,
         'pending_appointments': pending_appointments,
         'cancelled_appointments': cancelled_appointments,
+
+        'filter_status': status,  
+
         'action': 'appointments',
         "role": "admin"
     })
+
 
 
 @login_required(login_url=('/dash_login'))

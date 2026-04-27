@@ -26,10 +26,80 @@
             </div>
         </div>
 
+        <div class="col-12 my-4" data-aos="fade-right" data-aos-duration="800">
+            <div class="d-flex gap-3 flex-wrap">
+
+                <!-- 🔹 All -->
+                <a href="{% url 'doctor_list' %}"
+                class="btn btn-sm rounded-pill px-4 shadow-sm d-flex align-items-center"
+                style="
+                        transition: all 0.3s ease;
+                        {% if request.GET.status == 'All' or not request.GET.status %}
+                            background: linear-gradient(135deg,#6366f1,#4338ca);
+                            color: white;
+                            transform: scale(1.05);
+                            box-shadow: 0 10px 25px rgba(99,102,241,0.4);
+                        {% else %}
+                            background: white;
+                            color: #64748b;
+                            border: 1px solid #e2e8f0;
+                        {% endif %}
+                "
+                onmouseover="this.style.transform='translateY(-4px)'"
+                onmouseout="this.style.transform='{% if request.GET.status == 'All' or not request.GET.status %}scale(1.05){% else %}scale(1){% endif %}'">
+                
+                <i class="fas fa-layer-group me-2"></i> All
+                </a>
+
+
+                <a href="?status=available"
+                class="btn btn-sm rounded-pill px-4 shadow-sm d-flex align-items-center"
+                style="
+                        transition: all 0.3s ease;
+                        {% if request.GET.status == 'available' %}
+                            background: linear-gradient(135deg,#10b981,#059669);
+                            color: white;
+                            transform: scale(1.05);
+                            box-shadow: 0 10px 25px rgba(16,185,129,0.4);
+                        {% else %}
+                            background: white;
+                            color: #64748b;
+                            border: 1px solid #e2e8f0;
+                        {% endif %}
+                "
+                onmouseover="this.style.transform='translateY(-4px)'"
+                onmouseout="this.style.transform='{% if request.GET.status == 'Approved' %}scale(1.05){% else %}scale(1){% endif %}'">
+                
+                <i class="fas fa-check-circle me-2"></i> Available
+                </a>
+
+                <a href="?status=unavailable"
+                class="btn btn-sm rounded-pill px-4 shadow-sm d-flex align-items-center"
+                style="
+                        transition: all 0.3s ease;
+                        {% if request.GET.status == 'unavailable' %}
+                            background: linear-gradient(135deg,#ef4444,#dc2626);
+                            color: white;
+                            transform: scale(1.05);
+                            box-shadow: 0 10px 25px rgba(239,68,68,0.4);
+                        {% else %}
+                            background: white;
+                            color: #64748b;
+                            border: 1px solid #e2e8f0;
+                        {% endif %}
+                "
+                onmouseover="this.style.transform='translateY(-4px)'"
+                onmouseout="this.style.transform='{% if request.GET.status == 'Cancelled' %}scale(1.05){% else %}scale(1){% endif %}'">
+                
+                <i class="fas fa-times-circle me-2"></i> Unavailable
+                </a>
+
+            </div>
+        </div>
+
 
         <div class="row mb-5 g-3">
             <div class="col-xl-3 col-lg-4 col-md-6">
-                <a href="{% url 'doctor_list' %}" style="text-decoration:none;">
                     <div class="card h-100 border-0 shadow-lg rounded-3 overflow-hidden transition-all"
                         style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color:white; cursor:pointer; transition:0.3s;"
                         
@@ -49,11 +119,9 @@
                         </div>
 
                     </div>
-                </a>
             </div>
 
             <div class="col-xl-3 col-lg-4 col-md-6">
-                <a href="?status=available" style="text-decoration:none;">
                     <div class="card h-100 border-0 shadow-lg rounded-3 overflow-hidden transition-all"
                         style="background: linear-gradient(135deg, #10b981, #059669);
                             color:white; cursor:pointer; transition:0.3s;
@@ -75,11 +143,9 @@
                         </div>
 
                     </div>
-                </a>
             </div>
 
             <div class="col-xl-3 col-lg-4 col-md-6">
-                <a href="?status=unavailable" style="text-decoration:none;">
                     <div class="card h-100 border-0 shadow-lg rounded-3 overflow-hidden transition-all"
                         style="background: linear-gradient(135deg, #f59e0b, #d97706);
                             color:white; cursor:pointer; transition:0.3s;
@@ -101,9 +167,9 @@
                         </div>
 
                     </div>
-                </a>
             </div>
         </div>
+
 
         <!-- Doctors Grid -->
         <div class="row g-4">
@@ -192,6 +258,7 @@
 
         </div>
 
+
         <!-- 🔷 Pagination -->
         {% if page_obj.has_other_pages %}
             <div class="d-flex justify-content-center mt-5">
@@ -203,7 +270,7 @@
                         {% if page_obj.has_previous %}
                             <li class="page-item">
                                 <a class="page-link border-0 rounded-circle me-2"
-                                href="?page={{ page_obj.previous_page_number }}"
+                                href="?{% if request.GET.status %}status={{ request.GET.status }}&{% endif %}page={{ page_obj.previous_page_number }}"
                                 style="color:#5f6fff;">
                                     ←
                                 </a>
@@ -226,7 +293,7 @@
                             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                                 <li class="page-item">
                                     <a class="page-link border-0 rounded-circle mx-1"
-                                    href="?page={{ num }}"
+                                    href="?{% if request.GET.status %}status={{ request.GET.status }}&{% endif %}page={{ num }}"
                                     style="color:#5f6fff;">
                                         {{ num }}
                                     </a>
@@ -238,7 +305,7 @@
                         {% if page_obj.has_next %}
                             <li class="page-item">
                                 <a class="page-link border-0 rounded-circle ms-2"
-                                href="?page={{ page_obj.next_page_number }}"
+                                href="?{% if request.GET.status %}status={{ request.GET.status }}&{% endif %}page={{ page_obj.next_page_number }}"
                                 style="color:#5f6fff;">
                                     →
                                 </a>
