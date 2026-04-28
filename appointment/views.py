@@ -626,7 +626,7 @@ def doctor_dashboard(request):
     # Latest Appointments Top 10
     latest_appointments = appointments.select_related('user')[:10]
     
-    # 🔥 Revenue (Doctor specific)
+    # Revenue
     total_revenue = Billing.objects.filter(
         payment_status='Paid',
         appointment__doctor=doctor
@@ -644,7 +644,7 @@ def doctor_dashboard(request):
         "total_appointments": total_appointments,
         "total_patients": total_patients,
         
-        # 💰 Revenue
+        # Revenue
         "total_revenue": total_revenue,
 
         # Today
@@ -711,36 +711,6 @@ def edit_doctor(request):
     })
 
 
-# def doctor_appointments(request):
-#     doctor_id = request.session.get('doctor_id')
-  
-#     doctor = Doctor.objects.get(id=doctor_id)
-#     appointments = Appointment.objects.filter(doctor=doctor).order_by('-created_at')
-    
-#     total_appointments = appointments.count()
-#     completed_appointments = appointments.filter(status='Approved').count()
-#     pending_appointments = appointments.filter(status='Pending').count()
-#     cancelled_appointments = appointments.filter(status='Cancelled').count()
-    
-    
-#     paginator = Paginator(appointments, 10)  # 1 page = 10 records
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-
-    
-#     return render(request, 'dashboard/appointments.html', {
-#         'action': 'doctor_appointments',
-#         "role" : "doctor",           
-#         'appointments': appointments, 
-#         "doctor": doctor, 
-#         'total_appointments': total_appointments,
-#         'completed_appointments': completed_appointments,
-#         'pending_appointments': pending_appointments,
-#         'cancelled_appointments': cancelled_appointments,
-#         'appointments': page_obj,
-#         'page_obj': page_obj,
-#     })
-
 def doctor_appointments(request):
 
     doctor_id = request.session.get('doctor_id')
@@ -778,33 +748,6 @@ def doctor_appointments(request):
 
         'filter_status': status,  
     })
-
-
-# @login_required(login_url=('/dash_login'))
-# @staff_member_required
-# def appointments(request):
-#     appointments_list = Appointment.objects.all().order_by('-created_at')
-    
-#     total_appointments = appointments_list.count()
-#     completed_appointments = appointments_list.filter(status='Approved').count()
-#     pending_appointments = appointments_list.filter(status='Pending').count()
-#     cancelled_appointments = appointments_list.filter(status='Cancelled').count()
-
-#     paginator = Paginator(appointments_list, 10)  # 1 page = 10 records
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-
-#     return render(request, 'dashboard/appointments.html', {
-#         'appointments': page_obj,
-#         'page_obj': page_obj,
-        
-#         'total_appointments': total_appointments,
-#         'completed_appointments': completed_appointments,
-#         'pending_appointments': pending_appointments,
-#         'cancelled_appointments': cancelled_appointments,
-#         'action': 'appointments',
-#         "role": "admin"
-#     })
 
 
 @login_required(login_url='/dash_login')
@@ -845,7 +788,6 @@ def appointments(request):
     })
 
 
-
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def add_doctor(request):
@@ -878,49 +820,27 @@ def add_doctor(request):
     return render(request, 'dashboard/add_doctor.html', {'category': category, "role" : "admin", 'action': 'add_doctor'})
 
 
-# @login_required(login_url=('/dash_login'))
-# @staff_member_required
-# def doctor_list(request):
-#     doctors = Doctor.objects.all().order_by('-id')
-    
-#     total_doctor = doctors.count()
-#     available_doctor = doctors.filter(available=True).count()
-#     unavailable_doctor = doctors.filter(available=False).count()
-
-#     paginator = Paginator(doctors, 8)  # 1 page me 8 doctors
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-
-#     return render(request, 'dashboard/doctor_list.html', {
-#         'doctors': page_obj,  
-#         'page_obj': page_obj,
-#         'total_doctor': total_doctor,
-#         'available_doctor': available_doctor,
-#         'unavailable_doctor': unavailable_doctor,
-#         'action': 'doctor_list',
-#         "role": "admin"
-#     })
 
 @login_required(login_url='/dash_login')
 @staff_member_required
 def doctor_list(request):
 
-    filter_status = request.GET.get('status')  # 👈 NEW
+    filter_status = request.GET.get('status') 
 
     doctors = Doctor.objects.all().order_by('-id')
 
-    # 👉 Filter Apply
+    # Filter Apply
     if filter_status == 'available':
         doctors = doctors.filter(available=True)
     elif filter_status == 'unavailable':
         doctors = doctors.filter(available=False)
 
-    # 👉 Counts (Always total from ALL doctors)
+    # Counts (Always total from ALL doctors)
     total_doctor = Doctor.objects.count()
     available_doctor = Doctor.objects.filter(available=True).count()
     unavailable_doctor = Doctor.objects.filter(available=False).count()
 
-    # 👉 Pagination
+    # Pagination
     paginator = Paginator(doctors, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -931,7 +851,7 @@ def doctor_list(request):
         'total_doctor': total_doctor,
         'available_doctor': available_doctor,
         'unavailable_doctor': unavailable_doctor,
-        'filter_status': filter_status,   # 👈 send to template
+        'filter_status': filter_status,  
         'action': 'doctor_list',
         "role": "admin"
     })
@@ -949,7 +869,6 @@ def doctor_view(request, id):
     })
     
     
-
 @login_required(login_url=('/dash_login'))
 @staff_member_required
 def doctor_edit(request, id):
