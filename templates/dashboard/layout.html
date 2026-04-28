@@ -248,11 +248,6 @@
                         <i class="fa-regular fa-calendar-check" style="color: #1cc88a; width: 20px;"></i> <span class="small">My Appointments</span>
                     </a>
 
-                    <a href="{% url 'analytics_doc' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'analytics' %}bg-white shadow-sm border-start border-4 border-dark fw-bold{% else %}text-dark{% endif %}"
-                    style="transition: 0.3s; font-size: 18px; text-decoration: none;"
-                    onmouseout="if(!this.classList.contains('bg-white')) this.style.backgroundColor='transparent'">
-                        <i class="fa-solid fa-chart-line" style="color: #6610f2; width: 20px;"></i> <span class="small">Performance Analytics</span>
-                    </a>
 
                     <a href="{% url 'doctor_profile' %}" class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'profile' %}bg-white shadow-sm border-start border-4 border-info fw-bold{% else %}text-dark{% endif %}"
                     style="transition: 0.3s; font-size: 18px; text-decoration: none;">

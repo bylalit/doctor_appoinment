@@ -1150,7 +1150,7 @@ def setting(request):
 
     if request.method == "POST":
 
-        # 👉 Profile Update
+        # Profile Update
         if "profile_update" in request.POST:
             user.first_name = request.POST.get('full_name')
             user.email = request.POST.get('email')
@@ -1161,7 +1161,7 @@ def setting(request):
             return redirect('settings')
 
 
-        # 👉 Password Update
+        # Password Update
         if "password_update" in request.POST:
             current_password = request.POST.get('current_password')
             new_password = request.POST.get('new_password')
@@ -1187,18 +1187,7 @@ def setting(request):
 
 
 
-def analytics_doc(request):
-    context = {
-        'action': 'analytics',
-        "role": "doctor",
-    }
-    
-    return render(request, "dashboard/analytics_doc.html", context)
-
-
-
 def doctor_feedback(request):
-
     doctor_id = request.session.get('doctor_id')
 
     if not doctor_id:
@@ -1226,14 +1215,12 @@ def doctor_feedback(request):
     return render(request, 'dashboard/doctor_feedback.html', context)
 
 def approve_comment(request, comment_id):
-
     doctor_id = request.session.get('doctor_id')
 
     if not doctor_id:
         return redirect('dash_login')
 
     comment = get_object_or_404(Comment, id=comment_id)
-
 
     if comment.doctor.id == doctor_id:
         comment.is_approved = True
@@ -1243,7 +1230,6 @@ def approve_comment(request, comment_id):
 
 
 def delete_comment(request, comment_id):
-
     doctor_id = request.session.get('doctor_id')
 
     if not doctor_id:
