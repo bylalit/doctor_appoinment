@@ -1251,8 +1251,9 @@ def delete_comment(request, comment_id):
 
     comment = get_object_or_404(Comment, id=comment_id)
 
-    # ✅ security check
+    # security check
     if comment.doctor.id == doctor_id:
         comment.delete()
 
     return redirect('doctor_feedback')
+
