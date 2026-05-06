@@ -994,39 +994,39 @@ def delete_patient(request, id):
     return redirect('patient_list')
 
 
-# @login_required(login_url='/dash_login')
-# @staff_member_required
-# def billing(request):
+@login_required(login_url='/dash_login')
+@staff_member_required
+def billing(request):
     
-#     bills = Billing.objects.select_related(
-#         'appointment__user', 
-#         'appointment__doctor'
-#     ).order_by('-created_at')
+    bills = Billing.objects.select_related(
+        'appointment__user', 
+        'appointment__doctor'
+    ).order_by('-created_at')
 
-#     # Total Revenue (Only Paid)
-#     total_revenue = bills.filter(
-#         payment_status='Paid'
-#     ).aggregate(total=Sum('amount'))['total'] or 0
+    # Total Revenue (Only Paid)
+    total_revenue = bills.filter(
+        payment_status='Paid'
+    ).aggregate(total=Sum('amount'))['total'] or 0
     
     
-#     context = {
-#         'bills': bills,
-#         'total_revenue': total_revenue,
-#         'action': 'billing',
-#         "role": "admin"
-#     }
+    context = {
+        'bills': bills,
+        'total_revenue': total_revenue,
+        'action': 'billing',
+        "role": "admin"
+    }
 
-#     return render(request, 'dashboard/billing.html', context)
+    return render(request, 'dashboard/billing.html', context)
 
 
-# @login_required(login_url='/dash_login')
-# @staff_member_required
-# def billing_invoice(request, id):
-#     bill = get_object_or_404(Billing, id=id)
+@login_required(login_url='/dash_login')
+@staff_member_required
+def billing_invoice(request, id):
+    bill = get_object_or_404(Billing, id=id)
 
-#     return render(request, 'dashboard/billing_invoice.html', {
-#         'bill': bill
-#     })
+    return render(request, 'dashboard/billing_invoice.html', {
+        'bill': bill
+    })
 
 
 
