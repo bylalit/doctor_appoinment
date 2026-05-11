@@ -1029,7 +1029,6 @@ def billing_invoice(request, id):
     })
 
 
-
 @login_required(login_url='/dash_login')
 @staff_member_required
 def analytics(request):
