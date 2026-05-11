@@ -985,38 +985,38 @@ def patient_detail(request, id):
     return render(request, 'dashboard/patient_detail.html', context)
 
 
-# @login_required(login_url=('/dash_login'))
-# @staff_member_required
-# def delete_patient(request, id):
-#     if request.method == "POST":
-#         patient = get_object_or_404(Patients, id=id)
-#         patient.delete()
-#     return redirect('patient_list')
+@login_required(login_url=('/dash_login'))
+@staff_member_required
+def delete_patient(request, id):
+    if request.method == "POST":
+        patient = get_object_or_404(Patients, id=id)
+        patient.delete()
+    return redirect('patient_list')
 
 
-# @login_required(login_url='/dash_login')
-# @staff_member_required
-# def billing(request):
+@login_required(login_url='/dash_login')
+@staff_member_required
+def billing(request):
     
-#     bills = Billing.objects.select_related(
-#         'appointment__user', 
-#         'appointment__doctor'
-#     ).order_by('-created_at')
+    bills = Billing.objects.select_related(
+        'appointment__user', 
+        'appointment__doctor'
+    ).order_by('-created_at')
 
-#     # Total Revenue (Only Paid)
-#     total_revenue = bills.filter(
-#         payment_status='Paid'
-#     ).aggregate(total=Sum('amount'))['total'] or 0
+    # Total Revenue (Only Paid)
+    total_revenue = bills.filter(
+        payment_status='Paid'
+    ).aggregate(total=Sum('amount'))['total'] or 0
     
     
-#     context = {
-#         'bills': bills,
-#         'total_revenue': total_revenue,
-#         'action': 'billing',
-#         "role": "admin"
-#     }
+    context = {
+        'bills': bills,
+        'total_revenue': total_revenue,
+        'action': 'billing',
+        "role": "admin"
+    }
 
-#     return render(request, 'dashboard/billing.html', context)
+    return render(request, 'dashboard/billing.html', context)
 
 
 @login_required(login_url='/dash_login')
