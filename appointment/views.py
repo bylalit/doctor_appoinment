@@ -32,21 +32,21 @@ def patient_programs(request):
     return render(request, 'patient_programs.html')
 
 
-# def doctor(request, category_name):
-#     if category_name == 'all doctor':
-#         doctor_list = Doctor.objects.filter(available=True)
-#     else:
-#         doctor_list = Doctor.objects.filter(category__name=category_name, available=True)
+def doctor(request, category_name):
+    if category_name == 'all doctor':
+        doctor_list = Doctor.objects.filter(available=True)
+    else:
+        doctor_list = Doctor.objects.filter(category__name=category_name, available=True)
 
-#     paginator = Paginator(doctor_list, 16)  
+    paginator = Paginator(doctor_list, 16)  
 
-#     page_number = request.GET.get('page')
-#     doctors = paginator.get_page(page_number)
+    page_number = request.GET.get('page')
+    doctors = paginator.get_page(page_number)
 
-#     return render(request, 'doctor.html', {
-#         'doctors': doctors,
-#         'category_name': category_name
-#     })
+    return render(request, 'doctor.html', {
+        'doctors': doctors,
+        'category_name': category_name
+    })
 
 def doctor_info(request, id):
     doctor = Doctor.objects.get(id=id, available=True)
