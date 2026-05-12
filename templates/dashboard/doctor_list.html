@@ -257,7 +257,7 @@
 
 
         <!-- Pagination -->
-        {% if page_obj.has_other_pages %}
+        {% comment %} {% if page_obj.has_other_pages %}
             <div class="d-flex justify-content-center mt-5">
 
                 <nav>
@@ -317,7 +317,7 @@
                 </nav>
 
             </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
     </section>
 
