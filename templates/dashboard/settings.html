@@ -22,7 +22,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="profile_update">
 
-                    {% comment %} <div class="mb-3">
+                    <div class="mb-3">
                         <label class="form-label small">Full Name</label>
                         <input type="text" name="full_name" class="form-control" 
                             value="{{ user.first_name }}">
@@ -38,7 +38,7 @@
                         <label class="form-label small">Username</label>
                         <input type="text" class="form-control" 
                             value="{{ user.username }}" readonly>
-                    </div> {% endcomment %}
+                    </div>
 
                     <button class="btn btn-primary w-100">Save Changes</button>
                 </form>
