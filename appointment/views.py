@@ -1005,8 +1005,7 @@ def billing(request):
     total_revenue = bills.filter(
         payment_status='Paid'
     ).aggregate(total=Sum('amount'))['total'] or 0
-    
-    
+     
     context = {
         'bills': bills,
         'total_revenue': total_revenue,
@@ -1025,7 +1024,6 @@ def billing_invoice(request, id):
     return render(request, 'dashboard/billing_invoice.html', {
         'bill': bill
     })
-
 
 @login_required(login_url='/dash_login')
 @staff_member_required
@@ -1138,25 +1136,20 @@ def analytics(request):
     return render(request, "dashboard/analytics.html", context)
 
 
-
 @login_required(login_url='/dash_login')
 @staff_member_required
 def setting(request):
-
     user = request.user   # current logged-in admin
 
     if request.method == "POST":
-
         # Profile Update
         if "profile_update" in request.POST:
             user.first_name = request.POST.get('full_name')
             user.email = request.POST.get('email')
 
-
             user.save()
             messages.success(request, "Profile updated successfully!")
             return redirect('settings')
-
 
         # Password Update
         if "password_update" in request.POST:
@@ -1179,7 +1172,6 @@ def setting(request):
         'action': 'settings',
         'role': 'admin',
     }
-
     return render(request, "dashboard/settings.html", context)
 
 

@@ -54,5 +54,4 @@ urlpatterns = [
     path('feedback/', views.doctor_feedback, name='doctor_feedback'),
     path('approve-comment/<int:comment_id>/', views.approve_comment, name='approve_comment'),
     path('delete-comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
-     
 ]
