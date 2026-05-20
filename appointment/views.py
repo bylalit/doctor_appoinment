@@ -19,9 +19,7 @@ from django.db.models.functions import ExtractWeekDay
 from django.db.models import Count, Sum, Q, F
 from datetime import timedelta
 
-
 stripe.api_key = settings.STRIPE_SECRET_KEY
-
 
 
 def index(request):
