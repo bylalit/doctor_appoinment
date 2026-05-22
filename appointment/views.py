@@ -1159,6 +1159,13 @@ def messages(request):
     }
     return render(request, "dashboard/messages.html", context)
 
+@login_required(login_url='/dash_login')
+@staff_member_required
+def del_message(request, id):
+    contact = get_object_or_404(Contact, id=id)
+    contact.delete()
+    return redirect(messages)
+    
 
 @login_required(login_url='/dash_login')
 @staff_member_required

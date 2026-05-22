@@ -80,7 +80,7 @@
                             <!-- Message Data Block -->
                             <td style="padding: 1.5rem;">
                                 <div style="max-width: 320px; color: #64748b; font-size: 13px; line-height: 1.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ contact.message }}">
-                                    {{ contact.message }}
+                                    {{ contact.message|truncatechars:100 }}...
                                 </div>
                             </td>
 
@@ -98,9 +98,9 @@
                                     <button class="btn row-action-btn shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #475569; border: none; transition: all 0.2s ease;" title="Open Thread">
                                         <i class="fa-solid fa-eye" style="font-size: 12px;"></i>
                                     </button>
-                                    <button class="btn btn-danger-action shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #fff1f2; color: #e11d48; border: none; transition: all 0.2s ease;" title="Archive Message">
+                                    <a href="{% url "del_message" contact.id %}" class="btn btn-danger-action shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #fff1f2; color: #e11d48; border: none; transition: all 0.2s ease;" title="Archive Message">
                                         <i class="fa-solid fa-trash-can" style="font-size: 12px;"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
