@@ -1135,7 +1135,10 @@ def analytics(request):
 
     return render(request, "dashboard/analytics.html", context)
 
-
+@login_required(login_url='/dash_login')
+@staff_member_required
+def messages(request):
+    return render(request, "dashboard/messages.html")
 
 
 @login_required(login_url='/dash_login')
