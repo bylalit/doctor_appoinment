@@ -3,6 +3,126 @@
 
 {% block contant %}
 
-    
+<!-- Main Content Area Wrapper (Ensures 100% width coverage within custom layout padding) -->
+<div style="width: 100%; margin-top: 70px; margin-left: 18rem; min-height: 100vh; background: linear-gradient(135deg, #f8f9fc 0%, #f1f4f9 100%); padding: 2rem; transition: all 0.3s ease; overflow-x: hidden;">
+
+    <!-- Top Headline Section -->
+    <div class="d-flex justify-content-between align-items-center mb-5" style="animation: slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);">
+        <div>
+            <h6 style="color: #5f6fff; font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; margin-bottom: 0.5rem; opacity: 0.8;">Inbound Communication</h6>
+            <h2 class="fw-bold text-dark m-0" style="letter-spacing: -0.5px;">Contact Messages</h2>
+        </div>
+        <div>
+            <span class="badge" style="background: linear-gradient(135deg, #5f6fff, #3f4ed0); color: white; padding: 0.75rem 1.5rem; border-radius: 14px; font-weight: 600; box-shadow: 0 10px 20px rgba(95, 111, 255, 0.15);">
+                <i class="fa-solid fa-envelope me-2"></i> {{ contacts|length|default:"0" }} Active Threads
+            </span>
+        </div>
+    </div>
+
+    <!-- Main Card Body Frame -->
+    <div class="card border-0 shadow-lg" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-radius: 24px; overflow: hidden; animation: fadeInUp 0.9s ease-out; border: 1px solid rgba(255,255,255,0.8);">
+        
+        {% comment %} <!-- Search, Sorting & Filters Strip Context -->
+        <div class="p-4 border-bottom d-flex justify-content-between align-items-center bg-white" style="border-bottom: 1px solid #edf2f9 !important;">
+            <div class="input-group shadow-sm" style="width: 320px; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0;">
+                <span class="input-group-text border-0 bg-white px-3"><i class="fa-solid fa-magnifying-glass" style="color: #94a3b8; font-size: 14px;"></i></span>
+                <input type="text" class="form-control border-0 py-2" placeholder="Search by name or keyword..." style="font-size: 13px; box-shadow: none;">
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-light rounded-3 px-3 shadow-sm border" style="background: white; font-weight: 600; font-size: 13px; color: #475569; border-color: #e2e8f0 !important;">
+                    <i class="fa-solid fa-arrow-down-wide-short me-2"></i> Sort Date
+                </button>
+            </div>
+        </div> {% endcomment %}
+
+        <div class="card-body px-2 py-4">
+            {% if contacts %}
+            <div class="table-responsive">
+                <table class="table align-middle m-0" style="min-width: 1000px;">
+                    <thead style="background-color: #f8fafc;">
+                        <tr>
+                            <th style="padding: 1.5rem; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border: 0; font-weight: 700; width: 80px;">Index</th>
+                            <th style="padding: 1.5rem; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border: 0; font-weight: 700;">Sender Info</th>
+                            <th style="padding: 1.5rem; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border: 0; font-weight: 700; width: 220px;">Subject Line</th>
+                            <th style="padding: 1.5rem; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border: 0; font-weight: 700;">Message Preview</th>
+                            <th style="padding: 1.5rem; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border: 0; font-weight: 700; width: 150px;">Received Date</th>
+                            <th style="padding: 1.5rem; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border: 0; font-weight: 700; text-align: center; width: 120px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr class="custom-row-style" style="transition: all 0.25s ease; border-bottom: 1px solid #f1f5f9;">
+                            <!-- Counter Index Section -->
+                            <td style="padding: 1.5rem;">
+                                <span class="fw-bold" style="color: #5f6fff; font-size: 14px;">#{{ forloop.counter }}</span>
+                            </td>
+
+                            <!-- Sender Info Block with Gradient Initial Avatar -->
+                            <td style="padding: 1.5rem;">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, #e0e7ff 0%, #cbd5e1 100%); color: #3f4ed0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
+                                        {{ contact.name|slice:":1"|upper }}
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 700; color: #1e293b; font-size: 14px; text-transform: capitalize;">{{ contact.name }}</div>
+                                        <div style="color: #94a3b8; font-size: 12px; font-weight: 500;">{{ contact.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <!-- Subject Badges -->
+                            <td style="padding: 1.5rem;">
+                                <span class="badge" style="background-color: rgba(95, 111, 255, 0.1); color: #5f6fff; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(95, 111, 255, 0.15); display: inline-block; max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ contact.subject }}
+                                </span>
+                            </td>
+
+                            <!-- Message Data Block -->
+                            <td style="padding: 1.5rem;">
+                                <div style="max-width: 320px; color: #64748b; font-size: 13px; line-height: 1.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ contact.message }}">
+                                    {{ contact.message }}
+                                </div>
+                            </td>
+
+                            <!-- Timestamp Entry -->
+                            <td style="padding: 1.5rem;">
+                                <div style="color: #334155; font-size: 13px; font-weight: 600;">
+                                    {{ contact.created_at|date:"d M Y" }}
+                                </div>
+                                <div style="color: #94a3b8; font-size: 11px;">{{ contact.created_at|date:"g:i A" }}</div>
+                            </td>
+
+                            <!-- Responsive Action Menu Block -->
+                            <td style="padding: 1.5rem; text-align: center;">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn row-action-btn shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #475569; border: none; transition: all 0.2s ease;" title="Open Thread">
+                                        <i class="fa-solid fa-eye" style="font-size: 12px;"></i>
+                                    </button>
+                                    <button class="btn btn-danger-action shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #fff1f2; color: #e11d48; border: none; transition: all 0.2s ease;" title="Archive Message">
+                                        <i class="fa-solid fa-trash-can" style="font-size: 12px;"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+            <!-- Enhanced Empty Dataset Placeholder Screen -->
+            <div class="text-center py-5 style-empty-container" style="animation: fadeInUp 0.8s ease;">
+                <div style="width: 80px; height: 80px; background-color: #f1f5f9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                    <i class="fa-regular fa-envelope-open fa-2x" style="color: #94a3b8;"></i>
+                </div>
+                <h4 class="fw-bold text-dark mb-2" style="letter-spacing: -0.3px;">No Inbox Traffic Found</h4>
+                <p class="text-muted mx-auto" style="max-width: 340px; font-size: 14px; line-height: 1.5;">
+                    Your workspace is clear. Inbound contact forms filled out by patients will synchronize live to this space.
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}

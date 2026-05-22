@@ -1135,10 +1135,29 @@ def analytics(request):
 
     return render(request, "dashboard/analytics.html", context)
 
+# @login_required(login_url='/dash_login')
+# @staff_member_required
+# def messages(request):
+    
+    
+#     context = {
+#         'action': 'messages',
+#         'role': 'admin',
+#     }
+#     return render(request, "dashboard/messages.html", context)
+
 @login_required(login_url='/dash_login')
 @staff_member_required
 def messages(request):
-    return render(request, "dashboard/messages.html")
+
+    contacts = Contact.objects.all().order_by('-id')
+
+    context = {
+        'contacts': contacts,
+        'action': 'messages',
+        'role': 'admin',
+    }
+    return render(request, "dashboard/messages.html", context)
 
 
 @login_required(login_url='/dash_login')

@@ -133,7 +133,7 @@
         <main class="d-flex" style="min-height: calc(100vh - 64px);">
 
             {% if role == 'admin' %}
-                <nav id="sidebar" class="border-end bg-light p-3" 
+                <nav id="sidebar" class="border-end bg-light p-3 pb-5" 
                     style="width: 18rem; height: calc(100vh - 64px); position: fixed; top: 70px; left: 0; z-index: 1000; overflow-y: auto;">
                     <div class="mb-4 ps-2">
                         <h6 class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px; font-size: 1rem;">Admin Panel</h6>
@@ -193,6 +193,15 @@
                     style="transition: 0.3s; font-size: 18px; text-decoration: none;">
                         <i class="fa-solid fa-gear" style="color: #495057; width: 20px;"></i> 
                         <span class="small">Settings</span>
+                    </a>
+
+                    <a href="{% url 'messages' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'messages' %}bg-white shadow-sm border-start border-4 border-primary fw-bold text-primary{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        
+                        <i class="fa-solid fa-envelope" style="color: #0d6efd; width: 20px;"></i> 
+                        
+                        <span class="small">Messages</span>
                     </a>
 
 
