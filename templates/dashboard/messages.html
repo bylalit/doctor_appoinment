@@ -73,14 +73,14 @@
                             <!-- Subject Badges -->
                             <td style="padding: 1.5rem;">
                                 <span class="badge" style="background-color: rgba(95, 111, 255, 0.1); color: #5f6fff; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(95, 111, 255, 0.15); display: inline-block; max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                    {{ contact.subject }}
+                                    {{ contact.subject|truncatechars:40 }}
                                 </span>
                             </td>
 
                             <!-- Message Data Block -->
                             <td style="padding: 1.5rem;">
                                 <div style="max-width: 320px; color: #64748b; font-size: 13px; line-height: 1.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ contact.message }}">
-                                    {{ contact.message|truncatechars:100 }}...
+                                    {{ contact.message|truncatechars:40 }}...
                                 </div>
                             </td>
 
@@ -95,15 +95,29 @@
                             <!-- Responsive Action Menu Block -->
                             <td style="padding: 1.5rem; text-align: center;">
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button class="btn row-action-btn shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #475569; border: none; transition: all 0.2s ease;" title="Open Thread">
+                                    {% comment %} <button class="btn row-action-btn shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #475569; border: none; transition: all 0.2s ease;" title="Open Thread">
                                         <i class="fa-solid fa-eye" style="font-size: 12px;"></i>
+                                    </button> {% endcomment %}
+
+                                    <!-- View Button -->
+                                    <button 
+                                        class="btn shadow-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#messageModal{{ contact.id }}"
+                                        style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #475569; border: none; transition: all 0.2s ease;"
+                                        title="View Message">
+
+                                        <i class="fa-solid fa-eye" style="font-size: 12px;"></i>
+
                                     </button>
+
                                     <a href="{% url "del_message" contact.id %}" class="btn btn-danger-action shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #fff1f2; color: #e11d48; border: none; transition: all 0.2s ease;" title="Archive Message">
                                         <i class="fa-solid fa-trash-can" style="font-size: 12px;"></i>
                                     </a>
                                 </div>
                             </td>
                         </tr>
+                        
                         {% endfor %}
                     </tbody>
                 </table>
@@ -124,5 +138,147 @@
         </div>
     </div>
 </div>
+
+
+    <!-- 2. THE FIX: Put this loop at the very bottom of your file, outside of tables/flexboxes -->
+    {% for contact in contacts %}
+        <div class="modal"
+        id="messageModal{{ contact.id }}"
+        tabindex="-1"
+        aria-hidden="true"
+        style="backdrop-filter: none !important;">
+
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+
+                <div class="modal-content border-0 shadow-lg"
+                    style="border-radius: 24px;
+                            overflow: hidden;
+                            animation: modalZoom 0.3s ease;">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header border-0"
+                        style="background: linear-gradient(135deg, #5f6fff, #3f4ed0);
+                                padding: 1.5rem;">
+
+                        <h5 class="modal-title text-white fw-bold">
+                            <i class="fa-solid fa-envelope-open-text me-2"></i>
+                            Contact Message
+                        </h5>
+
+                        <!-- Fixed Close Button -->
+                        <button type="button"
+                                class="btn-close btn-close-white"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                style="box-shadow: none !important;"></button>
+
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body p-4 bg-white">
+
+                        <!-- User Info -->
+                        <div class="d-flex align-items-center gap-3 mb-4">
+
+                            <div style="width: 60px;
+                                        height: 60px;
+                                        border-radius: 18px;
+                                        background: linear-gradient(135deg, #e0e7ff 0%, #cbd5e1 100%);
+                                        color: #3f4ed0;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 24px;
+                                        font-weight: 800;">
+
+                                {{ contact.name|slice:":1"|upper }}
+
+                            </div>
+
+                            <div>
+
+                                <h5 class="mb-1 fw-bold text-dark">
+                                    {{ contact.name }}
+                                </h5>
+
+                                <p class="mb-0 text-muted">
+                                    {{ contact.email }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="mb-4">
+
+                            <label class="fw-bold mb-2"
+                                style="color: #475569;
+                                        font-size: 13px;">
+                                SUBJECT
+                            </label>
+
+                            <div class="p-3 rounded-4"
+                                style="background-color: #f8fafc;
+                                        border: 1px solid #e2e8f0;
+                                        color: #334155;
+                                        font-weight: 600;">
+
+                                {{ contact.subject }}
+
+                            </div>
+
+                        </div>
+
+                        <!-- Message -->
+                        <div class="mb-4">
+
+                            <label class="fw-bold mb-2"
+                                style="color: #475569;
+                                        font-size: 13px;">
+                                MESSAGE
+                            </label>
+
+                            <div class="p-4 rounded-4"
+                                style="background-color: #f8fafc;
+                                        border: 1px solid #e2e8f0;
+                                        color: #475569;
+                                        line-height: 1.8;
+                                        font-size: 14px;
+                                        max-height: 300px;
+                                        overflow-y: auto;">
+
+                                {{ contact.message }}
+
+                            </div>
+
+                        </div>
+
+                        <!-- Date -->
+                        <div>
+
+                            <label class="fw-bold mb-2"
+                                style="color: #475569;
+                                        font-size: 13px;">
+                                RECEIVED ON
+                            </label>
+
+                            <div class="text-muted">
+
+                                {{ contact.created_at|date:"d M Y - h:i A" }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    {% endfor %}
+
 
 {% endblock %}

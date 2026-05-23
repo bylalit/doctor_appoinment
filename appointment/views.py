@@ -1161,7 +1161,7 @@ def del_message(request, id):
 @login_required(login_url='/dash_login')
 @staff_member_required
 def setting(request):
-    user = request.user   # current logged-in admin
+    user = request.user  
 
     if request.method == "POST":
         # Profile Update
