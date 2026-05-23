@@ -77,6 +77,7 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+
 def user_appointment(request):
     if 'login' in request.session:
 
@@ -1135,26 +1136,15 @@ def analytics(request):
 
     return render(request, "dashboard/analytics.html", context)
 
-# @login_required(login_url='/dash_login')
-# @staff_member_required
-# def messages(request):
-    
-    
-#     context = {
-#         'action': 'messages',
-#         'role': 'admin',
-#     }
-#     return render(request, "dashboard/messages.html", context)
 
 @login_required(login_url='/dash_login')
 @staff_member_required
-def messages(request):
-
+def messages_contact(request):
     contacts = Contact.objects.all().order_by('-id')
 
     context = {
         'contacts': contacts,
-        'action': 'messages',
+        'action': 'messages_contact',
         'role': 'admin',
     }
     return render(request, "dashboard/messages.html", context)
@@ -1164,7 +1154,8 @@ def messages(request):
 def del_message(request, id):
     contact = get_object_or_404(Contact, id=id)
     contact.delete()
-    return redirect(messages)
+    messages.success(request, "Massage Deleted succfully!")
+    return redirect(messages_contact)
     
 
 @login_required(login_url='/dash_login')

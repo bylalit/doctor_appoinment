@@ -48,7 +48,7 @@ urlpatterns = [
     path('dash_admin/bill/<int:id>/', views.billing_invoice, name='billing_invoice'),
     
     path('dash_admin/analytics/', views.analytics, name='analytics'),
-    path('dash_admin/messages/', views.messages, name='messages'),
+    path('dash_admin/messages_contact/', views.messages_contact, name='messages_contact'),
     path('dash_admin/del_message/<int:id>', views.del_message, name='del_message'),
     path('dash_admin/settings/', views.setting, name='settings'),
     
