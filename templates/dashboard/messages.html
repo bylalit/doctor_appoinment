@@ -95,11 +95,6 @@
                             <!-- Responsive Action Menu Block -->
                             <td style="padding: 1.5rem; text-align: center;">
                                 <div class="d-flex justify-content-center gap-2">
-                                    {% comment %} <button class="btn row-action-btn shadow-sm" style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #475569; border: none; transition: all 0.2s ease;" title="Open Thread">
-                                        <i class="fa-solid fa-eye" style="font-size: 12px;"></i>
-                                    </button> {% endcomment %}
-
-                                    <!-- View Button -->
                                     <button 
                                         class="btn shadow-sm"
                                         data-bs-toggle="modal"
@@ -124,7 +119,6 @@
             </div>
 
             {% else %}
-            <!-- Enhanced Empty Dataset Placeholder Screen -->
             <div class="text-center py-5 style-empty-container" style="animation: fadeInUp 0.8s ease;">
                 <div style="width: 80px; height: 80px; background-color: #f1f5f9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
                     <i class="fa-regular fa-envelope-open fa-2x" style="color: #94a3b8;"></i>
@@ -140,7 +134,6 @@
 </div>
 
 
-    <!-- 2. THE FIX: Put this loop at the very bottom of your file, outside of tables/flexboxes -->
     {% for contact in contacts %}
         <div class="modal"
         id="messageModal{{ contact.id }}"
