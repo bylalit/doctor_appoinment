@@ -239,7 +239,6 @@ def approved_appointment(request, id):
     return redirect(request.META.get('HTTP_REFERER'))
 
     
-
 def cancel_appointment(request, id):
 
     appointment = get_object_or_404(Appointment, id=id)
@@ -438,6 +437,7 @@ def logout_user(request):
     request.session.flush()
     messages.success(request, "Logout Succefully!")
     return redirect('home')
+
 
 
 
