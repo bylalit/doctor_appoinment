@@ -153,11 +153,12 @@
                         <span class="small">Appointments</span>
                     </a>
 
-                    <a href="{% url 'add_doctor' %}" 
-                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'add_doctor' %}bg-white shadow-sm border-start border-4 border-warning fw-bold text-warning{% else %}text-dark{% endif %}"
+                    <!-- Speciality List Navigator -->
+                    <a href="{% url 'speciality_list' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'speciality_list' %}bg-white shadow-sm border-start border-4 border-success fw-bold text-success{% else %}text-dark{% endif %}"
                     style="transition: 0.3s; font-size: 18px; text-decoration: none;">
-                        <i class="fas fa-plus-square" style="color: #f6c23e; width: 20px;"></i> 
-                        <span class="small">Add Doctor</span>
+                        <i class="fas fa-th-list" style="color: #1cc88a; width: 20px;"></i> 
+                        <span class="small">Speciality List</span>
                     </a>
 
                     <a href="{% url 'doctor_list' %}" 
@@ -165,6 +166,13 @@
                     style="transition: 0.3s; font-size: 18px; text-decoration: none;">
                         <i class="fas fa-list-ul" style="color: #36b9cc; width: 20px;"></i> 
                         <span class="small">Doctors List</span>
+                    </a>
+
+                    <a href="{% url 'add_doctor' %}" 
+                    class="nav-link d-flex align-items-center gap-3 p-3 rounded-3 mb-2 {% if action == 'add_doctor' %}bg-white shadow-sm border-start border-4 border-warning fw-bold text-warning{% else %}text-dark{% endif %}"
+                    style="transition: 0.3s; font-size: 18px; text-decoration: none;">
+                        <i class="fas fa-plus-square" style="color: #f6c23e; width: 20px;"></i> 
+                        <span class="small">Add Doctor</span>
                     </a>
 
                     <a href="{% url 'patient_list' %}" 

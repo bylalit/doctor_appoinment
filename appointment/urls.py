@@ -40,6 +40,13 @@ urlpatterns = [
     path('dash_admin/doctor-delete/<int:id>/', views.doctor_delete, name='doctor_delete'),
     path('dash_admin/doctor/view/<int:id>/', views.doctor_view, name='doctor_view'),
     
+    path('dash_admin/speciality/', views.speciality_list, name='speciality_list'),
+    # path('dash_admin/speciality/', views.speciality_list, name='speciality_list'),
+    path('dash_admin/speciality/add/', views.add_speciality, name='add_speciality'),
+    path('dash_admin/speciality/edit/<int:pk>/', views.edit_speciality, name='edit_speciality'),
+    path('dash_admin/speciality/delete/<int:pk>/', views.delete_speciality, name='delete_speciality'),
+
+    
     path('dash_admin/patient-list/', views.patient_list, name='patient_list'),
     path('dash_admin/patient/<int:id>/', views.patient_detail, name='patient_detail'),
     path('dash_admin/delete-patient/<int:id>/', views.delete_patient, name='delete_patient'),

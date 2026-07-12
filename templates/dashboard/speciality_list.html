@@ -1,0 +1,58 @@
+{% extends "dashboard/layout.html" %}
+{% load static %}
+
+{% block contant %}
+    <section class="w-100 bg-light" style="margin-top: 70px; margin-left: 18rem; padding: 50px;">
+        
+        <!-- Simple Header Section -->
+        <div class="row align-items-center mb-5" style="margin-bottom: 2rem !important;">
+            <div class="col-8">
+                <h2 class="h3 fw-bold mb-1" style="color: rgb(95 111 255);">Specialities List</h2>
+                <p class="text-muted mb-0">All available medical categories and departments</p>
+            </div>
+            <div class="col-4 text-end">
+                <a href="{% url 'add_speciality' %}"
+                    class="btn px-4 py-2 text-white rounded-pill fw-semibold"
+                    style="background: linear-gradient(135deg,#4f5dff,#8f9bff); border:none;">
+                    + Add Speciality
+                </a>
+            </div>
+        </div>
+
+        <!-- Specialities Grid -->
+        <div class="row g-4">
+            {% for speciality in specialities %}
+            <div class="col-lg-6 col-md-6">
+                
+                <div class="bg-white rounded-4 shadow-sm p-4 d-flex align-items-center justify-content-between"
+                    style="transition:0.3s; min-height: 80px;"
+                    onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px rgba(0,0,0,0.05)'"
+                    onmouseout="this.style.transform=''; this.style.boxShadow=''">
+
+                    <!-- Speciality Information -->
+                    <div class="flex-grow-1">
+                        <h5 class="fw-bold mb-0 text-dark" style="font-size: 1.1rem;">{{ speciality.name }}</h5>
+                    </div>
+
+                    <!-- Action Links (Edit & Delete) -->
+                    <div class="d-flex gap-3 align-items-center">
+                        <a href="{% url 'edit_speciality' speciality.id %}" class="text-primary text-decoration-none small fw-semibold" style="transition: 0.2s;">
+                            ✏️ Edit
+                        </a>
+                        <a href="{% url 'delete_speciality' speciality.id %}" class="text-danger text-decoration-none small fw-semibold" style="transition: 0.2s;" onclick="return confirm('Are you sure you want to delete this speciality?')">
+                            🗑 Delete
+                        </a>
+                    </div>
+
+                </div>
+                
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="text-muted">No specialities available. Click "+ Add Speciality" to create one.</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </section>
+{% endblock contant %}

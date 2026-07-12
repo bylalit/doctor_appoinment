@@ -18,6 +18,7 @@ from django.db.models import Count
 from django.db.models.functions import ExtractWeekDay
 from django.db.models import Count, Sum, Q, F
 from datetime import timedelta
+from .forms import SpecialityForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -747,6 +748,64 @@ def doctor_appointments(request):
 
         'filter_status': status,  
     })
+
+def speciality_list(request):
+    # Saari categories ko fetch karega
+    specialities = Category.objects.all().order_by('name')
+    
+    cont = {
+        'specialities': specialities,
+        'action': 'speciality_list',  # Sidebar ko active rakhne ke liye
+        'role': 'admin'
+    }
+    return render(request, 'dashboard/speciality_list.html', cont)
+
+
+def add_speciality(request):
+    if request.method == 'POST':
+        form = SpecialityForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Speciality added successfully!")
+            return redirect('speciality_list')
+    else:
+        form = SpecialityForm()
+        
+    context = {
+        'form': form,
+        'title': 'Add New Speciality',
+        'action': 'add_speciality',
+        'role': 'admin'
+    }
+    return render(request, 'dashboard/speciality_form.html', context)
+
+# 3. Update/Edit Speciality View
+def edit_speciality(request, pk):
+    speciality = get_object_or_404(Category, pk=pk)
+    if request.method == 'POST':
+        form = SpecialityForm(request.POST, instance=speciality)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Speciality updated successfully!")
+            return redirect('speciality_list')
+    else:
+        form = SpecialityForm(instance=speciality)
+        
+    context = {
+        'form': form,
+        'title': 'Edit Speciality',
+        'action': 'speciality_list',
+        'role': 'admin'
+    }
+    return render(request, 'dashboard/speciality_form.html', context)
+
+# 4. Delete Speciality View
+def delete_speciality(request, pk):
+    speciality = get_object_or_404(Category, pk=pk)
+    speciality.delete()
+    messages.success(request, "Speciality deleted successfully!")
+    return redirect('speciality_list')
+
 
 
 @login_required(login_url='/dash_login')
