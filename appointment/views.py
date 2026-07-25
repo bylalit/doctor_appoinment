@@ -32,19 +32,22 @@ def patient_programs(request):
 
 
 def doctor(request, category_name):
+    specialitys = Category.objects.all()
+    
     if category_name == 'all doctor':
         doctor_list = Doctor.objects.filter(available=True)
     else:
         doctor_list = Doctor.objects.filter(category__name=category_name, available=True)
 
-    paginator = Paginator(doctor_list, 16)  
+    paginator = Paginator(doctor_list, 12)  
 
     page_number = request.GET.get('page')
     doctors = paginator.get_page(page_number)
 
     return render(request, 'doctor.html', {
         'doctors': doctors,
-        'category_name': category_name
+        'category_name': category_name,
+        'specialitys': specialitys
     })
 
 def doctor_info(request, id):
@@ -490,6 +493,7 @@ def dash_logout(request):
 
 
 @login_required(login_url=('/dash_login'))
+@staff_member_required
 def dash_admin(request):
     if request.user.is_superuser:
 
@@ -749,18 +753,20 @@ def doctor_appointments(request):
         'filter_status': status,  
     })
 
+@login_required(login_url=('/dash_login'))
+@staff_member_required
 def speciality_list(request):
-    # Saari categories ko fetch karega
     specialities = Category.objects.all().order_by('name')
     
     cont = {
         'specialities': specialities,
-        'action': 'speciality_list',  # Sidebar ko active rakhne ke liye
+        'action': 'speciality_list', 
         'role': 'admin'
     }
     return render(request, 'dashboard/speciality_list.html', cont)
 
-
+@login_required(login_url=('/dash_login'))
+@staff_member_required
 def add_speciality(request):
     if request.method == 'POST':
         form = SpecialityForm(request.POST)
@@ -779,7 +785,8 @@ def add_speciality(request):
     }
     return render(request, 'dashboard/speciality_form.html', context)
 
-# 3. Update/Edit Speciality View
+@login_required(login_url=('/dash_login'))
+@staff_member_required
 def edit_speciality(request, pk):
     speciality = get_object_or_404(Category, pk=pk)
     if request.method == 'POST':
@@ -799,7 +806,8 @@ def edit_speciality(request, pk):
     }
     return render(request, 'dashboard/speciality_form.html', context)
 
-# 4. Delete Speciality View
+@login_required(login_url=('/dash_login'))
+@staff_member_required
 def delete_speciality(request, pk):
     speciality = get_object_or_404(Category, pk=pk)
     speciality.delete()
